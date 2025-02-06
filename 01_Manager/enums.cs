@@ -45,8 +45,6 @@ namespace TeamRPG_17
     {
         Elinia,
         Hannesys,
-        CunningCity,
-        Perion,
-        Sleepywood
+        CunningCity
     }
 }
