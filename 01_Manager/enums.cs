@@ -40,4 +40,13 @@ namespace TeamRPG_17
         Armor,
         Weapon
     }
+
+    public enum TownName
+    {
+        Elinia,
+        Hannesys,
+        CunningCity,
+        Perion,
+        Sleepywood
+    }
 }
