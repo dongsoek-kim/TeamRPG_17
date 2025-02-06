@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamRPG_17._03_etc;
 
 namespace TeamRPG_17
 {
@@ -11,12 +12,19 @@ namespace TeamRPG_17
         private Scene currentScene;
         private Scene[] scenes;
         public Player player=new Player();
+        public Town[] towns;
         public int currentTown;
         public GameManager() 
         {
             currentTown = 0;
+            towns = new Town[Enum.GetValues(typeof(SceneName)).Length];
+            towns[(int)TownName.Elinia] = new Town("엘리니아","엘리니아 마을이다.", 1);
+            towns[(int)TownName.Hannesys] = new Town("헤네시스", "커닝시티 마을이다.", 5);
+            towns[(int)TownName.CunningCity] = new Town("커닝시티", "커닝시티 마을이다.", 10);
+
             int sceneCount = Enum.GetValues(typeof(SceneName)).Length;
             scenes = new Scene[sceneCount];
+            
 
             scenes[0] = new UserCreateScene();
             scenes[1] = new LobbyScene();
