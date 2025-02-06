@@ -34,6 +34,8 @@ namespace TeamRPG_17
                     continue;
 
                 Console.WriteLine(item.ItemInfo());
+                // 인벤토리 창에서 보유중인 골드 확인 추가
+                Console.WriteLine($"{GameManager.Instance.player.gold} G");
             }
         }
 
@@ -86,6 +88,7 @@ namespace TeamRPG_17
             string stat = "";
             if (equipedWeapon != null)
                 stat = $" ( +{equipedWeapon.damage} )";
+            // 공격력 = +무기공격력*log(str*(직업)+Dex*(직업)+inte(직업))
 
             Console.WriteLine($"{stat}");
         }

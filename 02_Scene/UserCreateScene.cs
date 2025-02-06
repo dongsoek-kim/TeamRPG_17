@@ -17,7 +17,7 @@ namespace TeamRPG_17
             isNameCheck = false;
             isJobCheck = false;
         }
-
+        
         public override void Update()
         {
             CreateName();   // 닉네임 생성
