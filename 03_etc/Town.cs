@@ -8,12 +8,12 @@ namespace TeamRPG_17._03_etc
 {
     internal class Town
     {
-        public TownName name { get; private set; }
+        public string name { get; private set; }
         public string townDescription { get; private set; }
         public int entryLevel { get; private set; }
 
 
-        public Town(TownName _name, string _townDescription, int _entryLevel)
+        public Town(string _name, string _townDescription, int _entryLevel)
         {
             name = _name;
             townDescription = _townDescription;
