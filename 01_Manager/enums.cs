@@ -9,7 +9,8 @@ namespace TeamRPG_17
     public enum JobType
     {
         Warrior,
-        Rogue
+        Rogue,
+        Wizard
     }
 
     public enum SceneName
