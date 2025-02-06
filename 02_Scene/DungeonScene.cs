@@ -51,13 +51,13 @@ namespace TeamRPG_17
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
 
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch(intCommand)
             {
                 case 0:
-                    SceneManager.Instance.ChangeScene(SceneName.LobbyScene);
+                    GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                     break;
                 case 1: 
                 case 2: 
@@ -78,8 +78,8 @@ namespace TeamRPG_17
             string dungeonDescription = "축하합니다!!\n던전을 클리어 하였습니다.";
 
             int dungeon = dungeonDefense[_dungeonLevel - 1];            // 던전 권장 방어력
-            int playerDefense = (int)Player.Instance.defense;                // 플레이어 방어력
-            int itemDefense = Player.Instance.GetArmorStat();           // 플레이어 장비 방어력
+            int playerDefense = (int)GameManager.Instance.player.defense;                // 플레이어 방어력
+            int itemDefense = GameManager.Instance.player.GetArmorStat();           // 플레이어 장비 방어력
 
             int hpOffset = dungeon - (playerDefense + itemDefense);     // hp감소량 offset
             int hpDecrease = random.Next(20 + hpOffset, 35 + hpOffset); // hp감소량
@@ -95,7 +95,7 @@ namespace TeamRPG_17
                 {
                     dungeonTitle = "던전 실패";
                     dungeonDescription = "던전을 실패 하였습니다.";
-                    hpDecrease = Player.Instance.hp / 2;
+                    hpDecrease = GameManager.Instance.player.hp / 2;
                     dungeonClear = false;
                 }
             }
@@ -104,21 +104,21 @@ namespace TeamRPG_17
             Console.WriteLine(dungeonDescription);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[탐험 결과]");
-            Console.WriteLine($"체력 {Player.Instance.hp} -> {Player.Instance.hp - hpDecrease}");
+            Console.WriteLine($"체력 {GameManager.Instance.player.hp} -> {GameManager.Instance.player.hp - hpDecrease}");
             if(dungeonClear)
-                Console.WriteLine($"Gold {Player.Instance.gold} G -> {Player.Instance.gold + clearGold} G");
+                Console.WriteLine($"Gold {GameManager.Instance.player.gold} G -> {GameManager.Instance.player.gold + clearGold} G");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
 
-            //if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            //if (!GameManager.Instance.SceneInputCommand(out int intCommand))
             //    return;
             Console.ReadLine();
 
-            Player.Instance.hp -= hpDecrease;
-            Player.Instance.gold += clearGold;
-            Player.Instance.AddExp();
+            GameManager.Instance.player.hp -= hpDecrease;
+            GameManager.Instance.player.gold += clearGold;
+            GameManager.Instance.player.AddExp();
             onResult = false;
-            SceneManager.Instance.ChangeScene(SceneName.LobbyScene);
+            GameManager.Instance.ChangeScene(SceneName.LobbyScene);
 
         }
     }

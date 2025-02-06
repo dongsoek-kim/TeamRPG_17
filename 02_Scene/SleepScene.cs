@@ -18,18 +18,18 @@ namespace TeamRPG_17
         {
             Console.Clear();
             Console.WriteLine("휴식하기");
-            Console.WriteLine($"{healPrice} G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {Player.Instance.gold} G)\n");
+            Console.WriteLine($"{healPrice} G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {GameManager.Instance.player.gold} G)\n");
             Console.WriteLine("1. 휴식하기");
             Console.WriteLine("0. 나가기");
 
             HealMessage();
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch(intCommand)
             {
                 case 0:
-                    SceneManager.Instance.ChangeScene(SceneName.LobbyScene);
+                    GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                     break;
                 case 1:
                     HealPlayer();
@@ -41,14 +41,14 @@ namespace TeamRPG_17
         {
             onMessage = true;
 
-            if(healPrice <= Player.Instance.gold)
+            if(healPrice <= GameManager.Instance.player.gold)
             {
                 // 메세지 출력
                 message = "휴식을 완료했습니다.";
                 messageColor = ConsoleColor.Blue;
 
-                Player.Instance.gold -= healPrice;
-                Player.Instance.hp = 100;
+                GameManager.Instance.player.gold -= healPrice;
+                GameManager.Instance.player.hp = 100;
             }
             else
             {

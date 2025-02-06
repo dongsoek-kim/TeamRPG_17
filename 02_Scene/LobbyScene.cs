@@ -21,25 +21,25 @@ namespace TeamRPG_17
             Console.WriteLine("4. 던전입장");
             Console.WriteLine("5. 휴식하기");
             Console.WriteLine("─────────────────────────");
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch(intCommand)
             {
                 case 1:
-                    SceneManager.Instance.ChangeScene(SceneName.StatScene);
+                    GameManager.Instance.ChangeScene(SceneName.StatScene);
                     break;
                 case 2:
-                    SceneManager.Instance.ChangeScene(SceneName.InventoryScene);
+                    GameManager.Instance.ChangeScene(SceneName.InventoryScene);
                     break;
                 case 3:
-                    SceneManager.Instance.ChangeScene(SceneName.ShopScene);
+                    GameManager.Instance.ChangeScene(SceneName.ShopScene);
                     break;
                 case 4:
-                    SceneManager.Instance.ChangeScene(SceneName.DungeonScene);
+                    GameManager.Instance.ChangeScene(SceneName.DungeonScene);
                     break;
                 case 5:
-                    SceneManager.Instance.ChangeScene(SceneName.SleepScene);
+                    GameManager.Instance.ChangeScene(SceneName.SleepScene);
                     break;
             }
         }

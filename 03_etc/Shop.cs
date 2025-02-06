@@ -33,7 +33,7 @@ namespace TeamRPG_17
             }
 
             // 이미 보유한 아이템
-            if (Player.Instance.inventory[itemIndex] != null)
+            if (GameManager.Instance.player.inventory[itemIndex] != null)
             {
                 message = "이미 구매한 아이템입니다.";
                 messageColor = ConsoleColor.Blue;
@@ -42,7 +42,7 @@ namespace TeamRPG_17
 
             // 구매 시도
             // 돈이 충분하지않을때
-            if (Player.Instance.gold < ItemManager.Instance.itemPrice[itemIndex])
+            if (GameManager.Instance.player.gold < ItemManager.Instance.itemPrice[itemIndex])
             {
                 message = "Gold 가 부족합니다.";
                 messageColor = ConsoleColor.Red;
@@ -54,8 +54,8 @@ namespace TeamRPG_17
             messageColor = ConsoleColor.Blue;
 
             // 돈 차감 및 아이템 추가
-            Player.Instance.gold -= ItemManager.Instance.itemPrice[itemIndex];
-            Player.Instance.inventory.AddItem(itemIndex);
+            GameManager.Instance.player.gold -= ItemManager.Instance.itemPrice[itemIndex];
+            GameManager.Instance.player.inventory.AddItem(itemIndex);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace TeamRPG_17
 
             for(int i = 0; i < ItemManager.Instance.itemLength; i++)
             {
-                if (Player.Instance.inventory[i] == null)
+                if (GameManager.Instance.player.inventory[i] == null)
                     continue;
 
                 if (_num != itemCount)
@@ -78,23 +78,23 @@ namespace TeamRPG_17
                 }
                 // 판매된 아이템이 착용중인 아이템인지 확인 및 착용해제
                 // 판매된 아이템 -> null
-                switch (Player.Instance.inventory[i].itemType)
+                switch (GameManager.Instance.player.inventory[i].itemType)
                 {
                     case ItemType.Armor:
-                        if (Player.Instance.inventory[i] == Player.Instance.inventory.equipedArmor)
-                            Player.Instance.inventory.Unequip(ItemType.Armor);
+                        if (GameManager.Instance.player.inventory[i] == GameManager.Instance.player.inventory.equipedArmor)
+                            GameManager.Instance.player.inventory.Unequip(ItemType.Armor);
                         break;
                     case ItemType.Weapon:
-                        if (Player.Instance.inventory[i] == Player.Instance.inventory.equipedWeapon)
-                            Player.Instance.inventory.Unequip(ItemType.Weapon);
+                        if (GameManager.Instance.player.inventory[i] == GameManager.Instance.player.inventory.equipedWeapon)
+                            GameManager.Instance.player.inventory.Unequip(ItemType.Weapon);
                         break;
                 }
 
                 int getGold = (int)(ItemManager.Instance.itemPrice[i] * sellRatio);
 
                 // 판매된 아이템 -> null , Gold 획득
-                Player.Instance.inventory[i] = null;
-                Player.Instance.gold += getGold;
+                GameManager.Instance.player.inventory[i] = null;
+                GameManager.Instance.player.gold += getGold;
 
                 message = $"판매되었습니다. ( + {getGold}G)";
                 messageColor = ConsoleColor.Blue;
@@ -118,7 +118,7 @@ namespace TeamRPG_17
 
                 Console.Write($"- {number} {ItemManager.Instance.items[i].ItemInfo()}");
 
-                if (Player.Instance.inventory[i] == null)
+                if (GameManager.Instance.player.inventory[i] == null)
                     Console.WriteLine($"  | {ItemManager.Instance.itemPrice[i]}G");
 
                 else
@@ -134,7 +134,7 @@ namespace TeamRPG_17
             int num = 1;
             for (int i = 0; i < ItemManager.Instance.itemLength; i++)
             {
-                if (Player.Instance.inventory[i] == null)
+                if (GameManager.Instance.player.inventory[i] == null)
                     continue;
 
                 Console.Write($"- {num++} {ItemManager.Instance.items[i].ItemInfo()}");

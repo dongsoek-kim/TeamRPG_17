@@ -29,18 +29,18 @@ namespace TeamRPG_17
             Console.WriteLine("보유중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
-            Player.Instance.inventory.ShowInventory();
+            GameManager.Instance.player.inventory.ShowInventory();
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("1. 장착 관리");
             Console.WriteLine("0. 나가기");
 
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch (intCommand)
             {
                 case 0:
-                    SceneManager.Instance.ChangeScene(SceneName.LobbyScene);
+                    GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                     break;
                 case 1:
                     onEquip = true;
@@ -55,11 +55,11 @@ namespace TeamRPG_17
             Console.WriteLine("보유중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
-            Player.Instance.inventory.ShowEquip();
+            GameManager.Instance.player.inventory.ShowEquip();
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
 
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch (intCommand)
@@ -69,7 +69,7 @@ namespace TeamRPG_17
                     break;
 
                 default:
-                    Player.Instance.inventory.Equipment(intCommand);
+                    GameManager.Instance.player.inventory.Equipment(intCommand);
                     break;
             }
         }

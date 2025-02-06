@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
-    public class Player : Singleton<Player>
+    public class Player
     {
         public string name      { get; set; }
         public JobType job      { get; set; }

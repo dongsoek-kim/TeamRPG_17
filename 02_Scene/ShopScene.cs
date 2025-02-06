@@ -40,7 +40,7 @@ namespace TeamRPG_17
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{Player.Instance.gold} G");
+            Console.WriteLine($"{GameManager.Instance.player.gold} G");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
             shop.PrintItemList();
@@ -50,13 +50,13 @@ namespace TeamRPG_17
             Console.WriteLine("2. 아이템 판매");
             Console.WriteLine("0. 나가기");
 
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch (intCommand)
             {
                 case 0:
-                    SceneManager.Instance.ChangeScene(SceneName.LobbyScene);
+                    GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                     break;
                 case 1:
                     onBuy = true;
@@ -74,7 +74,7 @@ namespace TeamRPG_17
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{Player.Instance.gold} G");
+            Console.WriteLine($"{GameManager.Instance.player.gold} G");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
             shop.PrintItemList(true);
@@ -83,7 +83,7 @@ namespace TeamRPG_17
             Console.WriteLine("0. 나가기");
 
             shop.ShopMessage();
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
             
             switch (intCommand)
@@ -105,7 +105,7 @@ namespace TeamRPG_17
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{Player.Instance.gold} G");
+            Console.WriteLine($"{GameManager.Instance.player.gold} G");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
             shop.SellItemList();
@@ -114,7 +114,7 @@ namespace TeamRPG_17
             Console.WriteLine("0. 나가기");
 
             shop.ShopMessage();
-            if (!SceneManager.Instance.SceneInputCommand(out int intCommand))
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch(intCommand)

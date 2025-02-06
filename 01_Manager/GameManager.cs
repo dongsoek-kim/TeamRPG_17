@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
-    public class SceneManager : Singleton<SceneManager>
+    public class GameManager : Singleton<GameManager>
     {
         private Scene currentScene;
         private Scene[] scenes;
-
-        public SceneManager() 
+        public Player player=new Player();
+        public GameManager() 
         {
             int sceneCount = Enum.GetValues(typeof(SceneName)).Length;
             scenes = new Scene[sceneCount];
@@ -23,7 +23,8 @@ namespace TeamRPG_17
             scenes[4] = new ShopScene();
             scenes[5] = new DungeonScene();
             scenes[6] = new SleepScene();
-
+            //scenes[7]
+            //seenes[8]
             ChangeScene(SceneName.UserCreateScene);
         }
 

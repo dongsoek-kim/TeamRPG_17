@@ -25,7 +25,7 @@ namespace TeamRPG_17
 
             // 닉네임과 직업 전부 완료되었을때 LobbyScene으로 이동
             if (isNameCheck && isJobCheck)
-                SceneManager.Instance.ChangeScene(SceneName.LobbyScene);
+                GameManager.Instance.ChangeScene(SceneName.LobbyScene);
         }
 
         private void CreateName()
@@ -54,7 +54,7 @@ namespace TeamRPG_17
                 if(intCommand == 1)
                 {
                     isNameCheck = true;
-                    Player.Instance.name = name;
+                    GameManager.Instance.player.name = name;
                 }
             }
         }
@@ -81,10 +81,10 @@ namespace TeamRPG_17
                 {
                     case 1:
                         isJobCheck = true;
-                        Player.Instance.job = JobType.Warrior;
+                        GameManager.Instance.player.job = JobType.Warrior;
                         break;
                     case 2:
-                        Player.Instance.job = JobType.Rogue;
+                        GameManager.Instance.player.job = JobType.Rogue;
                         isJobCheck = true;
                         break;
                 }
