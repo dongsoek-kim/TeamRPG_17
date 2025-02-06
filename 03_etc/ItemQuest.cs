@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeamRPG_17._03_etc
+namespace TeamRPG_17
 {
     public class ItemQuest : Quest
     {
