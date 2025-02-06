@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
-    internal class Monster
+    public class Monster
     {
         public string Name { get; set; }
         public int Level { get; private set; }
@@ -14,6 +14,8 @@ namespace TeamRPG_17
         public float Defense { get; private set; }
         public int MaxHp { get; set; }
         public int CurrentHp { get; set; }
+
+        public bool IsDead => CurrentHp <= 0;
 
 
 
@@ -25,6 +27,11 @@ namespace TeamRPG_17
             Defense = defense;
             MaxHp = hp;
             CurrentHp = hp;
+        }
+
+        public string GetInfo()
+        {
+            return $"Lv.{this.Level}   {this.Name}";
         }
     }
 }
