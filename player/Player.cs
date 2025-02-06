@@ -13,10 +13,6 @@ namespace TeamRPG_17
 
         public int level        { get; private set; }
         public int exp          { get; private set; }
-        public int str          { get; private set; }
-        public int dex          { get; private set; }
-        public int inte         { get; private set; }
-        public int luk          { get; private set; }
         public float damage     { get; private set; }
         public float defense    { get; private set; }
         public int hp           { get; set; }
@@ -28,10 +24,6 @@ namespace TeamRPG_17
         {
             level = 1;
             exp = 0;
-            str = 0;
-            dex = 0;
-            inte = 0;
-            luk = 0;
             damage = 10;
             defense = 5;
             hp = 100;

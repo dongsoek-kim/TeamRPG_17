@@ -69,7 +69,6 @@ namespace TeamRPG_17
                 Console.WriteLine("원하시는 직업을 선택해주세요.\n");
                 Console.WriteLine("1. 전사");
                 Console.WriteLine("2. 도적");
-                Console.WriteLine("3. 마법사");
 
                 Console.Write("\n> ");
                 string command = Console.ReadLine();
@@ -86,10 +85,6 @@ namespace TeamRPG_17
                         break;
                     case 2:
                         GameManager.Instance.player.job = JobType.Rogue;
-                        isJobCheck = true;
-                        break;
-                    case 3:
-                        GameManager.Instance.player.job = JobType.Wizard;
                         isJobCheck = true;
                         break;
                 }
