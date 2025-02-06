@@ -81,8 +81,11 @@ namespace TeamRPG_17
                 switch (GameManager.Instance.player.inventory[i].itemType)
                 {
                     case ItemType.Armor:
-                        if (GameManager.Instance.player.inventory[i] == GameManager.Instance.player.inventory.equipedArmor)
-                            GameManager.Instance.player.inventory.Unequip(ItemType.Armor);
+                        foreach (Armor equipedArmor in GameManager.Instance.player.inventory.equipedArmor)
+                        {
+                            if (GameManager.Instance.player.inventory[i] == equipedArmor)
+                                GameManager.Instance.player.inventory.Unequip(ItemType.Armor);
+                        }
                         break;
                     case ItemType.Weapon:
                         if (GameManager.Instance.player.inventory[i] == GameManager.Instance.player.inventory.equipedWeapon)
