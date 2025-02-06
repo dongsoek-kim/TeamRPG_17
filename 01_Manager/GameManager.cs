@@ -11,8 +11,10 @@ namespace TeamRPG_17
         private Scene currentScene;
         private Scene[] scenes;
         public Player player=new Player();
+        public int currentTown;
         public GameManager() 
         {
+            currentTown = 0;
             int sceneCount = Enum.GetValues(typeof(SceneName)).Length;
             scenes = new Scene[sceneCount];
 
