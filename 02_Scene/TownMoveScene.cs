@@ -26,6 +26,9 @@ namespace TeamRPG_17._02_Scene
 
             if(intCommand >= 0 && intCommand < length)
             {
+                /*if (townList[GameManager.Instance.currentTown].CanEnterTown() == false)
+                    return;*/
+
                 GameManager.Instance.currentTown = intCommand -1;
                 GameManager.Instance.ChangeScene(SceneName.LobbyScene);
             }
