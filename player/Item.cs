@@ -15,10 +15,9 @@ namespace TeamRPG_17
         public int str {  get; private set; }//힘
         public int dex { get; private set; }//민첩
         public  int inte {  get; private set; }//지력
-
         public int luk {  get; private set; }
-
-        public Item(string _name, string _description, ItemType _type,int _str, int _dex, int _inte,int _luk) 
+        public EquipSlot EquipSlot { get; private set; }
+        public Item(string _name, string _description, ItemType _type,int _str, int _dex, int _inte,int _luk,EquipSlot _equipslot) 
         {
             itemType = _type;
             itemName = _name;
@@ -27,6 +26,7 @@ namespace TeamRPG_17
             dex = _dex;
             inte = _inte;
             luk = _luk;
+            EquipSlot = _equipslot;
         }
 
         // 아이템 정보 문자열 반환 함수
@@ -37,8 +37,8 @@ namespace TeamRPG_17
     {
         public int defense { get; set; }
 
-        public Armor(string _name, string _description, int _defense, int _str, int _dex, int _inte,int _luk)
-            : base(_name, _description, ItemType.Armor,_str,_dex,_inte,_luk)
+        public Armor(string _name, string _description, int _defense, int _str, int _dex, int _inte,int _luk, EquipSlot _equipslot)
+            : base(_name, _description, ItemType.Armor,_str,_dex,_inte, _luk,_equipslot)
         {
             
             defense = _defense;
@@ -53,8 +53,8 @@ namespace TeamRPG_17
     public class Weapon : Item
     {
         public int damage { get; set; }
-        public Weapon(string _name, string _description, int _damage, int _str, int _dex, int _inte,int _luk) 
-            : base(_name, _description, ItemType.Weapon, _str, _dex, _inte, _luk)
+        public Weapon(string _name, string _description, int _damage, int _str, int _dex, int _inte,int _luk, EquipSlot _equipslot) 
+            : base(_name, _description, ItemType.Weapon, _str, _dex, _inte, _luk, _equipslot)
         {
             damage = _damage;
         }
@@ -64,4 +64,12 @@ namespace TeamRPG_17
             return $"{itemName} | 공격력 +{damage} | 힘 +{str} | 민첩 + {dex} | 지력 + {inte} {itemDescription}";
         }
     }
+}
+public enum EquipSlot
+{
+    Head,
+    Body,
+    Arm,
+    Foot,
+    Weapon
 }

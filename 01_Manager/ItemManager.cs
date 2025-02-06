@@ -11,29 +11,31 @@ namespace TeamRPG_17
         public Item[] items { get; private set; }
         public int[] itemPrice { get; private set; }
         public int itemLength { get; private set; }
+        public int equipSlot {  get; private set; }
         public ItemManager()
         {
+            equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;
             itemLength = Enum.GetValues(typeof(ItemName)).Length;
             items = new Item[itemLength];
             itemPrice = new int[itemLength];
 
             items[(int)ItemName.TrashArmor]
-                = new Armor("쓸모없는 갑옷", "진짜 쓸모없는 갑옷입니다.", 1,0,0,0,0);
+                = new Armor("쓸모없는 갑옷", "진짜 쓸모없는 갑옷입니다.", 1,0,0,0,0, EquipSlot.Body);
             items[(int)ItemName.NoviceArmor]    
-                = new Armor("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", 5, 0, 0, 0, 0);
+                = new Armor("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", 5, 0, 0, 0, 0, EquipSlot.Body);
             items[(int)ItemName.IronArmor]      
-                = new Armor("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 9, 0, 0, 0, 0);
+                = new Armor("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 9, 0, 0, 0, 0, EquipSlot.Body);
             items[(int)ItemName.SpartaArmor]
-                = new Armor("스파르타 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 15, 0, 0, 0,0); 
+                = new Armor("스파르타 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 15, 0, 0, 0,0, EquipSlot.Body); 
 
             items[(int)ItemName.WoodenStick]
-                = new Weapon("나무 젓가락", "나무 젓가락입니다.", 0, 0, 0, 0, 0);
+                = new Weapon("나무 젓가락", "나무 젓가락입니다.", 0, 0, 0, 0, 0, EquipSlot.Weapon);
             items[(int)ItemName.OldSword]
-                = new Weapon("낡은 검", "쉽게 볼 수 있는 낡은 검 입니다.", 2, 0, 0, 0, 0);
+                = new Weapon("낡은 검", "쉽게 볼 수 있는 낡은 검 입니다.", 2, 0, 0, 0, 0, EquipSlot.Weapon);
             items[(int)ItemName.BronzeAxe]      
-                = new Weapon("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", 5, 0, 0, 0, 0);
+                = new Weapon("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", 5, 0, 0, 0, 0, EquipSlot.Weapon);
             items[(int)ItemName.SpartaSpear]    
-                = new Weapon("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", 7, 0, 0, 0,0);
+                = new Weapon("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", 7, 0, 0, 0,0, EquipSlot.Weapon);
 
             itemPrice[(int)ItemName.TrashArmor]    = 100;
             itemPrice[(int)ItemName.NoviceArmor]    = 1000;
