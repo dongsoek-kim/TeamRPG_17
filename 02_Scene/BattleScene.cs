@@ -32,7 +32,6 @@ namespace TeamRPG_17
 
         private void DisplayStatus()
         {
-            // arr[0] = 2 List 정보가 있는데 monster[arr[0]].Name = 오크 이렇게 되지 않겠냐 이거지
             int deathCount = 0;
             while (_player.hp > 0 && deathCount < monster.Count)
             {
@@ -41,7 +40,7 @@ namespace TeamRPG_17
                 for (int i = 0; i < monster.Count; i++) // 그 배열 랜덤 정해진 몬스터 갯수만큼 반복
                 {
                     // 배열 가져와가지고 랜덤하게 정해진 몬스터 정보 출력
-                    Console.WriteLine(monster[i].GetInfo());
+                    Console.WriteLine($"{i+1} {monster[i].GetInfo()}");
                 }
 
                 Console.WriteLine("\n\n[내 정보]");
@@ -49,56 +48,47 @@ namespace TeamRPG_17
                 Console.WriteLine($"HP  {_player.hp}");
                 PlayerPhase();
 
-                for (int i = 0; i < monster.Count; i++) if (monster[i].IsDead) deathCount++;
+                for (int i = 0; i < monster.Count; i++) if (monster[i].IsDead) deathCount++; 
+                if (deathCount > 0) break; // 모두 죽였으면 끝
 
-                if (deathCount > 0) break;
-
-                MonsterPhase();
+                for (int i = 0; i < monster.Count; i++) // 위에 표시된 몬스터부터 차례대로 공격
+                {
+                    if (!monster[i].IsDead)
+                        MonsterPhase(monster[i]);
+                }
             }
-
         }
 
         // 플레이어 차례
         private void PlayerPhase()
         {
-            Console.WriteLine("1. 공격");
-            Console.WriteLine("2. 포션 처먹기");
-
             bool flag = true;
             while (flag)
             {
+                Console.WriteLine("1. 공격");
+                Console.WriteLine("2. 포션");
                 if (GameManager.Instance.SceneInputCommand(out int intCommand))
                 {
                     switch (intCommand)
                     {
                         case 1:
                             DisplayStatus();
-                            Targeting();
-                            flag = false;
+                            if (Targeting())
+                                flag = false;
                             break;
                         case 2:
-                            PotionDrink();
+                            Potion.UsePotion();
                             flag = false;
                             break;
                     }
                 }
             }
         }
-        // 몬스터 차례
-        private void MonsterPhase()
-        {
-            Console.Clear();
-            Console.WriteLine();
 
-        }
-        // 대미지 계산
-        private void TakeDamage() // 플레이어가 대미지 받을 때 계산 메서드
+        private bool Targeting()
         {
+            Console.WriteLine("\n0. 취소");
 
-        }
-
-        private void Targeting()
-        {
             Console.WriteLine("\n대상을 선택해 주세요.\n>>");
             int input = int.Parse(Console.ReadLine());
             DisplayStatus();
@@ -107,15 +97,18 @@ namespace TeamRPG_17
             {
                 if (input <= monster.Count && input > 0)
                 {
-                    MonsterTakeDamage(monster[input - 1]);
+                    PlayerAttack(monster[input - 1]);
                     break;
                 }
+                else if (input == 0) return false;
                 else Console.WriteLine("잘못된 입력입니다.");
             }
+            return true;
         }
-        private void MonsterTakeDamage(Monster monster) // 몬스터가 대미지 받을 때 계산 메서드
+
+        private void PlayerAttack(Monster monster) // 몬스터가 대미지 받을 때 출력
         {
-            int dmg = Math.Max((int)(_player.damage - monster.Defense), 1);
+            int dmg = MonsterTakeDamage(monster);
             Console.WriteLine($"{_player.name}의 공격!\n{monster.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
 
             Console.Write($"{monster.GetInfo()}\nHP {monster.CurrentHp} -> ");
@@ -126,15 +119,49 @@ namespace TeamRPG_17
             Console.WriteLine("0. 다음\n\n>>");
             string input = Console.ReadLine();
 
-            while(true)
+            while (true)
             {
                 if (input == "0")
                     break;
                 else Console.WriteLine("잘못된 입력입니다.");
             }
         }
-        
-        private void PotionDrink() // 포션 먹었을 때 회복 메서드
+        // 몬스터 차례
+        private void MonsterPhase(Monster monster) // 플레이어 대미지 받을 때 출력
+        {
+            Console.Clear();
+            int dmg = PlayerTakeDamage(monster);
+            Console.WriteLine($"{monster.GetInfo()}의 공격!\n{_player.name}을(를) 맞췄습니다. [데미지 : {dmg}]");
+
+            Console.Write($"{monster.GetInfo()}\nHP {monster.CurrentHp} -> ");
+
+            if (monster.CurrentHp <= 0) Console.WriteLine("Dead");
+            else Console.WriteLine($"{monster.CurrentHp -= dmg}");
+
+            Console.WriteLine("0. 다음\n\n>>");
+            string input = Console.ReadLine();
+
+            while (true)
+            {
+                if (input == "0")
+                    break;
+                else Console.WriteLine("잘못된 입력입니다.");
+            }
+        }
+        private int MonsterTakeDamage(Monster monster) // 대미지 계산 메서드
+        {
+            int dmg = Math.Max((int)(_player.damage - monster.Defense), 1); // 플레이어 대미지 - 몬스터 방어력
+            return dmg;
+        }
+
+        private int PlayerTakeDamage(Monster monster) // 대미지 계산 메서드
+        {
+            int dmg = Math.Max((int)(monster.Damage - _player.defense), 1); // 몬스터 대미지 - 플레이어 방어력
+            return dmg;
+        }
+
+
+        private void UsePotion() // 포션 먹었을 때 회복 메서드(지워야됨!!!!UsePotion()으로 대체될 예정)
         {
             _player.hp += 100;
         }
