@@ -36,21 +36,17 @@ namespace TeamRPG_17
         {
             int questCount = 1;
             string questStateText;
-            // 킬 퀘스트 리스트 출력
+
             foreach(KillQuest? quest in killQuests)
             {
                 if (quest == null || quest?.questTown != _town)
                     continue;
 
-                // 이미 수락했는지 / 퀘스트를 완료했는지 확인
-                // 퀘스트를 수락헀다면 진행중 / 수락하지않았다면 수락가능
-                // 퀘스트를 완료했다면 완료 / 완료하지않았다면 이전 텍스트 그대로
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
                 questStateText = quest.questComplete ? "완료" : questStateText;
                 Console.WriteLine($"{questCount++}. {quest.questTitle}  |  {questStateText}");
             }
 
-            // 아이템 퀘스트 출력
             foreach (ItemQuest? quest in itemQuests)
             {
                 if (quest == null || quest?.questTown != _town)
@@ -132,7 +128,7 @@ namespace TeamRPG_17
         }
 
         /// <summary>
-        /// 선택된 퀘스트의 수락 or 완료 메서드
+        /// 선택된 퀘스트의 수락 or 완료
         /// </summary>
         public bool SelectQuestAccept()
         {
@@ -141,8 +137,12 @@ namespace TeamRPG_17
 
             if(selectQuest.questAccpet)
             {
-                selectQuest.QuestComplete();
-                return false;
+                // 퀘스트 완료 성공시
+                if(selectQuest.QuestComplete())
+                    return false;
+                
+                //퀘스트 완료 실패시
+                return true;
             }
             else
             {
@@ -150,6 +150,11 @@ namespace TeamRPG_17
                 selectQuest.questAccpet = true;
                 return true;
             }
+        }
+
+        public void MonsterKillCount(Monster _monster)
+        { 
+        
         }
     }
 }
