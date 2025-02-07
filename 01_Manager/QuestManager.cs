@@ -19,13 +19,13 @@ namespace TeamRPG_17
 
         public QuestManager()
         {
-            
+
         }
 
-        public void LoadQuest(string killQuestJson, string itemQuestJson)
+        public void LoadQuest(string itemQuestJson, string killQuestJson)
         {
+            itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(itemQuestJson);
             killQuests = JsonConvert.DeserializeObject<KillQuest[]>(killQuestJson);
-            itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(killQuestJson);
         }
 
         /// <summary>
