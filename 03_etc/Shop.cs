@@ -83,8 +83,11 @@ namespace TeamRPG_17
                 switch (GameManager.Instance.player.inventory[i].itemType)
                 {
                     case ItemType.Armor:
-                        foreach (Armor equipedArmor in GameManager.Instance.player.inventory.equipedArmor)
+                        foreach (Armor? equipedArmor in GameManager.Instance.player.inventory.equipedArmor)
                         {
+                            if (equipedArmor == null)
+                                continue;
+
                             if (GameManager.Instance.player.inventory[i] == equipedArmor)
                                 GameManager.Instance.player.inventory.Unequip(ItemType.Armor);
                         }
