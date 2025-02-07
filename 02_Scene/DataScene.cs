@@ -37,10 +37,10 @@ namespace TeamRPG_17
 
             }
             else
-                LoadMain();
+                DataMain();
         }
 
-        private void LoadMain()
+        private void DataMain()
         {
             Console.Clear();
             Console.WriteLine("데이터 관리");
