@@ -8,43 +8,55 @@ namespace TeamRPG_17
 {
     public class BattleScene
     {
-        Player _player = GameManager.Instance.player;
+        static Player _player = GameManager.Instance.player;
+        private Dungeon currentDungeon;
         MonsterManager _monster = MonsterManager.Instance;
         List<Monster> monster;
         Potion potion;
-        private bool onGame = false;
 
-        public void StartBattle()
+        public int playerHp = _player.hp;
+
+
+        public void StartBattle(Dungeon dungeon)
         {
-            monster = BattleEngage();
+            currentDungeon = dungeon;
+            monster = BattleEngage(dungeon);
             InBattle();
         }
-        public List<Monster> BattleEngage()
+        public List<Monster> BattleEngage(Dungeon dungeon)
         {
             // 몬스터 랜덤 생성
-            onGame = true;
-            return _monster.RandomMonsterSpawn();
+            return _monster.RandomMonsterSpawn(dungeon);
         }
 
         public void InBattle()
         {
             int deathCount = 0;
-            while (_player.hp > 0 && deathCount < monster.Count)
+            while (playerHp > 0 && deathCount < monster.Count)
             {
                 DisplayStatus();
                 PlayerPhase();
 
-                for (int i = 0; i < monster.Count; i++)
-                {
-                    if (monster[i].IsDead) deathCount++;
-                }
-                if (deathCount >= monster.Count) break; // 모두 죽였으면 끝
+    
+                deathCount = monster.Count(m => m.IsDead);
 
-                for (int i = 0; i < monster.Count; i++) // 위에 표시된 몬스터부터 차례대로 공격
+                if (deathCount >= monster.Count)
                 {
-                    if (!monster[i].IsDead)
-                        MonsterPhase(monster[i]);
+                    BattleResult(true);
+                    return;
                 }
+
+
+                foreach (var mon in monster)
+                {
+                    if (!mon.IsDead)
+                        MonsterPhase(mon);
+                }
+            }
+
+            if (playerHp <= 0)
+            {
+                BattleResult(false);
             }
         }
 
@@ -52,15 +64,15 @@ namespace TeamRPG_17
         {
             Console.Clear();
             Console.WriteLine("=== ENGAGE!!! ===");
-            for (int i = 0; i < monster.Count; i++) // 그 배열 랜덤 정해진 몬스터 갯수만큼 반복
+            for (int i = 0; i < monster.Count; i++) // 그 배열 랜덤 정해진 몬스터 갯수만큼 반복, 동일한 객체가 들어가면 같은 객체로 쳐서 수정 필요
             {
                 // 배열 가져와가지고 랜덤하게 정해진 몬스터 정보 출력
-                Console.WriteLine($"{i + 1} {monster[i].GetInfo()}");
+                Console.WriteLine($"{i + 1}. {monster[i].GetInfo()}   " + (monster[i].CurrentHp > 0 ? $"HP {monster[i].CurrentHp}" : "Dead"));
             }
 
             Console.WriteLine("\n\n[내 정보]");
             Console.WriteLine($"Lv.{_player.level}  {_player.name} ({_player.job})");
-            Console.WriteLine($"HP  {_player.hp}");
+            Console.WriteLine($"HP  {playerHp}");
         }
 
         // 플레이어 차례
@@ -118,12 +130,17 @@ namespace TeamRPG_17
 
         private void PlayerAttack(Monster monster) // 몬스터가 대미지 받을 때 출력
         {
+            if (monster.IsDead) return;
             int dmg = MonsterTakeDamage(monster);
             Console.WriteLine($"{_player.name}의 공격!\n{monster.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
 
             Console.Write($"{monster.GetInfo()}\nHP {monster.CurrentHp} -> ");
 
-            if (monster.CurrentHp <= 0) Console.WriteLine("Dead");
+            if (monster.CurrentHp <= 0)
+            {
+                Console.WriteLine("Dead");
+                //QuestManager.Instance.MonsterKillCount(monster);
+            }
             else Console.WriteLine($"{monster.CurrentHp -= dmg}");
 
             Console.WriteLine("0. 다음\n\n>>");
@@ -147,10 +164,10 @@ namespace TeamRPG_17
             int dmg = PlayerTakeDamage(monster);
             Console.WriteLine($"{monster.GetInfo()}의 공격!\n{_player.name}을(를) 맞췄습니다. [데미지 : {dmg}]");
 
-            Console.Write($"{monster.GetInfo()}\nHP {monster.CurrentHp} -> ");
+            Console.Write($"Lv.{_player.level} {_player.name}\nHP {playerHp} -> ");
 
-            if (monster.CurrentHp <= 0) Console.WriteLine("Dead");
-            else Console.WriteLine($"{monster.CurrentHp -= dmg}");
+            if (playerHp <= 0) Console.WriteLine("Dead");
+            else Console.WriteLine($"{playerHp -= dmg}");
 
             Console.WriteLine("0. 다음\n\n>>");
             string input = Console.ReadLine();
@@ -220,6 +237,33 @@ namespace TeamRPG_17
                 }
             }
             return true;
+        }
+        private void BattleResult(bool isWin)
+        {
+            Console.Clear();
+            Console.WriteLine("Battle - Result");
+            if (isWin)
+            {
+                Console.WriteLine("\n\n!!!   VICTORY   !!!");
+                foreach (var mon in monster)
+                {
+                    if (mon.IsDead)
+                    {
+                        Console.WriteLine($"- {mon.Name} 처치!");
+                    }
+                }
+                int dungeonLevel = currentDungeon.Level;
+                BattleReward reward = new BattleReward(dungeonLevel, monster.Count);
+                reward.ApplyReward(_player);
+            }
+            else
+            {
+                Console.WriteLine("\n\n~~~  YOU LOSE  ~~~");
+            }
+
+            Console.WriteLine($"\n\nHP {_player.hp} remains");
+            Console.WriteLine(">>");
+            Console.ReadLine();
         }
     }
 }

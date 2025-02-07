@@ -27,9 +27,10 @@ namespace TeamRPG_17
             Console.WriteLine($"{monsterName} ( {killCount} / {monsterCount})");
         }
 
-        public override void QuestComplete()
+        public override bool QuestComplete()
         {
-            
+            questComplete = true;
+            return true;
         }
 
         public void QuestUpdate(string _targetName)

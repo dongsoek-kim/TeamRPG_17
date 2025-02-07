@@ -1,100 +1,31 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace TeamRPG_17
 {
     public class QuestManager : Singleton<QuestManager>
     {
         // KillQuest의 Json파일, ItemQuest의 Json파일을 분리해서 관리
-        private KillQuest[] killQuests;
-        private ItemQuest[] itemQuests;
+        public KillQuest[] killQuests { get; private set; }
+        public ItemQuest[] itemQuests { get; private set; }
 
         public Quest? selectQuest;
 
         public QuestManager()
         {
-            // 배열 초기화
-            killQuests = new KillQuest[6];
-            itemQuests = new ItemQuest[6];
-
-            // 퀘스트임시 데이터 로드
-            LoadQuestData();
+            
         }
 
-        public void LoadQuestData()
+        public void LoadQuest(string killQuestJson, string itemQuestJson)
         {
-            /*
-             이미 데이터가있을때 
-             저장된 퀘스트 데이터 불러오기 
-             퀘스트 데이터 자체에 퀘스트진행도, 퀘스트완료상태 저장
-              - 반복퀘스트 기본적인 퀘스트기능 완성후 추가예정
-
-             저장된 퀘스트 데이터가없을때
-             기본 퀘스트데이터 복사해서 저장.
-            */
-
-            // 임시 퀘스트 데이터
-            // 킬
-            killQuests[0] = new KillQuest(
-                TownName.Elinia, "테스트퀘스트1_kill", "테스트퀘스트1입니다.\n몬스터1 5마리",
-                10, 10, "몬스터1", 5);
-
-            killQuests[1] = new KillQuest(
-                TownName.Elinia, "테스트퀘스트2_kill", "테스트퀘스트2입니다.\n몬스터2 10마리",
-                20, 10, "몬스터2", 10);
-
-            killQuests[2] = new KillQuest(
-                TownName.Hannesys, "테스트퀘스트3_kill", "테스트퀘스트3입니다.\n몬스터3 15마리",
-                30, 10, "몬스터3", 15);
-
-            killQuests[3] = new KillQuest(
-                TownName.Hannesys, "테스트퀘스트4_kill", "테스트퀘스트4입니다.\n몬스터4 20마리",
-                40, 10, "몬스터4", 20);
-
-            killQuests[4] = new KillQuest(
-                TownName.CunningCity, "테스트퀘스트5_kill", "테스트퀘스트5입니다.\n몬스터5 25마리",
-                50, 10, "몬스터5", 25);
-
-            killQuests[5] = new KillQuest(
-                TownName.CunningCity, "테스트퀘스트6_kill", "테스트퀘스트6입니다.\n몬스터6 30마리",
-                60, 10, "몬스터6", 30);
-
-            // 아이템
-            itemQuests[0] = new ItemQuest(
-                TownName.Elinia, "테스트퀘스트1_item", "테스트퀘스트1입니다.\n아이템주세요",
-                10, 10, ItemName.TrashArmor
-                );
-
-            itemQuests[1] = new ItemQuest(
-                TownName.Elinia, "테스트퀘스트2_item", "테스트퀘스트2입니다.\n아이템주세요",
-                20, 10, ItemName.IronArmor
-                );
-
-            itemQuests[2] = new ItemQuest(
-                TownName.Hannesys, "테스트퀘스트3_item", "테스트퀘스트3입니다.\n아이템주세요",
-                30, 10, ItemName.WoodenStick
-                );
-
-            itemQuests[3] = new ItemQuest(
-                TownName.Hannesys, "테스트퀘스트4_item", "테스트퀘스트4입니다.\n아이템주세요",
-                40, 10, ItemName.IronArmor
-                );
-
-            itemQuests[4] = new ItemQuest(
-                TownName.CunningCity, "테스트퀘스트5_item", "테스트퀘스트5입니다.\n아이템주세요",
-                50, 10, ItemName.BronzeAxe
-                );
-
-            itemQuests[5] = new ItemQuest(
-                TownName.CunningCity, "테스트퀘스트6_item", "테스트퀘스트6입니다.\n아이템주세요",
-                60, 10, ItemName.OldSword
-                );
+            killQuests = JsonConvert.DeserializeObject<KillQuest[]>(killQuestJson);
+            itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(killQuestJson);
         }
 
         /// <summary>
@@ -105,21 +36,17 @@ namespace TeamRPG_17
         {
             int questCount = 1;
             string questStateText;
-            // 킬 퀘스트 리스트 출력
+
             foreach(KillQuest? quest in killQuests)
             {
                 if (quest == null || quest?.questTown != _town)
                     continue;
 
-                // 이미 수락했는지 / 퀘스트를 완료했는지 확인
-                // 퀘스트를 수락헀다면 진행중 / 수락하지않았다면 수락가능
-                // 퀘스트를 완료했다면 완료 / 완료하지않았다면 이전 텍스트 그대로
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
                 questStateText = quest.questComplete ? "완료" : questStateText;
                 Console.WriteLine($"{questCount++}. {quest.questTitle}  |  {questStateText}");
             }
 
-            // 아이템 퀘스트 출력
             foreach (ItemQuest? quest in itemQuests)
             {
                 if (quest == null || quest?.questTown != _town)
@@ -172,6 +99,9 @@ namespace TeamRPG_17
                 if (questCount == index)
                 {
                     selectQuest = quest;
+                    if (quest.questComplete)
+                        return false;
+
                     return true;
                 }
 
@@ -186,6 +116,9 @@ namespace TeamRPG_17
                 if (questCount == index)
                 {
                     selectQuest = quest;
+                    if (quest.questComplete)
+                        return false;
+
                     return true;
                 }
 
@@ -195,22 +128,33 @@ namespace TeamRPG_17
         }
 
         /// <summary>
-        /// 선택된 퀘스트의 수락 or 완료 메서드
+        /// 선택된 퀘스트의 수락 or 완료
         /// </summary>
-        public void SelectQuestAccept()
+        public bool SelectQuestAccept()
         {
             if (selectQuest == null)
-                return;
+                return false;
 
             if(selectQuest.questAccpet)
             {
-                selectQuest.QuestComplete();
+                // 퀘스트 완료 성공시
+                if(selectQuest.QuestComplete())
+                    return false;
+                
+                //퀘스트 완료 실패시
+                return true;
             }
             else
             {
                 // 선택된 퀘스트 수락
                 selectQuest.questAccpet = true;
+                return true;
             }
+        }
+
+        public void MonsterKillCount(Monster _monster)
+        { 
+        
         }
     }
 }
