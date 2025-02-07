@@ -15,10 +15,12 @@ namespace TeamRPG_17
             Console.Clear();
             Console.WriteLine("도시 이름들어갈 곳");
             Console.WriteLine("이동해주실 도시를 선택해주세요\n");
+            Console.WriteLine($"현재 플레이어의 레벨 : {GameManager.Instance.player.level}");
             Console.WriteLine("─────────────────────────");
             for ( int i = 0; i < length; i++)
             {
-                Console.WriteLine($"{i + 1}. {GameManager.Instance.towns[i].name}");
+                Console.Write($"{i + 1}. {GameManager.Instance.towns[i].name}");
+                Console.WriteLine($" | 도시레벨 : {GameManager.Instance.towns[i].entryLevel}");
             }    
             Console.WriteLine("─────────────────────────");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
