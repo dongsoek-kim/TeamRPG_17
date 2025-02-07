@@ -125,7 +125,7 @@ namespace TeamRPG_17
             }
 
             // 판매 목록
-            for (int i = town.startItemIdx; i < town.count; i++)
+            for (int i = town.startItemIdx; i < town.startItemIdx + town.count; i++)
             {
                 number = _isNumber ? i + 1 : null;
 
