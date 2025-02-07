@@ -71,7 +71,7 @@ namespace TeamRPG_17
             }
 
             Console.WriteLine("\n\n[내 정보]");
-            Console.WriteLine($"Lv.{_player.level}  {_player.name} ({_player.job})");
+            Console.WriteLine($"\nLv.{_player.level}  {_player.name} ({_player.job})");
             Console.WriteLine($"HP  {playerHp}");
         }
 
@@ -82,7 +82,7 @@ namespace TeamRPG_17
             while (flag)
             {
                 DisplayStatus();
-                Console.WriteLine("1. 공격");
+                Console.WriteLine("\n\n1. 공격");
                 Console.WriteLine("2. 포션");
                 if (GameManager.Instance.SceneInputCommand(out int intCommand))
                 {
@@ -108,24 +108,39 @@ namespace TeamRPG_17
             while (true)
             {
                 DisplayStatus();
-                Console.WriteLine("\n0. 취소");
+                Console.WriteLine("\n\n0. 취소");
 
                 Console.WriteLine("\n대상을 선택해 주세요.\n>>");
-                int input = int.Parse(Console.ReadLine());
+                int input;
+
+                if (!int.TryParse(Console.ReadLine(), out input))
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    continue;
+                }
+
+                if (input == 0) return false;
 
                 if (input <= monster.Count && input > 0)
                 {
-                    PlayerAttack(monster[input - 1]);
-                    break;
+                    Monster targetMonster = monster[input - 1];
+
+                    if (targetMonster.IsDead)
+                    {
+                        Console.WriteLine("이미 죽은 몬스터입니다!");
+                        Console.ReadLine();
+                        continue;
+                    }
+
+                    PlayerAttack(targetMonster);
+                    return true;
                 }
-                else if (input == 0) return false;
                 else
                 {
                     Console.WriteLine("잘못된 입력입니다.");
                     Console.ReadLine();
                 }
             }
-            return true;
         }
 
         private void PlayerAttack(Monster monster) // 몬스터가 대미지 받을 때 출력
@@ -139,11 +154,13 @@ namespace TeamRPG_17
             if (monster.CurrentHp <= 0)
             {
                 Console.WriteLine("Dead");
+                monster.CurrentHp = 0;
+                monster.IsDead = true;
                 QuestManager.Instance.MonsterKillCount(monster);
             }
             else Console.WriteLine($"{monster.CurrentHp -= dmg}");
 
-            Console.WriteLine("0. 다음\n\n>>");
+            Console.WriteLine("\n\n0. 다음\n\n>>");
             string input = Console.ReadLine();
 
             while (true)
@@ -169,7 +186,7 @@ namespace TeamRPG_17
             if (playerHp <= 0) Console.WriteLine("Dead");
             else Console.WriteLine($"{playerHp -= dmg}");
 
-            Console.WriteLine("0. 다음\n\n>>");
+            Console.WriteLine("\n\n0. 다음\n\n>>");
             string input = Console.ReadLine();
 
             while (true)
@@ -202,7 +219,7 @@ namespace TeamRPG_17
             while (!potionSelect)
             {
                 DisplayStatus();
-                Console.WriteLine($"0. 취소");
+                Console.WriteLine($"\n\n0. 취소");
                 Console.WriteLine($"1. 회복 포션");
                 Console.WriteLine($"2. 힘 포션");
                 Console.WriteLine($"3. 민첩 포션");
