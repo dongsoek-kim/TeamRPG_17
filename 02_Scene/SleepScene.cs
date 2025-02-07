@@ -77,7 +77,7 @@ namespace TeamRPG_17
             if (potionCount < 3)
             {
                 GameManager.Instance.player.inventory.potion.GetPotion(PotionType.Health, 0);
-                potionCount++;
+                for (int i = 1; 1 <= 3; i++) 
                 Console.WriteLine("포션이 지급되었습니다!");
             }
             else
