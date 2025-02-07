@@ -10,7 +10,7 @@ namespace TeamRPG_17._02_Scene
     {
         public override void Update()
         {
-            int length = Enum.GetValues(typeof(ItemName)).Length;
+            int length = Enum.GetValues(typeof(TownName)).Length;
 
             Console.Clear();
             Console.WriteLine("도시 이름들어갈 곳");
