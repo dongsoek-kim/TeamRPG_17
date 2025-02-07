@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TeamRPG_17._02_Scene;
-
-namespace TeamRPG_17
+﻿namespace TeamRPG_17
 {
     public class GameManager : Singleton<GameManager>
     {
