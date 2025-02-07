@@ -49,4 +49,20 @@ namespace TeamRPG_17
         Hannesys,
         CunningCity
     }
+    public enum PotionNum
+    {
+        Health,
+        str,
+        dex,
+        inte,
+        luk
+    }
+    public enum EquipSlot
+    {
+        Head,
+        Body,
+        Arm,
+        Foot,
+        Weapon
+    }
 }

@@ -13,7 +13,10 @@ namespace TeamRPG_17
         public int dex = 5;
         public int inte = 5;
         public int luk = 5;
-
+        public Potion()
+        {
+           int PotionNum = Enum.GetValues(typeof(PotionNum)).Length;
+        }
         public void UsePotion(PotionNum potionNum)
         {
             switch (potionNum)
@@ -42,13 +45,4 @@ namespace TeamRPG_17
         }
     }
 
-}
-
-public enum PotionNum
-{
-    Health,
-    str,
-    dex,
-    inte,
-    luk
 }
