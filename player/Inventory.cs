@@ -159,7 +159,12 @@ namespace TeamRPG_17
         }
         public int SumDefense()
         {
-            return 0;
+            int sumDefense = 0;
+            foreach (Armor equipArmor in equipedArmor)
+            {
+                sumDefense += (equipArmor != null) ? equipArmor.defense : 0;
+            }
+            return sumDefense;
         }
     }
 }
