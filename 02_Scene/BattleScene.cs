@@ -64,25 +64,23 @@ namespace TeamRPG_17
             Console.WriteLine("1. 공격");
             Console.WriteLine("2. 포션 처먹기");
 
-            string input = Console.ReadLine();
             bool flag = true;
             while (flag)
             {
-                switch (input)
+                if (GameManager.Instance.SceneInputCommand(out int intCommand))
                 {
-                    case "1":
-                        DisplayStatus();
-                        Targeting();
-                        flag = false;
-                        break;
-                    case "2":
-                        PotionDrink();
-                        flag = false;
-                        break;
-
-                    default:
-                        Console.WriteLine("잘못된 입력입니다.");
-                        break;
+                    switch (intCommand)
+                    {
+                        case 1:
+                            DisplayStatus();
+                            Targeting();
+                            flag = false;
+                            break;
+                        case 2:
+                            PotionDrink();
+                            flag = false;
+                            break;
+                    }
                 }
             }
         }
@@ -115,7 +113,7 @@ namespace TeamRPG_17
                 else Console.WriteLine("잘못된 입력입니다.");
             }
         }
-        private void MonsterTakeDamage(Monster monster) // 몬스터가 대미지 받을 때 계산 메서드(몬스터 index만 받으면 되나)
+        private void MonsterTakeDamage(Monster monster) // 몬스터가 대미지 받을 때 계산 메서드
         {
             int dmg = Math.Max((int)(_player.damage - monster.Defense), 1);
             Console.WriteLine($"{_player.name}의 공격!\n{monster.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
