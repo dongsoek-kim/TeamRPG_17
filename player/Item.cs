@@ -17,6 +17,7 @@ namespace TeamRPG_17
         public int dex { get; private set; }//민첩
         public  int inte {  get; private set; }//지력
         public int luk {  get; private set; }
+        
         public EquipSlot EquipSlot { get; private set; }
         public Item(string _name, string _description, ItemType _type,int _str, int _dex, int _inte,int _luk,EquipSlot _equipslot) 
         {

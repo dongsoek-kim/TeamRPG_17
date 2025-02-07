@@ -128,8 +128,13 @@ namespace TeamRPG_17
                 return;
             }
         }
-
-        public static void SaveGameData(Player player, Inventory inventory)
+        static public void LoadData(int _input)
+        {
+            LoadPlayerData(_input);
+            LoadInventoryData(_input);
+            LoadQuestManagerData(_input);
+        }
+        public static void SaveGameData(Player player, Inventory inventory, QuestManager questManager)
         {
 
 
@@ -196,5 +201,6 @@ namespace TeamRPG_17
                 Console.WriteLine($"Error saving game data: {ex.Message}");
             }
         }
+
     }
 }

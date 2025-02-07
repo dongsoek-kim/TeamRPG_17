@@ -28,6 +28,8 @@
             scenes[5] = new DungeonScene();
             scenes[6] = new SleepScene();
             scenes[7] = new TownMoveScene();
+            scenes[8] = new QuestScene();
+            scenes[9] = new DataScene();
             //seenes[8]
             ChangeScene(SceneName.UserCreateScene);
         }
