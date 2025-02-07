@@ -98,7 +98,11 @@ namespace TeamRPG_17
                     {
                         isCheck = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?");
                         if(isCheck == 1)
+                        {
                             DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, null);
+                            Console.WriteLine("데이터 저장 완료!");
+                            Console.ReadLine();
+                        }        
                     }
                     break;
             }
@@ -180,7 +184,7 @@ namespace TeamRPG_17
         {
             for (int i = 0; i < datas.Length; i++)
             {
-                string strNumber = onSelect ? (i + 1).ToString() : "";
+                string strNumber = !onSelect ? (i + 1).ToString() : "";
                 string str = "비어있음";
                 if (datas[i].name != null)
                     str = string.Format("Lv {0:D2}. {1}", datas[i].level, datas[i].name);
