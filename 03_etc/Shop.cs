@@ -101,10 +101,10 @@ namespace TeamRPG_17
                 int getGold = (int)(ItemManager.Instance.itemPrice[i] * sellRatio);
 
                 // 판매된 아이템 -> null , Gold 획득
+                message = $"{GameManager.Instance.player.inventory[i].itemName} 판매되었습니다. ( + {getGold}G)";
                 GameManager.Instance.player.inventory[i] = null;
                 GameManager.Instance.player.gold += getGold;
 
-                message = $"판매되었습니다. ( + {getGold}G)";
                 messageColor = ConsoleColor.Blue;
                 return;
             }
