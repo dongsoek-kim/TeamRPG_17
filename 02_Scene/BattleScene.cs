@@ -233,23 +233,23 @@ namespace TeamRPG_17
                     case "0":
                         return false;
                     case "1":
-                        potion.UsePotion(PotionNum.Health);
+                        potion.UsePotion(PotionType.Health);
                         potionSelect = true;
                         break;
                     case "2":
-                        potion.UsePotion(PotionNum.str);
+                        potion.UsePotion(PotionType.str);
                         potionSelect = true;
                         break;
                     case "3":
-                        potion.UsePotion(PotionNum.dex);
+                        potion.UsePotion(PotionType.dex);
                         potionSelect = true;
                         break;
                     case "4":
-                        potion.UsePotion(PotionNum.inte);
+                        potion.UsePotion(PotionType.inte);
                         potionSelect = true;
                         break;
                     case "5":
-                        potion.UsePotion(PotionNum.luk);
+                        potion.UsePotion(PotionType.luk);
                         potionSelect = true;
                         break;
                 }
@@ -271,7 +271,7 @@ namespace TeamRPG_17
                     }
                 }
                 int dungeonLevel = currentDungeon.Level;
-                BattleReward reward = new BattleReward(dungeonLevel, monster.Count);
+                BattleReward reward = new BattleReward(dungeonLevel, monster.Count, potion);
                 reward.ApplyReward(_player);
             }
             else

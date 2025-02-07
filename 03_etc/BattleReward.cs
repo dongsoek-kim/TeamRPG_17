@@ -24,6 +24,7 @@ namespace TeamRPG_17
             //Exp = dungeonLevel * monsterCount * 10;
             Exp = 1;
             Gold = dungeonLevel * monsterCount * 5;
+            Potion.GetPotion(PotionType.Health, 2);
         }
         public void ApplyReward(Player player)
         {
