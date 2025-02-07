@@ -9,8 +9,10 @@ namespace TeamRPG_17
 {
     static class DataManager//Player,Inventory,Quest의 데이터 저장,불러오기
     {
+      private static int nowSlot;
       static public Player LoadPlayerData(int _input)
         {
+            nowSlot = _input;
             string relativePath = @"..\..\..\Json\";
             string jsonFile = "PlayerData";  // JSON 파일명
             string slot;
@@ -49,7 +51,7 @@ namespace TeamRPG_17
                 return null;
             }
         }
-        static public Inventory LoadInventoryData()
+        static public Inventory LoadInventoryData(int _input)
         {
             string relativePath = @"..\..\..\Json\";
             string jsonFile = "InventoryData.json";  // JSON 파일명
@@ -100,9 +102,26 @@ namespace TeamRPG_17
 
 
             string relativePath = @"..\..\..\Json\";
-            string PlyerDatajsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, "PlayerData.json"));
+            string jsonPath;
+            switch (nowSlot)
+            {
+                case 1:
+                    jsonPath = "PlayerDataSlot1.json";
+                    break;
+                case 2:
+                    jsonPath = "PlayerDataSlot2.json";
+                    break;
+                case 3:
+                    jsonPath = "PlayerDataSlot3.json";
+                    break;
+                default:
+                    jsonPath = "PlayerDataSlot1.json";
+                    break;
+            }
+            string PlyerDatajsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonPath));
             string InventoryDatajsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, "InventoryData.json"));
             string QusetManagerDatajsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, "QuestManagerData.json"));
+    
             try// JSON 파일로 저장
             { 
                 string PlayerDatajson = JsonConvert.SerializeObject(player, Formatting.Indented);
