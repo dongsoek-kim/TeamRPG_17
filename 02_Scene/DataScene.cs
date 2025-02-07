@@ -2,7 +2,7 @@
 
 namespace TeamRPG_17
 {
-    public class LoadScene : Scene
+    public class DataScene : Scene
     {
 
         private bool onSave;
@@ -10,7 +10,7 @@ namespace TeamRPG_17
         private bool onDelete;
         private bool onSelect;
 
-        public LoadScene()
+        public DataScene()
         {
             onSave = false;
             onLoad = false;
