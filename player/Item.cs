@@ -19,6 +19,7 @@ namespace TeamRPG_17
         public EquipSlot EquipSlot { get; private set; }
         public Item(string _name, string _description, ItemType _type,int _str, int _dex, int _inte,int _luk,EquipSlot _equipslot) 
         {
+            
             itemType = _type;
             itemName = _name;
             itemDescription = _description;
@@ -65,11 +66,4 @@ namespace TeamRPG_17
         }
     }
 }
-public enum EquipSlot
-{
-    Head,
-    Body,
-    Arm,
-    Foot,
-    Weapon
-}
+

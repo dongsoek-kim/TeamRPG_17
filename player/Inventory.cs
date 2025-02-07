@@ -21,12 +21,12 @@ namespace TeamRPG_17
 
         public int equipSlot { get; private set; }
 
-        public int sumDefense { get; private set; }
         public Inventory()
         {
             equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;
             int length = Enum.GetValues(typeof(ItemName)).Length;
             inventory = new Item[length];
+            Potion potion = new Potion();
         }
 
         public void ShowInventory()
@@ -157,6 +157,15 @@ namespace TeamRPG_17
                 equipedArmor = null;
             else
                 equipedWeapon = null;
+        }
+        public int SumDefense()
+        {
+            int sumDefense = 0;
+            foreach (Armor equipArmor in equipedArmor)
+            {
+                sumDefense += (equipArmor != null) ? equipArmor.defense : 0;
+            }
+            return sumDefense;
         }
     }
 }
