@@ -163,10 +163,11 @@ namespace TeamRPG_17
         /// <summary>
         /// 장비 착용해제 함수
         /// </summary>
-        public void Unequip(ItemType _type)
+        public void Unequip(ItemType _itemType,EquipSlot _equipSlot)
         {
-            if (_type == ItemType.Armor)
-                equipedArmor = null;
+            if (_itemType == ItemType.Armor)
+
+                equipedArmor[(int)_equipSlot] = null;
             else
                 equipedWeapon = null;
         }
