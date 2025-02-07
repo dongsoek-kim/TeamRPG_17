@@ -139,7 +139,7 @@ namespace TeamRPG_17
             if (monster.CurrentHp <= 0)
             {
                 Console.WriteLine("Dead");
-                QuestManager.Instance.MonsterKillCount(monster);
+                //QuestManager.Instance.MonsterKillCount(monster);
             }
             else Console.WriteLine($"{monster.CurrentHp -= dmg}");
 
