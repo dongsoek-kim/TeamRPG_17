@@ -9,10 +9,27 @@ namespace TeamRPG_17
 {
     static class DataManager//Player,Inventory,Quest의 데이터 저장,불러오기
     {
-      static public Player LoadPlayerData()
+      static public Player LoadPlayerData(int _input)
         {
             string relativePath = @"..\..\..\Json\";
-            string jsonFile = "PlayerData.json";  // JSON 파일명
+            string jsonFile = "PlayerData";  // JSON 파일명
+            string slot;
+            switch(_input)
+            {
+                case 1:
+                    slot = "Slot1.json";
+                    break;
+                case 2:
+                    slot = "Slot2.json";
+                    break;
+                case 3:
+                    slot = "Slot3.json";
+                    break;
+                default:
+                    slot = "Slot1.json";
+                    break;
+            }
+            jsonFile =jsonFile + slot;
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             try
             {
