@@ -168,7 +168,7 @@ namespace TeamRPG_17
                 default:
                     if (intCommand - 1 < datas.Length)
                     {
-                        Player p = datas[intCommand];
+                        Player p = datas[intCommand - 1];
                         if (CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 삭제를 하시겠습니까?") == 1)
                         {              
                             p.name = "";
