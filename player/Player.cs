@@ -35,7 +35,7 @@ namespace TeamRPG_17
             dex = 0;
             inte = 0;
             luk = 0;
-            damage = 10;
+            damage = 100;
             defense = 5;
             hp = 100;
             gold = 1000;
