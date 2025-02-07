@@ -93,17 +93,19 @@ namespace TeamRPG_17
                     onSelect = true;
                     break;
                 default:
-                    int isCheck = 1;
+                    bool isSlot = true;
                     if(intCommand - 1 < datas.Length)
                     {
-                        isCheck = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?");
-                        if(isCheck == 1)
+                        int innerCommand = 0;
+                        isSlot = CheckSlot(intCommand - 1, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?", out innerCommand);
+                        
+                        if((isSlot && innerCommand == 1) || isSlot == false) // Slot있고 확인을 누르거나, Slot이 비어있으면 실행
                         {
                             DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, intCommand);
                             Console.WriteLine("데이터 저장 완료!!");
                             SyncSlot(); // 다시 불러오기
                             Console.ReadLine();
-                        }        
+                        }
                     }
                     break;
             }
@@ -133,10 +135,15 @@ namespace TeamRPG_17
                 default:
                     if (intCommand - 1 < datas.Length)
                     {
-                        if (datas[intCommand - 1].name != null)
+                        if ((string)datas[intCommand - 1].name != null)
                         {
                             DataManager.LoadData(intCommand);
                             Console.WriteLine("불러오기 완료!!");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("해당 슬롯은 비어있습니다.");
                             Console.ReadLine();
                         }
                     }
@@ -168,13 +175,21 @@ namespace TeamRPG_17
                 default:
                     if (intCommand - 1 < datas.Length)
                     {
-                        Player p = datas[intCommand - 1];
-                        if (CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 삭제를 하시겠습니까?") == 1)
+                        int innerCommand = 0;
+                        bool isSlot = CheckSlot(intCommand - 1, "현재 슬롯에 데이터가 남아있습니다.\n정말로 삭제를 하시겠습니까?", out innerCommand);
+                        
+                        if (isSlot && innerCommand == 1)
                         {              
-                            p.name = "";
+                            Player p = datas[intCommand - 1];
+                            p.name = null;
                             DataManager.SaveGameData(p, new Inventory(), intCommand);
                             Console.WriteLine("삭제완료!!");
                             SyncSlot(); // 다시 불러오기
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("해당 슬롯은 비어있습니다.");
                             Console.ReadLine();
                         }
                     }
@@ -194,7 +209,7 @@ namespace TeamRPG_17
             }
         }
 
-        private int CheckSlot(int slotNumber, string checkMessage)
+        private bool CheckSlot(int slotNumber, string checkMessage, out int _innerCommand)
         {
             string pName = datas[slotNumber-1].name;
             int checkCommand = 1;
@@ -207,15 +222,19 @@ namespace TeamRPG_17
 
                 while (true)
                 {
-                    if (GameManager.Instance.SceneInputCommand(out checkCommand))
+                    if (GameManager.Instance.SceneInputCommand(out _innerCommand))
                     {
-                        if (checkCommand >= 0 || checkCommand <= 1)
+                        if (_innerCommand >= 0 || _innerCommand <= 1)
                             break;
                     }
 
                 }
+                return true;
             }
-            return checkCommand;
+
+            // 제어문을 무시하면 innerCommand = 0;
+            _innerCommand = 0;
+            return false;
         }
 
         private void SyncSlot()
