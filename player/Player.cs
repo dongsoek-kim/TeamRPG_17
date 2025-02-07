@@ -24,6 +24,8 @@ namespace TeamRPG_17
 
         public Inventory inventory { get; private set; }
 
+        private Random random = new Random();
+
         public Player()
         {
             level = 1;
@@ -50,6 +52,10 @@ namespace TeamRPG_17
                 level++;
                 exp = 0;
 
+                str += 1;
+                dex += 1;
+                inte += 1;
+                luk += 1;
                 damage += 0.5f;
                 defense += 1;
             }
@@ -75,6 +81,52 @@ namespace TeamRPG_17
                 return 0;
             else
                 return inventory.equipedWeapon.damage;
+        }
+
+        // 총 데미지 계산식 (스탯/직업별)
+        public int TotalDamage 
+        {
+            get
+            {
+                float totalDamage = damage;
+                float bonusDamage = 0;
+
+                switch (job)
+                {
+                    case JobType.Warrior:
+                        damage = (((float)str * 1.5f) + ((float)dex * 0.5f) + ((float)inte * 0.1f));
+                        break;
+
+                    case JobType.Rogue:
+                        damage = (((float)str * 0.5f) + ((float)dex * 1.5f) + ((float)inte * 0.1f));
+                        break;
+
+                    case JobType.Wizard:
+                        damage = (((float)str * 0.1f) + ((float)dex * 0.5f) + ((float)inte * 1.5f));
+                        break;
+                }
+                return (int)(totalDamage + bonusDamage);
+            }
+         }
+
+        public int LuckyDamage()
+        {
+            float finalDamage = TotalDamage;
+
+            // 회피확률
+            float dodge = luk * 0.5f / 100f;  // Luk 10이면 5% 확률 회피
+            if (random.NextDouble() < dodge)
+            {
+                return 0;  // 회피하면 데미지를 0으로 설정
+            }
+            // 크리티컬
+            float critical = luk * 0.3f / 100f; // Luk 10이면 3% 확률 회피
+            if (random.NextDouble() < critical)
+            {
+                finalDamage *= 1.5f;
+            }
+
+            return (int)finalDamage;
         }
     }
 }
