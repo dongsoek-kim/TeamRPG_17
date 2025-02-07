@@ -19,7 +19,7 @@ namespace TeamRPG_17
             {
                 monster = BattleEngage();
             }
-            else DisplayStatus();
+            else InBatte();
         }
 
         public List<Monster> BattleEngage()
@@ -29,26 +29,15 @@ namespace TeamRPG_17
             return _monster.RandomMonsterSpawn();
         }
 
-
-        private void DisplayStatus()
+        private void InBatte()
         {
             int deathCount = 0;
             while (_player.hp > 0 && deathCount < monster.Count)
             {
-                Console.Clear();
-                Console.WriteLine("=== ENGAGE!!! ===");
-                for (int i = 0; i < monster.Count; i++) // 그 배열 랜덤 정해진 몬스터 갯수만큼 반복
-                {
-                    // 배열 가져와가지고 랜덤하게 정해진 몬스터 정보 출력
-                    Console.WriteLine($"{i+1} {monster[i].GetInfo()}");
-                }
-
-                Console.WriteLine("\n\n[내 정보]");
-                Console.WriteLine($"Lv.{_player.level}  {_player.name} ({_player.job})");
-                Console.WriteLine($"HP  {_player.hp}");
+                DisplayStatus();
                 PlayerPhase();
 
-                for (int i = 0; i < monster.Count; i++) if (monster[i].IsDead) deathCount++; 
+                for (int i = 0; i < monster.Count; i++) if (monster[i].IsDead) deathCount++;
                 if (deathCount > 0) break; // 모두 죽였으면 끝
 
                 for (int i = 0; i < monster.Count; i++) // 위에 표시된 몬스터부터 차례대로 공격
@@ -57,6 +46,21 @@ namespace TeamRPG_17
                         MonsterPhase(monster[i]);
                 }
             }
+        }
+
+        private void DisplayStatus()
+        {
+            Console.Clear();
+            Console.WriteLine("=== ENGAGE!!! ===");
+            for (int i = 0; i < monster.Count; i++) // 그 배열 랜덤 정해진 몬스터 갯수만큼 반복
+            {
+                // 배열 가져와가지고 랜덤하게 정해진 몬스터 정보 출력
+                Console.WriteLine($"{i + 1} {monster[i].GetInfo()}");
+            }
+
+            Console.WriteLine("\n\n[내 정보]");
+            Console.WriteLine($"Lv.{_player.level}  {_player.name} ({_player.job})");
+            Console.WriteLine($"HP  {_player.hp}");
         }
 
         // 플레이어 차례
@@ -77,8 +81,9 @@ namespace TeamRPG_17
                                 flag = false;
                             break;
                         case 2:
-                            Potion.UsePotion();
-                            flag = false;
+                            DisplayStatus();
+                            if (SelectPotion())
+                                flag = false;
                             break;
                     }
                 }
@@ -161,10 +166,36 @@ namespace TeamRPG_17
         }
 
 
-        private void UsePotion() // 포션 먹었을 때 회복 메서드(지워야됨!!!!UsePotion()으로 대체될 예정)
+        private bool SelectPotion() // 포션 선택
         {
-            _player.hp += 100;
+            while (true)
+            {
+                DisplayStatus();
+                Console.WriteLine($"0. 취소");
+                Console.WriteLine($"1. 회복 포션");
+                Console.WriteLine($"2. 힘 포션");
+                Console.WriteLine($"3. 민첩 포션");
+                Console.WriteLine($"4. 지능 포션");
+                Console.WriteLine($"5. 행운 포션");
+                Console.WriteLine("\n포션 종류를 입력해 주세요.\n>>");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "0":
+                        return false;
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+                        break;
+                }
+            }
+            return true;
         }
-
     }
 }
