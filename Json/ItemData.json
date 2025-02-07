@@ -1,0 +1,38 @@
+[
+    {
+        "itemName": "쓸모없는 갑옷",
+        "itemDescription": "진짜 쓸모없는 갑옷입니다.",
+        "itemType": 0,
+        "str": 1,
+        "dex": 2,
+        "inte": 3,
+        "luk": 4,
+        "EquipSlot": "Head",
+        "Grade": "Common",
+        "Defense": "3"
+    },
+    {
+        "itemName": "쓸모있는 갑옷",
+        "itemDescription": "진짜 쓸모있 갑옷입니다.",
+        "itemType": 0,
+        "str": 0,
+        "dex": 0,
+        "inte": 0,
+        "luk": 0,
+        "EquipSlot": "Head",
+        "Grade": "Rare",
+        "Defense": "10"
+    },
+    {
+        "itemName": "쓸모많은 갑옷",
+        "itemDescription": "진짜 쓸모많은 갑옷입니다.",
+        "itemType": 0,
+        "str": 0,
+        "dex": 0,
+        "inte": 0,
+        "luk": 0,
+        "EquipSlot": "Head",
+        "Grade": "Unique",
+        "Defense": "15"
+    }
+]

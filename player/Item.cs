@@ -22,7 +22,7 @@ namespace TeamRPG_17
 
         public int price {  get; private set; }
         
-        public Item(string _name, string _description, ItemType _type,int _str, int _dex, int _inte,int _luk,EquipSlot _equipslot,Grade grade) 
+        public Item(string _name, string _description, ItemType _type,int _str, int _dex, int _inte,int _luk,EquipSlot _equipslot,Grade _grade) 
         {
             
             itemType = _type;
@@ -33,20 +33,21 @@ namespace TeamRPG_17
             inte = _inte;
             luk = _luk;
             EquipSlot = _equipslot;
-            switch(grade)
-            {
-                case Grade.Common:
-                    price = 500;
-                    break;
-                case Grade.rare:
-                    price = 1000;
-                    break;
-                case Grade.Unique:
-                    price = 2000;
-                    break;
-                default:
-                    break;
-            }    
+            grade = _grade;
+            //switch(grade)
+            //{
+            //    case Grade.Common:
+            //        price = 500;
+            //        break;
+            //    case Grade.rare:
+            //        price = 1000;
+            //        break;
+            //    case Grade.Unique:
+            //        price = 2000;
+            //        break;
+            //    default:
+            //        break;
+            //}    
         }
 
         // 아이템 정보 문자열 반환 함수

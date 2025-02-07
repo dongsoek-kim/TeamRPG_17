@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,33 +19,79 @@ namespace TeamRPG_17
             itemLength = Enum.GetValues(typeof(ItemName)).Length;
             items = new Item[itemLength];
             itemPrice = new int[itemLength];
+            LoadItemsData();
+        }
+        public void LoadItemsData()
+        {
+            string relativePath = @"..\..\..\Json\";
+            string jsonFile = "ItemData.json";  // JSON 파일명
+            string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
+            try
+            {
+                if (File.Exists(jsonPath))
+                {
+                    string json = File.ReadAllText(jsonPath);
+                    // JSON 데이터를 불러와 아이템 생성
+                    var rawItems = JsonConvert.DeserializeObject<dynamic[]>(json);
+                    for (int i = 0; i < rawItems.Length; i++)
+                    {
+                        var rawItem = rawItems[i];
+                        ItemType itemType = (ItemType)Enum.Parse(typeof(ItemType), rawItem.itemType.ToString());
 
-            items[(int)ItemName.TrashArmor]
-                = new Armor("쓸모없는 갑옷", "진짜 쓸모없는 갑옷입니다.", 1,0,0,0,0, EquipSlot.Body);
-            items[(int)ItemName.NoviceArmor]    
-                = new Armor("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", 5, 0, 0, 0, 0, EquipSlot.Body);
-            items[(int)ItemName.IronArmor]      
-                = new Armor("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 9, 0, 0, 0, 0, EquipSlot.Body);
-            items[(int)ItemName.SpartaArmor]
-                = new Armor("스파르타 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 15, 0, 0, 0,0, EquipSlot.Body); 
-
-            items[(int)ItemName.WoodenStick]
-                = new Weapon("나무 젓가락", "나무 젓가락입니다.", 0, 0, 0, 0, 0, EquipSlot.Weapon);
-            items[(int)ItemName.OldSword]
-                = new Weapon("낡은 검", "쉽게 볼 수 있는 낡은 검 입니다.", 2, 0, 0, 0, 0, EquipSlot.Weapon);
-            items[(int)ItemName.BronzeAxe]      
-                = new Weapon("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", 5, 0, 0, 0, 0, EquipSlot.Weapon);
-            items[(int)ItemName.SpartaSpear]    
-                = new Weapon("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", 7, 0, 0, 0,0, EquipSlot.Weapon);
-
-            itemPrice[(int)ItemName.TrashArmor]    = 100;
-            itemPrice[(int)ItemName.NoviceArmor]    = 1000;
-            itemPrice[(int)ItemName.IronArmor]      = 2000;
-            itemPrice[(int)ItemName.SpartaArmor]    = 3500;
-            itemPrice[(int)ItemName.WoodenStick]    = 50;
-            itemPrice[(int)ItemName.OldSword]       = 600;
-            itemPrice[(int)ItemName.BronzeAxe]      = 1500;
-            itemPrice[(int)ItemName.SpartaSpear]    = 3000;
+                        // 아이템 타입에 맞게 생성
+                        if (itemType == ItemType.Armor)
+                        {
+                            int defense = int.Parse(rawItem.Defense.ToString());
+                            int str = int.Parse(rawItem.str.ToString());
+                            int dex = int.Parse(rawItem.dex.ToString());
+                            int inte = int.Parse(rawItem.inte.ToString());
+                            int luk = int.Parse(rawItem.luk.ToString());
+                            Grade grade = (Grade)Enum.Parse(typeof(Grade), rawItem.Grade.ToString());  // 대소문자 구분 안함
+                            EquipSlot equipSlot = (EquipSlot)Enum.Parse(typeof(EquipSlot), rawItem.EquipSlot.ToString());
+                            items[i] = new Armor(
+                                rawItem.itemName.ToString(),
+                                rawItem.itemDescription.ToString(),
+                                defense,    // int로 변환된 값
+                                str,
+                                dex,
+                                inte,
+                                luk,
+                                equipSlot,
+                                grade
+                            );
+                        }
+                        else if (itemType == ItemType.Weapon)
+                        {
+                            int damage = int.Parse(rawItem.damage.ToString());
+                            int str = int.Parse(rawItem.str.ToString());
+                            int dex = int.Parse(rawItem.dex.ToString());
+                            int inte = int.Parse(rawItem.inte.ToString());
+                            int luk = int.Parse(rawItem.luk.ToString());
+                            Grade grade = (Grade)Enum.Parse(typeof(Grade), rawItem.Grade.ToString());  // 대소문자 구분 안함
+                            EquipSlot equipSlot = (EquipSlot)Enum.Parse(typeof(EquipSlot), rawItem.EquipSlot.ToString());           
+                            // Weapon 객체 생성
+                            items[i] = new Weapon(
+                                rawItem.itemName.ToString(),
+                                rawItem.itemDescription.ToString(),
+                                damage,    // int로 변환된 값
+                                str,
+                                dex,
+                                inte,
+                                luk,
+                                equipSlot,
+                                grade
+                            );
+                        }
+                    }
+                }
+                else
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }
+

@@ -29,7 +29,6 @@ namespace TeamRPG_17
             inventory = new Item[length];
             Potion potion = new Potion();
             equipedArmor = new Armor[equipSlot];
-            AddItem(0); AddItem(1); AddItem(2); AddItem(5); AddItem(6);
         }
 
         public void ShowInventory()
