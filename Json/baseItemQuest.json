@@ -1,6 +1,6 @@
 [
   {
-    "questItem": 0,
+    "questItem": "아이템1",
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -10,7 +10,7 @@
     "gold": 10
   },
   {
-    "questItem": 2,
+    "questItem": "아이템2",
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -20,7 +20,7 @@
     "gold": 10
   },
   {
-    "questItem": 4,
+    "questItem": "아이템3",
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -30,7 +30,7 @@
     "gold": 10
   },
   {
-    "questItem": 2,
+    "questItem": "아이템4",
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -40,7 +40,7 @@
     "gold": 10
   },
   {
-    "questItem": 6,
+    "questItem": "아이템5",
     "questTown": 2,
     "questComplete": false,
     "questAccpet": false,
@@ -50,7 +50,7 @@
     "gold": 10
   },
   {
-    "questItem": 5,
+    "questItem": "아이템6",
     "questTown": 2,
     "questComplete": false,
     "questAccpet": false,
