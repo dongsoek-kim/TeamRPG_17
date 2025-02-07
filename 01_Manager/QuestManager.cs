@@ -12,17 +12,32 @@ namespace TeamRPG_17
         private KillQuest[] killQuests;
         private ItemQuest[] itemQuests;
 
-        public Quest selectQuest;
+        public Quest? selectQuest;
 
         public QuestManager()
         {
-            LoadQuestData();    // 퀘스트 데이터 로드
+            // 배열 초기화
+            killQuests = new KillQuest[6];
+            itemQuests = new ItemQuest[6];
+
+            // 퀘스트임시 데이터 로드
+            LoadQuestData();
         }
 
         public void LoadQuestData()
         {
+            /*
+             이미 데이터가있을때 
+             저장된 퀘스트 데이터 불러오기 
+             퀘스트 데이터 자체에 퀘스트진행도, 퀘스트완료상태 저장
+              - 반복퀘스트 기본적인 퀘스트기능 완성후 추가예정
+
+             저장된 퀘스트 데이터가없을때
+             기본 퀘스트데이터 복사해서 저장.
+            */
+
             // 임시 퀘스트 데이터
-            killQuests = new KillQuest[6];
+            // 킬
             killQuests[0] = new KillQuest(
                 TownName.Elinia, "테스트퀘스트1_kill", "테스트퀘스트1입니다.\n몬스터1 5마리",
                 10, 10, "몬스터1", 5);
@@ -47,8 +62,7 @@ namespace TeamRPG_17
                 TownName.CunningCity, "테스트퀘스트6_kill", "테스트퀘스트6입니다.\n몬스터6 30마리",
                 60, 10, "몬스터6", 30);
 
-
-            itemQuests = new ItemQuest[6];
+            // 아이템
             itemQuests[0] = new ItemQuest(
                 TownName.Elinia, "테스트퀘스트1_item", "테스트퀘스트1입니다.\n아이템주세요",
                 10, 10, ItemName.TrashArmor
@@ -80,6 +94,10 @@ namespace TeamRPG_17
                 );
         }
 
+        /// <summary>
+        /// _town 마을의 퀘스트 리스트 출력
+        /// </summary>
+        /// <param name="_town"></param>
         public void ShowQuestList(TownName _town)
         {
             int questCount = 1;
@@ -108,11 +126,21 @@ namespace TeamRPG_17
             if (selectQuest == null)
                 return;
 
-            Console.WriteLine($"{selectQuest.questTown} 의 퀘스트");    // 퀘스트 진행 마을
-            Console.WriteLine($"-- {selectQuest.questTitle} --");      // 퀘스트 명
-            Console.WriteLine($"{selectQuest.questDescription}");      // 퀘스트 설명
-            Console.WriteLine($"----퀘스트진행도----");   
-            selectQuest.QuestProgress();                               // 퀘스트 진행도 확인
+            Console.WriteLine($"-- {selectQuest.questTown} --");     // 퀘스트 진행 마을
+            Console.WriteLine($"퀘스트 {selectQuest.questTitle}");   // 퀘스트 명
+            Console.WriteLine($"{selectQuest.questDescription}");   // 퀘스트 설명
+
+            // 수락한 퀘스트일때
+            if (selectQuest.questAccpet)
+            {
+                Console.WriteLine($"----퀘스트진행도----");
+                selectQuest.QuestProgress();                                // 퀘스트 진행도 확인
+                Console.WriteLine($"\n1. 퀘스트 완료하기");
+            }
+            else
+            {
+                Console.WriteLine("\n1. 퀘스트 수락하기");
+            }
         }
 
         /// <summary>
@@ -124,7 +152,7 @@ namespace TeamRPG_17
 
             for(int i = 0; i < killQuests.Length; i++)
             {
-                if (killQuests[i] == null || killQuests[i].questTown != _town)
+                if (killQuests[i] == null || killQuests[i]?.questTown != _town)
                     continue;
 
                 if(questCount == index)
@@ -138,7 +166,7 @@ namespace TeamRPG_17
 
             for (int i = 0; i < itemQuests.Length; i++)
             {
-                if (itemQuests[i] == null || itemQuests[i].questTown != _town)
+                if (itemQuests[i] == null || itemQuests[i]?.questTown != _town)
                     continue;
 
                 if (questCount == index)
@@ -149,9 +177,26 @@ namespace TeamRPG_17
 
                 questCount++;
             }
-
-
             return false;
+        }
+
+        /// <summary>
+        /// 선택된 퀘스트의 수락 or 완료 메서드
+        /// </summary>
+        public void SelectQuestAccept()
+        {
+            if (selectQuest == null)
+                return;
+
+            if(selectQuest.questAccpet)
+            {
+                selectQuest.QuestComplete();
+            }
+            else
+            {
+                // 선택된 퀘스트 수락
+                selectQuest.questAccpet = true;
+            }
         }
     }
 }

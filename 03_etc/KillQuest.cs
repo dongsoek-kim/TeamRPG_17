@@ -26,5 +26,24 @@ namespace TeamRPG_17
         {
             Console.WriteLine($"{monsterName} ( {killCount} / {monsterCount})");
         }
+
+        public override void QuestComplete()
+        {
+            
+        }
+
+        public void QuestUpdate(string _targetName)
+        {
+            if (monsterName == _targetName)
+            {
+                killCount++;
+
+                // 킬카운터가 퀘스트 요구치를 넘지않도록 예외처리
+                if(killCount > monsterCount)
+                {
+                    killCount = monsterCount;
+                }
+            }
+        }
     }
 }

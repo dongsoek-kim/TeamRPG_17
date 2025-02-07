@@ -68,7 +68,8 @@ namespace TeamRPG_17
                     questInformation = false;
                     break;
 
-                default:
+                case 1:
+                    QuestManager.Instance.SelectQuestAccept();
                     break;
             }
         }
