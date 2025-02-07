@@ -100,7 +100,8 @@ namespace TeamRPG_17
                         if(isCheck == 1)
                         {
                             DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, null);
-                            Console.WriteLine("데이터 저장 완료!");
+                            Console.WriteLine("데이터 저장 완료!!");
+                            SyncSlot(); // 다시 불러오기
                             Console.ReadLine();
                         }        
                     }
@@ -174,6 +175,7 @@ namespace TeamRPG_17
                             DataManager.SaveGameData(p, new Inventory(), null);
                         }
                         Console.WriteLine("삭제완료!!");
+                        SyncSlot(); // 다시 불러오기
                         Console.ReadLine();
                     }
                     break;
@@ -214,6 +216,12 @@ namespace TeamRPG_17
                 }
             }
             return checkCommand;
+        }
+
+        private void SyncSlot()
+        {
+            for(int i = 0; i<datas.Length; i++)
+                datas[i] = DataManager.LoadPlayerData(i+1);
         }
     }
 }
