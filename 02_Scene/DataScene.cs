@@ -8,12 +8,18 @@ namespace TeamRPG_17
         private bool onSave;
         private bool onLoad;
         private bool onDelete;
+        private Player[] datas;
 
         public DataScene()
         {
             onSave = false;
             onLoad = false;
             onDelete = false;
+
+            datas = new Player[3]; // 데이터 크기
+            for(int i = 0; i<datas.Length; i++)
+                datas[i] = DataManager.LoadPlayerData(i+1);
+            
         }
 
         public override void Update()
@@ -36,13 +42,15 @@ namespace TeamRPG_17
             Console.WriteLine("─────────────────────────");
             for (int i = 0; i < 3; i++) // Data[] 배열의 공간의 길이를 입력
             {
-                Console.WriteLine($"[비어있음]"); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
+                string str = "비어있음";
+                if (datas[i].name != "")
+                    str = string.Format("Lv {0:D2}. {1}", datas[i].level, datas[i].name);
+                Console.WriteLine($"[{str}]"); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
             }
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("1. 저장하기");
             Console.WriteLine("2. 불러오기");
-            Console.WriteLine("3. 삭제하기");
-            Console.WriteLine("4. 선택하기\n");
+            Console.WriteLine("3. 삭제하기\n");
             Console.WriteLine("0. 나가기");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
@@ -60,9 +68,6 @@ namespace TeamRPG_17
                     break;
                 case 3:
                     onDelete = true;
-                    break;
-                case 4:
-                    onSelect = true;
                     break;
             }
         }
