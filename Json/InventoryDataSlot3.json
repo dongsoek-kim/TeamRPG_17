@@ -1,11 +1,11 @@
 {
-    "inventory": {
-        "inventory": [
-        ],
-        "equipedArmor": [
-          
-        ],
-        "equipedWeapon": {
-        }
-    }
+  "equipedArmor": [
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "equipedWeapon": null,
+  "equipSlot": 5
 }

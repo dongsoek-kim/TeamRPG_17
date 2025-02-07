@@ -1,16 +1,26 @@
 {
-	"Player": {
-		"name": "",
-		"job": "",
-		"level": 5,
-		"exp": 1200,
-		"str": 10,
-		"dex": 5,
-		"inte": 2,
-		"luk": 3,
-		"damage": 15.5,
-		"defense": 10.0,
-		"hp": 100,
-		"gold": 500
-	}
+  "name": "d",
+  "job": 0,
+  "level": 1,
+  "exp": 0,
+  "str": 0,
+  "dex": 0,
+  "inte": 0,
+  "luk": 0,
+  "damage": 100.0,
+  "defense": 5.0,
+  "hp": 100,
+  "gold": 1000,
+  "inventory": {
+    "equipedArmor": [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "equipedWeapon": null,
+    "equipSlot": 5
+  },
+  "TotalDamage": 100
 }

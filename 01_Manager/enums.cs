@@ -71,7 +71,7 @@ namespace TeamRPG_17
     public enum Grade
     { 
         Common,
-        rare,
+        Rare,
         Unique
     }
 }

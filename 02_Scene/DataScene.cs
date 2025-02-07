@@ -196,7 +196,7 @@ namespace TeamRPG_17
 
         private int CheckSlot(int slotNumber, string checkMessage)
         {
-            string pName = datas[slotNumber].name;
+            string pName = datas[slotNumber-1].name;
             int checkCommand = 1;
             if(pName != null)
             {

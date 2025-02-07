@@ -10,7 +10,7 @@
         public GameManager() 
         {
             towns = new Town[Enum.GetValues(typeof(SceneName)).Length];
-            towns[(int)TownName.Elinia] = new Town(TownName.Elinia, "엘리니아","엘리니아 마을이다.",1 ,0, 1);
+            towns[(int)TownName.Elinia] = new Town(TownName.Elinia, "엘리니아","엘리니아 마을이다.",1 ,0, 4);
             towns[(int)TownName.Hannesys] = new Town(TownName.Hannesys, "헤네시스", "커닝시티 마을이다.",1 ,2, 1);
             towns[(int)TownName.CunningCity] = new Town(TownName.CunningCity, "커닝시티", "커닝시티 마을이다.",1,3, 1);
             currentTown = towns[0];
@@ -32,6 +32,7 @@
             scenes[9] = new DataScene();
             //seenes[8]
             ChangeScene(SceneName.UserCreateScene);
+            DataManager.LoadQuestManagerData(1);
         }
 
         /// <summary>

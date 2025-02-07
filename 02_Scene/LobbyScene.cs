@@ -22,6 +22,7 @@ namespace TeamRPG_17
             Console.WriteLine("5. 휴식하기");
             Console.WriteLine("6. 도시선택");
             Console.WriteLine("7. 데이터관리");
+            Console.WriteLine("8. 퀘스트");
             Console.WriteLine("─────────────────────────");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
@@ -48,6 +49,9 @@ namespace TeamRPG_17
                     break;
                 case 7:
                     GameManager.Instance.ChangeScene(SceneName.DataScene);
+                    break;
+                case 8:
+                    GameManager.Instance.ChangeScene(SceneName.QusetScene);
                     break;
             }
         }
