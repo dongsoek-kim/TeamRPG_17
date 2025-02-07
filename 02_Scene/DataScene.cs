@@ -99,7 +99,7 @@ namespace TeamRPG_17
                         isCheck = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?");
                         if(isCheck == 1)
                         {
-                            DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, null);
+                            DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, intCommand);
                             Console.WriteLine("데이터 저장 완료!!");
                             SyncSlot(); // 다시 불러오기
                             Console.ReadLine();
@@ -172,11 +172,11 @@ namespace TeamRPG_17
                         if (CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 삭제를 하시겠습니까?") == 1)
                         {              
                             p.name = "";
-                            DataManager.SaveGameData(p, new Inventory(), null);
+                            DataManager.SaveGameData(p, new Inventory(), intCommand);
+                            Console.WriteLine("삭제완료!!");
+                            SyncSlot(); // 다시 불러오기
+                            Console.ReadLine();
                         }
-                        Console.WriteLine("삭제완료!!");
-                        SyncSlot(); // 다시 불러오기
-                        Console.ReadLine();
                     }
                     break;
             }
