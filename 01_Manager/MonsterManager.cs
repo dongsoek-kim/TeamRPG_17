@@ -40,10 +40,10 @@ namespace TeamRPG_17
 
             for (int i = 0; i < arr.Length; i++)
             {
-                arr[i] = rand.Next(0, monsters.Count); // rand = 몬스터 종류를 정해주는거 // if  arr[0] = 2
+                arr[i] = rand.Next(0, encounter.Count); // rand = 몬스터 종류를 정해주는거 // if  arr[0] = 2
+                Monster newMonster = new Monster(encounter[arr[i]].Name, encounter[arr[i]].Level, encounter[arr[i]].MaxHp, encounter[arr[i]].Damage, encounter[arr[i]].Defense);
                 list.Add(monsters[arr[i]]);
             }
-
             return list;
         }
     }
