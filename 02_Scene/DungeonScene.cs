@@ -25,8 +25,8 @@ namespace TeamRPG_17
             Console.WriteLine($"\n현재 던전의 레벨은 {currentDungeon.Level}입니다.\n");
             Console.WriteLine($"{currentDungeon.DungeonName} - {currentDungeon.DungeonInfo}\n\n");
 
-            Console.WriteLine("0. 나가기");
             Console.WriteLine("1. 입장하기");
+            Console.WriteLine("0. 나가기");
 
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
