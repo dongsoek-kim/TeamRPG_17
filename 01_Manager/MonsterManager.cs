@@ -22,11 +22,13 @@ namespace TeamRPG_17
             new Monster("해골 병사", 3, 100, 19, 15),
             new Monster("파묻힌 유령", 3, 80, 25, 20),
             new Monster("폐허의 수호자", 3, 200, 10, 30),
-
-
         };
 
-        public List<Monster> RandomMonsterSpawn()
+        public List<Monster> GetMonsterByLevel(int level)
+        {
+            return monsters.Where(m => m.Level == level).ToList();
+        }
+        public List<Monster> RandomMonsterSpawn(Dungeon dungeon)
         {
             Random rand = new Random();
             List<Monster> list = new List<Monster>();

@@ -38,18 +38,10 @@ namespace TeamRPG_17
                     break;
                 case 1:
                     BattleScene battle = new BattleScene();
-                    battle.StartBattle();
+                    battle.StartBattle(currentDungeon);
                     break;
                    
             }
-        }
-
-        private void DungeonResult(int _dungeonLevel)
-        {
-            bool dungeonClear = true;
-
-            Console.Clear();
-
         }
     }
 }

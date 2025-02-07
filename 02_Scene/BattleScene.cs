@@ -14,16 +14,16 @@ namespace TeamRPG_17
         Potion potion;
         private bool onGame = false;
 
-        public void StartBattle()
+        public void StartBattle(Dungeon dungeon)
         {
-            monster = BattleEngage();
+            monster = BattleEngage(dungeon);
             InBattle();
         }
-        public List<Monster> BattleEngage()
+        public List<Monster> BattleEngage(Dungeon dungeon)
         {
             // 몬스터 랜덤 생성
             onGame = true;
-            return _monster.RandomMonsterSpawn();
+            return _monster.RandomMonsterSpawn(dungeon);
         }
 
         public void InBattle()
@@ -34,17 +34,26 @@ namespace TeamRPG_17
                 DisplayStatus();
                 PlayerPhase();
 
-                for (int i = 0; i < monster.Count; i++)
-                {
-                    if (monster[i].IsDead) deathCount++;
-                }
-                if (deathCount >= monster.Count) break; // 모두 죽였으면 끝
+    
+                deathCount = monster.Count(m => m.IsDead);
 
-                for (int i = 0; i < monster.Count; i++) // 위에 표시된 몬스터부터 차례대로 공격
+                if (deathCount >= monster.Count)
                 {
-                    if (!monster[i].IsDead)
-                        MonsterPhase(monster[i]);
+                    BattleResult(true);
+                    return;
                 }
+
+
+                foreach (var mon in monster)
+                {
+                    if (!mon.IsDead)
+                        MonsterPhase(mon);
+                }
+            }
+
+            if (_player.hp <= 0)
+            {
+                BattleResult(false);
             }
         }
 
@@ -220,6 +229,32 @@ namespace TeamRPG_17
                 }
             }
             return true;
+        }
+        private void BattleResult(bool isWin)
+        {
+            Console.Clear();
+            Console.WriteLine("Battle - Result");
+            if (isWin)
+            {
+                Console.WriteLine("\n\n!!!   VICTORY   !!!");
+                foreach (var mon in monster)
+                {
+                    if (mon.IsDead)
+                    {
+                        Console.WriteLine($"- {mon.Name} 처치!");
+                    }
+                }
+
+                int dungeonLevel =
+            }
+            else
+            {
+                Console.WriteLine("\n\n~~~  YOU LOSE  ~~~");
+            }
+
+            Console.WriteLine($"\n\nHP {_player.hp} remains");
+            Console.WriteLine(">>");
+            Console.ReadLine();
         }
     }
 }
