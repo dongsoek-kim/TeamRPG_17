@@ -25,7 +25,7 @@ namespace TeamRPG_17
         }
         public override void QuestComplete()
         {
-            
+            questComplete = true;
         }
     }
 }
