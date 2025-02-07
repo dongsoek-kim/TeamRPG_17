@@ -32,10 +32,10 @@ namespace TeamRPG_17
             level = 1;
             exp = 0;
             // 스탯(str 등)은 추후에 확정하여 변경예정
-            str = 1;
-            dex = 1;
-            inte = 1;
-            luk = 1;
+            str = 0;
+            dex = 0;
+            inte = 0;
+            luk = 0;
             damage = 100;
             defense = 5;
             hp = 100;
@@ -89,21 +89,21 @@ namespace TeamRPG_17
         {
             get
             {
-                float baselDamage = damage;
+                float baseDamage = damage;
                 float bonusDamage = 0;
 
                 switch (job)
                 {
                     case JobType.Warrior:
-                        damage = (((float)str * 1.5f) + ((float)dex * 0.5f) + ((float)inte * 0.1f));
+                        bonusDamage = (((float)str * 1.5f) + ((float)dex * 0.5f) + ((float)inte * 0.1f));
                         break;
 
                     case JobType.Rogue:
-                        damage = (((float)str * 0.5f) + ((float)dex * 1.5f) + ((float)inte * 0.1f));
+                        bonusDamage = (((float)str * 0.5f) + ((float)dex * 1.5f) + ((float)inte * 0.1f));
                         break;
 
                     case JobType.Wizard:
-                        damage = (((float)str * 0.1f) + ((float)dex * 0.5f) + ((float)inte * 1.5f));
+                        bonusDamage = (((float)str * 0.1f) + ((float)dex * 0.5f) + ((float)inte * 1.5f));
                         break;
                 }
                 return (int)(baseDamage + bonusDamage);
