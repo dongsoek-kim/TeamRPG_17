@@ -8,11 +8,11 @@ namespace TeamRPG_17
 {
     public class ItemQuest : Quest
     {
-        // 퀘스트완료에 필요한 아이템 enum
-        public ItemName questItem;
+        // 퀘스트완료에 필요한 아이템 이름
+        public string questItem;
 
         public ItemQuest(TownName _town, string _questTitle, string _questDescription, int _exp, int _gold
-            , ItemName _questItem)
+            , string _questItem)
             : base(_town, _questTitle, _questDescription, _exp, _gold)
         {
             questItem = _questItem;
