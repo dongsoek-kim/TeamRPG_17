@@ -9,7 +9,8 @@ namespace TeamRPG_17
     public enum JobType
     {
         Warrior,
-        Rogue
+        Rogue,
+        Wizard
     }
 
     public enum SceneName
@@ -39,5 +40,12 @@ namespace TeamRPG_17
     {
         Armor,
         Weapon
+    }
+
+    public enum TownName
+    {
+        Elinia,
+        Hannesys,
+        CunningCity
     }
 }
