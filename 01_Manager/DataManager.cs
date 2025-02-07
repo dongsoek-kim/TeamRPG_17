@@ -94,7 +94,7 @@ namespace TeamRPG_17
         {
             string relativePath = @"..\..\..\Json\";                            // 파일 위치
             string itemQuestjsonFile = $"itemQuestDataSlot{_input}.json";       // 템퀘스트 JSON 파일명
-            string killQuestjsonFile = $"QukillQuestDataSlot{_input}.json";     // 킬퀘스트 JSON 파일명
+            string killQuestjsonFile = $"killQuestDataSlot{_input}.json";     // 킬퀘스트 JSON 파일명
 
             string itemQuestjsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, itemQuestjsonFile));
             string killQuestjsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, killQuestjsonFile));
@@ -179,8 +179,8 @@ namespace TeamRPG_17
                 // 데이터 직렬화
                 string PlayerData = JsonConvert.SerializeObject(player, Formatting.Indented);
                 string InventoryData = JsonConvert.SerializeObject(inventory, Formatting.Indented);
-                string itemQuestData = JsonConvert.SerializeObject(itemQuestJson, Formatting.Indented);
-                string killQuestData = JsonConvert.SerializeObject(killQuestJson, Formatting.Indented);
+                string itemQuestData = JsonConvert.SerializeObject(QuestManager.Instance.itemQuests, Formatting.Indented);
+                string killQuestData = JsonConvert.SerializeObject(QuestManager.Instance.killQuests, Formatting.Indented);
 
                 // 데이터 저장
                 File.WriteAllText(PlayerDatajson, PlayerData);
