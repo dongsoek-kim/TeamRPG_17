@@ -8,14 +8,12 @@ namespace TeamRPG_17
         private bool onSave;
         private bool onLoad;
         private bool onDelete;
-        private bool onSelect;
 
         public DataScene()
         {
             onSave = false;
             onLoad = false;
             onDelete = false;
-            onSelect = false;
         }
 
         public override void Update()
@@ -25,13 +23,7 @@ namespace TeamRPG_17
             else if (onLoad)
                 DataLoad();
             else if (onDelete)
-            {
-
-            }
-            else if (onSelect)
-            {
-
-            }
+                DataDelete();
             else
                 DataMain();
         }
