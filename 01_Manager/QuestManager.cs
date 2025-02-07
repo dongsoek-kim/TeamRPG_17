@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace TeamRPG_17
 {
@@ -101,22 +104,33 @@ namespace TeamRPG_17
         public void ShowQuestList(TownName _town)
         {
             int questCount = 1;
-
+            string questStateText;
             // 킬 퀘스트 리스트 출력
-            for (int i = 0; i < killQuests.Length; i++)
+            foreach(KillQuest? quest in killQuests)
             {
-                // killQuest[i]가 null이 아님 & 현재 마을의 퀘스트일때
-                if (killQuests[i]?.questTown == _town)
-                    Console.WriteLine($"{questCount++}. {killQuests[i].questTitle}");
+                if (quest == null || quest?.questTown != _town)
+                    continue;
+
+                // 이미 수락했는지 / 퀘스트를 완료했는지 확인
+                // 퀘스트를 수락헀다면 진행중 / 수락하지않았다면 수락가능
+                // 퀘스트를 완료했다면 완료 / 완료하지않았다면 이전 텍스트 그대로
+                questStateText = quest.questAccpet ? "진행중" : "수락가능";
+                questStateText = quest.questComplete ? "완료" : questStateText;
+                Console.WriteLine($"{questCount++}. {quest.questTitle}  |  {questStateText}");
             }
 
             // 아이템 퀘스트 출력
-            for (int i = 0; i < itemQuests.Length; i++)
+            foreach (ItemQuest? quest in itemQuests)
             {
-                if (itemQuests[i]?.questTown == _town)
-                    Console.WriteLine($"{questCount++}. {itemQuests[i].questTitle}");
+                if (quest == null || quest?.questTown != _town)
+                    continue;
+
+                questStateText = quest.questAccpet ? "진행중" : "수락가능";
+                questStateText = quest.questComplete ? "완료" : questStateText;
+                Console.WriteLine($"{questCount++}. {quest.questTitle}  |  {questStateText}");
             }
         }
+
 
         /// <summary>
         /// 선택된 퀘스트의 정보를 출력해주는 메서드
@@ -135,11 +149,11 @@ namespace TeamRPG_17
             {
                 Console.WriteLine($"----퀘스트진행도----");
                 selectQuest.QuestProgress();                                // 퀘스트 진행도 확인
-                Console.WriteLine($"\n1. 퀘스트 완료하기");
+                Console.WriteLine($"\n1. 퀘스트 완료");
             }
             else
             {
-                Console.WriteLine("\n1. 퀘스트 수락하기");
+                Console.WriteLine("\n1. 퀘스트 수락");
             }
         }
 
@@ -150,28 +164,28 @@ namespace TeamRPG_17
         {
             int questCount = 1;
 
-            for(int i = 0; i < killQuests.Length; i++)
+            foreach(KillQuest? quest in killQuests)
             {
-                if (killQuests[i] == null || killQuests[i]?.questTown != _town)
+                if (quest == null || quest.questTown != _town)
                     continue;
 
-                if(questCount == index)
+                if (questCount == index)
                 {
-                    selectQuest = killQuests[i];
+                    selectQuest = quest;
                     return true;
                 }
 
                 questCount++;
             }
 
-            for (int i = 0; i < itemQuests.Length; i++)
+            foreach (ItemQuest? quest in itemQuests)
             {
-                if (itemQuests[i] == null || itemQuests[i]?.questTown != _town)
+                if (quest == null || quest.questTown != _town)
                     continue;
 
                 if (questCount == index)
                 {
-                    selectQuest = itemQuests[i];
+                    selectQuest = quest;
                     return true;
                 }
 

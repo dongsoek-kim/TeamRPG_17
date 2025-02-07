@@ -30,6 +30,7 @@ namespace TeamRPG_17
             Console.WriteLine("퀘스트");
             Console.WriteLine("퀘스트 수락 및 완료");
             Console.WriteLine("─────────────────────────");
+            // 매개변수 수정할예정 >> (TownName)GameManager.Instance.currentTown.id
             QuestManager.Instance.ShowQuestList(TownName.Elinia);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
@@ -64,10 +65,12 @@ namespace TeamRPG_17
 
             switch (intCommand)
             {
+                // 퀘스트 목록으로 이동
                 case 0:
                     questInformation = false;
                     break;
 
+                // 현재 보고있는 퀘스트를 수락 또는 완료
                 case 1:
                     QuestManager.Instance.SelectQuestAccept();
                     break;
