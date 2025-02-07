@@ -67,20 +67,23 @@ namespace TeamRPG_17
             if (selectQuest == null)
                 return;
 
-            Console.WriteLine($"-- {selectQuest.questTown} --");     // 퀘스트 진행 마을
+            Console.WriteLine($"\n-- {selectQuest.questTown} --");     // 퀘스트 진행 마을
             Console.WriteLine($"퀘스트 {selectQuest.questTitle}");   // 퀘스트 명
             Console.WriteLine($"{selectQuest.questDescription}");   // 퀘스트 설명
 
             // 수락한 퀘스트일때
             if (selectQuest.questAccpet)
             {
-                Console.WriteLine($"----퀘스트진행도----");
-                selectQuest.QuestProgress();                                // 퀘스트 진행도 확인
-                Console.WriteLine($"\n1. 퀘스트 완료");
+                Console.WriteLine($"\n----퀘스트진행도----");
+                selectQuest.QuestProgress();                // 퀘스트 진행도 확인
+
+                // 퀘스트 완료 가능하다면 퀘스트완료 선택지 추가
+                if(selectQuest.QuestCheck())
+                    Console.WriteLine($"\n1. 퀘스트 완료\n");
             }
             else
             {
-                Console.WriteLine("\n1. 퀘스트 수락");
+                Console.WriteLine("\n1. 퀘스트 수락\n");
             }
         }
 
@@ -135,26 +138,34 @@ namespace TeamRPG_17
             if (selectQuest == null)
                 return false;
 
+            // 퀘스트를 수락한 상태일때
             if(selectQuest.questAccpet)
             {
-                // 퀘스트 완료 성공시
+                // 퀘스트 완료 성공
                 if(selectQuest.QuestComplete())
                     return false;
                 
-                //퀘스트 완료 실패시
+                //퀘스트 완료 실패
                 return true;
             }
+
+            // 퀘스트를 수락하지않은 상태일때
             else
             {
-                // 선택된 퀘스트 수락
+                // 선택된 퀘스트 수락 true
                 selectQuest.questAccpet = true;
                 return true;
             }
         }
 
         public void MonsterKillCount(Monster _monster)
-        { 
-        
+        {
+            // Killquest 중 수락한 퀘스트
+            foreach (KillQuest quest in killQuests)
+            {
+                if(quest.questAccpet)
+                    quest.QuestUpdate(_monster);
+            }
         }
     }
 }

@@ -36,6 +36,17 @@ namespace TeamRPG_17
         /// 퀘스트의 진행도를 출력해주는 메서드
         /// </summary>
         public abstract void QuestProgress();
+
+        /// <summary>
+        /// 퀘스트를 완료하는 메서드 ( + 퀘스트 완료 검증 )
+        /// </summary>
+        /// <returns></returns>
         public abstract bool QuestComplete();
+
+        /// <summary>
+        /// 퀘스트 완료 가능여부 확인
+        /// </summary>
+        /// <returns></returns>
+        public abstract bool QuestCheck();
     }
 }

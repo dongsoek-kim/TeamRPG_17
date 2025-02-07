@@ -24,27 +24,40 @@ namespace TeamRPG_17
 
         public override void QuestProgress()
         {
-            Console.WriteLine($"{monsterName} ( {killCount} / {monsterCount})");
+            Console.WriteLine($"{monsterName} - ( {killCount} / {monsterCount})\n");
         }
 
         public override bool QuestComplete()
         {
-            questComplete = true;
-            return true;
+            // 몬스터 사냥횟수 충족
+            if(killCount >= monsterCount)
+            {
+                questComplete = true;
+                return true;
+            }
+            return false;
         }
 
-        public void QuestUpdate(string _targetName)
+        public void QuestUpdate(Monster _target)
         {
-            if (monsterName == _targetName)
-            {
-                killCount++;
+            // 죽은 몬스터가 해당 퀘스트의 목표 몬스터가 다르면 조기리턴
+            if (_target.Name != monsterName)
+                return;
 
-                // 킬카운터가 퀘스트 요구치를 넘지않도록 예외처리
-                if(killCount > monsterCount)
-                {
-                    killCount = monsterCount;
-                }
-            }
+            killCount++;
+
+            // 킬카운터가 퀘스트 요구치를 넘지않도록 예외처리
+            if (killCount > monsterCount)
+                killCount = monsterCount;
+        }
+
+        public override bool QuestCheck()
+        {
+            // 몬스터수 충족
+            if (killCount >= monsterCount)
+                return true;
+
+            return false;
         }
     }
 }

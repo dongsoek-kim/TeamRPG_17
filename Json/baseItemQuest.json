@@ -1,11 +1,11 @@
 [
   {
-    "questItem": "아이템1",
+    "questItem": "누가 쓰다버린 목검",
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
-    "questTitle": "테스트퀘스트1_item",
-    "questDescription": "테스트퀘스트1입니다.\n아이템주세요",
+    "questTitle": "누가 쓰다버린 목검 가져오기",
+    "questDescription": "누가 쓰다버린 목검 줘.\n주세요",
     "exp": 10,
     "gold": 10
   },

@@ -71,8 +71,8 @@ namespace TeamRPG_17
                     break;
 
                 // 현재 보고있는 퀘스트를 수락 또는 완료
-                // 수락되면 true
-                // 완료되면 false 반환
+                // 퀘스트 수락 / 퀘스트 완료 실패 true
+                // 퀘스트 완료 false
                 case 1:
                     if (!QuestManager.Instance.SelectQuestAccept())
                         questInformation = false;
