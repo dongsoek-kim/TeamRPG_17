@@ -6,22 +6,19 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
-    internal class BattleScene : Scene
+    public class BattleScene
     {
         Player _player = GameManager.Instance.player;
-        MonsterManager _monster;
+        MonsterManager _monster = MonsterManager.Instance;
         List<Monster> monster;
+        Potion potion;
         private bool onGame = false;
-        public override void Update()
-        {
-            // 전투 개시
-            if (!onGame)
-            {
-                monster = BattleEngage();
-            }
-            else InBatte();
-        }
 
+        public void StartBattle()
+        {
+            monster = BattleEngage();
+            InBattle();
+        }
         public List<Monster> BattleEngage()
         {
             // 몬스터 랜덤 생성
@@ -29,7 +26,7 @@ namespace TeamRPG_17
             return _monster.RandomMonsterSpawn();
         }
 
-        private void InBatte()
+        public void InBattle()
         {
             int deathCount = 0;
             while (_player.hp > 0 && deathCount < monster.Count)
@@ -37,8 +34,11 @@ namespace TeamRPG_17
                 DisplayStatus();
                 PlayerPhase();
 
-                for (int i = 0; i < monster.Count; i++) if (monster[i].IsDead) deathCount++;
-                if (deathCount > 0) break; // 모두 죽였으면 끝
+                for (int i = 0; i < monster.Count; i++)
+                {
+                    if (monster[i].IsDead) deathCount++;
+                }
+                if (deathCount >= monster.Count) break; // 모두 죽였으면 끝
 
                 for (int i = 0; i < monster.Count; i++) // 위에 표시된 몬스터부터 차례대로 공격
                 {
@@ -69,6 +69,7 @@ namespace TeamRPG_17
             bool flag = true;
             while (flag)
             {
+                DisplayStatus();
                 Console.WriteLine("1. 공격");
                 Console.WriteLine("2. 포션");
                 if (GameManager.Instance.SceneInputCommand(out int intCommand))
@@ -92,21 +93,25 @@ namespace TeamRPG_17
 
         private bool Targeting()
         {
-            Console.WriteLine("\n0. 취소");
-
-            Console.WriteLine("\n대상을 선택해 주세요.\n>>");
-            int input = int.Parse(Console.ReadLine());
-            DisplayStatus();
-
             while (true)
             {
+                DisplayStatus();
+                Console.WriteLine("\n0. 취소");
+
+                Console.WriteLine("\n대상을 선택해 주세요.\n>>");
+                int input = int.Parse(Console.ReadLine());
+
                 if (input <= monster.Count && input > 0)
                 {
                     PlayerAttack(monster[input - 1]);
                     break;
                 }
                 else if (input == 0) return false;
-                else Console.WriteLine("잘못된 입력입니다.");
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.ReadLine();
+                }
             }
             return true;
         }
@@ -128,7 +133,11 @@ namespace TeamRPG_17
             {
                 if (input == "0")
                     break;
-                else Console.WriteLine("잘못된 입력입니다.");
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    break;
+                }
             }
         }
         // 몬스터 차례
@@ -150,7 +159,11 @@ namespace TeamRPG_17
             {
                 if (input == "0")
                     break;
-                else Console.WriteLine("잘못된 입력입니다.");
+                else 
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    break;
+                }
             }
         }
         private int MonsterTakeDamage(Monster monster) // 대미지 계산 메서드
@@ -168,7 +181,8 @@ namespace TeamRPG_17
 
         private bool SelectPotion() // 포션 선택
         {
-            while (true)
+            bool potionSelect = false;
+            while (!potionSelect)
             {
                 DisplayStatus();
                 Console.WriteLine($"0. 취소");
@@ -177,21 +191,31 @@ namespace TeamRPG_17
                 Console.WriteLine($"3. 민첩 포션");
                 Console.WriteLine($"4. 지능 포션");
                 Console.WriteLine($"5. 행운 포션");
-                Console.WriteLine("\n포션 종류를 입력해 주세요.\n>>");
+                Console.WriteLine("\n포션을 선택해 주세요.\n>>");
                 string input = Console.ReadLine();
                 switch (input)
                 {
                     case "0":
                         return false;
                     case "1":
+                        potion.UsePotion(PotionNum.Health);
+                        potionSelect = true;
                         break;
                     case "2":
+                        potion.UsePotion(PotionNum.str);
+                        potionSelect = true;
                         break;
                     case "3":
+                        potion.UsePotion(PotionNum.dex);
+                        potionSelect = true;
                         break;
                     case "4":
+                        potion.UsePotion(PotionNum.inte);
+                        potionSelect = true;
                         break;
                     case "5":
+                        potion.UsePotion(PotionNum.luk);
+                        potionSelect = true;
                         break;
                 }
             }

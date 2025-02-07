@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeamRPG_17._02_Scene
+namespace TeamRPG_17
 {
     internal class TownMoveScene : Scene
     {
@@ -15,10 +15,12 @@ namespace TeamRPG_17._02_Scene
             Console.Clear();
             Console.WriteLine("도시 이름들어갈 곳");
             Console.WriteLine("이동해주실 도시를 선택해주세요\n");
+            Console.WriteLine($"현재 플레이어의 레벨 : {GameManager.Instance.player.level}");
             Console.WriteLine("─────────────────────────");
             for ( int i = 0; i < length; i++)
             {
-                Console.WriteLine($"{i + 1}. {GameManager.Instance.towns[i].name}");
+                Console.Write($"{i + 1}. {GameManager.Instance.towns[i].name}");
+                Console.WriteLine($" | 도시레벨 : {GameManager.Instance.towns[i].entryLevel}");
             }    
             Console.WriteLine("─────────────────────────");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
@@ -27,7 +29,7 @@ namespace TeamRPG_17._02_Scene
             if(intCommand > 0 && intCommand <= length)
             {
                 // GameManager에 가지고있는 towns배열, 현재타운번호를 대입해서 플레이어가 입장 할 수 있는지 확인한다.
-                if (GameManager.Instance.towns[intCommand - 1].CanEnterTown() == false)
+                if (GameManager.Instance.currentTown.CanEnterTown() == false)
                 {
                     Console.WriteLine("레벨이 맞지 않아서 입장할 수 없습니다.");
                     Console.ReadKey(true); // 입력 대기

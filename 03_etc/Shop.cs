@@ -20,12 +20,14 @@ namespace TeamRPG_17
         /// </summary>
         public void BuyItem(int _num)
         {
+            // 현재 도시에 따라서 아이템 인덱스 변경
+            Town town = GameManager.Instance.currentTown;
             int itemIndex = _num - 1;
             onMessage = true;
 
             // 잘못된 입력
             // 범위 초과 ( 0 미만 , 게임 내 아이템 개수 초과 )
-            if (_num < 0 || ItemManager.Instance.itemLength < _num)
+            if (_num < 0 || (town.startItemIdx + town.count) < _num)
             {
                 message = "잘못된 입력입니다";
                 messageColor = ConsoleColor.Red;
@@ -125,9 +127,9 @@ namespace TeamRPG_17
             }
 
             // 판매 목록
-            for (int i = town.startItemIdx; i < town.count; i++)
+            for (int i = town.startItemIdx; i < town.startItemIdx + town.count; i++)
             {
-                number = _isNumber ? i + 1 : null;
+                number = _isNumber ? i - town.startItemIdx + 1 : null;
 
                 Console.Write($"- {number} {ItemManager.Instance.items[i].ItemInfo()}");
 

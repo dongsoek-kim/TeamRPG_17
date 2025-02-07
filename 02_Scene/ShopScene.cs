@@ -93,7 +93,7 @@ namespace TeamRPG_17
                     break;
 
                 default:
-                    shop.BuyItem(intCommand);
+                    shop.BuyItem(GameManager.Instance.currentTown.startItemIdx + intCommand);
                     break;
             }
         }
@@ -123,7 +123,7 @@ namespace TeamRPG_17
                     onSell = false;
                     break;
                 default:
-                    shop.SellItem(intCommand);
+                    shop.SellItem(GameManager.Instance.currentTown.startItemIdx + intCommand);
                     break;
             }
         }

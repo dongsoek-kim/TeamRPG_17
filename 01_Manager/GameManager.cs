@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TeamRPG_17._02_Scene;
-
-namespace TeamRPG_17
+﻿namespace TeamRPG_17
 {
     public class GameManager : Singleton<GameManager>
     {
@@ -18,9 +11,10 @@ namespace TeamRPG_17
         {
             towns = new Town[Enum.GetValues(typeof(SceneName)).Length];
             towns[(int)TownName.Elinia] = new Town(TownName.Elinia, "엘리니아","엘리니아 마을이다.",1 ,0, 1);
-            towns[(int)TownName.Hannesys] = new Town(TownName.Hannesys, "헤네시스", "커닝시티 마을이다.",5 ,2, 1);
-            towns[(int)TownName.CunningCity] = new Town(TownName.CunningCity, "커닝시티", "커닝시티 마을이다.",10,3, 1);
+            towns[(int)TownName.Hannesys] = new Town(TownName.Hannesys, "헤네시스", "커닝시티 마을이다.",1 ,2, 1);
+            towns[(int)TownName.CunningCity] = new Town(TownName.CunningCity, "커닝시티", "커닝시티 마을이다.",1,3, 1);
             currentTown = towns[0];
+            
 
             int sceneCount = Enum.GetValues(typeof(SceneName)).Length;
             scenes = new Scene[sceneCount];
