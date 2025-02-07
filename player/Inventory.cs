@@ -16,11 +16,15 @@ namespace TeamRPG_17
             set { inventory[index] = value; }
         }
 
-        public Armor? equipedArmor { get; private set; }
+        public Armor[]? equipedArmor { get; private set; }
         public Weapon? equipedWeapon { get; private set; }
 
+        public int equipSlot { get; private set; }
+
+        public int sumDefense { get; private set; }
         public Inventory()
         {
+            equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;
             int length = Enum.GetValues(typeof(ItemName)).Length;
             inventory = new Item[length];
         }
@@ -53,11 +57,13 @@ namespace TeamRPG_17
                     continue;
 
                 // item이 장착중인 방어구일때
-                if(equipedArmor == item)
-                    Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
-
+                foreach (Armor equipedArmor in equipedArmor)
+                { 
+                    if (equipedArmor == item)
+                        Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
+                }
                 // item이 장착중인 무기일때
-                else if(equipedWeapon == item)
+                if(equipedWeapon == item)
                     Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
 
                 // item이 장착중이 아닐때
@@ -74,8 +80,11 @@ namespace TeamRPG_17
         public void ArmorStat()
         {
             string stat = "";
-            if (equipedArmor != null)
-                stat = $" ( +{equipedArmor.defense} )";
+            foreach (Armor equipedArmor in equipedArmor)
+            {
+                if (equipedArmor != null)
+                    stat = $" ( +{equipedArmor.defense} )";
+            }
 
             Console.WriteLine($"{stat}");
         }
@@ -110,26 +119,21 @@ namespace TeamRPG_17
                     itemCount++;
                     continue;
                 }
-
+                int equipSlot = (int)inventory[i].EquipSlot;
+                if (equipedArmor[equipSlot]!=null)
+                {
+                    equipedArmor = null;
+                }
                 switch (inventory[i].itemType)
                 {
                     case ItemType.Armor:
-                        // 선택된 방어구가 착용중인 방어구와 같을때 착용해제
-                        if (equipedArmor == (Armor)inventory[i])
-                            equipedArmor = null;
-                        // 착용
-                        else
-                            equipedArmor = (Armor)inventory[i];
-                        break;
+                       equipedArmor[equipSlot] = (Armor)inventory[i];
+                       break;
 
                     case ItemType.Weapon:
                         // 선택된 무기가 착용중인 무기와 같을때 착용해제
-                        if (equipedWeapon == (Weapon)inventory[i])
-                            equipedWeapon = null;
-                        //착용
-                        else
-                            equipedWeapon = (Weapon)inventory[i];
-                        break;
+                       equipedWeapon = (Weapon)inventory[i];
+                       break;
                 }
 
                 break;
