@@ -89,12 +89,12 @@ namespace TeamRPG_17
                                 continue;
 
                             if (GameManager.Instance.player.inventory[i] == equipedArmor)
-                                GameManager.Instance.player.inventory.Unequip(ItemType.Armor);
+                                GameManager.Instance.player.inventory.Unequip(ItemType.Armor, equipedArmor.EquipSlot);
                         }
                         break;
                     case ItemType.Weapon:
                         if (GameManager.Instance.player.inventory[i] == GameManager.Instance.player.inventory.equipedWeapon)
-                            GameManager.Instance.player.inventory.Unequip(ItemType.Weapon);
+                            GameManager.Instance.player.inventory.Unequip(ItemType.Weapon, EquipSlot.Weapon);
                         break;
                 }
 
