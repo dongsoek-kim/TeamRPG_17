@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
+
     public abstract class Item
     {
         public ItemType itemType        { get; private set; }
