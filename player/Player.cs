@@ -63,7 +63,7 @@ namespace TeamRPG_17
             if (inventory.equipedArmor == null)
                 return 0;
             else
-                return inventory.sumDefense;
+                return inventory.SumDefense();
         }
 
         /// <summary>
