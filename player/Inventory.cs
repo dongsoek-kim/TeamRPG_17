@@ -20,6 +20,8 @@ namespace TeamRPG_17
         public Weapon? equipedWeapon { get; private set; }
 
         public int equipSlot { get; private set; }
+
+        public int sumDefense { get; private set; }
         public Inventory()
         {
             equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;

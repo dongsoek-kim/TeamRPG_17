@@ -50,7 +50,7 @@ namespace TeamRPG_17
         /// 현재 착용중인 방어구의 방어력 스탯 반환 함수
         /// </summary>
         public int GetArmorStat()
-        {
+        {   
             if (inventory.equipedArmor == null)
                 return 0;
             else
