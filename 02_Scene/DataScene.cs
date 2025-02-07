@@ -135,7 +135,31 @@ namespace TeamRPG_17
 
         private void DataDelete()
         {
+            Console.Clear();
+            Console.WriteLine("데이터 삭제하기");
+            Console.WriteLine("삭제하실 공간을 지정해주세요.\n");
+            Console.WriteLine("─────────────────────────");
 
+            for (int i = 0; i < 3; i++) // Data[] 배열의 공간의 길이를 입력
+            {
+                Console.WriteLine($"{i + 1}. [비어있음]"); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
+            }
+
+            Console.WriteLine("─────────────────────────");
+            Console.WriteLine("\n0. 나가기");
+            if (!GameManager.Instance.SceneInputCommand(out int intCommand))
+                return;
+
+            switch (intCommand)
+            {
+                case 0:
+                    onDelete = false;
+                    break;
+
+                default:
+                    //if(intCommand - 1 < slos.length) 데이터 불러오기
+                    break;
+            }
         }
     }
 }
