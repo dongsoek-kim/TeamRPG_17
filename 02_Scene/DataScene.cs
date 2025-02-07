@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Design;
+﻿using Newtonsoft.Json.Linq;
+using System.ComponentModel.Design;
 
 namespace TeamRPG_17
 {
@@ -8,6 +9,7 @@ namespace TeamRPG_17
         private bool onSave;
         private bool onLoad;
         private bool onDelete;
+        private bool onSelect;
         private Player[] datas;
 
         public DataScene()
@@ -15,6 +17,7 @@ namespace TeamRPG_17
             onSave = false;
             onLoad = false;
             onDelete = false;
+            onSelect = true;
 
             datas = new Player[3]; // 데이터 크기
             for(int i = 0; i<datas.Length; i++)
@@ -56,12 +59,15 @@ namespace TeamRPG_17
                     break;
                 case 1:
                     onSave = true;
+                    onSelect = false;
                     break;
                 case 2:
                     onLoad = true;
+                    onSelect = false;
                     break;
                 case 3:
                     onDelete = true;
+                    onSelect = false;
                     break;
             }
         }
@@ -84,13 +90,15 @@ namespace TeamRPG_17
             {
                 case 0:
                     onSave = false;
+                    onSelect = true;
                     break;
-
                 default:
+                    int isCheck = 1;
                     if(intCommand - 1 < datas.Length)
                     {
-                        if (CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?") == 1) { }
-                            //DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, );
+                        isCheck = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?");
+                        if(isCheck == 1)
+                            DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, null);
                     }
                     break;
             }
@@ -114,13 +122,18 @@ namespace TeamRPG_17
             {
                 case 0:
                     onLoad = false;
+                    onSelect = true;
                     break;
 
                 default:
                     if (intCommand - 1 < datas.Length)
                     {
                         if (datas[intCommand - 1].name != null)
+                        {
                             DataManager.LoadData(intCommand);
+                            Console.WriteLine("불러오기 완료!!");
+                            Console.ReadLine();
+                        }
                     }
                     break;
             }
@@ -144,17 +157,20 @@ namespace TeamRPG_17
             {
                 case 0:
                     onDelete = false;
+                    onSelect = true;
                     break;
 
                 default:
                     if (intCommand - 1 < datas.Length)
                     {
+                        Player p = datas[intCommand];
                         if (CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 삭제를 하시겠습니까?") == 1)
-                        {
-                            Player p = datas[intCommand];
+                        {              
                             p.name = "";
-                            //DataManager.SaveGameData(p, new Inventory(), ); 덮어씌우기
+                            DataManager.SaveGameData(p, new Inventory(), null);
                         }
+                        Console.WriteLine("삭제완료!!");
+                        Console.ReadLine();
                     }
                     break;
             }
@@ -164,10 +180,11 @@ namespace TeamRPG_17
         {
             for (int i = 0; i < datas.Length; i++)
             {
+                string strNumber = onSelect ? (i + 1).ToString() : "";
                 string str = "비어있음";
                 if (datas[i].name != null)
                     str = string.Format("Lv {0:D2}. {1}", datas[i].level, datas[i].name);
-                Console.WriteLine($"[{str}]"); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
+                Console.WriteLine($"{strNumber} [{str}]"); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
             }
         }
 
