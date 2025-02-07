@@ -159,6 +159,7 @@ namespace TeamRPG_17
             inventory[_index] = ItemManager.Instance.items[_index];
         }
 
+
         /// <summary>
         /// 장비 착용해제 함수
         /// </summary>
@@ -178,6 +179,39 @@ namespace TeamRPG_17
                 sumDefense += (equipArmor != null) ? equipArmor.defense : 0;
             }
             return sumDefense;
+        }
+
+        /// <summary>
+        /// 아이템 보유여부
+        /// </summary>
+        public bool haveItem(string itemName)
+        {
+            foreach (Item item in inventory)
+            {
+                if (item == null)
+                    continue;
+
+                if (item.itemName == itemName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool DeleteItem(string itemName)
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                if (inventory[i] == null)
+                    continue;
+
+                if (inventory[i].itemName == itemName)
+                {
+                    inventory[i] = null;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

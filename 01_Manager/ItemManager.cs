@@ -68,7 +68,7 @@ namespace TeamRPG_17
                             int inte = int.Parse(rawItem.inte.ToString());
                             int luk = int.Parse(rawItem.luk.ToString());
                             Grade grade = (Grade)Enum.Parse(typeof(Grade), rawItem.Grade.ToString());  // 대소문자 구분 안함
-                            EquipSlot equipSlot = (EquipSlot)Enum.Parse(typeof(EquipSlot), rawItem.EquipSlot.ToString());           
+                            EquipSlot equipSlot = (EquipSlot)Enum.Parse(typeof(EquipSlot), rawItem.EquipSlot.ToString());
                             // Weapon 객체 생성
                             items[i] = new Weapon(
                                 rawItem.itemName.ToString(),
@@ -88,9 +88,7 @@ namespace TeamRPG_17
                 {
                 }
             }
-            catch (Exception ex)
-            {
-            }
+            catch { }
         }
     }
 }
