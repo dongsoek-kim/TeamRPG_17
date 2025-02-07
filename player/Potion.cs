@@ -14,26 +14,26 @@ namespace TeamRPG_17
         public int inte = 5;
         public int luk = 5;
 
-        public void UsePotion(PosionNum posionNum)
+        public void UsePotion(PotionNum potionNum)
         {
-            switch (posionNum)
+            switch (potionNum)
             {
-                case PosionNum.Health:
+                case PotionNum.Health:
                     {
                         GameManager.Instance.player.hp = +health;
                         GameManager.Instance.player.hp = (GameManager.Instance.player.hp >= 100) ? GameManager.Instance.player.hp = 100 : GameManager.Instance.player.hp;
                         break;
                     }
-                case PosionNum.str:
+                case PotionNum.str:
                     //GameManager.Instance.player.str = +str;
                     break;
-                case PosionNum.dex:
+                case PotionNum.dex:
                     //GameManager.Instance.player.dex = +str;
                     break;
-                case PosionNum.inte:
+                case PotionNum.inte:
                     //GameManager.Instance.player.inte = +str;
                     break;
-                case PosionNum.luk:
+                case PotionNum.luk:
                     //GameManager.Instance.player.luk = +str;
                     break;
                 default: break;
@@ -44,7 +44,7 @@ namespace TeamRPG_17
 
 }
 
-public enum PosionNum
+public enum PotionNum
 {
     Health,
     str,
