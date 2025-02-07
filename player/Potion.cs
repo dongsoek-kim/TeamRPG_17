@@ -46,30 +46,30 @@ namespace TeamRPG_17
 
             }
         }
-        public void getPotoin(PotionType potionType,int _getNum)
-            {
+        public void GetPotion(PotionType potionType, int _getNum)
+        {
             switch (potionType)
             {
                 case PotionType.Health:
-                {
-                    potionCount[(int)PotionType.Health] += _getNum;
+                    {
+                        potionCount[(int)PotionType.Health] += _getNum;
+                        break;
+                    }
+                case PotionType.str:
+                    //GameManager.Instance.player.str = +str;
                     break;
-                }
-            case PotionType.str:
-                //GameManager.Instance.player.str = +str;
-                break;
-            case PotionType.dex:
-                //GameManager.Instance.player.dex = +str;
-                break;
-            case PotionType.inte:
-                //GameManager.Instance.player.inte = +str;
-                break;
-            case PotionType.luk:
-                //GameManager.Instance.player.luk = +str;
-                break;
-            default: break;
+                case PotionType.dex:
+                    //GameManager.Instance.player.dex = +str;
+                    break;
+                case PotionType.inte:
+                    //GameManager.Instance.player.inte = +str;
+                    break;
+                case PotionType.luk:
+                    //GameManager.Instance.player.luk = +str;
+                    break;
+                default: break;
 
             }
         }
-
+    }
 }

@@ -12,7 +12,7 @@ namespace TeamRPG_17
         private Dungeon currentDungeon;
         MonsterManager _monster = MonsterManager.Instance;
         List<Monster> monster;
-        Potion potion;
+        Potion potion = new Potion();
 
         public int playerHp = _player.hp;
 
@@ -271,7 +271,7 @@ namespace TeamRPG_17
                     }
                 }
                 int dungeonLevel = currentDungeon.Level;
-                BattleReward reward = new BattleReward(dungeonLevel, monster.Count, potion);
+                BattleReward reward = new BattleReward(dungeonLevel, monster.Count);
                 reward.ApplyReward(_player);
             }
             else
