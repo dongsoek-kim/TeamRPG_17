@@ -23,12 +23,12 @@ namespace TeamRPG_17
             List<Monster> list = new List<Monster>();
             // 전투 개시 시 몬스터 랜덤 할당
             // 1~4마리 몬스터를 랜덤으로 선언?
-            int[] arr = new int[rand.Next(0, 4)]; // 0~3 정해주고 몬스터 갯수
+            int[] arr = new int[rand.Next(1, 5)]; // 0~3 정해주고 몬스터 갯수
 
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = rand.Next(0, 3); // rand = 몬스터 종류를 정해주는거 // if  arr[0] = 2
-                list.Add(monsters[arr[i]]); // 됐어 나이스~
+                list.Add(monsters[arr[i]]);
             }
 
             return list;
