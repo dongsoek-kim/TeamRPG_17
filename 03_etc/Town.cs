@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeamRPG_17._03_etc
+namespace TeamRPG_17
 {
-    internal class Town
+    public class Town
     {
         public string name { get; private set; }
         public string townDescription { get; private set; }
@@ -34,7 +34,7 @@ namespace TeamRPG_17._03_etc
         
         public bool CanEnterTown()
         {
-            return (GameManager.Instance.player.level >= EntryLevel);
+            return (GameManager.Instance.player.level >= entryLevel);
         }
 
         
