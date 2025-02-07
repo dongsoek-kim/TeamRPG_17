@@ -22,7 +22,9 @@ namespace TeamRPG_17
         ShopScene,
         DungeonScene,
         SleepScene,
-        TownMoveScene
+        TownMoveScene,
+        DataScene,
+        QusetScene
     }
 
     public enum ItemName

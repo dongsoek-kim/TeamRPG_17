@@ -42,6 +42,7 @@ namespace TeamRPG_17
             {
                 case 0:
                     GameManager.Instance.ChangeScene(SceneName.LobbyScene);
+                    DataManager.testSave();
                     break;
 
                 default:
@@ -71,8 +72,11 @@ namespace TeamRPG_17
                     break;
 
                 // 현재 보고있는 퀘스트를 수락 또는 완료
+                // 수락되면 true
+                // 완료되면 false 반환
                 case 1:
-                    QuestManager.Instance.SelectQuestAccept();
+                    if (!QuestManager.Instance.SelectQuestAccept())
+                        questInformation = false;
                     break;
             }
         }
