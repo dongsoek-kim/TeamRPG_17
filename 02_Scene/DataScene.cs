@@ -97,7 +97,7 @@ namespace TeamRPG_17
                     if(intCommand - 1 < datas.Length)
                     {
                         int innerCommand = 0;
-                        isSlot = CheckSlot(intCommand - 1, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?", out innerCommand);
+                        isSlot = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?", out innerCommand);
                         
                         if((isSlot && innerCommand == 1) || isSlot == false) // Slot있고 확인을 누르거나, Slot이 비어있으면 실행
                         {
@@ -176,7 +176,7 @@ namespace TeamRPG_17
                     if (intCommand - 1 < datas.Length)
                     {
                         int innerCommand = 0;
-                        bool isSlot = CheckSlot(intCommand - 1, "현재 슬롯에 데이터가 남아있습니다.\n정말로 삭제를 하시겠습니까?", out innerCommand);
+                        bool isSlot = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 삭제를 하시겠습니까?", out innerCommand);
                         
                         if (isSlot && innerCommand == 1)
                         {              
