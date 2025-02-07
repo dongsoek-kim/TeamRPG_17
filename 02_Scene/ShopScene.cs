@@ -93,7 +93,7 @@ namespace TeamRPG_17
                     break;
 
                 default:
-                    shop.BuyItem(intCommand);
+                    shop.BuyItem(GameManager.Instance.currentTown.startItemIdx + intCommand);
                     break;
             }
         }
