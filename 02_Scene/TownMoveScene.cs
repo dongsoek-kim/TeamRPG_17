@@ -28,7 +28,11 @@ namespace TeamRPG_17._02_Scene
             {
                 // GameManager에 가지고있는 towns배열, 현재타운번호를 대입해서 플레이어가 입장 할 수 있는지 확인한다.
                 if (GameManager.Instance.currentTown.CanEnterTown() == false)
+                {
+                    Console.WriteLine("레벨이 맞지 않아서 입장할 수 없습니다.");
+                    Console.ReadKey(true); // 입력 대기
                     return;
+                }
 
                 // 게임매니저에 있는 현재 도시 설정후 로비씬
                 GameManager.Instance.currentTown = GameManager.Instance.towns[intCommand - 1];
