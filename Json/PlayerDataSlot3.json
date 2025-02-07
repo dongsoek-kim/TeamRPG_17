@@ -1,0 +1,16 @@
+{
+	"Player": {
+		"name": "",
+		"job": "",
+		"level": 5,
+		"exp": 1200,
+		"str": 10,
+		"dex": 5,
+		"inte": 2,
+		"luk": 3,
+		"damage": 15.5,
+		"defense": 10.0,
+		"hp": 100,
+		"gold": 500
+	}
+}
