@@ -17,9 +17,9 @@ namespace TeamRPG_17
         {
             currentTown = 0;
             towns = new Town[Enum.GetValues(typeof(SceneName)).Length];
-            towns[(int)TownName.Elinia] = new Town("엘리니아","엘리니아 마을이다.", 1);
-            towns[(int)TownName.Hannesys] = new Town("헤네시스", "커닝시티 마을이다.", 5);
-            towns[(int)TownName.CunningCity] = new Town("커닝시티", "커닝시티 마을이다.", 10);
+            towns[(int)TownName.Elinia] = new Town("엘리니아","엘리니아 마을이다.",1 ,0, 1);
+            towns[(int)TownName.Hannesys] = new Town("헤네시스", "커닝시티 마을이다.",5 ,2, 1);
+            towns[(int)TownName.CunningCity] = new Town("커닝시티", "커닝시티 마을이다.",10,3, 1);
 
             int sceneCount = Enum.GetValues(typeof(SceneName)).Length;
             scenes = new Scene[sceneCount];
