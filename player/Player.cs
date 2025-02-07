@@ -44,7 +44,7 @@ namespace TeamRPG_17
         }
 
         // 던전 클리어 후 경험치 획득 함수
-        public void AddExp()
+        public void AddExp(int addExp)
         {
             exp++;
             if (exp == level)
