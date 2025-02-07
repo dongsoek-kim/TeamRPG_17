@@ -12,7 +12,7 @@ namespace TeamRPG_17
         private Dungeon currentDungeon;
         MonsterManager _monster = MonsterManager.Instance;
         List<Monster> monster;
-        Potion potion = new Potion();
+        Potion potion = GameManager.Instance.player.inventory.potion;
 
         public int playerHp = _player.hp;
 
