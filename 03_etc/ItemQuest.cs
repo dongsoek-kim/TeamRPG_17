@@ -21,7 +21,7 @@ namespace TeamRPG_17
         public override void QuestProgress()
         {
             // TODO: 인벤토리에서 questItem을 가지고있는지 확인해서 넣어주기
-            Console.WriteLine($"{questItem} ( 0 / 1)");
+            Console.WriteLine($"{questItem} ( 미보유 / 보유 )");
         }
         public override void QuestComplete()
         {
