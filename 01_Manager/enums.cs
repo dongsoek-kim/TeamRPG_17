@@ -67,4 +67,11 @@ namespace TeamRPG_17
         Foot,
         Weapon
     }
+
+    public enum Grade
+    { 
+        Common,
+        rare,
+        Unique
+    }
 }
