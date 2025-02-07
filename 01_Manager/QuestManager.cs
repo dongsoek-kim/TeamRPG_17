@@ -164,28 +164,28 @@ namespace TeamRPG_17
         {
             int questCount = 1;
 
-            for(int i = 0; i < killQuests.Length; i++)
+            foreach(KillQuest? quest in killQuests)
             {
-                if (killQuests[i] == null || killQuests[i]?.questTown != _town)
+                if (quest == null || quest.questTown != _town)
                     continue;
 
-                if(questCount == index)
+                if (questCount == index)
                 {
-                    selectQuest = killQuests[i];
+                    selectQuest = quest;
                     return true;
                 }
 
                 questCount++;
             }
 
-            for (int i = 0; i < itemQuests.Length; i++)
+            foreach (ItemQuest? quest in itemQuests)
             {
-                if (itemQuests[i] == null || itemQuests[i]?.questTown != _town)
+                if (quest == null || quest.questTown != _town)
                     continue;
 
                 if (questCount == index)
                 {
-                    selectQuest = itemQuests[i];
+                    selectQuest = quest;
                     return true;
                 }
 
