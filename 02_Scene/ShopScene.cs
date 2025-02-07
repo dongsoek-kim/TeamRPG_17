@@ -123,7 +123,7 @@ namespace TeamRPG_17
                     onSell = false;
                     break;
                 default:
-                    shop.SellItem(intCommand);
+                    shop.SellItem(GameManager.Instance.currentTown.startItemIdx + intCommand);
                     break;
             }
         }
