@@ -127,7 +127,7 @@ namespace TeamRPG_17
             // 판매 목록
             for (int i = town.startItemIdx; i < town.startItemIdx + town.count; i++)
             {
-                number = _isNumber ? i + 1 : null;
+                number = _isNumber ? i - town.startItemIdx + 1 : null;
 
                 Console.Write($"- {number} {ItemManager.Instance.items[i].ItemInfo()}");
 
