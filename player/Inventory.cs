@@ -21,7 +21,6 @@ namespace TeamRPG_17
 
         public int equipSlot { get; private set; }
 
-        public int sumDefense { get; private set; }
         public Inventory()
         {
             equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;
@@ -157,6 +156,10 @@ namespace TeamRPG_17
                 equipedArmor = null;
             else
                 equipedWeapon = null;
+        }
+        public int SumDefense()
+        {
+            return 0;
         }
     }
 }
