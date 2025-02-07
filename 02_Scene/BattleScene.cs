@@ -129,11 +129,13 @@ namespace TeamRPG_17
                     {
                         Console.WriteLine("이미 죽은 몬스터입니다!");
                         Console.ReadLine();
-                        continue;
+                        return false;
                     }
-
-                    PlayerAttack(targetMonster);
-                    return true;
+                    else
+                    {
+                        PlayerAttack(targetMonster);
+                        return true;
+                    }
                 }
                 else
                 {
@@ -155,7 +157,6 @@ namespace TeamRPG_17
             {
                 Console.WriteLine("Dead");
                 monster.CurrentHp = 0;
-                monster.IsDead = true;
                 QuestManager.Instance.MonsterKillCount(monster);
             }
             else Console.WriteLine($"{monster.CurrentHp -= dmg}");

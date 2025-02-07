@@ -15,7 +15,7 @@ namespace TeamRPG_17
         public int MaxHp { get; set; }
         public int CurrentHp { get; set; }
 
-        public bool IsDead { get; set; }
+        public bool IsDead => CurrentHp <= 0;
 
 
 
