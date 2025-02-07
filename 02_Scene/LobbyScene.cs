@@ -20,6 +20,7 @@ namespace TeamRPG_17
             Console.WriteLine("3. 상점");
             Console.WriteLine("4. 던전입장");
             Console.WriteLine("5. 휴식하기");
+            Console.WriteLine("6. 도시선택");
             Console.WriteLine("─────────────────────────");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
@@ -40,6 +41,9 @@ namespace TeamRPG_17
                     break;
                 case 5:
                     GameManager.Instance.ChangeScene(SceneName.SleepScene);
+                    break;
+                case 6:
+                    GameManager.Instance.ChangeScene(SceneName.TownMoveScene);
                     break;
             }
         }

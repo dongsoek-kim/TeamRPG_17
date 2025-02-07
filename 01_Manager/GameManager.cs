@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamRPG_17._02_Scene;
 
 namespace TeamRPG_17
 {
@@ -32,7 +33,7 @@ namespace TeamRPG_17
             scenes[4] = new ShopScene();
             scenes[5] = new DungeonScene();
             scenes[6] = new SleepScene();
-            //scenes[7]
+            scenes[7] = new TownMoveScene();
             //seenes[8]
             ChangeScene(SceneName.UserCreateScene);
         }

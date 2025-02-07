@@ -115,7 +115,17 @@ namespace TeamRPG_17
         public void PrintItemList(bool _isNumber = false)
         {
             int? number;
-            for (int i = 0; i < ItemManager.Instance.itemLength; i++)
+            Town town = GameManager.Instance.currentTown; // 현재 타운
+
+            // 예외 처리사항
+            if (!town.CanGetItem())
+            {
+                Console.WriteLine("PrintItemList() 메서드에서 아이템 리스를 가져올 수 없습니다.");
+                return;
+            }
+
+            // 판매 목록
+            for (int i = town.startItemIdx; i < town.count; i++)
             {
                 number = _isNumber ? i + 1 : null;
 
