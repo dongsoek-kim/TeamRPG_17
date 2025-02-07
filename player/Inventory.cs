@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace TeamRPG_17
             int length = Enum.GetValues(typeof(ItemName)).Length;
             inventory = new Item[length];
             Potion potion = new Potion();
+            equipedArmor = new Armor[equipSlot];
+            AddItem(0); AddItem(1); AddItem(2); AddItem(5); AddItem(6);
         }
 
         public void ShowInventory()
@@ -55,21 +58,28 @@ namespace TeamRPG_17
             {
                 if (item == null)
                     continue;
-
-                // item이 장착중인 방어구일때
-                foreach (Armor equipedArmor in equipedArmor)
-                { 
-                    if (equipedArmor == item)
+                if (item.itemType == ItemType.Armor)// item이 장착중인 방어구일때
+                {
+                    if (equipedArmor[(int)item.EquipSlot] == item)
+                    {
                         Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
+                    }
+                    else 
+                    {
+                        Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
+                    }
                 }
-                // item이 장착중인 무기일때
-                if(equipedWeapon == item)
-                    Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
-
-                // item이 장착중이 아닐때
-                else
-                    Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
-
+                else if(item.itemType == ItemType.Weapon)
+                {
+                    if (equipedWeapon == item)
+                    {
+                        Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
+                    }
+                }                
                 itemCount++;
             }
         }
@@ -80,10 +90,13 @@ namespace TeamRPG_17
         public void ArmorStat()
         {
             string stat = "";
-            foreach (Armor equipedArmor in equipedArmor)
+            if (equipedArmor != null)
             {
-                if (equipedArmor != null)
-                    stat = $" ( +{equipedArmor.defense} )";
+                foreach (Armor equipedArmor in equipedArmor)
+                {
+                    if (equipedArmor != null)
+                        stat = $" ( +{equipedArmor.defense} )";
+                }
             }
 
             Console.WriteLine($"{stat}");
@@ -119,23 +132,22 @@ namespace TeamRPG_17
                     itemCount++;
                     continue;
                 }
-                int equipSlot = (int)inventory[i].EquipSlot;
-                if (equipedArmor[equipSlot]!=null)
+                int thisEquipSlot = (int)inventory[i].EquipSlot;
+                if (equipedArmor[thisEquipSlot] != null)
                 {
-                    equipedArmor = null;
+                    equipedArmor[thisEquipSlot] = null;
                 }
                 switch (inventory[i].itemType)
                 {
                     case ItemType.Armor:
-                       equipedArmor[equipSlot] = (Armor)inventory[i];
-                       break;
+                        equipedArmor[thisEquipSlot] = (Armor)inventory[i];
+                        break;
 
                     case ItemType.Weapon:
                         // 선택된 무기가 착용중인 무기와 같을때 착용해제
-                       equipedWeapon = (Weapon)inventory[i];
-                       break;
+                        equipedWeapon = (Weapon)inventory[i];
+                        break;
                 }
-
                 break;
             }
         }
