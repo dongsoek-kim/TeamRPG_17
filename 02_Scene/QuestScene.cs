@@ -42,7 +42,6 @@ namespace TeamRPG_17
             {
                 case 0:
                     GameManager.Instance.ChangeScene(SceneName.LobbyScene);
-                    DataManager.testSave();
                     break;
 
                 default:
