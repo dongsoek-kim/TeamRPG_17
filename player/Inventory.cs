@@ -21,13 +21,14 @@ namespace TeamRPG_17
         public Weapon? equipedWeapon { get; private set; }
 
         public int equipSlot { get; private set; }
+        public Potion potion { get; private set; }
 
         public Inventory()
         {
             equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;
             int length = Enum.GetValues(typeof(ItemName)).Length;
             inventory = new Item[length];
-            Potion potion = new Potion();
+            potion = new Potion();
             equipedArmor = new Armor[equipSlot];
         }
 
