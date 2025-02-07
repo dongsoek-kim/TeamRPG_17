@@ -10,7 +10,7 @@ namespace TeamRPG_17
 {
     public class Inventory
     {
-        private Item[] inventory;
+        public Item[] inventory { get; set; }
         public Item this[int index]
         {
             get { return inventory[index]; }
