@@ -1,11 +1,35 @@
 {
   "equipedArmor": [
-    null,
+    {
+      "defense": 15,
+      "itemType": 0,
+      "grade": 2,
+      "EquipSlot": 0,
+      "itemName": "쓸모많은 갑옷",
+      "itemDescription": "진짜 쓸모많은 갑옷입니다.",
+      "str": 3,
+      "dex": 0,
+      "inte": 0,
+      "luk": 0,
+      "price": 0
+    },
     null,
     null,
     null,
     null
   ],
-  "equipedWeapon": null,
+  "equipedWeapon": {
+    "damage": 15,
+    "itemType": 1,
+    "grade": 2,
+    "EquipSlot": 4,
+    "itemName": "쓸모많은 칼",
+    "itemDescription": "진짜 쓸모많은 칼입니다.",
+    "str": 4,
+    "dex": 3,
+    "inte": 2,
+    "luk": 1,
+    "price": 0
+  },
   "equipSlot": 5
 }

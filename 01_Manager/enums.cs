@@ -51,7 +51,7 @@ namespace TeamRPG_17
         Hannesys,
         CunningCity
     }
-    public enum PotionNum
+    public enum PotionType
     {
         Health,
         str,

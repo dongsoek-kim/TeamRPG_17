@@ -23,7 +23,7 @@ namespace TeamRPG_17
         public int hp           { get; set; }
         public int gold         { get; set; }
 
-        public Inventory inventory { get; private set; }
+        public Inventory inventory { get; set; }
 
         private Random random = new Random();
 

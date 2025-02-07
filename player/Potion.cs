@@ -13,36 +13,63 @@ namespace TeamRPG_17
         public int dex = 5;
         public int inte = 5;
         public int luk = 5;
+        public int[] potionCount = new int[Enum.GetValues(typeof(PotionType)).Length];
+
         public Potion()
         {
-           int PotionNum = Enum.GetValues(typeof(PotionNum)).Length;
+            int PotionType = Enum.GetValues(typeof(PotionType)).Length;
         }
-        public void UsePotion(PotionNum potionNum)
+        public void UsePotion(PotionType potionType)
         {
-            switch (potionNum)
+            switch (potionType)
             {
-                case PotionNum.Health:
+                case PotionType.Health:
                     {
                         GameManager.Instance.player.hp = +health;
                         GameManager.Instance.player.hp = (GameManager.Instance.player.hp >= 100) ? GameManager.Instance.player.hp = 100 : GameManager.Instance.player.hp;
+                        potionCount[(int)PotionType.Health]--;
                         break;
                     }
-                case PotionNum.str:
+                case PotionType.str:
                     //GameManager.Instance.player.str = +str;
                     break;
-                case PotionNum.dex:
+                case PotionType.dex:
                     //GameManager.Instance.player.dex = +str;
                     break;
-                case PotionNum.inte:
+                case PotionType.inte:
                     //GameManager.Instance.player.inte = +str;
                     break;
-                case PotionNum.luk:
+                case PotionType.luk:
                     //GameManager.Instance.player.luk = +str;
                     break;
                 default: break;
 
             }
         }
-    }
+        public void getPotoin(PotionType potionType,int _getNum)
+            {
+            switch (potionType)
+            {
+                case PotionType.Health:
+                {
+                    potionCount[(int)PotionType.Health] += _getNum;
+                    break;
+                }
+            case PotionType.str:
+                //GameManager.Instance.player.str = +str;
+                break;
+            case PotionType.dex:
+                //GameManager.Instance.player.dex = +str;
+                break;
+            case PotionType.inte:
+                //GameManager.Instance.player.inte = +str;
+                break;
+            case PotionType.luk:
+                //GameManager.Instance.player.luk = +str;
+                break;
+            default: break;
+
+            }
+        }
 
 }

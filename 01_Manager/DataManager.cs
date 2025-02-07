@@ -127,8 +127,8 @@ namespace TeamRPG_17
         }
         static public void LoadData(int _input)
         {
-            LoadPlayerData(_input);
-            LoadInventoryData(_input);
+            GameManager.Instance.player=LoadPlayerData(_input);
+            GameManager.Instance.player.inventory=LoadInventoryData(_input);
             LoadQuestManagerData(_input);
         }
         public static void SaveGameData(Player player, Inventory inventory, int userInput = 1)
