@@ -9,10 +9,8 @@ namespace TeamRPG_17
 {
     static class DataManager//Player,Inventory,Quest의 데이터 저장,불러오기
     {
-      private static int nowSlot;
       static public Player LoadPlayerData(int _input)
         {
-            nowSlot = _input;
             string relativePath = @"..\..\..\Json\";
             string jsonFile = "PlayerData";  // JSON 파일명
             string slot;
@@ -94,7 +92,6 @@ namespace TeamRPG_17
         }
         static public void LoadQuestManagerData(int _input)
         {
-            nowSlot = _input;
             string relativePath = @"..\..\..\Json\";                            // 파일 위치
             string itemQuestjsonFile = $"itemQuestDataSlot{_input}.json";       // 템퀘스트 JSON 파일명
             string killQuestjsonFile = $"QukillQuestDataSlot{_input}.json";     // 킬퀘스트 JSON 파일명
@@ -134,10 +131,8 @@ namespace TeamRPG_17
             LoadInventoryData(_input);
             LoadQuestManagerData(_input);
         }
-        public static void SaveGameData(Player player, Inventory inventory, QuestManager questManager)
+        public static void SaveGameData(Player player, Inventory inventory, int userInput = 1)
         {
-
-
             string relativePath = @"..\..\..\Json\";
             string PlayerDatajsonPath;
             string InventoryDatajsonPath;
@@ -145,7 +140,7 @@ namespace TeamRPG_17
             string killQuestjsonPath;
 
             // 세이브 슬롯에 맞는 파일 경로 설정
-            switch (nowSlot)
+            switch (userInput)
             {
                 case 1:
                     PlayerDatajsonPath = "PlayerDataSlot1.json";
