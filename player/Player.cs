@@ -18,6 +18,7 @@ namespace TeamRPG_17
         public int inte         { get; private set; }
         public int luk          { get; private set; }
         public float damage     { get; private set; }
+        public float baseDamage { get; private set; }
         public float defense    { get; private set; }
         public int hp           { get; set; }
         public int gold         { get; set; }
@@ -31,10 +32,10 @@ namespace TeamRPG_17
             level = 1;
             exp = 0;
             // 스탯(str 등)은 추후에 확정하여 변경예정
-            str = 0;
-            dex = 0;
-            inte = 0;
-            luk = 0;
+            str = 1;
+            dex = 1;
+            inte = 1;
+            luk = 1;
             damage = 100;
             defense = 5;
             hp = 100;
@@ -88,7 +89,7 @@ namespace TeamRPG_17
         {
             get
             {
-                float totalDamage = damage;
+                float baselDamage = damage;
                 float bonusDamage = 0;
 
                 switch (job)
@@ -105,7 +106,7 @@ namespace TeamRPG_17
                         damage = (((float)str * 0.1f) + ((float)dex * 0.5f) + ((float)inte * 1.5f));
                         break;
                 }
-                return (int)(totalDamage + bonusDamage);
+                return (int)(baseDamage + bonusDamage);
             }
          }
 

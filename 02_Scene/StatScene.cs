@@ -19,7 +19,15 @@ namespace TeamRPG_17
             Console.WriteLine($"Lv. {GameManager.Instance.player.level}");
             Console.WriteLine($"{GameManager.Instance.player.name} ( {GameManager.Instance.player.job} )");
 
-            Console.Write($"공격력 : {GameManager.Instance.player.damage}");
+            Console.Write($"힘 : {GameManager.Instance.player.str}");
+            GameManager.Instance.player.inventory.WeaponStat();
+            Console.Write($"민첩 : {GameManager.Instance.player.dex}");
+            GameManager.Instance.player.inventory.WeaponStat();
+            Console.Write($"지능 : {GameManager.Instance.player.inte}");
+            GameManager.Instance.player.inventory.WeaponStat();
+            Console.Write($"행운 : {GameManager.Instance.player.luk}");
+            GameManager.Instance.player.inventory.WeaponStat();
+            Console.Write($"공격력 : {GameManager.Instance.player.TotalDamage}");
             GameManager.Instance.player.inventory.WeaponStat();
 
             Console.Write($"방어력 : {GameManager.Instance.player.defense}");
