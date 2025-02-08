@@ -68,5 +68,22 @@ namespace TeamRPG_17
 
             onMessage = false;
         }
+
+        public void GiftPotion()
+        {
+            int potionCount = 0;
+
+            potionCount = GameManager.Instance.player.inventory.potion.potionCount[0];
+            if (potionCount < 3)
+            {
+                GameManager.Instance.player.inventory.potion.GetPotion(PotionType.Health, 0);
+                for (int i = 1; 1 <= 3; i++) 
+                Console.WriteLine("포션이 지급되었습니다!");
+            }
+            else
+            {
+                Console.WriteLine("포션은 이미 3개 이상 보유 중입니다.");
+            }
+        }
     }
 }

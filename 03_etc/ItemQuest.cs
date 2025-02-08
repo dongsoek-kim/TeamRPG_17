@@ -23,7 +23,12 @@ namespace TeamRPG_17
             // TODO:
             // 인벤토리에서 questItem을 가지고있는지 확인
             // 가지고있다면 보유 / 없다면 미보유로 출력
-            Console.WriteLine($"{questItem} ( 미보유 / 보유 )");
+
+            // 변수명을 못정하겠어요
+            string canloadItem = "아이템이없습니다.";
+            if (GameManager.Instance.player.inventory.haveItem(questItem))
+                canloadItem = "제출가능";
+            Console.WriteLine($"{questItem} ( {canloadItem} )");
         }
         public override bool QuestComplete()
         {
@@ -33,9 +38,26 @@ namespace TeamRPG_17
             // questComplete = true 
             // 퀘스트보상 지급
 
-            // 없다면 return;
-            questComplete = true;
-            return true;
+            // 아이템 보유중일때
+            if (GameManager.Instance.player.inventory.haveItem(questItem))
+            {
+                questComplete = true;
+                GameManager.Instance.player.inventory.DeleteItem(questItem);
+            }
+            else
+                questComplete = false;
+
+            return questComplete;
+        }
+
+        public override bool QuestCheck()
+        {
+            // 아이템 가지고있으면 true
+            // 없으면 false
+            if (GameManager.Instance.player.inventory.haveItem(questItem))
+                return true;
+            else
+                return false;
         }
     }
 }
