@@ -37,23 +37,49 @@ namespace TeamRPG_17
             Console.ResetColor();
         }
 
-        public static void AnimationWrite(string text, float duration, ConsoleColor color = ConsoleColor.Gray)
+        public static void AnimationWrite(string text, float duration, bool canSkip, ConsoleColor color = ConsoleColor.Gray)
         {
-            for (int i = 0; i < text.Length; i++)
+            int count = 0;
+            for (count = 0; count < text.Length; count++)
             {
-                ColorWrite(text[i], color);
+                ColorWrite(text[count], color);
                 Thread.Sleep((int)(1000f * duration / text.Length));
-                while (Console.KeyAvailable) { Console.ReadKey(true); } // 키보드 버퍼삭제
+                while (Console.KeyAvailable) 
+                {
+                    ConsoleKeyInfo info = Console.ReadKey(true);
+                    if (canSkip)
+                    {
+                        if ( info.Key != ConsoleKey.None && info.Key != ConsoleKey.Enter) // 엔터는 무시
+                        {
+                            ColorWrite(text.Substring(count + 1), color);
+                            count = text.Length;
+                            break;
+                        }
+                    }
+                }
             }
         }
 
-        public static void AnimationWriteLine(string text, float duration, ConsoleColor color = ConsoleColor.Gray)
+        public static void AnimationWriteLine(string text, float duration,bool canSkip, ConsoleColor color = ConsoleColor.Gray)
         {
-            for (int i = 0; i < text.Length; i++)
+            int count = 0;
+            for (count = 0; count < text.Length; count++)
             {
-                ColorWrite(text[i], color);
+                ColorWrite(text[count], color);
                 Thread.Sleep((int)(1000f * duration / text.Length));
-                while (Console.KeyAvailable) { Console.ReadKey(true); } // 키보드 버퍼삭제
+                while (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo info = Console.ReadKey(true);
+                    if (canSkip)
+                    {
+                        if (info.Key != ConsoleKey.None && info.Key != ConsoleKey.Enter) // 엔터는 무시
+                        {
+                            ColorWrite(text.Substring(count + 1), color);
+                            count = text.Length;
+                            break;
+                        }
+                    }
+                }
             }
             Console.WriteLine();
         }
