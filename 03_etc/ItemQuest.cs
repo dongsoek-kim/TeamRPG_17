@@ -9,27 +9,48 @@ namespace TeamRPG_17
     public class ItemQuest : Quest
     {
         // 퀘스트완료에 필요한 아이템
-        public string questItem;
+        public string[] questItem;
 
         public override void QuestProgress()
         {
-            string canloadItem = "아이템이없습니다.";
-            if (GameManager.Instance.player.inventory.haveItem(questItem))
-                canloadItem = "제출가능";
-            Console.WriteLine($"{questItem} ( {canloadItem} )\n");
+            foreach (string item in questItem)
+            {
+                ConsoleColor color = ConsoleColor.Red;
+
+                string canloadItem = "아이템이없습니다.";
+                if (GameManager.Instance.player.inventory.haveItem(item))
+                {
+                    canloadItem = "제출가능";
+                    color = ConsoleColor.Green;
+                }
+                Console.Write($"{item} ");
+                Render.ColorWrite($"( {canloadItem} )\n", color);
+            }
+            Console.WriteLine();
         }
 
         public override bool QuestComplete()
         {
-            if (GameManager.Instance.player.inventory.haveItem(questItem))
+            if(QuestCheck())
             {
+                // 아이템 반납 및 퀘스트완료
                 questComplete = true;
-                GameManager.Instance.player.inventory.DeleteItem(questItem);
+                foreach(string item in questItem)
+                    GameManager.Instance.player.inventory.DeleteItem(item);
 
+                // 보상 지급
                 GameManager.Instance.player.AddExp(exp);
                 GameManager.Instance.player.gold += gold;
                 if (rewardItem != null)
                     GameManager.Instance.player.inventory.AddItem(rewardItem);
+
+                // 반복 가능한 퀘스트일때
+                if (questRepeatable)
+                {
+                    questComplete = false;
+                    questAccpet = false;
+                }
+
                 return true;
             }
 
@@ -38,12 +59,17 @@ namespace TeamRPG_17
 
         public override bool QuestCheck()
         {
-            // 아이템 가지고있으면 true
-            // 없으면 false
-            if (GameManager.Instance.player.inventory.haveItem(questItem))
-                return true;
-            else
+            // 퀘스트 아이템 리스트에서 하나라도 부족하면 false
+            // 퀘스트 아이템 전부 가지고있으면 true
+            for(int i = 0; i < questItem.Length; i++)
+            {
+                if (GameManager.Instance.player.inventory.haveItem(questItem[i]))
+                    continue;
+
                 return false;
+            }
+
+            return true;
         }
     }
 }

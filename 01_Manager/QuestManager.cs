@@ -15,7 +15,7 @@ namespace TeamRPG_17
         public KillQuest[] killQuests { get; private set; }
         public ItemQuest[] itemQuests { get; private set; }
 
-        public Quest? selectQuest;
+        public Quest? selectQuest { get; set; }
 
         public void LoadQuest(string itemQuestJson, string killQuestJson)
         {
@@ -64,7 +64,7 @@ namespace TeamRPG_17
             if (selectQuest == null)
                 return;
 
-            Console.WriteLine($"\n{selectQuest.questTitle}");         // 퀘스트 명
+            Render.ColorWriteLine($"\n{selectQuest.questTitle}",ConsoleColor.Cyan);
             Console.WriteLine($"{selectQuest.questDescription}\n");   // 퀘스트 설명
             selectQuest.ShowQuestReward();                          // 퀘스트 보상
 
@@ -76,7 +76,7 @@ namespace TeamRPG_17
 
                 // 퀘스트 완료 가능하다면 퀘스트완료 선택지 추가
                 if(selectQuest.QuestCheck())
-                    Console.WriteLine($"\n1. 퀘스트 완료\n");
+                    Console.WriteLine($"1. 퀘스트 완료\n");
             }
             else
             {
