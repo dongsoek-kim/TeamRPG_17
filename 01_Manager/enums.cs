@@ -29,6 +29,7 @@ namespace TeamRPG_17
 
     public enum ItemName
     {
+        촌장의야망,
         누가쓰다버린목검,
         테무산쇠검,
         누가쓰다버린단검,
@@ -80,7 +81,6 @@ namespace TeamRPG_17
         힘이깃든신발,
         청동흉갑,
         양동이,
-        촌장의야망,
         가죽모자,
         누더기,
         붕대,
