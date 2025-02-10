@@ -104,7 +104,7 @@ namespace TeamRPG_17
                             DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, intCommand);
                             Console.WriteLine("데이터 저장 완료!!");
                             SyncSlot(); // 다시 불러오기
-                            Console.ReadLine();
+                            Console.ReadKey(true);
                         }
                     }
                     break;
@@ -139,12 +139,12 @@ namespace TeamRPG_17
                         {
                             DataManager.LoadData(intCommand);
                             Console.WriteLine("불러오기 완료!!");
-                            Console.ReadLine();
+                            Console.ReadKey(true);
                         }
                         else
                         {
                             Console.WriteLine("해당 슬롯은 비어있습니다.");
-                            Console.ReadLine();
+                            Console.ReadKey(true);
                         }
                     }
                     break;
@@ -185,12 +185,12 @@ namespace TeamRPG_17
                             DataManager.SaveGameData(p, new Inventory(), intCommand);
                             Console.WriteLine("삭제완료!!");
                             SyncSlot(); // 다시 불러오기
-                            Console.ReadLine();
+                            Console.ReadKey(true);
                         }
                         else
                         {
                             Console.WriteLine("해당 슬롯은 비어있습니다.");
-                            Console.ReadLine();
+                            Console.ReadKey(true);
                         }
                     }
                     break;
