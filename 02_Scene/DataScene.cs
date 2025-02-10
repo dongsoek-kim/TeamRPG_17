@@ -135,7 +135,7 @@ namespace TeamRPG_17
                 default:
                     if (intCommand - 1 < datas.Length)
                     {
-                        if ((string)datas[intCommand - 1].name != null)
+                        if (datas[intCommand - 1] != null && datas[intCommand - 1].name != null)
                         {
                             DataManager.LoadData(intCommand);
                             Console.WriteLine("불러오기 완료!!");
@@ -202,8 +202,9 @@ namespace TeamRPG_17
             for (int i = 0; i < datas.Length; i++)
             {
                 string strNumber = !onSelect ? (i + 1).ToString() : "";
-                string str = "비어있음";
-                if (datas[i].name != null)
+                string str = "비어있음";   
+
+                if (datas[i] != null && datas[i].name != null)
                     str = string.Format("Lv {0:D2}. {1}", datas[i].level, datas[i].name);
                 Console.WriteLine($"{strNumber} [{str}]"); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
             }
@@ -211,8 +212,12 @@ namespace TeamRPG_17
 
         private bool CheckSlot(int slotNumber, string checkMessage, out int _innerCommand)
         {
-            string pName = datas[slotNumber-1].name;
+            string pName = "";
             int checkCommand = 1;
+            
+            if (datas[slotNumber - 1] != null)
+                pName = datas[slotNumber-1].name;
+
             if(pName != null)
             {
                 Console.Clear();
