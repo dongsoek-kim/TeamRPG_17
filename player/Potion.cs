@@ -87,5 +87,10 @@ namespace TeamRPG_17
 
             }
         }
+
+        public int GetPotionCount(PotionType potionType)
+        {
+            return potionCount[(int)potionType];
+        }
     }
 }

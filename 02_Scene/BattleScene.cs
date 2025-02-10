@@ -12,7 +12,6 @@ namespace TeamRPG_17
         private Dungeon currentDungeon;
         MonsterManager _monster = MonsterManager.Instance;
         List<Monster> monster;
-        Potion potion = GameManager.Instance.player.inventory.potion;
 
         public int playerHp = _player.hp;
 
@@ -221,37 +220,38 @@ namespace TeamRPG_17
             {
                 DisplayStatus();
                 Console.WriteLine($"\n\n0. 취소");
-                Console.WriteLine($"1. 회복 포션");
-                Console.WriteLine($"2. 힘 포션");
-                Console.WriteLine($"3. 민첩 포션");
-                Console.WriteLine($"4. 지능 포션");
-                Console.WriteLine($"5. 행운 포션");
+
+                foreach (PotionType type in Enum.GetValues(typeof(PotionType)))
+                {
+                    int count = _player.inventory.potion.GetPotionCount(type);
+                    Console.WriteLine($"{(int)type + 1}. {type} 포션({count}개)");
+                }
+
                 Console.WriteLine("\n포션을 선택해 주세요.\n>>");
                 string input = Console.ReadLine();
-                switch (input)
+                int selectedPotion;
+
+                if (!int.TryParse(input, out selectedPotion) || selectedPotion < 0 || selectedPotion > Enum.GetValues(typeof(PotionType)).Length)
                 {
-                    case "0":
-                        return false;
-                    case "1":
-                        potion.UsePotion(PotionType.Health);
-                        potionSelect = true;
-                        break;
-                    case "2":
-                        potion.UsePotion(PotionType.str);
-                        potionSelect = true;
-                        break;
-                    case "3":
-                        potion.UsePotion(PotionType.dex);
-                        potionSelect = true;
-                        break;
-                    case "4":
-                        potion.UsePotion(PotionType.inte);
-                        potionSelect = true;
-                        break;
-                    case "5":
-                        potion.UsePotion(PotionType.luk);
-                        potionSelect = true;
-                        break;
+                    Console.WriteLine("잘못된 입력입니다.");
+                    continue;
+                }
+
+                if (selectedPotion == 0)
+                    return false;
+
+                PotionType selectedType = (PotionType)(selectedPotion - 1);
+                int potionCount = _player.inventory.potion.GetPotionCount(selectedType);
+
+                if (potionCount > 0)
+                {
+                    _player.inventory.potion.UsePotion(selectedType);
+                    potionSelect = true;
+                }
+                else
+                {
+                    Console.WriteLine("\n남은 포션이 없습니다! 다른 포션을 선택해주세요.");
+                    Console.ReadLine();
                 }
             }
             return true;
