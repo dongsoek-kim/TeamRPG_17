@@ -1,6 +1,6 @@
 [
   {
-    "questItem": "누가 쓰다버린 목검",
+    "questItem": [ "누가 쓰다버린 목검", "누가 쓰다버린 단검" ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -12,7 +12,7 @@
     "rewardItem": null
   },
   {
-    "questItem": "촌장의 야망",
+    "questItem": [ "촌장의 야망" ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -24,7 +24,7 @@
     "rewardItem": null
   },
   {
-    "questItem": "2번 마을 퀘스트",
+    "questItem": [ "2번 마을 퀘스트" ],
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -36,7 +36,7 @@
     "rewardItem": null
   },
   {
-    "questItem": "3번 마을 퀘스트",
+    "questItem": [ "3번 마을 퀘스트" ],
     "questTown": 2,
     "questComplete": false,
     "questAccpet": false,
