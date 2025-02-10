@@ -15,7 +15,6 @@ namespace TeamRPG_17
         public int equipSlot {  get; private set; }
         public ItemManager()
         {
-            equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;
             itemLength = Enum.GetValues(typeof(ItemName)).Length;
             items = new Item[itemLength];
             itemPrice = new int[itemLength];
