@@ -128,14 +128,14 @@ namespace TeamRPG_17
         static public void LoadData(int _input)
         {
             GameManager.Instance.player=LoadPlayerData(_input);
-            GameManager.Instance.player.inventory=LoadInventoryData(_input);
+            //GameManager.Instance.player.inventory=LoadInventoryData(_input);
             LoadQuestManagerData(_input);
         }
         public static void SaveGameData(Player player, Inventory inventory, int userInput = 1)
         {
             string relativePath = @"..\..\..\Json\";
             string PlayerDatajsonPath;
-            string InventoryDatajsonPath;
+            //string InventoryDatajsonPath;
             string itemQuestjsonPath;
             string killQuestjsonPath;
 
@@ -144,25 +144,25 @@ namespace TeamRPG_17
             {
                 case 1:
                     PlayerDatajsonPath = "PlayerDataSlot1.json";
-                    InventoryDatajsonPath = "InventoryDataSlot1.json";
+                    //InventoryDatajsonPath = "InventoryDataSlot1.json";
                     itemQuestjsonPath = "itemQuestDataSlot1.json";
                     killQuestjsonPath = "killQuestDataSlot1.json";
                     break;
                 case 2:
                     PlayerDatajsonPath = "PlayerDataSlot2.json";
-                    InventoryDatajsonPath = "InventoryDataSlot2.json";
+                    //InventoryDatajsonPath = "InventoryDataSlot2.json";
                     itemQuestjsonPath = "itemQuestDataSlot2.json";
                     killQuestjsonPath = "killQuestDataSlot2.json";
                     break;
                 case 3:
                     PlayerDatajsonPath = "PlayerDataSlot3.json";
-                    InventoryDatajsonPath = "InventoryDataSlot3.json";
+                    //InventoryDatajsonPath = "InventoryDataSlot3.json";
                     itemQuestjsonPath = "itemQuestDataSlot3.json";
                     killQuestjsonPath = "killQuestDataSlot4.json";
                     break;
                 default:
                     PlayerDatajsonPath = "PlayerDataSlot1.json";
-                    InventoryDatajsonPath = "InventoryDataSlot1.json";
+                    //InventoryDatajsonPath = "InventoryDataSlot1.json";
                     itemQuestjsonPath = "itemQuestDataSlot1.json";
                     killQuestjsonPath = "killQuestDataSlot1.json";
                     break;
@@ -170,7 +170,7 @@ namespace TeamRPG_17
 
             // 파일 경로 생성
             string PlayerDatajson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, PlayerDatajsonPath));
-            string InventoryDatajson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, InventoryDatajsonPath));
+            //string InventoryDatajson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, InventoryDatajsonPath));
             string itemQuestJson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, itemQuestjsonPath));
             string killQuestJson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, killQuestjsonPath));
 
@@ -184,7 +184,7 @@ namespace TeamRPG_17
 
                 // 데이터 저장
                 File.WriteAllText(PlayerDatajson, PlayerData);
-                File.WriteAllText(InventoryDatajson, InventoryData);
+                //File.WriteAllText(InventoryDatajson, InventoryData);
                 File.WriteAllText(itemQuestJson, itemQuestData);
                 File.WriteAllText(killQuestJson, killQuestData);
 

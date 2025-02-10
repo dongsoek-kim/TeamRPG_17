@@ -208,6 +208,24 @@ namespace TeamRPG_17
 
                 if (inventory[i].itemName == itemName)
                 {
+                    if (inventory[i].itemType == ItemType.Armor)
+                    {
+                        if (GameManager.Instance.player.inventory.equipedArmor[(int)inventory[i].EquipSlot] == inventory[i])
+                        {
+                            GameManager.Instance.player.inventory.equipedArmor[(int)inventory[i].EquipSlot] = null;
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (inventory[i].itemType == ItemType.Weapon)
+                    {
+                        if (GameManager.Instance.player.inventory.equipedWeapon == inventory[i])
+                        {
+                            GameManager.Instance.player.inventory.equipedWeapon = null;
+                        }
+                    }
                     inventory[i] = null;
                     return true;
                 }
