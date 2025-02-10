@@ -58,12 +58,22 @@ namespace TeamRPG_17
                 {
                     prefix = "[E] ";
                 }
-
                 Console.WriteLine($"{prefix}{item.ItemInfo()}");
 
             }
         }
-
+        /// <summary>
+        /// 포션갯수 출력함수
+        /// </summary>
+        public void showPotion()
+        { 
+            int potionType = 0;
+            foreach (int potion in potion.potionCount) 
+            {
+                Console.WriteLine($"{(PotionType)potionType}포션의 갯수 : {potion}개");
+                potionType++;
+            }
+        }
         /// <summary>
         /// 장비 정보 출력함수
         /// 착용중인 장비는 [E] 포함해서 출력

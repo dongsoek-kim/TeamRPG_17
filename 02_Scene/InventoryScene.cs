@@ -36,6 +36,8 @@ namespace TeamRPG_17
             GameManager.Instance.player.inventory.ShowInventory(nowPage,out totalPage);
             Console.WriteLine($"{nowPage+1}/{totalPage}페이지");
             Console.WriteLine("─────────────────────────");
+            Console.WriteLine("[포션갯수]");
+            GameManager.Instance.player.inventory.showPotion();
             Console.WriteLine("1. 장착 관리");
             ItemPage();
             Console.WriteLine("0. 나가기");
