@@ -33,6 +33,7 @@ namespace TeamRPG_17
             Console.Write($"방어력 : {GameManager.Instance.player.defense}");
             GameManager.Instance.player.inventory.ArmorStat();
 
+
             Console.WriteLine($"체 력 : {GameManager.Instance.player.hp} / {{GameManager.Instance.player.hpMax}}\");");
             Console.WriteLine($"마 력 : {GameManager.Instance.player.mp} / {{GameManager.Instance.player.mpMax}}\");");
             Console.WriteLine($"Gold : {GameManager.Instance.player.gold}");

@@ -11,13 +11,6 @@ namespace TeamRPG_17
         // 퀘스트완료에 필요한 아이템
         public string questItem;
 
-        public ItemQuest(TownName _town, string _questTitle, string _questDescription, int _exp, int _gold
-            , string _questItem)
-            : base(_town, _questTitle, _questDescription, _exp, _gold)
-        {
-            questItem = _questItem;
-        }
-
         public override void QuestProgress()
         {
             string canloadItem = "아이템이없습니다.";
@@ -35,7 +28,8 @@ namespace TeamRPG_17
 
                 GameManager.Instance.player.AddExp(exp);
                 GameManager.Instance.player.gold += gold;
-
+                if (rewardItem != null)
+                    GameManager.Instance.player.inventory.AddItem(rewardItem);
                 return true;
             }
 

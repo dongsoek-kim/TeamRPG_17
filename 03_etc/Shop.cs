@@ -57,7 +57,7 @@ namespace TeamRPG_17
 
             // 돈 차감 및 아이템 추가
             GameManager.Instance.player.gold -= ItemManager.Instance.itemPrice[itemIndex];
-            GameManager.Instance.player.inventory.AddItem(itemIndex);
+            GameManager.Instance.player.inventory.AddItem((ItemName)itemIndex);
         }
 
         /// <summary>

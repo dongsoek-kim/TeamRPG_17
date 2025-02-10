@@ -56,6 +56,7 @@ namespace TeamRPG_17
             Console.WriteLine("퀘스트 정보");
             Console.WriteLine("─────────────────────────");
             QuestManager.Instance.ShowQuestInformation();
+
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
 
