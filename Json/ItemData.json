@@ -1,4 +1,17 @@
 [
+  // 퀘스트 (상점)템
+  {
+    "itemName": "촌장의 야망",
+    "itemDescription": "보상보다 상점판매가가 비싼 이상한아이템",
+    "itemType": "Armor",
+    "str": 0,
+    "dex": 0,
+    "inte": 0,
+    "luk": 0,
+    "EquipSlot": "Body",
+    "Grade": "Unique",
+    "Defense": "0"
+  },
   // --------------------------------------------------------- Common Weapon
   {
     "itemName": "누가 쓰다버린 목검",
@@ -642,18 +655,6 @@
     "EquipSlot": "Head",
     "Grade": "Common",
     "Defense": "3"
-  },
-  {
-    "itemName": "촌장의 야망",
-    "itemDescription": "보상보다 상점판매가가 비싼 이상한아이템",
-    "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Body",
-    "Grade": "Unique",
-    "Defense": "0"
   },
 
   // 던전 보상
