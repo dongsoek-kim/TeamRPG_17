@@ -25,9 +25,7 @@ namespace TeamRPG_17
 
         public Inventory()
         {
-            equipSlot = Enum.GetValues(typeof(EquipSlot)).Length;
-            int length = Enum.GetValues(typeof(ItemName)).Length;
-            inventory = new Item[length];
+            inventory = new Item[ItemManager.Instance.items.Length];
             potion = new Potion();
             equipedArmor = new Armor[equipSlot];
         }
