@@ -9,59 +9,57 @@ namespace TeamRPG_17
     public class KillQuest : Quest
     {
         // 수정필요 @@
-        public string monsterName; // 잡아야하는 몬스터 이름
-        public int monsterCount;   // 잡아야하는 몬스터 수
-        public int killCount { get; private set; } // 잡아야하는 몬스터 수
-
-        public KillQuest(TownName _town, string _questTitle, string _questDescription, int _exp, int _gold
-            , string _monsterName, int _count) 
-            : base(_town, _questTitle, _questDescription, _exp, _gold)
-        {
-            monsterName = _monsterName;
-            monsterCount = _count;
-            killCount = 0;
-        }
+        public string[] monsterName; // 잡아야하는 몬스터 이름
+        public int[] monsterCount;   // 잡아야하는 몬스터 수
+        public int[] killCount;      // 잡은 몬스터 수
 
         public override void QuestProgress()
         {
-            Console.WriteLine($"{monsterName} - ( {killCount} / {monsterCount})\n");
+            for (int i = 0; i < monsterName.Length; i++)
+            {
+                Console.WriteLine($"{monsterName[i]} - ( {killCount[i]} / {monsterCount[i]})");
+            }
         }
 
         public override bool QuestComplete()
         {
-            // 몬스터 사냥횟수 충족
-            if(killCount >= monsterCount)
+            if(QuestCheck())
             {
                 questComplete = true;
 
                 GameManager.Instance.player.AddExp(exp);
                 GameManager.Instance.player.gold += gold;
-
                 return true;
             }
+
             return false;
         }
 
         public void QuestUpdate(Monster _target)
         {
-            // 죽은 몬스터가 해당 퀘스트의 목표 몬스터가 다르면 조기리턴
-            if (_target.Name != monsterName)
-                return;
+            for (int i = 0; i < monsterName.Length; i++)
+            {
+                if (_target.Name != monsterName[i])
+                    continue;
 
-            killCount++;
+                killCount[i]++;
 
-            // 킬카운터가 퀘스트 요구치를 넘지않도록 예외처리
-            if (killCount > monsterCount)
-                killCount = monsterCount;
+                if (killCount[i] > monsterCount[i])
+                    killCount[i] = monsterCount[i];
+            }
         }
 
         public override bool QuestCheck()
         {
-            // 몬스터수 충족
-            if (killCount >= monsterCount)
-                return true;
+            for (int i = 0; i < monsterName.Length; i++)
+            {
+                if (killCount[i] >= monsterCount[i])
+                    continue;
 
-            return false;
+                return false;
+            }
+
+            return true;
         }
     }
 }

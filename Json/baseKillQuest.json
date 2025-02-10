@@ -1,46 +1,46 @@
 [
   {
-    "monsterName": "슬라임",
-    "monsterCount": 10,
-    "killCount": 0,
+    "monsterName": [ "슬라임","고블린" ],
+    "monsterCount": [ 10,10 ],
+    "killCount": [ 0,0 ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
-    "questTitle": "슬라임 사냥",
-    "questDescription": "슬라임 사냥 퀘스트.\n슬라임 5마리 잡아주세요.",
+    "questTitle": "슬라임/고블린 사냥",
+    "questDescription": "슬라임/고블린 사냥 퀘스트.\n슬라임 5마리와 고블린 10마리를 잡아주세요.",
     "exp": 10,
     "gold": 10
   },
   {
-    "monsterName": "고블린",
-    "monsterCount": 15,
-    "killCount": 0,
+    "monsterName": [ "고블린","새끼 늑대" ],
+    "monsterCount": [ 15,20 ],
+    "killCount": [ 0,0 ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
-    "questTitle": "고블린 사냥",
-    "questDescription": "고블린 사냥 퀘스트.\n고블린 10마리 잡아주세요.",
+    "questTitle": "고블린/새끼늑대 사냥",
+    "questDescription": "고블린/새끼늑대 사냥 퀘스트.\n고블린 15마리와 새끼늑대 20마리를 잡아주세요",
     "exp": 20,
     "gold": 10
   },
   {
-    "monsterName": "새끼 늑대",
-    "monsterCount": 25,
-    "killCount": 0,
+    "monsterName": [ "새끼 늑대" ],
+    "monsterCount": [ 25 ],
+    "killCount": [ 0 ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
     "questTitle": "새끼 늑대 사냥",
-    "questDescription": "새끼 늑대 사냥 퀘스트.\n새끼늑대 15마리 잡아주세요.",
+    "questDescription": "새끼 늑대 사냥 퀘스트.\n새끼늑대 25마리 잡아주세요.",
     "exp": 30,
     "gold": 10
   },
 
 
   {
-    "monsterName": "거대한 쥐",
-    "monsterCount": 20,
-    "killCount": 0,
+    "monsterName": [ "거대한 쥐" ],
+    "monsterCount": [ 20 ],
+    "killCount": [ 0 ],
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -50,9 +50,9 @@
     "gold": 10
   },
   {
-    "monsterName": "살벌한 거미",
-    "monsterCount": 30,
-    "killCount": 0,
+    "monsterName": [ "살벌한 거미" ],
+    "monsterCount": [ 30 ],
+    "killCount": [ 0 ],
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -62,9 +62,9 @@
     "gold": 10
   },
   {
-    "monsterName": "그림자 골렘",
-    "monsterCount": 40,
-    "killCount": 0,
+    "monsterName": [ "그림자 골렘" ],
+    "monsterCount": [ 40 ],
+    "killCount": [ 0 ],
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -76,9 +76,9 @@
 
 
   {
-    "monsterName": "해골 병사",
-    "monsterCount": 20,
-    "killCount": 0,
+    "monsterName": [ "해골 병사" ],
+    "monsterCount": [ 20 ],
+    "killCount": [ 0 ],
     "questTown": 2,
     "questComplete": false,
     "questAccpet": false,
@@ -88,9 +88,9 @@
     "gold": 10
   },
   {
-    "monsterName": "파묻힌 유령",
-    "monsterCount": 40,
-    "killCount": 0,
+    "monsterName": [ "파묻힌 유령" ],
+    "monsterCount": [ 40 ],
+    "killCount": [ 0 ],
     "questTown": 2,
     "questComplete": false,
     "questAccpet": false,
@@ -100,9 +100,9 @@
     "gold": 10
   },
   {
-    "monsterName": "폐허의 수호자",
-    "monsterCount": 100,
-    "killCount": 0,
+    "monsterName": [ "폐허의 수호자" ],
+    "monsterCount": [ 100 ],
+    "killCount": [ 0 ],
     "questTown": 2,
     "questComplete": false,
     "questAccpet": false,
