@@ -152,13 +152,15 @@ namespace TeamRPG_17
 
             Console.Write($"{monster.GetInfo()}\nHP {monster.CurrentHp} -> ");
 
+            monster.CurrentHp -= dmg;
+
             if (monster.CurrentHp <= 0)
             {
                 Console.WriteLine("Dead");
                 monster.CurrentHp = 0;
                 QuestManager.Instance.MonsterKillCount(monster);
             }
-            else Console.WriteLine($"{monster.CurrentHp -= dmg}");
+            else Console.WriteLine($"{monster.CurrentHp}");
 
             Console.WriteLine("\n\n0. 다음\n\n>>");
             string input = Console.ReadLine();
