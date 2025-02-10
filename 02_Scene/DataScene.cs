@@ -213,9 +213,11 @@ namespace TeamRPG_17
         private bool CheckSlot(int slotNumber, string checkMessage, out int _innerCommand)
         {
             string pName = "";
-            
+
             if (datas[slotNumber - 1] != null)
-                pName = datas[slotNumber-1].name;
+                pName = datas[slotNumber - 1].name;
+            else
+                pName = null;
 
             if(pName != null)
             {
