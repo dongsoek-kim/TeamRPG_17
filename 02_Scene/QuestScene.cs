@@ -28,7 +28,7 @@ namespace TeamRPG_17
         {
             Console.Clear();
             Console.WriteLine("퀘스트");
-            Console.WriteLine("퀘스트 수락 및 완료");
+            Console.WriteLine("퀘스트 수락 및 완료 할 수 있습니다.");
             Console.WriteLine("─────────────────────────");
             QuestManager.Instance.ShowQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");

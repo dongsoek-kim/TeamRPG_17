@@ -64,7 +64,7 @@ namespace TeamRPG_17
             if (selectQuest == null)
                 return;
 
-            Console.WriteLine($"\n{selectQuest.questTitle}");         // 퀘스트 명
+            Render.ColorWriteLine($"\n{selectQuest.questTitle}",ConsoleColor.Cyan);
             Console.WriteLine($"{selectQuest.questDescription}\n");   // 퀘스트 설명
             selectQuest.ShowQuestReward();                          // 퀘스트 보상
 

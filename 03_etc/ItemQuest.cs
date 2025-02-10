@@ -23,13 +23,23 @@ namespace TeamRPG_17
         {
             if (GameManager.Instance.player.inventory.haveItem(questItem))
             {
+                // 아이템 반납 및 퀘스트 완료
                 questComplete = true;
                 GameManager.Instance.player.inventory.DeleteItem(questItem);
 
+                // 보상지급
                 GameManager.Instance.player.AddExp(exp);
                 GameManager.Instance.player.gold += gold;
                 if (rewardItem != null)
                     GameManager.Instance.player.inventory.AddItem(rewardItem);
+
+                // 반복 가능한 퀘스트일때
+                if (questRepeatable)
+                {
+                    questComplete = false;
+                    questAccpet = false;
+                }
+
                 return true;
             }
 
