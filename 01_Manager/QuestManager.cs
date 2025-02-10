@@ -76,7 +76,7 @@ namespace TeamRPG_17
 
                 // 퀘스트 완료 가능하다면 퀘스트완료 선택지 추가
                 if(selectQuest.QuestCheck())
-                    Console.WriteLine($"\n1. 퀘스트 완료\n");
+                    Console.WriteLine($"1. 퀘스트 완료\n");
             }
             else
             {

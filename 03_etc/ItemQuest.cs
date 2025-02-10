@@ -15,11 +15,18 @@ namespace TeamRPG_17
         {
             foreach (string item in questItem)
             {
+                ConsoleColor color = ConsoleColor.Red;
+
                 string canloadItem = "아이템이없습니다.";
                 if (GameManager.Instance.player.inventory.haveItem(item))
+                {
                     canloadItem = "제출가능";
-                Console.WriteLine($"{item} ( {canloadItem} )\n");
+                    color = ConsoleColor.Green;
+                }
+                Console.Write($"{item} ");
+                Render.ColorWrite($"( {canloadItem} )\n", color);
             }
+            Console.WriteLine();
         }
 
         public override bool QuestComplete()
