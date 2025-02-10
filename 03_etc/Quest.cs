@@ -18,19 +18,9 @@ namespace TeamRPG_17
         public string questDescription; // 퀘스트설명
 
         // 퀘스트 보상
-        public int exp;     // 퀘스트 경험치 보상
-        public int gold;    // 퀘스트 골드 보상
-        // TODO: 퀘스트 아이템 보상 추가하기
-        // 아이템 파트 어느정도 만들어졌을때 추가예정
-
-        public Quest(TownName _town, string _questTitle, string _questDescription, int _exp, int _gold)
-        {
-            questTown = _town;
-            questTitle = _questTitle;
-            questDescription = _questDescription;
-            gold = _gold;
-            exp = _exp;
-        }
+        public int exp;                 // 퀘스트 경험치 보상
+        public int gold;                // 퀘스트 골드 보상
+        public ItemName? rewardItem;    // 퀘스트 아이템 보상
 
         /// <summary>
         /// 퀘스트의 진행도를 출력해주는 메서드
@@ -48,5 +38,15 @@ namespace TeamRPG_17
         /// </summary>
         /// <returns></returns>
         public abstract bool QuestCheck();
+
+        public virtual void ShowQuestReward()
+        {
+            Console.WriteLine("~~~~~보상~~~~~");
+            Render.ColorWriteLine($"경험치 : {exp}\n골드 : {gold}",ConsoleColor.Yellow);
+            if(rewardItem != null)
+            {
+                Render.ColorWriteLine($"아이템 : {rewardItem}",ConsoleColor.Cyan);
+            }
+        }
     }
 }

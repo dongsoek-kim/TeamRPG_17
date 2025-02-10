@@ -8,7 +8,7 @@ namespace TeamRPG_17
 {
     public class BattleReward
     {
-        public int Exp {  get; private set; }
+        public int Exp { get; private set; }
         public int Gold { get; private set; }
 
         public List<Item> Items { get; private set; }
@@ -33,13 +33,37 @@ namespace TeamRPG_17
             PotionType randomPotion = (PotionType)potionValues.GetValue(RandomGenerator.Instance.Next(potionValues.Length));
 
             player.inventory.potion.GetPotion(randomPotion, 1);
-
+            EquipmentReward();
             Console.WriteLine($"보상 획득!!");
             Console.WriteLine($"\n획득 Exp : {Exp}");
             Console.WriteLine($"{randomPotion}포션 획득");
 
             Console.WriteLine($"획득 Gold : {Gold}");
             Console.WriteLine($"총 보유 Gold : {player.gold}");
+
+        }
+        public void EquipmentReward()
+        {
+            Random random = new Random();
+            int newerandom = random.Next(1, 1001);
+            if(newerandom==1)
+            {
+                //if(GameManager.Instance.player.inventory[(int)ItemName.평범한쇠검]==null)
+                //GameManager.Instance.player.inventory.AddItem(ItemName.평범한쇠검);
+                //
+            }
+            if (newerandom > 2 && newerandom < 12)
+            {
+                //if(GameManager.Instance.player.inventory[(int)ItemName.평범한쇠검]==null)
+                //GameManager.Instance.player.inventory.AddItem(ItemName.평범한쇠검);
+                //
+            }
+            else if (newerandom > 12 && newerandom < 52);
+            {
+                //if(GameManager.Instance.player.inventory[(int)ItemName.평범한쇠검]==null)
+                //GameManager.Instance.player.inventory.AddItem(ItemName.평범한쇠검);
+                //
+            }
 
         }
     }
