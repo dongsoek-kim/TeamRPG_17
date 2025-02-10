@@ -195,9 +195,10 @@ namespace TeamRPG_17
                 if (input == 0) return false; // 0. 취소 입력 시 뒤로가기
 
                 // 스킬 실제 효과 메서드
-                // 마나가 없을 때 SelecSkill다시 해줘야되고(스킬 요구 mp보다 현재 mp가 적을 때
+                // 마나가 없을 때 SelectSkill다시 해줘야되고(스킬 요구 mp보다 현재 mp가 적을 때
 
-                
+                // 스킬을 Potion처럼 관리하면 enum으로 하는건데 그럼 직업마다 다른 스킬을 어떻게 넣을지
+                // 스킬 정보는 Skill에서 관리하고 스킬 목록 자체는 SkillManager에서 관리
             }
         }
 
