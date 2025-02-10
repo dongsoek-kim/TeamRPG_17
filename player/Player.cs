@@ -66,9 +66,9 @@ namespace TeamRPG_17
                 damage += 0.5f;
                 defense += 1;
                 hp += 1;
-                hpMax = 1;
+                hpMax += 1;
                 mp += 1;
-                mpMax = 1;
+                mpMax += 1;
             }
         }
 
