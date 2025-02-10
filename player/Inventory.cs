@@ -163,9 +163,9 @@ namespace TeamRPG_17
         /// <summary>
         /// 아이템 추가함수
         /// </summary>
-        public void AddItem(int _index)
+        public void AddItem(ItemName itemName)
         {
-            inventory[_index] = ItemManager.Instance.items[_index];
+            inventory[(int)itemName] = ItemManager.Instance.items[(int)itemName];
         }
 
 
