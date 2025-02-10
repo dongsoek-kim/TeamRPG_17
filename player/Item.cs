@@ -65,6 +65,7 @@ namespace TeamRPG_17
             defense = _defense;
         }
 
+
         public override string ItemInfo()
         {
             return $"{itemName} | 방어력 +{defense} | 힘 +{str} | 민첩 + {dex} | 지력 + {inte} {itemDescription}";
@@ -79,7 +80,6 @@ namespace TeamRPG_17
         {
             damage = _damage;
         }
-
         public override string ItemInfo()
         {
             return $"{itemName} | 공격력 +{damage} | 힘 +{str} | 민첩 + {dex} | 지력 + {inte} {itemDescription}";

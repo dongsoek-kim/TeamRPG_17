@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TeamRPG_17
 {
@@ -36,7 +37,12 @@ namespace TeamRPG_17
                 if (File.Exists(jsonPath))
                 {
                     string json = File.ReadAllText(jsonPath);
-                    Player player = JsonConvert.DeserializeObject<Player>(json);  
+                    var settings = new JsonSerializerSettings
+                    {
+                        ObjectCreationHandling = ObjectCreationHandling.Replace
+                    };
+                    settings.Converters.Add(new ItemConverter());
+                    Player player = JsonConvert.DeserializeObject<Player>(json, settings);
                     return player;
                 }
                 else
@@ -198,4 +204,103 @@ namespace TeamRPG_17
         }
 
     }
+    public class ItemConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return typeof(Item).IsAssignableFrom(objectType);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            JObject jObject = JObject.Load(reader);
+            string itemType = jObject["itemType"]?.Value<string>();
+
+            Item item;
+            switch (itemType)
+            {
+                case "0":
+                    {
+                        string _name = jObject["itemName"]?.Value<string>() ?? "";
+                        string _description = jObject["itemDescription"]?.Value<string>() ?? "";
+                        int _str = jObject["str"]?.Value<int>() ?? 0;
+                        int _dex = jObject["dex"]?.Value<int>() ?? 0;
+                        int _inte = jObject["inte"]?.Value<int>() ?? 0;
+                        int _luk = jObject["luk"]?.Value<int>() ?? 0;
+                        int _defense = jObject["defense"]?.Value<int>() ?? 0;
+                        string equipSlotString = jObject["EquipSlot"]?.Value<string>();
+                        EquipSlot _equipslot = default(EquipSlot);
+                        if (!string.IsNullOrEmpty(equipSlotString))
+                        {
+                            if (!Enum.TryParse<EquipSlot>(equipSlotString, true, out _equipslot))
+                            {
+                                // 변환 실패 시 기본값 사용 또는 예외 처리
+                                _equipslot = default(EquipSlot);
+                            }
+                        }
+                        string gradeString = jObject["Grade"]?.Value<string>();
+                        Grade grade = default(Grade);
+                        if (!string.IsNullOrEmpty(gradeString))
+                        {
+                            if (!Enum.TryParse<Grade>(gradeString, true, out grade))
+                            {
+                                // 변환 실패 시 기본값 사용 또는 예외 처리
+                                grade = default(Grade);
+                            }
+                        }
+                        item = new Armor(_name, _description, _defense, _str, _dex, _inte, _luk, _equipslot, grade);
+                        break;
+                    }
+                case "1":
+                    {
+                        string _name = jObject["itemName"]?.Value<string>() ?? "";
+                        string _description = jObject["itemDescription"]?.Value<string>() ?? "";
+                        int _str = jObject["str"]?.Value<int>() ?? 0;
+                        int _dex = jObject["dex"]?.Value<int>() ?? 0;
+                        int _inte = jObject["inte"]?.Value<int>() ?? 0;
+                        int _luk = jObject["luk"]?.Value<int>() ?? 0;
+                        int _damage = jObject["damage"]?.Value<int>() ?? 0;
+                        string equipSlotString = jObject["EquipSlot"]?.Value<string>();
+                        EquipSlot _equipslot = default(EquipSlot);
+                        if (!string.IsNullOrEmpty(equipSlotString))
+                        {
+                            if (!Enum.TryParse<EquipSlot>(equipSlotString, true, out _equipslot))
+                            {
+                                // 변환 실패 시 기본값 사용 또는 예외 처리
+                                _equipslot = default(EquipSlot);
+                            }
+                        }
+                        string gradeString = jObject["Grade"]?.Value<string>();
+                        Grade grade = default(Grade);
+                        if (!string.IsNullOrEmpty(gradeString))
+                        {
+                            if (!Enum.TryParse<Grade>(gradeString, true, out grade))
+                            {
+                                // 변환 실패 시 기본값 사용 또는 예외 처리
+                                grade = default(Grade);
+                            }
+                        }
+                        item = new Weapon(_name,_description,_damage,_str,_dex,_inte,_luk,_equipslot,grade);
+                        break;
+                    }
+
+                default:
+                    throw new Exception("알 수 없는 itemType: " + itemType);
+            }
+
+            serializer.Populate(jObject.CreateReader(), item);
+            return item;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            serializer.Serialize(writer, value);
+        }
+    }
 }
+

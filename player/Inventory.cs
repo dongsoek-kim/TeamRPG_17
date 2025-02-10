@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +11,7 @@ namespace TeamRPG_17
 {
     public class Inventory
     {
+        [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Replace)]
         public Item[] inventory { get; set; }
         public Item this[int index]
         {
@@ -25,9 +27,9 @@ namespace TeamRPG_17
 
         public Inventory()
         {
+            //ItemType=Armor면 new Armor , ItemType=Weapon이면 new Weapon
             inventory = new Item[ItemManager.Instance.items.Length];
             potion = new Potion();
-            equipedArmor = new Armor[equipSlot];
         }
 
         public void ShowInventory()
