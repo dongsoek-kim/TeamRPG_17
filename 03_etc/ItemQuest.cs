@@ -23,7 +23,7 @@ namespace TeamRPG_17
             string canloadItem = "아이템이없습니다.";
             if (GameManager.Instance.player.inventory.haveItem(questItem))
                 canloadItem = "제출가능";
-            Console.WriteLine($"{questItem} ( {canloadItem} )");
+            Console.WriteLine($"{questItem} ( {canloadItem} )\n");
         }
 
         public override bool QuestComplete()
