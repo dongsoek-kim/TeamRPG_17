@@ -13,9 +13,6 @@ namespace TeamRPG_17
         MonsterManager _monster = MonsterManager.Instance;
         List<Monster> monster;
 
-        public int playerHp = _player.hp;
-
-
         public void StartBattle(Dungeon dungeon)
         {
             currentDungeon = dungeon;
@@ -31,7 +28,7 @@ namespace TeamRPG_17
         public void InBattle()
         {
             int deathCount = 0;
-            while (playerHp > 0 && deathCount < monster.Count)
+            while (_player.hp > 0 && deathCount < monster.Count)
             {
                 DisplayStatus();
                 PlayerPhase();
@@ -53,7 +50,7 @@ namespace TeamRPG_17
                 }
             }
 
-            if (playerHp <= 0)
+            if (_player.hp <= 0)
             {
                 BattleResult(false);
             }
@@ -71,7 +68,7 @@ namespace TeamRPG_17
 
             Console.WriteLine("\n\n[내 정보]");
             Console.WriteLine($"\nLv.{_player.level}  {_player.name} ({_player.job})");
-            Console.WriteLine($"HP  {playerHp}");
+            Console.WriteLine($"HP  {_player.hp}");
         }
 
         // 플레이어 차례
@@ -183,24 +180,13 @@ namespace TeamRPG_17
             int dmg = PlayerTakeDamage(monster);
             Console.WriteLine($"{monster.GetInfo()}의 공격!\n{_player.name}을(를) 맞췄습니다. [데미지 : {dmg}]");
 
-            Console.Write($"Lv.{_player.level} {_player.name}\nHP {playerHp} -> ");
+            Console.Write($"Lv.{_player.level} {_player.name}\nHP {_player.hp} -> ");
 
-            if (playerHp <= 0) Console.WriteLine("Dead");
-            else Console.WriteLine($"{playerHp -= dmg}");
+            if (_player.hp <= 0) Console.WriteLine("Dead");
+            else Console.WriteLine($"{_player.hp}");
 
             Console.WriteLine("\n\n0. 다음\n\n>>");
-            string input = Console.ReadLine();
-
-            while (true)
-            {
-                if (input == "0")
-                    break;
-                else
-                {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    break;
-                }
-            }
+            Console.ReadLine();
         }
         private int MonsterTakeDamage(Monster monster) // 대미지 계산 메서드
         {
@@ -235,8 +221,10 @@ namespace TeamRPG_17
                 return 0; // 피해 없음
             }
 
-            // 몬스터는 치명타 없음 -> 기본 데미지만 적용
-            return Math.Max((int)(monster.Damage - _player.defense), 1); // 최소 1 이상의 피해
+            int damageTaken = Math.Max((int)(monster.Damage - _player.defense), 1); // 최소 1 이상의 피해
+            _player.hp -= damageTaken;
+            
+            return damageTaken;
         }
 
 
