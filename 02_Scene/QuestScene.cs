@@ -30,8 +30,7 @@ namespace TeamRPG_17
             Console.WriteLine("퀘스트");
             Console.WriteLine("퀘스트 수락 및 완료");
             Console.WriteLine("─────────────────────────");
-            // 매개변수 수정할예정 >> (TownName)GameManager.Instance.currentTown.id
-            QuestManager.Instance.ShowQuestList(TownName.Elinia);
+            QuestManager.Instance.ShowQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
 

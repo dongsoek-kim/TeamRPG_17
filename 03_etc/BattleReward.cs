@@ -12,7 +12,6 @@ namespace TeamRPG_17
         public int Gold { get; private set; }
 
         public List<Item> Items { get; private set; }
-        public Potion Potion { get; private set; }
 
         public BattleReward(int dungeonLevel, int monsterCount)
         {
@@ -24,15 +23,21 @@ namespace TeamRPG_17
             //Exp = dungeonLevel * monsterCount * 10;
             Exp = 1;
             Gold = dungeonLevel * monsterCount * 5;
-            Potion.GetPotion(PotionType.Health, 2);
         }
         public void ApplyReward(Player player)
         {
             player.AddExp(Exp);
             player.gold += Gold;
 
+            Array potionValues = Enum.GetValues(typeof(PotionType));
+            PotionType randomPotion = (PotionType)potionValues.GetValue(RandomGenerator.Instance.Next(potionValues.Length));
+
+            player.inventory.potion.GetPotion(randomPotion, 1);
+
             Console.WriteLine($"보상 획득!!");
             Console.WriteLine($"\n획득 Exp : {Exp}");
+            Console.WriteLine($"{randomPotion}포션 획득");
+
             Console.WriteLine($"획득 Gold : {Gold}");
             Console.WriteLine($"총 보유 Gold : {player.gold}");
 

@@ -30,17 +30,16 @@ namespace TeamRPG_17
         }
         public List<Monster> RandomMonsterSpawn(Dungeon dungeon)
         {
-            Random rand = new Random();
             List<Monster> list = new List<Monster>();
             // 전투 개시 시 몬스터 랜덤 할당
             // 1~4마리 몬스터를 랜덤으로 선언?
-            int[] arr = new int[rand.Next(1, 5)]; // 0~3 정해주고 몬스터 갯수
+            int[] arr = new int[RandomGenerator.Instance.Next(1, 5)]; // 0~3 정해주고 몬스터 갯수
 
             List<Monster> encounter = this.GetMonsterByLevel(dungeon.Level);
 
             for (int i = 0; i < arr.Length; i++)
             {
-                arr[i] = rand.Next(0, encounter.Count); // rand = 몬스터 종류를 정해주는거 // if  arr[0] = 2
+                arr[i] = RandomGenerator.Instance.Next(0, encounter.Count); // rand = 몬스터 종류를 정해주는거 // if  arr[0] = 2
                 Monster newMonster = new Monster(encounter[arr[i]].Name, encounter[arr[i]].Level, encounter[arr[i]].MaxHp, encounter[arr[i]].Damage, encounter[arr[i]].Defense);
                 list.Add(newMonster);
             }
