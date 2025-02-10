@@ -41,10 +41,11 @@ namespace TeamRPG_17
             luk = 0;
             damage = 20;
             defense = 5;
-            hp = 100;
-            mp = 100;
-            hpMax = hp;
-            mpMax = mp;
+
+            hpMax = 100;
+            mpMax = 100;
+            hp = hpMax;
+            mp = mpMax;
             gold = 1000;
 
             inventory = new Inventory();
@@ -65,7 +66,6 @@ namespace TeamRPG_17
                 luk += 1;
                 damage += 0.5f;
                 defense += 1;
-                hp = hpMax;
                 mpMax += 1;
                 mp = mpMax;
             }

@@ -56,7 +56,8 @@ namespace TeamRPG_17
 
             Console.WriteLine("\n\n[내 정보]");
             Console.WriteLine($"\nLv.{_player.level}  {_player.name} ({_player.job})");
-            Console.WriteLine($"HP  {_player.hp}");
+            Console.WriteLine($"HP  {_player.hp} / {_player.hpMax}"); // 체력 출력
+            Console.WriteLine($"HP  {_player.mp} / {_player.mpMax}"); // mp 출력
         }
 
         // 플레이어 차례
@@ -66,15 +67,18 @@ namespace TeamRPG_17
             while (!actionTaken)
             {
                 DisplayStatus();
-                Console.WriteLine("\n\n1. 공격\n2. 포션"); // 전투 선택지
+                Console.WriteLine("\n\n1. 공격\n2. 스킬\n3. 포션"); // 전투 선택지
 
-                int command = HandleInput(2);
+                int command = HandleInput(3);
                 switch (command)
                 {
                     case 1:
                         actionTaken = Targeting();
                         break;
                     case 2:
+                        actionTaken = SelectSkill();
+                        break;
+                    case 3:
                         actionTaken = SelectPotion();
                         break;
                 }
@@ -175,6 +179,27 @@ namespace TeamRPG_17
             return damageTaken;
         }
 
+        private bool SelectSkill()
+        {
+            while (true)
+            {
+                DisplayStatus();
+                Console.WriteLine("\n\n0. 취소");
+
+                // 스킬 목록 출력
+                Console.WriteLine("1. 몸통박치기");
+
+                Console.WriteLine("\n사용할 스킬을 선택해 주세요.\n>>");
+                int input = HandleInput(1); // 사용할 스킬 번호 입력
+
+                if (input == 0) return false; // 0. 취소 입력 시 뒤로가기
+
+                // 스킬 실제 효과 메서드
+                // 마나가 없을 때 SelecSkill다시 해줘야되고(스킬 요구 mp보다 현재 mp가 적을 때
+
+                
+            }
+        }
 
         private bool SelectPotion() // 포션 선택
         {
