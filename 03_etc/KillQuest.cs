@@ -9,9 +9,9 @@ namespace TeamRPG_17
     public class KillQuest : Quest
     {
         // 수정필요 @@
-        public string monsterName;  // 잡아야하는 몬스터 이름
-        public int monsterCount;    // 잡아야하는 몬스터 수
-        public int killCount;    // 잡아야하는 몬스터 수
+        public string monsterName { get; private set; } // 잡아야하는 몬스터 이름
+        public int monsterCount { get; private set; }   // 잡아야하는 몬스터 수
+        public int killCount { get; private set; }      // 잡아야하는 몬스터 수
 
         public KillQuest(TownName _town, string _questTitle, string _questDescription, int _exp, int _gold
             , string _monsterName, int _count) 
@@ -33,6 +33,10 @@ namespace TeamRPG_17
             if(killCount >= monsterCount)
             {
                 questComplete = true;
+
+                GameManager.Instance.player.AddExp(exp);
+                GameManager.Instance.player.gold += gold;
+
                 return true;
             }
             return false;

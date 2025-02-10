@@ -8,8 +8,8 @@ namespace TeamRPG_17
 {
     public class ItemQuest : Quest
     {
-        // 퀘스트완료에 필요한 아이템 이름
-        public string questItem;
+        // 퀘스트완료에 필요한 아이템
+        public string questItem { get; private set; }
 
         public ItemQuest(TownName _town, string _questTitle, string _questDescription, int _exp, int _gold
             , string _questItem)
@@ -20,34 +20,26 @@ namespace TeamRPG_17
 
         public override void QuestProgress()
         {
-            // TODO:
-            // 인벤토리에서 questItem을 가지고있는지 확인
-            // 가지고있다면 보유 / 없다면 미보유로 출력
-
-            // 변수명을 못정하겠어요
             string canloadItem = "아이템이없습니다.";
             if (GameManager.Instance.player.inventory.haveItem(questItem))
                 canloadItem = "제출가능";
             Console.WriteLine($"{questItem} ( {canloadItem} )");
         }
+
         public override bool QuestComplete()
         {
-            // TODO :
-            // 인벤토리에서 questItem을 가지고있는지 확인
-            // 가지고있다면
-            // questComplete = true 
-            // 퀘스트보상 지급
-
-            // 아이템 보유중일때
             if (GameManager.Instance.player.inventory.haveItem(questItem))
             {
                 questComplete = true;
                 GameManager.Instance.player.inventory.DeleteItem(questItem);
-            }
-            else
-                questComplete = false;
 
-            return questComplete;
+                GameManager.Instance.player.AddExp(exp);
+                GameManager.Instance.player.gold += gold;
+
+                return true;
+            }
+
+            return false;
         }
 
         public override bool QuestCheck()
