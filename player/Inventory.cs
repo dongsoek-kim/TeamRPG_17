@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,19 +31,24 @@ namespace TeamRPG_17
             //ItemType=Armor면 new Armor , ItemType=Weapon이면 new Weapon
             inventory = new Item[ItemManager.Instance.items.Length];
             potion = new Potion();
+            for(int i=0;i< Enum.GetValues(typeof(ItemName)).Length;i++)
+            {
+                AddItem((ItemName)i);
+            }
+
         }
 
-        public void ShowInventory()
+        public void ShowInventory(int nowPage,out int totalPages)
         {
-            // 인벤토리 내 보유한 아이템 전부 출력
-            foreach (Item item in inventory)
+            int itemsPerPage = 10; // 한 페이지에 표시할 아이템 수
+            int  itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
+            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            List<Item> itemList = inventory.Where(i => i != null).ToList();
+            int startIndex = nowPage * itemsPerPage;
+            List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
+            foreach (Item item in pageList)
             {
-                if (item == null)
-                    continue;
-
                 Console.WriteLine(item.ItemInfo());
-                // 인벤토리 창에서 보유중인 골드 확인 추가
-                Console.WriteLine($"{GameManager.Instance.player.gold} G");
             }
         }
 
@@ -50,26 +56,29 @@ namespace TeamRPG_17
         /// 장비 정보 출력함수
         /// 착용중인 장비는 [E] 포함해서 출력
         /// </summary>
-        public void ShowEquip()
+        public void ShowEquip(int nowPage, out int totalPages)
         {
             int itemCount = 1;
-
-            foreach (Item item in inventory)
+            int itemsPerPage = 10; // 한 페이지에 표시할 아이템 수
+            int itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
+            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            List<Item> itemList = inventory.Where(i => i != null).ToList();
+            int startIndex = nowPage * itemsPerPage;
+            List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
+            foreach (Item item in pageList)
             {
-                if (item == null)
-                    continue;
                 if (item.itemType == ItemType.Armor)// item이 장착중인 방어구일때
                 {
                     if (equipedArmor[(int)item.EquipSlot] == item)
                     {
                         Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
                     }
-                    else 
+                    else
                     {
                         Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
                     }
                 }
-                else if(item.itemType == ItemType.Weapon)
+                else if (item.itemType == ItemType.Weapon)
                 {
                     if (equipedWeapon == item)
                     {
@@ -79,9 +88,37 @@ namespace TeamRPG_17
                     {
                         Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
                     }
-                }                
+                }
                 itemCount++;
             }
+            //foreach (Item item in inventory)
+            //{
+            //    if (item == null)
+            //        continue;
+            //    if (item.itemType == ItemType.Armor)// item이 장착중인 방어구일때
+            //    {
+            //        if (equipedArmor[(int)item.EquipSlot] == item)
+            //        {
+            //            Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
+            //        }
+            //        else 
+            //        {
+            //            Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
+            //        }
+            //    }
+            //    else if(item.itemType == ItemType.Weapon)
+            //    {
+            //        if (equipedWeapon == item)
+            //        {
+            //            Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
+            //        }
+            //    }                
+            //    itemCount++;
+            //}
         }
 
         /// <summary>
@@ -163,7 +200,7 @@ namespace TeamRPG_17
         /// <summary>
         /// 아이템 추가함수
         /// </summary>
-        public void AddItem(ItemName itemName)
+        public void AddItem(ItemName? itemName)
         {
             inventory[(int)itemName] = ItemManager.Instance.items[(int)itemName];
         }
