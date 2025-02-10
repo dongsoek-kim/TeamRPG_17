@@ -36,7 +36,7 @@ namespace TeamRPG_17
                 DisplayStatus();
                 PlayerPhase();
 
-    
+
                 deathCount = monster.Count(m => m.IsDead);
 
                 if (deathCount >= monster.Count)
@@ -195,7 +195,7 @@ namespace TeamRPG_17
             {
                 if (input == "0")
                     break;
-                else 
+                else
                 {
                     Console.WriteLine("잘못된 입력입니다.");
                     break;
@@ -204,14 +204,39 @@ namespace TeamRPG_17
         }
         private int MonsterTakeDamage(Monster monster) // 대미지 계산 메서드
         {
-            int dmg = Math.Max((int)(_player.damage - monster.Defense), 1); // 플레이어 대미지 - 몬스터 방어력
+            int dmg = _player.LuckyDamage();
+
+            if (dmg == 0) // 몬스터는 따로 회피 기능이 없으므로 플레이어의 럭키 데미지가 0이면 회피한 것으로 처리
+            {
+                Console.WriteLine($"{monster.GetInfo()}가 공격을 회피했습니다!");
+            }
+            else // 회피하지 않았다면 데미지 출력
+            {
+                bool isCritical = dmg > _player.TotalDamage;
+
+                Console.WriteLine($"{_player.name}의 공격! {monster.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
+
+                if (isCritical)
+                {
+                    Console.WriteLine("치명타 적중!!!"); // 치명타 메시지 출력
+                }
+            }
+
             return dmg;
         }
 
         private int PlayerTakeDamage(Monster monster) // 대미지 계산 메서드
         {
-            int dmg = Math.Max((int)(monster.Damage - _player.defense), 1); // 몬스터 대미지 - 플레이어 방어력
-            return dmg;
+            float dodgeChance = _player.luk * 0.5f / 100f; // 플레이어 회피 확률 적용
+
+            if (RandomGenerator.Instance.NextDouble() < dodgeChance) // 회피 성공
+            {
+                Console.WriteLine($"{_player.name}이(가) 공격을 회피했습니다!"); // 회피 메시지 출력
+                return 0; // 피해 없음
+            }
+
+            // 몬스터는 치명타 없음 -> 기본 데미지만 적용
+            return Math.Max((int)(monster.Damage - _player.defense), 1); // 최소 1 이상의 피해
         }
 
 
