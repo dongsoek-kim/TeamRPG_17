@@ -184,7 +184,7 @@ namespace TeamRPG_17
                 // 스킬 목록 출력
                 for (int i = 0; i < availableSkills.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {availableSkills[i].Name} (MP {availableSkills[i].MpCost}");
+                    Console.WriteLine($"{i + 1}. {availableSkills[i].Name} (MP {availableSkills[i].MpCost})");
                 }
 
                 Console.WriteLine("\n사용할 스킬을 선택해 주세요.\n>>");
