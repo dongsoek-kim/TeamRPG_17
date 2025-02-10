@@ -9,18 +9,23 @@ namespace TeamRPG_17
     public class QuestScene : Scene
     {
         private bool questInformation;
-
+        private bool questReward;
         public QuestScene() 
         {
             questInformation = false;
+            questReward = false;
         }
 
         public override void Update()
         {
             if (questInformation)
                 QuestInformation(); // 선택된 퀘스트 정보 확인
+
+            else if(questReward) 
+                QuestReward();      // 퀘스트 완료시 획득 보상 출력
+
             else
-                QuestList();    // 퀘스트 리스트 출력
+                QuestList();        // 퀘스트 리스트 출력
 
         }
 
@@ -28,7 +33,7 @@ namespace TeamRPG_17
         {
             Console.Clear();
             Console.WriteLine("퀘스트");
-            Console.WriteLine("퀘스트 수락 및 완료");
+            Console.WriteLine("퀘스트 수락 및 완료 할 수 있습니다.");
             Console.WriteLine("─────────────────────────");
             QuestManager.Instance.ShowQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");
@@ -44,7 +49,7 @@ namespace TeamRPG_17
                     break;
 
                 default:
-                    if(QuestManager.Instance.SelectQuest(TownName.Elinia, intCommand))
+                    if(QuestManager.Instance.SelectQuest((TownName)GameManager.Instance.currentTown.id, intCommand))
                         questInformation = true;
                     break;
             }
@@ -75,9 +80,24 @@ namespace TeamRPG_17
                 // 퀘스트 완료 false
                 case 1:
                     if (!QuestManager.Instance.SelectQuestAccept())
+                    {
                         questInformation = false;
+                        questReward = true;
+                    }
                     break;
             }
+        }
+        
+        public void QuestReward()
+        {
+            Console.Clear();
+            QuestManager.Instance.selectQuest?.ShowQuestReward();
+            Console.WriteLine("\n보상을 획득하셨습니다.");
+            Console.WriteLine("─────────────────────────");
+            Console.WriteLine("enter any Key");
+            Console.ReadKey();
+
+            questReward = false;
         }
     }
 }

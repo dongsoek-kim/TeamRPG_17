@@ -26,12 +26,22 @@ namespace TeamRPG_17
         {
             if(QuestCheck())
             {
+                // 퀘스트 완료
                 questComplete = true;
 
+                // 보상 지급
                 GameManager.Instance.player.AddExp(exp);
                 GameManager.Instance.player.gold += gold;
                 if(rewardItem != null)
                     GameManager.Instance.player.inventory.AddItem(rewardItem);
+
+                // 반복 가능한 퀘스트일때
+                if(questRepeatable)
+                {
+                    questComplete = false;
+                    questAccpet = false;
+                }
+
                 return true;
             }
 
