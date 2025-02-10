@@ -17,8 +17,9 @@ namespace TeamRPG_17
         {
             for (int i = 0; i < monsterName.Length; i++)
             {
-                Console.WriteLine($"{monsterName[i]} - ( {killCount[i]} / {monsterCount[i]})");
+                Console.WriteLine($"{monsterName[i]} - ( {killCount[i]} / {monsterCount[i]} )");
             }
+            Console.WriteLine();
         }
 
         public override bool QuestComplete()

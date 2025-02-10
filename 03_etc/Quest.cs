@@ -41,7 +41,12 @@ namespace TeamRPG_17
 
         public virtual void ShowQuestReward()
         {
-
+            Console.WriteLine("~~~~~보상~~~~~");
+            Render.ColorWriteLine($"경험치 : {exp}\n골드 : {gold}",ConsoleColor.Yellow);
+            if(rewardItem != null)
+            {
+                Render.ColorWriteLine($"아이템 : {rewardItem}",ConsoleColor.Cyan);
+            }
         }
     }
 }
