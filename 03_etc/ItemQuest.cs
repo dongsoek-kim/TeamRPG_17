@@ -28,7 +28,8 @@ namespace TeamRPG_17
 
                 GameManager.Instance.player.AddExp(exp);
                 GameManager.Instance.player.gold += gold;
-
+                if (rewardItem != null)
+                    GameManager.Instance.player.inventory.AddItem((int)rewardItem);
                 return true;
             }
 

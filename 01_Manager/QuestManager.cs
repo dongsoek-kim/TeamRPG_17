@@ -17,11 +17,6 @@ namespace TeamRPG_17
 
         public Quest? selectQuest;
 
-        public QuestManager()
-        {
-
-        }
-
         public void LoadQuest(string itemQuestJson, string killQuestJson)
         {
             itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(itemQuestJson);

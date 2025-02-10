@@ -18,8 +18,9 @@ namespace TeamRPG_17
         public string questDescription; // 퀘스트설명
 
         // 퀘스트 보상
-        public int exp;     // 퀘스트 경험치 보상
-        public int gold;    // 퀘스트 골드 보상
+        public int exp;                 // 퀘스트 경험치 보상
+        public int gold;                // 퀘스트 골드 보상
+        public ItemName? rewardItem;    // 퀘스트 아이템 보상
 
         /// <summary>
         /// 퀘스트의 진행도를 출력해주는 메서드
@@ -37,5 +38,10 @@ namespace TeamRPG_17
         /// </summary>
         /// <returns></returns>
         public abstract bool QuestCheck();
+
+        public virtual void ShowQuestReward()
+        {
+
+        }
     }
 }
