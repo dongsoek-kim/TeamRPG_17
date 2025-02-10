@@ -9,7 +9,7 @@ namespace TeamRPG_17
     public class ItemQuest : Quest
     {
         // 퀘스트완료에 필요한 아이템
-        public string questItem { get; private set; }
+        public string questItem;
 
         public ItemQuest(TownName _town, string _questTitle, string _questDescription, int _exp, int _gold
             , string _questItem)
