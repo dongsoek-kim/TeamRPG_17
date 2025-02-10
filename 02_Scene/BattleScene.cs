@@ -12,6 +12,7 @@ namespace TeamRPG_17
         private Dungeon _currentDungeon;
         MonsterManager _monsterManager = MonsterManager.Instance;
         List<Monster> _monster;
+        List<Skill> availableSkills = SkillManager.Instance.GetSkillList(_player.job);
 
         public void StartBattle(Dungeon dungeon)
         {
@@ -187,19 +188,35 @@ namespace TeamRPG_17
                 Console.WriteLine("\n\n0. 취소");
 
                 // 스킬 목록 출력
-                Console.WriteLine("1. 몸통박치기");
+                for (int i = 0; i < availableSkills.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {availableSkills[i].Name} (MP {availableSkills[i].MpCost}");
+                }
 
                 Console.WriteLine("\n사용할 스킬을 선택해 주세요.\n>>");
-                int input = HandleInput(1); // 사용할 스킬 번호 입력
+                int input = HandleInput(availableSkills.Count); // 사용할 스킬 번호 입력
 
                 if (input == 0) return false; // 0. 취소 입력 시 뒤로가기
 
                 // 스킬 실제 효과 메서드
+                Skill selectedSkill = availableSkills[input - 1];
                 // 마나가 없을 때 SelectSkill다시 해줘야되고(스킬 요구 mp보다 현재 mp가 적을 때
+                if (_player.mp < selectedSkill.MpCost)
+                {
+                    Console.WriteLine("마나가 부족합니다!");
+                    PrintContinuePrompt();
+                    continue;
+                }
 
-                // 스킬을 Potion처럼 관리하면 enum으로 하는건데 그럼 직업마다 다른 스킬을 어떻게 넣을지
+                UseSkill(selectedSkill);
+                return true;
                 // 스킬 정보는 Skill에서 관리하고 스킬 목록 자체는 SkillManager에서 관리
             }
+        }
+
+        private void UseSkill(Skill skill)
+        {
+
         }
 
         private bool SelectPotion() // 포션 선택

@@ -123,4 +123,10 @@ namespace TeamRPG_17
         Rare,
         Unique
     }
+
+    public enum SkillType
+    {
+        SingleTarget,
+        AllTarget
+    }
 }
