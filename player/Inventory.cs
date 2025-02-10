@@ -48,7 +48,19 @@ namespace TeamRPG_17
             List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
             foreach (Item item in pageList)
             {
-                Console.WriteLine(item.ItemInfo());
+                string prefix = ""; // 기본적으로 장착 여부 없음
+
+                if (item.itemType == ItemType.Armor && equipedArmor[(int)item.EquipSlot] == item)
+                {
+                    prefix = "[E] ";
+                }
+                else if (item.itemType == ItemType.Weapon && equipedWeapon == item)
+                {
+                    prefix = "[E] ";
+                }
+
+                Console.WriteLine($"{prefix}{item.ItemInfo()}");
+
             }
         }
 
