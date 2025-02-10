@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TeamRPG_17
 {
@@ -101,7 +102,7 @@ namespace TeamRPG_17
                 {
                     Console.WriteLine("이미 죽은 몬스터입니다!");
                     PrintContinuePrompt();
-                    return false;
+                    continue;
                 }
 
                 PlayerAttack(target);
@@ -112,17 +113,18 @@ namespace TeamRPG_17
         private void PlayerAttack(Monster target) // 몬스터가 대미지 받을 때 출력
         {
             if (target.IsDead) return;
+            int tempHp = target.CurrentHp;
 
             float dodgeChance = 0.1f; // 10% 회피 확률
             bool isDodge = RandomGenerator.Instance.NextDouble() < dodgeChance;
 
-            int damage = _player.LuckyDamage();
+            int damage = _player.LuckyDamage() - (int)target.Defense;
             bool isCritical = damage > _player.TotalDamage;
 
             if (isCritical)
             {
                 // 치명타는 회피를 무시함
-                Console.WriteLine($"{_player.name}의 치명타 공격!\n{target.GetInfo()}을(를) 맞췄습니다. [데미지 : {damage}]");
+                Console.WriteLine($"{_player.name}의 치명타 공격!");
             }
             else if (isDodge)
             {
@@ -133,34 +135,26 @@ namespace TeamRPG_17
             else
             {
                 // 회피하지 않았다면 피해를 입힌다
-                Console.WriteLine($"{_player.name}의 공격! {target.GetInfo()}을(를) 맞췄습니다. [데미지 : {damage}]");
+                Console.WriteLine($"{_player.name}의 공격!");
             }
 
             // 피해 계산
             target.CurrentHp = Math.Max(target.CurrentHp - damage, 0);
 
-            if (target.CurrentHp <= 0)
-            {
-                Console.WriteLine("Dead");
-                QuestManager.Instance.MonsterKillCount(target);
-            }
-            else
-            {
-                Console.WriteLine($"HP {target.CurrentHp}");
-            }
-
-            PrintContinuePrompt();
+            PrintDamageTaken(target, tempHp, damage);
         }
         // 몬스터 차례
         private void MonsterPhase(Monster monster) // 플레이어 대미지 받을 때 출력
         {
+            int tempHp = _player.hp;
             int damage = PlayerTakeDamage(monster);
             Console.WriteLine($"{monster.GetInfo()}의 공격! {_player.name}을(를) 맞췄습니다. [데미지 : {damage}]");
+            Console.Write($"HP {tempHp} -> ");
 
             if (_player.hp <= 0)
                 Console.WriteLine("Dead");
             else
-                Console.WriteLine($"HP {_player.hp}");
+                Console.WriteLine($"{_player.hp}");
 
             PrintContinuePrompt();
         }
@@ -214,9 +208,54 @@ namespace TeamRPG_17
             }
         }
 
+        private List<Monster> TargetingForSkill(Skill skill)
+        {
+            if (skill.SkillType == SkillType.AllTarget)
+            {
+                return _monster.Where(m => !m.IsDead).ToList(); // 모든 생존한 몬스터 반환
+            }
+
+            while (true)
+            {
+                DisplayStatus();
+                Console.WriteLine("\n\n0. 취소\n대상을 선택해 주세요.\n>>");
+
+                int input = HandleInput(_monster.Count);
+                if (input == 0) return new List<Monster>(); // 취소할 경우 빈 리스트 반환
+
+                Monster target = _monster[input - 1];
+                if (target.IsDead)
+                {
+                    Console.WriteLine("이미 죽은 몬스터입니다!");
+                    PrintContinuePrompt();
+                    continue;
+                }
+
+                return new List<Monster> { target }; // 선택한 몬스터 하나를 리스트로 반환
+            }
+        }
+
         private void UseSkill(Skill skill)
         {
+            List<Monster> targets = TargetingForSkill(skill);
+            if (targets.Count == 0) return;
 
+
+            Console.WriteLine($"{_player.name}가 {skill.Name} 사용!");
+
+            foreach (var target in targets)
+            {
+                if (target.IsDead) continue;
+                int tempHp = target.CurrentHp;
+
+                int dmg = (int)(_player.TotalDamage * (skill.Damage / 100f)) - (int)target.Defense; // 치명타 없음, 스킬 배율만 적용
+
+                target.CurrentHp = Math.Max(target.CurrentHp - dmg, 0);
+
+                PrintDamageTaken(target, tempHp, dmg);
+            }
+
+            _player.mp -= skill.MpCost;
         }
 
         private bool SelectPotion() // 포션 선택
@@ -288,6 +327,24 @@ namespace TeamRPG_17
         {
             Console.WriteLine("\n0. 다음\n>>");
             Console.ReadLine();
+        }
+
+        private void PrintDamageTaken(Monster target, int prevHp, int dmg)
+        {
+            Console.WriteLine($"{target.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
+            Console.Write($"HP {prevHp} -> ");
+
+            if (target.CurrentHp <= 0)
+            {
+                Console.WriteLine("Dead");
+                QuestManager.Instance.MonsterKillCount(target);
+            }
+            else
+            {
+                Console.WriteLine($"{target.CurrentHp}");
+            }
+
+            PrintContinuePrompt();
         }
     }
 }
