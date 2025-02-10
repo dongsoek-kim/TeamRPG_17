@@ -1,148 +1,76 @@
 [
-  // --------------------------------------------------------- Common Weapon : 12
+  // --------------------------------------------------------- Common Weapon : 6
   {
     "itemName": "누가 쓰다버린 목검",
     "itemDescription": "많이 낡았다",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 2,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Weapon",
     "Grade": "Common",
-    "damage": "0"
+    "damage": "1"
   },
   {
-    "itemName": "어디서 본듯한 검",
-    "itemDescription": "길에 버려져있는 검과 비슷하다",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "0"
-  },
-  {
-    "itemName": "평범한 쇠 검",
+    "itemName": "테무산 쇠 검",
     "itemDescription": "쇠로 만들어진 평범한 검",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 3,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Weapon",
     "Grade": "Common",
-    "damage": "0"
-  },
-  {
-    "itemName": "고급 대장간의 검",
-    "itemDescription": "좋은 대장간에서 판매하는 검",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "0"
+    "damage": "2"
   },
   {
     "itemName": "누가 쓰다버린 단검",
     "itemDescription": "많이 낡았다",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 2,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Weapon",
     "Grade": "Common",
-    "damage": "0"
+    "damage": "1"
   },
   {
-    "itemName": "어디서 본듯한 단검",
-    "itemDescription": "길에 버려져있는 단검과 비슷하다",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "0"
-  },
-  {
-    "itemName": "평범한 쇠 단검",
+    "itemName": "테무산 쇠 단검",
     "itemDescription": "쇠로 만들어진 평범한 검",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 3,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Weapon",
     "Grade": "Common",
-    "damage": "0"
-  },
-  {
-    "itemName": "유명한 도둑의 단검",
-    "itemDescription": "유명한 도둑도 사용하는 검",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "0"
+    "damage": "2"
   },
   {
     "itemName": "누가 쓰다버린 나무 지팡이",
     "itemDescription": "많이 낡았다",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 2,
+    "luk": 1,
     "EquipSlot": "Weapon",
     "Grade": "Common",
-    "damage": "0"
+    "damage": "1"
   },
   {
-    "itemName": "어디서 본듯한 지팡이",
-    "itemDescription": "길에 버려져있는 검과 비슷하다",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "0"
-  },
-  {
-    "itemName": "평범한 나무 지팡이",
+    "itemName": "테무산 나무 지팡이",
     "itemDescription": "나무로 만들어진 평범한 지팡이",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 3,
+    "luk": 1,
     "EquipSlot": "Weapon",
     "Grade": "Common",
-    "damage": "0"
-  },
-  {
-    "itemName": "상급 위저드의 지팡이",
-    "itemDescription": "상급 마법사들이 주로 쓰는 지팡이",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "0"
+    "damage": "2"
   },
 
   // --------------------------------------------------------- Common Head : 6
@@ -150,61 +78,63 @@
     "itemName": "가죽모자",
     "itemDescription": "질긴 가죽으로 만들어진 튼튼한 모자. 오래 사용해도 망가지지 않는다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Head",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
   {
     "itemName": "녹슨철모",
     "itemDescription": "녹슬어버린 철모",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 2,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Head",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "2"
   },
+  // 퀘스트 아이템 ------------
   {
     "itemName": "양동이",
     "itemDescription": "꽤 튼튼하다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 2,
+    "dex": 2,
+    "inte": 2,
+    "luk": 2,
     "EquipSlot": "Head",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "3"
   },
+  // -------------------------
   {
     "itemName": "낡은 도둑의 복면",
     "itemDescription": "도둑이 사용했던 흔적이 남아 있는 낡은 복면",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 2,
+    "inte": 1,
+    "luk": 2,
     "EquipSlot": "Head",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "2"
   },
   {
     "itemName": "종이모자",
     "itemDescription": "신문지를 접어 만든 간단한 종이 모자",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 2,
+    "luk": 1,
     "EquipSlot": "Head",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
   {
     "itemName": "누더기 모자",
@@ -216,7 +146,7 @@
     "luk": 0,
     "EquipSlot": "Head",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
 
   // --------------------------------------------------------- Common Body : 6
@@ -230,67 +160,57 @@
     "luk": 0,
     "EquipSlot": "Body",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
   {
     "itemName": "가죽 튜닉",
     "itemDescription": "두껍지만 가벼운 가죽으로 만든 활동성 좋은 튜닉",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 2,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Body",
     "Grade": "Common",
-    "Defense": "0"
-  },
-  {
-    "itemName": "체인 메일",
-    "itemDescription": "관절 부분의 움직임이 자유로운 사슬 갑옷",
-    "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Body",
-    "Grade": "Common",
-    "Defense": "0"
+    "Defense": "2"
   },
   {
     "itemName": "비단 로브",
     "itemDescription": "방어에는 거의 도움이 되지 않는다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 2,
+    "luk": 1,
     "EquipSlot": "Body",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
+  // 퀘스트, 드랍 템----------------
   {
     "itemName": "청동 흉갑",
     "itemDescription": "청동을 제작된 흉갑, 철제보다는 가볍다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 2,
+    "dex": 2,
+    "inte": 2,
+    "luk": 2,
     "EquipSlot": "Body",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "3"
   },
+  //---------------------------------
   {
     "itemName": "강철 갑옷",
     "itemDescription": "엄청 무겁지만 굉장히 단단하다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 2,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Body",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "2"
   },
 
   // --------------------------------------------------------- Common Arm : 6
@@ -298,73 +218,49 @@
     "itemName": "붕대",
     "itemDescription": "손에 감싸는 붕대, 착용은 스스로 한다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Arm",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
   {
     "itemName": "가죽 장갑",
     "itemDescription": "평범한 가죽장갑",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 2,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Arm",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
   {
     "itemName": "노가다 목장갑",
     "itemDescription": "이세계에서 온듯한 장갑, 알수없는 재료로 만들어져 튼튼하다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 2,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Arm",
     "Grade": "Common",
-    "Defense": "0"
-  },
-  {
-    "itemName": "털장갑",
-    "itemDescription": "추운겨울을 나기위한 성인의 지혜, 토끼털로 만들어져있다",
-    "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Arm",
-    "Grade": "Common",
-    "Defense": "0"
-  },
-  {
-    "itemName": "브레이슬렛",
-    "itemDescription": "단단한 손목보호대,합판에 가죽으로 감싸져있다.",
-    "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Arm",
-    "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
   {
     "itemName": "마력팔찌",
     "itemDescription": "미약한 마력을띄고있는 팔찌",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 2,
+    "luk": 1,
     "EquipSlot": "Arm",
     "Grade": "Common",
-    "Defense": "0"
+    "Defense": "1"
   },
 
   // --------------------------------------------------------- Common Foot : 6
@@ -373,7 +269,7 @@
     "itemDescription": "너무 냄새나보인다.",
     "itemType": "Armor",
     "str": 0,
-    "dex": 1,
+    "dex": 0,
     "inte": 0,
     "luk": 0,
     "EquipSlot": "Foot",
@@ -385,9 +281,9 @@
     "itemDescription": "누군가 신고 버린듯한 신발",
     "itemType": "Armor",
     "str": 1,
-    "dex": 2,
+    "dex": 0,
     "inte": 0,
-    "luk": 1,
+    "luk": 0,
     "EquipSlot": "Foot",
     "Grade": "Common",
     "Defense": "1"
@@ -396,10 +292,10 @@
     "itemName": "가죽샌들",
     "itemDescription": "평범한 가죽 샌들",
     "itemType": "Armor",
-    "str": 1,
+    "str": 0,
     "dex": 1,
     "inte": 0,
-    "luk": 2,
+    "luk": 0,
     "EquipSlot": "Foot",
     "Grade": "Common",
     "Defense": "1"
@@ -408,111 +304,51 @@
     "itemName": "장화",
     "itemDescription": "비올때 신을 수 있는 장화",
     "itemType": "Armor",
-    "str": 1,
+    "str": 0,
     "dex": 0,
-    "inte": 2,
-    "luk": 1,
-    "EquipSlot": "Foot",
-    "Grade": "Common",
-    "Defense": "1"
-  },
-  {
-    "itemName": "크록스",
-    "itemDescription": "신으면 편하게 다닐 수 있을꺼 같다",
-    "itemType": "Armor",
-    "str": 1,
-    "dex": 3,
-    "inte": 0,
-    "luk": 1,
-    "EquipSlot": "Foot",
-    "Grade": "Common",
-    "Defense": "1"
-  },
-  {
-    "itemName": "인기많은 컨버스",
-    "itemDescription": "와 땡잡았다 오늘은 럭키한 날이자나",
-    "itemType": "Armor",
-    "str": 1,
-    "dex": 3,
     "inte": 1,
-    "luk": 4,
+    "luk": 0,
     "EquipSlot": "Foot",
     "Grade": "Common",
-    "Defense": "2"
+    "Defense": "1"
   },
 
   // --------------------------------------------------------- Rare Weapon : 6
   {
-    "itemName": "엑스칼리버",
-    "itemDescription": "유명한 명검",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Rare",
-    "damage": "0"
-  },
-  {
     "itemName": "글라디우스",
     "itemDescription": "좋은 검",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 5,
+    "dex": 3,
+    "inte": 3,
+    "luk": 3,
     "EquipSlot": "Weapon",
     "Grade": "Rare",
-    "damage": "0"
+    "damage": "3"
   },
   {
     "itemName": "카타르",
     "itemDescription": "뾰족하고 날카로운 단검",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 3,
+    "dex": 5,
+    "inte": 3,
+    "luk": 3,
     "EquipSlot": "Weapon",
     "Grade": "Rare",
-    "damage": "0"
-  },
-  {
-    "itemName": "은의 발톱",
-    "itemDescription": "좋은 늑대의 발톱으로 만들어진 단검",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Rare",
-    "damage": "0"
-  },
-  {
-    "itemName": "미스릴 스태프",
-    "itemDescription": "미스릴로 만들어진 스태프, 사람도 때릴수 있을것 같다",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Rare",
-    "damage": "0"
+    "damage": "3"
   },
   {
     "itemName": "전설의 레전드 윙봉",
     "itemDescription": "치킨 날개모양으로 생겼지만 구하기 힘들다",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 3,
+    "dex": 3,
+    "inte": 5,
+    "luk": 3,
     "EquipSlot": "Weapon",
     "Grade": "Rare",
-    "damage": "0"
+    "damage": "3"
   },
 
   // --------------------------------------------------------- Rare Head : 3
@@ -520,37 +356,37 @@
     "itemName": "해골 헬멧",
     "itemDescription": "해골로 만들어진 헬멧. 공포를 자아내는 강렬한 비주얼",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 3,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Head",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
   {
     "itemName": "불타는 비전모자",
     "itemDescription": "뜨거운 힘이 느껴진다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 3,
+    "luk": 1,
     "EquipSlot": "Head",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
   {
     "itemName": "그림자 망토 후드",
     "itemDescription": "그림자 속에 숨을 수 있는 특별한 후드. 적이 쉽게 알아차리지 못한다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 3,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Head",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
 
   // --------------------------------------------------------- Rare Body : 3
@@ -558,37 +394,37 @@
     "itemName": "은빛 체인 메일",
     "itemDescription": "은빛의 마법으로 강화된 사슬 갑옷",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 3,
+    "dex": 1,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Body",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
   {
     "itemName": "붉은 망토",
     "itemDescription": "움직임이 가벼워지며 불꽃처럼 일렁이는 망토",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 3,
+    "inte": 1,
+    "luk": 1,
     "EquipSlot": "Body",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
   {
     "itemName": "서릿발의 코트",
     "itemDescription": "마법이 부여된 차가운 코트",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 1,
+    "dex": 1,
+    "inte": 3,
+    "luk": 1,
     "EquipSlot": "Body",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
 
   // --------------------------------------------------------- Rare Arm : 3
@@ -597,24 +433,24 @@
     "itemDescription": "고양이손 모양하고있는 장갑,왠지모르게 손재주가 올라간다",
     "itemType": "Armor",
     "str": 0,
-    "dex": 0,
+    "dex": 2,
     "inte": 0,
-    "luk": 0,
+    "luk": 1,
     "EquipSlot": "Arm",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
   {
     "itemName": "판금장갑",
     "itemDescription": "풀플레이트아머세트",
     "itemType": "Armor",
-    "str": 0,
+    "str": 2,
     "dex": 0,
     "inte": 0,
-    "luk": 0,
+    "luk": 1,
     "EquipSlot": "Arm",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
   {
     "itemName": "틱스미 실드",
@@ -622,11 +458,11 @@
     "itemType": "Armor",
     "str": 0,
     "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "inte": 3,
+    "luk": 1,
     "EquipSlot": "Arm",
     "Grade": "Rare",
-    "Defense": "0"
+    "Defense": "3"
   },
 
   // --------------------------------------------------------- Rare Foot : 3
@@ -634,33 +470,33 @@
     "itemName": "아이젠",
     "itemDescription": "미끄럽지는 않겠네",
     "itemType": "Armor",
-    "str": 3,
-    "dex": 2,
+    "str": 2,
+    "dex": 4,
     "inte": 1,
     "luk": 3,
     "EquipSlot": "Foot",
     "Grade": "Rare",
-    "Defense": "2"
+    "Defense": "3"
   },
   {
     "itemName": "전투화",
     "itemDescription": "군인들이 착용하는 만능 신발",
     "itemType": "Armor",
-    "str": 5,
-    "dex": 5,
-    "inte": 5,
-    "luk": 5,
+    "str": 4,
+    "dex": 2,
+    "inte": 1,
+    "luk": 3,
     "EquipSlot": "Foot",
     "Grade": "Rare",
-    "Defense": "4"
+    "Defense": "3"
   },
   {
     "itemName": "완벽한 운동화",
-    "itemDescription": "민첩하게 움직일 수 있을것 같다",
+    "itemDescription": "가볍게 움직일 수 있을것 같다",
     "itemType": "Armor",
-    "str": 4,
-    "dex": 7,
-    "inte": 3,
+    "str": 1,
+    "dex": 2,
+    "inte": 5,
     "luk": 3,
     "EquipSlot": "Foot",
     "Grade": "Rare",
@@ -669,112 +505,40 @@
 
   // --------------------------------------------------------- Unique Weapon : 9
   {
-    "itemName": "나히니르",
-    "itemDescription": "최초의 용을 벤 검",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Unique",
-    "damage": "0"
-  },
-  {
     "itemName": "연장점검",
     "itemDescription": "기다리던 유저에겐 이름만으로도 화나게 하는 검",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 10,
+    "dex": 5,
+    "inte": 5,
+    "luk": 5,
     "EquipSlot": "Weapon",
     "Grade": "Unique",
-    "damage": "0"
-  },
-  {
-    "itemName": "아이쿠 손이 미끄러졌검",
-    "itemDescription": "아이쿠, 손이 미끄러졌지만 데미지는 보장하는 검",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Unique",
-    "damage": "0"
-  },
-  {
-    "itemName": "장미칼",
-    "itemDescription": "장미모양이 그려진 모든걸 썰수있다는 단검",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Unique",
-    "damage": "0"
+    "damage": "12"
   },
   {
     "itemName": "부채",
     "itemDescription": "부채처럼 생겼지만 날카롭고 아프다",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 5,
+    "dex": 10,
+    "inte": 5,
+    "luk": 5,
     "EquipSlot": "Weapon",
     "Grade": "Unique",
-    "damage": "0"
-  },
-  {
-    "itemName": "도넛을 먹었더니 단검",
-    "itemDescription": "단냄새도 나고 무언가 먹고싶어지지만..",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Unique",
-    "damage": "0"
-  },
-  {
-    "itemName": "이럴수가, 마법하나를 빠트렸어!",
-    "itemDescription": "무언가 마법이 빠진듯 하지만 원래 위력보다 더 쌔진 느낌이다",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Unique",
-    "damage": "0"
-  },
-  {
-    "itemName": "미스틸테인/세계수의 가지",
-    "itemDescription": "세계수의 나뭇가지로 만든 지팡이",
-    "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
-    "EquipSlot": "Weapon",
-    "Grade": "Unique",
-    "damage": "0"
+    "damage": "12"
   },
   {
     "itemName": "세상을 구하는 빛",
     "itemDescription": "세상을 구했던 빛을 담아 만들어진 지팡이",
     "itemType": "Weapon",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 5,
+    "dex": 5,
+    "inte": 10,
+    "luk": 5,
     "EquipSlot": "Weapon",
     "Grade": "Unique",
-    "damage": "0"
+    "damage": "12"
   },
 
   // --------------------------------------------------------- Unique Head : 3
@@ -782,37 +546,37 @@
     "itemName": "거인의 투구",
     "itemDescription": "거인의 힘을 불어넣은 투구. 착용자에게 압도적인 힘을 준다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 8,
+    "dex": 4,
+    "inte": 4,
+    "luk": 4,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "8"
   },
   {
     "itemName": "전설의 사냥꾼 모자",
     "itemDescription": "설 속 사냥꾼이 쓰던 모자",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 4,
+    "dex": 8,
+    "inte": 4,
+    "luk": 4,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "8"
   },
   {
     "itemName": "광휘의 마법 왕관",
     "itemDescription": "빛의 마법으로 만들어진 왕관",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 4,
+    "dex": 4,
+    "inte": 8,
+    "luk": 4,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "8"
   },
 
   // --------------------------------------------------------- Unique Body : 3
@@ -820,40 +584,42 @@
     "itemName": "용의 심장",
     "itemDescription": "용의 힘을 담아 어마어마한 내구성을 자랑한다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 8,
+    "dex": 5,
+    "inte": 5,
+    "luk": 7,
     "EquipSlot": "Body",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "12"
   },
   {
     "itemName": "빛과 어둠의 그림자",
     "itemDescription": "마치 보이지 않는 것처럼 빠르게 움직일 수 있다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 5,
+    "dex": 8,
+    "inte": 5,
+    "luk": 7,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "12"
   },
   {
     "itemName": "영원의 파편",
     "itemDescription": "영원의 마법을 착용자에게 부여한다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 5,
+    "dex": 5,
+    "inte": 8,
+    "luk": 7,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "12"
   },
 
   // --------------------------------------------------------- Unique Arm : 4
+
+  // 퀘스트 아이템-------
   {
     "itemName": "촌장의 야망",
     "itemDescription": "보상보다 상점판매가가 비싼 이상한아이템",
@@ -866,41 +632,42 @@
     "Grade": "Unique",
     "Defense": "0"
   },
+  //---------------------
   {
     "itemName": "오우거파워건틀렛",
     "itemDescription": "와 OPG아시는구나",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 10,
+    "dex": 7,
+    "inte": 7,
+    "luk": 5,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "6"
   },
   {
     "itemName": "마법사의 손",
     "itemDescription": "염동력으로 움직이는 마법사의 손,최고수준의 마법사만 다룰수있다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 7,
+    "dex": 7,
+    "inte": 10,
+    "luk": 5,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "6"
   },
   {
     "itemName": "매조련사의 장갑",
     "itemDescription": "훌륭한 도적의 친구 매가 쉴수있다",
     "itemType": "Armor",
-    "str": 0,
-    "dex": 0,
-    "inte": 0,
-    "luk": 0,
+    "str": 7,
+    "dex": 10,
+    "inte": 7,
+    "luk": 5,
     "EquipSlot": "Head",
     "Grade": "Unique",
-    "Defense": "0"
+    "Defense": "6"
   },
 
   // --------------------------------------------------------- Unique Foot : 4
@@ -908,48 +675,36 @@
     "itemName": "깃털 신발",
     "itemDescription": "몸이 가벼워지는 느낌이다",
     "itemType": "Armor",
-    "str": 10,
-    "dex": 20,
-    "inte": 6,
+    "str": 5,
+    "dex": 6,
+    "inte": 5,
     "luk": 7,
     "EquipSlot": "Foot",
     "Grade": "Unique",
-    "Defense": "5"
+    "Defense": "6"
   },
   {
     "itemName": "마력이 깃든 신발",
     "itemDescription": "신발에 알 수 없는 마력이 느껴진다",
     "itemType": "Armor",
     "str": 5,
-    "dex": 10,
-    "inte": 30,
-    "luk": 5,
+    "dex": 5,
+    "inte": 6,
+    "luk": 7,
     "EquipSlot": "Foot",
     "Grade": "Unique",
-    "Defense": "10"
+    "Defense": "6"
   },
   {
     "itemName": "힘이 깃든 신발",
     "itemDescription": "신발에 알 수 없는 힘이 느껴진다",
     "itemType": "Armor",
-    "str": 30,
-    "dex": 10,
+    "str": 6,
+    "dex": 5,
     "inte": 5,
-    "luk": 5,
+    "luk": 7,
     "EquipSlot": "Foot",
     "Grade": "Unique",
-    "Defense": "10"
-  },
-  {
-    "itemName": "광전사의 신발",
-    "itemDescription": "힘을 감당하지 못할 신발인것 같다",
-    "itemType": "Armor",
-    "str": 30,
-    "dex": 30,
-    "inte": 30,
-    "luk": 30,
-    "EquipSlot": "Foot",
-    "Grade": "Unique",
-    "Defense": "20"
+    "Defense": "6"
   }
 ]
