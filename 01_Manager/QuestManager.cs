@@ -17,11 +17,6 @@ namespace TeamRPG_17
 
         public Quest? selectQuest;
 
-        public QuestManager()
-        {
-
-        }
-
         public void LoadQuest(string itemQuestJson, string killQuestJson)
         {
             itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(itemQuestJson);
@@ -44,7 +39,8 @@ namespace TeamRPG_17
 
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
                 questStateText = quest.questComplete ? "완료" : questStateText;
-                Console.WriteLine($"{questCount++}. {quest.questTitle}  |  {questStateText}");
+                Console.Write($"{questCount++}. {quest.questTitle}  |  ");
+                Render.ColorWrite($"{questStateText}\n",ConsoleColor.Cyan);
             }
 
             foreach (ItemQuest? quest in itemQuests)
@@ -54,7 +50,8 @@ namespace TeamRPG_17
 
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
                 questStateText = quest.questComplete ? "완료" : questStateText;
-                Console.WriteLine($"{questCount++}. {quest.questTitle}  |  {questStateText}");
+                Console.Write($"{questCount++}. {quest.questTitle}  |  ");
+                Render.ColorWrite($"{questStateText}\n", ConsoleColor.Cyan);
             }
         }
 
@@ -67,14 +64,14 @@ namespace TeamRPG_17
             if (selectQuest == null)
                 return;
 
-            Console.WriteLine($"\n-- {selectQuest.questTown} --");     // 퀘스트 진행 마을
-            Console.WriteLine($"퀘스트 {selectQuest.questTitle}");   // 퀘스트 명
-            Console.WriteLine($"{selectQuest.questDescription}");   // 퀘스트 설명
+            Console.WriteLine($"\n{selectQuest.questTitle}");         // 퀘스트 명
+            Console.WriteLine($"{selectQuest.questDescription}\n");   // 퀘스트 설명
+            selectQuest.ShowQuestReward();                          // 퀘스트 보상
 
             // 수락한 퀘스트일때
             if (selectQuest.questAccpet)
             {
-                Console.WriteLine($"\n----퀘스트진행도----");
+                Console.WriteLine($"\n~~~~~퀘스트 진행률~~~~~");
                 selectQuest.QuestProgress();                // 퀘스트 진행도 확인
 
                 // 퀘스트 완료 가능하다면 퀘스트완료 선택지 추가
