@@ -89,7 +89,7 @@
   {
     "monsterName": [ "거대한 쥐", "살벌한 거미" ],
     "monsterCount": [ 10, 10 ],
-    "killCount": [ 0 ],
+    "killCount": [ 0,0 ],
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -131,7 +131,7 @@
   {
     "monsterName": [ "거대한 쥐", "그림자 골렘" ],
     "monsterCount": [ 30, 10 ],
-    "killCount": [ 0 ],
+    "killCount": [ 0,0 ],
     "questTown": 1,
     "questComplete": false,
     "questAccpet": false,
@@ -146,18 +146,46 @@
   // --------------------------------------------------------- 마을 3퀘스트
 
   {
-    "monsterName": [ "" ],
-    "monsterCount": [ 0 ],
+    "monsterName": [ "해골병사" ],
+    "monsterCount": [ 20 ],
     "killCount": [ 0 ],
     "questTown": 2,
     "questComplete": false,
     "questAccpet": false,
     "questRepeatable": false,
-    "questTitle": "",
-    "questDescription": "",
-    "exp": 0,
-    "gold": 0,
+    "questTitle": "깨어난 망자",
+    "questDescription": "마을 외곽 공동묘지에서 죽은 해골병사들이 깨어나 밤마다 사람들을 습격하고 있다.\n주민들은 불안에 떨고있어 마을 장로가 이들을 처치해달라고 요청한다.",
+    "exp": 1000,
+    "gold": 2000,
     "rewardItem": null
   },
+  {
+    "monsterName": [ "파묻힌 유령" ],
+    "monsterCount": [ 25 ],
+    "killCount": [ 0 ],
+    "questTown": 2,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "깨어난 망자",
+    "questDescription": "오래된 유적지에서 원혼들의 울부짖음이 들리며 유적지에 들어가면 유령들이 나타나 습격한다.\n원혼을 잠재워 평온을 되찾아라.",
+    "exp": 1250,
+    "gold": 2200,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [ "폐허의 수호자" ],
+    "monsterCount": [ 40 ],
+    "killCount": [ 0 ],
+    "questTown": 2,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "고대의 심판",
+    "questDescription": "한때 신전을 지키던 폐허의 수호자가 침입자를 심판하려고 하며, 던전에 들어간 모험가들은 모두 돌아오지 못했다.\n학자는 수호자를 무찌르고 유적을 조사할 수 있도록 도와달라고 말한다.",
+    "exp": 2000,
+    "gold": 2500,
+    "rewardItem": null
+  }
 
 ]

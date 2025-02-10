@@ -15,7 +15,7 @@ namespace TeamRPG_17
         public KillQuest[] killQuests { get; private set; }
         public ItemQuest[] itemQuests { get; private set; }
 
-        public Quest? selectQuest;
+        public Quest? selectQuest { get; set; }
 
         public void LoadQuest(string itemQuestJson, string killQuestJson)
         {
