@@ -36,7 +36,7 @@ namespace TeamRPG_17
             dex = 0;
             inte = 0;
             luk = 0;
-            damage = 100;
+            damage = 20;
             defense = 5;
             hp = 100;
             gold = 1000;
@@ -114,12 +114,6 @@ namespace TeamRPG_17
         {
             float finalDamage = TotalDamage;
 
-            // 회피확률
-            float dodge = luk * 0.5f / 100f;  // Luk 10이면 5% 확률 회피
-            if (random.NextDouble() < dodge)
-            {
-                return 0;  // 회피하면 데미지를 0으로 설정
-            }
             // 크리티컬
             float critical = luk * 0.3f / 100f; // Luk 10이면 3% 확률 회피
             if (random.NextDouble() < critical)
