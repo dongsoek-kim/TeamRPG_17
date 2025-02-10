@@ -25,7 +25,7 @@ namespace TeamRPG_17
             {
                 case PotionType.Health:
                     {
-                        GameManager.Instance.player.hp = +health;
+                        GameManager.Instance.player.hp += health;
                         GameManager.Instance.player.hp = (GameManager.Instance.player.hp >= 100) ? GameManager.Instance.player.hp = 100 : GameManager.Instance.player.hp;
                         potionCount[(int)PotionType.Health]--;
                         break;
