@@ -178,7 +178,7 @@ namespace TeamRPG_17
             {
                 // 데이터 직렬화
                 string PlayerData = JsonConvert.SerializeObject(player, Formatting.Indented);
-                string InventoryData = JsonConvert.SerializeObject(inventory, Formatting.Indented);
+                //string InventoryData = JsonConvert.SerializeObject(inventory, Formatting.Indented);
                 string itemQuestData = JsonConvert.SerializeObject(QuestManager.Instance.itemQuests, Formatting.Indented);
                 string killQuestData = JsonConvert.SerializeObject(QuestManager.Instance.killQuests, Formatting.Indented);
 
