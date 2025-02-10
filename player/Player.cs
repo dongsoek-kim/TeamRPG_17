@@ -21,6 +21,9 @@ namespace TeamRPG_17
         public float baseDamage { get; private set; }
         public float defense    { get; private set; }
         public int hp           { get; set; }
+        public int hpMax        { get; set; }
+        public int mp           { get; set; }
+        public int mpMax        { get; set; }
         public int gold         { get; set; }
 
         public Inventory inventory { get; set; }
@@ -38,7 +41,11 @@ namespace TeamRPG_17
             luk = 0;
             damage = 20;
             defense = 5;
-            hp = 100;
+
+            hpMax = 100;
+            mpMax = 100;
+            hp = hpMax;
+            mp = mpMax;
             gold = 1000;
 
             inventory = new Inventory();
@@ -59,6 +66,8 @@ namespace TeamRPG_17
                 luk += 1;
                 damage += 0.5f;
                 defense += 1;
+                mpMax += 1;
+                mp = mpMax;
             }
         }
 

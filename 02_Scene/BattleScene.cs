@@ -9,50 +9,39 @@ namespace TeamRPG_17
     public class BattleScene
     {
         static Player _player = GameManager.Instance.player;
-        private Dungeon currentDungeon;
-        MonsterManager _monster = MonsterManager.Instance;
-        List<Monster> monster;
+        private Dungeon _currentDungeon;
+        MonsterManager _monsterManager = MonsterManager.Instance;
+        List<Monster> _monster;
+        List<Skill> availableSkills = SkillManager.Instance.GetSkillList(_player.job);
 
         public void StartBattle(Dungeon dungeon)
         {
-            currentDungeon = dungeon;
-            monster = BattleEngage(dungeon);
+            _currentDungeon = dungeon;
+            _monster = _monsterManager.RandomMonsterSpawn(dungeon);
             InBattle();
         }
-        public List<Monster> BattleEngage(Dungeon dungeon)
+        private void InBattle()
         {
-            // 몬스터 랜덤 생성
-            return _monster.RandomMonsterSpawn(dungeon);
-        }
-
-        public void InBattle()
-        {
-            int deathCount = 0;
-            while (_player.hp > 0 && deathCount < monster.Count)
+            while (_player.hp > 0 && _monster.Any(m => !m.IsDead))
             {
                 DisplayStatus();
                 PlayerPhase();
 
-
-                deathCount = monster.Count(m => m.IsDead);
-
-                if (deathCount >= monster.Count)
+                if (_monster.All(m => m.IsDead)) // 몬스터 다죽었으면
                 {
-                    BattleResult(true);
+                    BattleResult(true); // 승리
                     return;
                 }
 
-
-                foreach (var mon in monster)
+                foreach (var monster in _monster.Where(m => !m.IsDead))
                 {
-                    if (!mon.IsDead)
-                        MonsterPhase(mon);
+                    MonsterPhase(monster);
                 }
             }
 
-            if (_player.hp <= 0)
+            if (_player.hp <= 0) // 플레이어 죽었으면
             {
-                BattleResult(false);
+                BattleResult(false); // 패배
             }
         }
 
@@ -60,182 +49,182 @@ namespace TeamRPG_17
         {
             Console.Clear();
             Console.WriteLine("=== ENGAGE!!! ===");
-            for (int i = 0; i < monster.Count; i++) // 그 배열 랜덤 정해진 몬스터 갯수만큼 반복, 동일한 객체가 들어가면 같은 객체로 쳐서 수정 필요
+            for (int i = 0; i < _monster.Count; i++) // 그 배열 랜덤 정해진 몬스터 갯수만큼 반복, 동일한 객체가 들어가면 같은 객체로 쳐서 수정 필요
             {
                 // 배열 가져와가지고 랜덤하게 정해진 몬스터 정보 출력
-                Console.WriteLine($"{i + 1}. {monster[i].GetInfo()}   " + (monster[i].CurrentHp > 0 ? $"HP {monster[i].CurrentHp}" : "Dead"));
+                Console.WriteLine($"{i + 1}. {_monster[i].GetInfo()}   " + (_monster[i].CurrentHp > 0 ? $"HP {_monster[i].CurrentHp}" : "Dead"));
             }
 
             Console.WriteLine("\n\n[내 정보]");
             Console.WriteLine($"\nLv.{_player.level}  {_player.name} ({_player.job})");
-            Console.WriteLine($"HP  {_player.hp}");
+            Console.WriteLine($"HP  {_player.hp} / {_player.hpMax}"); // 체력 출력
+            Console.WriteLine($"HP  {_player.mp} / {_player.mpMax}"); // mp 출력
         }
 
         // 플레이어 차례
         private void PlayerPhase()
         {
-            bool flag = true;
-            while (flag)
+            bool actionTaken = false;
+            while (!actionTaken)
             {
                 DisplayStatus();
-                Console.WriteLine("\n\n1. 공격");
-                Console.WriteLine("2. 포션");
-                if (GameManager.Instance.SceneInputCommand(out int intCommand))
+                Console.WriteLine("\n\n1. 공격\n2. 스킬\n3. 포션"); // 전투 선택지
+
+                int command = HandleInput(3);
+                switch (command)
                 {
-                    switch (intCommand)
-                    {
-                        case 1:
-                            DisplayStatus();
-                            if (Targeting())
-                                flag = false;
-                            break;
-                        case 2:
-                            DisplayStatus();
-                            if (SelectPotion())
-                                flag = false;
-                            break;
-                    }
+                    case 1:
+                        actionTaken = Targeting();
+                        break;
+                    case 2:
+                        actionTaken = SelectSkill();
+                        break;
+                    case 3:
+                        actionTaken = SelectPotion();
+                        break;
                 }
             }
         }
 
-        private bool Targeting()
+        private bool Targeting() // 공격할 몬스터 선택
+        {
+            while (true)
+            {
+                DisplayStatus();
+                Console.WriteLine("\n\n0. 취소\n대상을 선택해 주세요.\n>>");
+
+                int input = HandleInput(_monster.Count);
+                if (input == 0) return false;
+
+                Monster target = _monster[input - 1];
+                if (target.IsDead)
+                {
+                    Console.WriteLine("이미 죽은 몬스터입니다!");
+                    PrintContinuePrompt();
+                    return false;
+                }
+
+                PlayerAttack(target);
+                return true;
+            }
+        }
+
+        private void PlayerAttack(Monster target) // 몬스터가 대미지 받을 때 출력
+        {
+            if (target.IsDead) return;
+
+            float dodgeChance = 0.1f; // 10% 회피 확률
+            bool isDodge = RandomGenerator.Instance.NextDouble() < dodgeChance;
+
+            int damage = _player.LuckyDamage();
+            bool isCritical = damage > _player.TotalDamage;
+
+            if (isCritical)
+            {
+                // 치명타는 회피를 무시함
+                Console.WriteLine($"{_player.name}의 치명타 공격!\n{target.GetInfo()}을(를) 맞췄습니다. [데미지 : {damage}]");
+            }
+            else if (isDodge)
+            {
+                // 회피 처리
+                Console.WriteLine($"{target.GetInfo()}가 공격을 회피했습니다!");
+                return; // 피해를 입히지 않음
+            }
+            else
+            {
+                // 회피하지 않았다면 피해를 입힌다
+                Console.WriteLine($"{_player.name}의 공격! {target.GetInfo()}을(를) 맞췄습니다. [데미지 : {damage}]");
+            }
+
+            // 피해 계산
+            target.CurrentHp = Math.Max(target.CurrentHp - damage, 0);
+
+            if (target.CurrentHp <= 0)
+            {
+                Console.WriteLine("Dead");
+                QuestManager.Instance.MonsterKillCount(target);
+            }
+            else
+            {
+                Console.WriteLine($"HP {target.CurrentHp}");
+            }
+
+            PrintContinuePrompt();
+        }
+        // 몬스터 차례
+        private void MonsterPhase(Monster monster) // 플레이어 대미지 받을 때 출력
+        {
+            int damage = PlayerTakeDamage(monster);
+            Console.WriteLine($"{monster.GetInfo()}의 공격! {_player.name}을(를) 맞췄습니다. [데미지 : {damage}]");
+
+            if (_player.hp <= 0)
+                Console.WriteLine("Dead");
+            else
+                Console.WriteLine($"HP {_player.hp}");
+
+            PrintContinuePrompt();
+        }
+
+        private int PlayerTakeDamage(Monster monster) // 대미지 계산 메서드
+        {
+            float dodgeChance = _player.luk * 0.5f / 100f;
+            if (RandomGenerator.Instance.NextDouble() < dodgeChance)
+            {
+                Console.WriteLine($"{_player.name}이(가) 공격을 회피했습니다!");
+                return 0;
+            }
+
+            int damageTaken = Math.Max((int)(monster.Damage - _player.defense), 1);
+            _player.hp = Math.Max(_player.hp - damageTaken, 0);
+
+            return damageTaken;
+        }
+
+        private bool SelectSkill()
         {
             while (true)
             {
                 DisplayStatus();
                 Console.WriteLine("\n\n0. 취소");
 
-                Console.WriteLine("\n대상을 선택해 주세요.\n>>");
-                int input;
-
-                if (!int.TryParse(Console.ReadLine(), out input))
+                // 스킬 목록 출력
+                for (int i = 0; i < availableSkills.Count; i++)
                 {
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine($"{i + 1}. {availableSkills[i].Name} (MP {availableSkills[i].MpCost}");
+                }
+
+                Console.WriteLine("\n사용할 스킬을 선택해 주세요.\n>>");
+                int input = HandleInput(availableSkills.Count); // 사용할 스킬 번호 입력
+
+                if (input == 0) return false; // 0. 취소 입력 시 뒤로가기
+
+                // 스킬 실제 효과 메서드
+                Skill selectedSkill = availableSkills[input - 1];
+                // 마나가 없을 때 SelectSkill다시 해줘야되고(스킬 요구 mp보다 현재 mp가 적을 때
+                if (_player.mp < selectedSkill.MpCost)
+                {
+                    Console.WriteLine("마나가 부족합니다!");
+                    PrintContinuePrompt();
                     continue;
                 }
 
-                if (input == 0) return false;
-
-                if (input <= monster.Count && input > 0)
-                {
-                    Monster targetMonster = monster[input - 1];
-
-                    if (targetMonster.IsDead)
-                    {
-                        Console.WriteLine("이미 죽은 몬스터입니다!");
-                        Console.ReadLine();
-                        return false;
-                    }
-                    else
-                    {
-                        PlayerAttack(targetMonster);
-                        return true;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    Console.ReadLine();
-                }
+                UseSkill(selectedSkill);
+                return true;
+                // 스킬 정보는 Skill에서 관리하고 스킬 목록 자체는 SkillManager에서 관리
             }
         }
 
-        private void PlayerAttack(Monster monster) // 몬스터가 대미지 받을 때 출력
+        private void UseSkill(Skill skill)
         {
-            if (monster.IsDead) return;
-            int dmg = MonsterTakeDamage(monster);
-            Console.WriteLine($"{_player.name}의 공격!\n{monster.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
 
-            Console.Write($"{monster.GetInfo()}\nHP {monster.CurrentHp} -> ");
-
-            monster.CurrentHp -= dmg;
-
-            if (monster.CurrentHp <= 0)
-            {
-                Console.WriteLine("Dead");
-                monster.CurrentHp = 0;
-                QuestManager.Instance.MonsterKillCount(monster);
-            }
-            else Console.WriteLine($"{monster.CurrentHp}");
-
-            Console.WriteLine("\n\n0. 다음\n\n>>");
-            string input = Console.ReadLine();
-
-            while (true)
-            {
-                if (input == "0")
-                    break;
-                else
-                {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    break;
-                }
-            }
         }
-        // 몬스터 차례
-        private void MonsterPhase(Monster monster) // 플레이어 대미지 받을 때 출력
-        {
-            Console.Clear();
-            int dmg = PlayerTakeDamage(monster);
-            Console.WriteLine($"{monster.GetInfo()}의 공격!\n{_player.name}을(를) 맞췄습니다. [데미지 : {dmg}]");
-
-            Console.Write($"Lv.{_player.level} {_player.name}\nHP {_player.hp} -> ");
-
-            if (_player.hp <= 0) Console.WriteLine("Dead");
-            else Console.WriteLine($"{_player.hp}");
-
-            Console.WriteLine("\n\n0. 다음\n\n>>");
-            Console.ReadLine();
-        }
-        private int MonsterTakeDamage(Monster monster) // 대미지 계산 메서드
-        {
-            int dmg = _player.LuckyDamage();
-
-            if (dmg == 0) // 몬스터는 따로 회피 기능이 없으므로 플레이어의 럭키 데미지가 0이면 회피한 것으로 처리
-            {
-                Console.WriteLine($"{monster.GetInfo()}가 공격을 회피했습니다!");
-            }
-            else // 회피하지 않았다면 데미지 출력
-            {
-                bool isCritical = dmg > _player.TotalDamage;
-
-                Console.WriteLine($"{_player.name}의 공격! {monster.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
-
-                if (isCritical)
-                {
-                    Console.WriteLine("치명타 적중!!!"); // 치명타 메시지 출력
-                }
-            }
-
-            return dmg;
-        }
-
-        private int PlayerTakeDamage(Monster monster) // 대미지 계산 메서드
-        {
-            float dodgeChance = _player.luk * 0.5f / 100f; // 플레이어 회피 확률 적용
-
-            if (RandomGenerator.Instance.NextDouble() < dodgeChance) // 회피 성공
-            {
-                Console.WriteLine($"{_player.name}이(가) 공격을 회피했습니다!"); // 회피 메시지 출력
-                return 0; // 피해 없음
-            }
-
-            int damageTaken = Math.Max((int)(monster.Damage - _player.defense), 1); // 최소 1 이상의 피해
-            _player.hp -= damageTaken;
-            
-            return damageTaken;
-        }
-
 
         private bool SelectPotion() // 포션 선택
         {
-            bool potionSelect = false;
-            while (!potionSelect)
+            while (true)
             {
                 DisplayStatus();
-                Console.WriteLine($"\n\n0. 취소");
-
+                Console.WriteLine("\n\n0. 취소");
                 foreach (PotionType type in Enum.GetValues(typeof(PotionType)))
                 {
                     int count = _player.inventory.potion.GetPotionCount(type);
@@ -243,33 +232,22 @@ namespace TeamRPG_17
                 }
 
                 Console.WriteLine("\n포션을 선택해 주세요.\n>>");
-                string input = Console.ReadLine();
-                int selectedPotion;
+                int input = HandleInput(Enum.GetValues(typeof(PotionType)).Length);
 
-                if (!int.TryParse(input, out selectedPotion) || selectedPotion < 0 || selectedPotion > Enum.GetValues(typeof(PotionType)).Length)
-                {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    continue;
-                }
+                if (input == 0) return false;
 
-                if (selectedPotion == 0)
-                    return false;
-
-                PotionType selectedType = (PotionType)(selectedPotion - 1);
-                int potionCount = _player.inventory.potion.GetPotionCount(selectedType);
-
-                if (potionCount > 0)
+                PotionType selectedType = (PotionType)(input - 1);
+                if (_player.inventory.potion.GetPotionCount(selectedType) > 0)
                 {
                     _player.inventory.potion.UsePotion(selectedType);
-                    potionSelect = true;
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine("\n남은 포션이 없습니다! 다른 포션을 선택해주세요.");
-                    Console.ReadLine();
+                    PrintContinuePrompt();
                 }
             }
-            return true;
         }
         private void BattleResult(bool isWin)
         {
@@ -277,25 +255,38 @@ namespace TeamRPG_17
             Console.WriteLine("Battle - Result");
             if (isWin)
             {
-                Console.WriteLine("\n\n!!!   VICTORY   !!!");
-                foreach (var mon in monster)
+                Console.WriteLine("\n!!!   VICTORY   !!!");
+                foreach (var mon in _monster.Where(m => m.IsDead))
                 {
-                    if (mon.IsDead)
-                    {
-                        Console.WriteLine($"- {mon.Name} 처치!");
-                    }
+                    Console.WriteLine($"- {mon.Name} 처치!");
                 }
-                int dungeonLevel = currentDungeon.Level;
-                BattleReward reward = new BattleReward(dungeonLevel, monster.Count);
+                BattleReward reward = new BattleReward(_currentDungeon.Level, _monster.Count);
                 reward.ApplyReward(_player);
             }
             else
             {
-                Console.WriteLine("\n\n~~~  YOU LOSE  ~~~");
+                Console.WriteLine("\n~~~  YOU LOSE  ~~~");
             }
 
-            Console.WriteLine($"\n\nHP {_player.hp} remains");
-            Console.WriteLine(">>");
+            Console.WriteLine($"\nHP {_player.hp} remains");
+            PrintContinuePrompt();
+        }
+        private int HandleInput(int maxOption)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out int selection) && selection >= 0 && selection <= maxOption)
+                {
+                    return selection;
+                }
+                Console.WriteLine("잘못된 입력입니다. 다시 입력하세요.");
+            }
+        }
+
+        private void PrintContinuePrompt()
+        {
+            Console.WriteLine("\n0. 다음\n>>");
             Console.ReadLine();
         }
     }
