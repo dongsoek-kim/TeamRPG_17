@@ -15,10 +15,10 @@ namespace TeamRPG_17
         public int luk = 5;
         public int[] potionCount = new int[Enum.GetValues(typeof(PotionType)).Length];
 
-        //public Potion()
-        //{
-        //    int PotionType = Enum.GetValues(typeof(PotionType)).Length;
-        //}
+        public Potion()
+        {
+            potionCount[0] = 3;
+        }
         public void UsePotion(PotionType potionType)
         {
             switch (potionType)
