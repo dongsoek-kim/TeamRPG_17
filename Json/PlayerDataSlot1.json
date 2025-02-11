@@ -1,20 +1,21 @@
 {
-  "name": "테스트1",
+  "name": "user",
   "job": 0,
-  "level": 2,
+  "nowTown": 0,
+  "level": 1,
   "exp": 0,
-  "str": 1,
-  "dex": 1,
-  "inte": 1,
-  "luk": 1,
-  "damage": 20.5,
+  "str": 0,
+  "dex": 0,
+  "inte": 0,
+  "luk": 0,
+  "damage": 20.0,
   "baseDamage": 0.0,
-  "defense": 6.0,
-  "hp": 96,
+  "defense": 5.0,
+  "hp": 100,
   "hpMax": 100,
-  "mp": 101,
-  "mpMax": 101,
-  "gold": 1005,
+  "mp": 100,
+  "mpMax": 100,
+  "gold": 1000,
   "inventory": {
     "inventory": [
       {
@@ -747,48 +748,12 @@
       }
     ],
     "equipedArmor": [
-      {
-        "defense": 3,
-        "itemType": 0,
-        "grade": 1,
-        "EquipSlot": 0,
-        "itemName": "불타는 비전모자",
-        "itemDescription": "뜨거운 힘이 느껴진다",
-        "str": 1,
-        "dex": 1,
-        "inte": 3,
-        "luk": 1,
-        "price": 1000
-      },
-      {
-        "defense": 3,
-        "itemType": 0,
-        "grade": 1,
-        "EquipSlot": 1,
-        "itemName": "은빛 체인 메일",
-        "itemDescription": "은빛의 마법으로 강화된 사슬 갑옷",
-        "str": 3,
-        "dex": 1,
-        "inte": 1,
-        "luk": 1,
-        "price": 1000
-      },
+      null,
+      null,
       null,
       null
     ],
-    "equipedWeapon": {
-      "damage": 2,
-      "itemType": 1,
-      "grade": 0,
-      "EquipSlot": 4,
-      "itemName": "테무산 쇠 단검",
-      "itemDescription": "쇠로 만들어진 평범한 검",
-      "str": 1,
-      "dex": 3,
-      "inte": 1,
-      "luk": 1,
-      "price": 500
-    },
+    "equipedWeapon": null,
     "equipSlot": 0,
     "potion": {
       "health": 30,
@@ -798,7 +763,7 @@
       "luk": 5,
       "potionCount": [
         3,
-        1,
+        0,
         0,
         0,
         0
@@ -806,6 +771,6 @@
     }
   },
   "BonusDamage": 0.0,
-  "TotalDamage": 33,
-  "TotalDefens": 12
+  "TotalDamage": 20,
+  "TotalDefens": 5
 }

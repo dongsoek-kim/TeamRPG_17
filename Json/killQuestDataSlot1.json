@@ -1,0 +1,325 @@
+[
+  {
+    "monsterName": [
+      "슬라임"
+    ],
+    "monsterCount": [
+      3
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 0,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "슬라임의 침입",
+    "questDescription": "마을 근처의 농장이 최근 슬라임들에게 습격을 받아 작물이 망가지고 있다.\n농부는 더 이상 참을 수 없고, 이를 해결해달라고 부탁한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 150,
+    "gold": 200,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "고블린"
+    ],
+    "monsterCount": [
+      5
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 0,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "고블린의 음모",
+    "questDescription": "마을 주변 숲에서 고블린들이 무리를 이루어 다니며 길을 지나는 행인들을 습격하고 있다.\n경비대장은 고블린의 무리와 그들의 리더를 처치해달라고 요청한다.",
+    "questAccess": false,
+    "preQuestTitle": "슬라임의 침입",
+    "exp": 200,
+    "gold": 350,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "새끼 늑대"
+    ],
+    "monsterCount": [
+      5
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 0,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "숲의 포식자",
+    "questDescription": "숲 깊은 곳에서 새끼늑대들이 무리를 지어 마을 사람들을 위협하고 있다.\n정찰자는 늑대 무리가 평소보다 더 공격적이라며 원인을 밝혀줄 것을 부탁한다.",
+    "questAccess": false,
+    "preQuestTitle": "슬라임의 침입",
+    "exp": 200,
+    "gold": 350,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "고블린",
+      "새끼 늑대"
+    ],
+    "monsterCount": [
+      5,
+      5
+    ],
+    "killCount": [
+      0,
+      0
+    ],
+    "questTown": 0,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "늑대와 고블린의 영역 싸움",
+    "questDescription": "숲 한가운데서 고블린과 새끼늑대 무리가\n서로 싸우며 숲을 황폐화시키고 있다.\n사냥꾼은 이들의 영역 싸움이 멈추지 않으면 숲이 망가질 거라며\n도움을 요청한다.",
+    "questAccess": false,
+    "preQuestTitle": "숲의 포식자",
+    "exp": 350,
+    "gold": 500,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "슬라임"
+    ],
+    "monsterCount": [
+      10
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 0,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": true,
+    "questTitle": "끝나지 않는 슬라임의 습격",
+    "questDescription": "마을 주변 농장에서 슬라임들이 끝도 없이 나타나 곡식을 망치고 있다.\n농부 테드는 슬라임들을 계속 처치해도 끝없이 나오는 상황에 일정 수의 슬라임을 처치해 달라고 부탁한다.",
+    "questAccess": false,
+    "preQuestTitle": "늑대와 고블린의 영역 싸움",
+    "exp": 200,
+    "gold": 300,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "슬라임",
+      "고블린",
+      "새끼 늑대"
+    ],
+    "monsterCount": [
+      7,
+      7,
+      7
+    ],
+    "killCount": [
+      0,
+      0,
+      0
+    ],
+    "questTown": 0,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "슬라임, 고블린, 그리고 늑대굴의 비밀",
+    "questDescription": "슬라임, 고블린, 새끼늑대가 모두 근처 산의 특정 동굴에서 나타나고 있다.\n장로는 이들의 출몰이 단순히 우연이 아니며, 동굴 안에 뭔가 위험한 존재가 있다고 믿는다.",
+    "questAccess": false,
+    "preQuestTitle": "늑대와 고블린의 영역 싸움",
+    "exp": 450,
+    "gold": 1000,
+    "rewardItem": 51
+  },
+  {
+    "monsterName": [
+      "거대한 쥐"
+    ],
+    "monsterCount": [
+      10
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 1,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "거대한 쥐의 소굴",
+    "questDescription": "마을의 식량 창고에서 거대한 쥐들이 나타나 식량을 망치고 있다.\n창고지기는 쥐들의 둥지를 없애고, 쥐가 훔쳐 간 물품을 찾아달라고 요청한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 500,
+    "gold": 800,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "거대한 쥐",
+      "살벌한 거미"
+    ],
+    "monsterCount": [
+      5,
+      5
+    ],
+    "killCount": [
+      0,
+      0
+    ],
+    "questTown": 1,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "창고의 해충 대소동",
+    "questDescription": "마을 창고 안에서 거대한 쥐와 살벌한 거미가 동시에 출몰해 식량을 망치고 있다.\n창고지기는 이들을 한꺼번에 처리해달라고 부탁한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 600,
+    "gold": 850,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "살벌한 거미"
+    ],
+    "monsterCount": [
+      10
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 1,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "거미굴의 공포",
+    "questDescription": "마을 외곽 숲에서 살벌한 거미들이 나타나 사냥터를 점령하고 있다.\n정찰자는 이 거미들이 거대한 쥐와 함께 행동하며 숲의 균형을 위협하고 있다며 모험가에게 도움을 요청한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 600,
+    "gold": 800,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "그림자 골렘"
+    ],
+    "monsterCount": [
+      15
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 1,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "그림자 골렘의 부활",
+    "questDescription": "마법사 길드의 장로는 살벌한 거미굴에서 가져온 검은 수정이 고대 마법의 부산물이며,\n이 수정이 그림자 골렘을 부활시키기 위해 사용되고 있다고 경고한다.\n모험가에게 그림자 골렘의 봉인을 막아달라고 요청한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 1500,
+    "gold": 1500,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "거대한 쥐",
+      "그림자 골렘"
+    ],
+    "monsterCount": [
+      10,
+      5
+    ],
+    "killCount": [
+      0,
+      0
+    ],
+    "questTown": 1,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "어둠 속의 위협",
+    "questDescription": "오래된 유적지에서 거대한 쥐와 살벌한 거미들이 그림자 골렘을 지키고 있다는 보고가 들어왔다.\n장로는 이들이 골렘을 깨우려는 걸 막아달라고 요청한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 1500,
+    "gold": 1500,
+    "rewardItem": 50
+  },
+  {
+    "monsterName": [
+      "해골병사"
+    ],
+    "monsterCount": [
+      20
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 2,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "깨어난 망자",
+    "questDescription": "마을 외곽 공동묘지에서 죽은 해골병사들이 깨어나 밤마다 사람들을 습격하고 있다.\n주민들은 불안에 떨고있어 마을 장로가 이들을 처치해달라고 요청한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 1000,
+    "gold": 2000,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "파묻힌 유령"
+    ],
+    "monsterCount": [
+      25
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 2,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "깨어난 망자",
+    "questDescription": "오래된 유적지에서 원혼들의 울부짖음이 들리며 유적지에 들어가면 유령들이 나타나 습격한다.\n원혼을 잠재워 평온을 되찾아라.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 1250,
+    "gold": 2200,
+    "rewardItem": null
+  },
+  {
+    "monsterName": [
+      "폐허의 수호자"
+    ],
+    "monsterCount": [
+      40
+    ],
+    "killCount": [
+      0
+    ],
+    "questTown": 2,
+    "questComplete": false,
+    "questAccpet": false,
+    "questRepeatable": false,
+    "questTitle": "고대의 심판",
+    "questDescription": "한때 신전을 지키던 폐허의 수호자가 침입자를 심판하려고 하며, 던전에 들어간 모험가들은 모두 돌아오지 못했다.\n학자는 수호자를 무찌르고 유적을 조사할 수 있도록 도와달라고 말한다.",
+    "questAccess": true,
+    "preQuestTitle": null,
+    "exp": 2000,
+    "gold": 2500,
+    "rewardItem": null
+  }
+]
