@@ -142,12 +142,12 @@ namespace TeamRPG_17
             PrintContinuePrompt();
         }
 
-        public void DisplayInvalidInput()
+        public static void DisplayInvalidInput()
         {
             Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
         }
 
-        public void DisplayNotEnoughMP()
+        public static void DisplayNotEnoughMP()
         {
             Console.WriteLine("마나가 부족합니다! 다시 입력해주세요.");
             Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)

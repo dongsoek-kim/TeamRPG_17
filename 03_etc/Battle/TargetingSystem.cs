@@ -27,7 +27,7 @@ namespace TeamRPG_17
 
                 if (input == -1) // 잘못된 입력 처리
                 {
-                    _battleUI.DisplayInvalidInput();
+                    BattleScene.DisplayInvalidInput();
                     continue;
                 }
 
