@@ -47,10 +47,7 @@ namespace TeamRPG_17
                 case 6:
                     GameManager.Instance.ChangeScene(SceneName.TownMoveScene);
                     break;
-                case 7:
-                    GameManager.Instance.ChangeScene(SceneName.DataScene);
-                    break;
-                case 8:
+                case (int)SceneName.QusetScene:
                     GameManager.Instance.ChangeScene(SceneName.QusetScene);
                     break;
             }

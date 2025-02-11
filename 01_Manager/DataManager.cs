@@ -10,6 +10,7 @@ namespace TeamRPG_17
 {
     static class DataManager//Player,Inventory,Quest의 데이터 저장,불러오기
     {
+        static public int currentSlot = 1;
       static public Player LoadPlayerData(int _input)
         {
             string relativePath = @"..\..\..\Json\";
