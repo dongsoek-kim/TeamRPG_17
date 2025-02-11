@@ -71,7 +71,7 @@
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
-    "questRepeatable": false,
+    "questRepeatable": true,
     "questTitle": "끝나지 않는 슬라임의 습격",
     "questDescription": "마을 주변 농장에서 슬라임들이 끝도 없이 나타나 곡식을 망치고 있다.\n농부 테드는 슬라임들을 계속 처치해도 끝없이 나오는 상황에 일정 수의 슬라임을 처치해 달라고 부탁한다.",
     "questAccess": false,
