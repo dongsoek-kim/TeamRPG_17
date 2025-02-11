@@ -18,7 +18,9 @@ namespace TeamRPG_17
         public string questTitle;       // 퀘스트명
         public string questDescription; // 퀘스트설명
 
-
+        // 연계퀘스트 데이터
+        public bool questAccess;        // 퀘스트 접근 가능여부
+        public string? preQuestTitle;    // 사전 퀘스트명
 
         // 퀘스트 보상
         public int exp;                 // 퀘스트 경험치 보상

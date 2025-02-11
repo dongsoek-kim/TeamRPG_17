@@ -35,8 +35,10 @@ namespace TeamRPG_17
             Console.WriteLine("퀘스트");
             Console.WriteLine("퀘스트 수락 및 완료 할 수 있습니다.");
             Console.WriteLine("─────────────────────────");
+            Render.ColorWriteLine("진행가능한 퀘스트", ConsoleColor.Green);
             QuestManager.Instance.ShowQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");
+            Render.ColorWriteLine("완료한 퀘스트", ConsoleColor.Red);
             QuestManager.Instance.ShowEndQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");

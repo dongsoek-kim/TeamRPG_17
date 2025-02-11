@@ -46,7 +46,7 @@ namespace TeamRPG_17
                 if (quest == null || quest?.questTown != _town)
                     continue;
 
-                if (quest.questComplete)
+                if (quest.questComplete || !quest.questAccess)
                     continue;
 
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
@@ -120,7 +120,8 @@ namespace TeamRPG_17
                     continue;
 
                 // 이미 완료한 퀘스트 선택 X
-                if (quest.questComplete)
+                // 수락권한 없는 퀘스트 선택 X
+                if (quest.questComplete || !quest.questAccess)
                     continue;
 
                 if (questCount == index)
@@ -148,7 +149,10 @@ namespace TeamRPG_17
             {
                 // 퀘스트 완료 성공
                 if(selectQuest.QuestComplete())
+                {
+                    CheckPreQuest(selectQuest.questTitle);
                     return false;
+                }
                 
                 //퀘스트 완료 실패
                 return true;
@@ -160,6 +164,25 @@ namespace TeamRPG_17
                 // 선택된 퀘스트 수락 true
                 selectQuest.questAccpet = true;
                 return true;
+            }
+        }
+
+        public void CheckPreQuest(string _questTitle)
+        {
+            foreach(Quest? quest in quests)
+            {
+                // null 예외
+                if (quest == null)
+                    continue;
+
+                // 이미 퀘스트 권한 O / 사전퀘스트 X
+                if (quest.questAccess || quest.preQuestTitle == null)
+                    continue;
+
+                if(quest.preQuestTitle.Equals(_questTitle))
+                {
+                    quest.questAccess = true;
+                }
             }
         }
 
