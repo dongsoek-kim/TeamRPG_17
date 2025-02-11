@@ -33,6 +33,7 @@ namespace TeamRPG_17
                     break;
                 case 1:
                     HealPlayer();
+                    GiftPotion();
                     break;
             }
         }
@@ -67,16 +68,20 @@ namespace TeamRPG_17
             onMessage = false;
         }
 
+
         public void GiftPotion()
         {
-            int potionCount = 0;
+            int potionCount = GameManager.Instance.player.inventory.potion.potionCount[(int)PotionType.Health];
 
-            potionCount = GameManager.Instance.player.inventory.potion.potionCount[0];
             if (potionCount < 3)
             {
-                GameManager.Instance.player.inventory.potion.GetPotion(PotionType.Health, 0);
-                for (int i = 1; 1 <= 3; i++) 
-                Console.WriteLine("포션이 지급되었습니다!");
+                int givePotions = 3 - potionCount;
+
+                for (int i = 0; i < givePotions; i++)
+                {
+                    GameManager.Instance.player.inventory.potion.GetPotion(PotionType.Health, 1);
+                    Console.WriteLine("포션이 지급되었습니다!");
+                }
             }
             else
             {
