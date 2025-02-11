@@ -12,7 +12,7 @@ namespace TeamRPG_17
         [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Replace)]
         public string name      { get; set; }
         public JobType job      { get; set; }
-        TownName currentTown    {  get; set; }
+
         public int level        { get; private set; }
         public int exp          { get; private set; }
         public int str          { get; private set; }
@@ -49,11 +49,11 @@ namespace TeamRPG_17
             hp = hpMax;
             mp = mpMax;
             gold = 1000;
-            currentTown = (TownName)GameManager.Instance.currentTown.id;
+
             inventory = new Inventory();
         }
         [JsonConstructor]
-        public Player(int level, int exp, int str, int dex, int inte, int luk,float damage,float defense,int hpMax, int mpMax, int gold,TownName currentTown,Inventory inventory)
+        public Player(int level, int exp, int str, int dex, int inte, int luk,float damage,float defense,int hpMax, int mpMax, int gold,Inventory inventory)
         {
             this.level = level;
             this.exp = exp;
@@ -66,8 +66,6 @@ namespace TeamRPG_17
             this.damage = damage;
             this.defense = defense;
             this.gold = gold;
-            this.currentTown = currentTown;
-            GameManager.Instance.currentTown = GameManager.Instance.towns[(int)currentTown];
             this.inventory = inventory ?? new Inventory();
         }
         // 던전 클리어 후 경험치 획득 함수
