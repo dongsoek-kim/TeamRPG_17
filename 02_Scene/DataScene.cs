@@ -40,23 +40,19 @@ namespace TeamRPG_17
         private void DataMain()
         {
             Console.Clear();
-            Console.WriteLine("데이터 관리");
-            Console.WriteLine("데이터를 관리해주는 씬입니다.\n");
+            Console.WriteLine("캐릭터 선택");
+            Console.WriteLine("사용하실 캐릭터를 선택해주세요.\n");
             Console.WriteLine("─────────────────────────");
             DataList(); // 현재 들어있는 데이터 출력
             Console.WriteLine("─────────────────────────");
-            Console.WriteLine("1. 저장하기");
+            Console.WriteLine("1. 새게임");
             Console.WriteLine("2. 불러오기");
             Console.WriteLine("3. 삭제하기\n");
-            Console.WriteLine("0. 나가기");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
             switch (intCommand)
             {
-                case 0:
-                    GameManager.Instance.ChangeScene(SceneName.LobbyScene);
-                    break;
                 case 1:
                     onSave = true;
                     onSelect = false;
@@ -75,7 +71,7 @@ namespace TeamRPG_17
         private void DataSave()
         {
             Console.Clear();
-            Console.WriteLine("데이터 저장하기");
+            Console.WriteLine("데이터 생성하기");
             Console.WriteLine("원하시는 공간을 지정해주세요.\n");
             Console.WriteLine("─────────────────────────");
 
@@ -83,29 +79,35 @@ namespace TeamRPG_17
 
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("\n0. 나가기");
+
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
+            // 1 2 3
             switch (intCommand)
             {
                 case 0:
                     onSave = false;
                     onSelect = true;
                     break;
+
                 default:
+                    int slotIndex = intCommand - 1; // 선택된 슬롯 배열 index
                     bool isSlot = true;
-                    if(intCommand - 1 < datas.Length)
+
+                    // 범위를 벗어난 입력 ( 0 미만 , datas.Length 이상 )
+                    if (slotIndex < 0 || slotIndex >= datas.Length)
+                        break;
+
+                    isSlot = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?", out int innerCommand);   // 슬롯 덮어쓰기 여부 확인
+
+                    // 슬롯O & 덮어쓰기O  or  슬롯X
+                    if((isSlot && innerCommand == 1) || isSlot == false)
                     {
-                        int innerCommand = 0;
-                        isSlot = CheckSlot(intCommand, "현재 슬롯에 데이터가 남아있습니다.\n정말로 저장을 하시겠습니까?", out innerCommand);
-                        
-                        if((isSlot && innerCommand == 1) || isSlot == false) // Slot있고 확인을 누르거나, Slot이 비어있으면 실행
-                        {
-                            DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, intCommand);
-                            Console.WriteLine("데이터 저장 완료!!");
-                            SyncSlot(); // 다시 불러오기
-                            Console.ReadKey(true);
-                        }
+                        onSave = false;
+                        onSelect = true;
+
+                        GameManager.Instance.ChangeScene(SceneName.UserCreateScene);
                     }
                     break;
             }
