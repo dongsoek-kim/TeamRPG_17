@@ -23,7 +23,7 @@ namespace TeamRPG_17
             _monsters = monsters;
         }
 
-        public void DisplayBattleStatus()
+        public void DisplayBattleStatus() // 전투 기본 정보들 출력
         {
             Console.Clear();
             Console.WriteLine("=== ENGAGE!!! ===");
@@ -32,7 +32,7 @@ namespace TeamRPG_17
             DisplayPlayerStatus();
         }
 
-        private void DisplayMonsterStatus()
+        private void DisplayMonsterStatus() // 몬스터 목록
         {
             for (int i = 0; i < _monsters.Count; i++)
             {
@@ -41,26 +41,26 @@ namespace TeamRPG_17
             }
         }
 
-        private void DisplayPlayerStatus()
+        private void DisplayPlayerStatus() // 플레이어 기본 정보
         {
             Console.WriteLine($"\nLv.{_player.level}  {_player.name} ({_player.job})");
             Console.WriteLine($"HP  {_player.hp} / {_player.hpMax}");
             Console.WriteLine($"MP  {_player.mp} / {_player.mpMax}");
         }
 
-        public void DisplayBattleMenu()
+        public void DisplayBattleMenu() // 전투 메뉴 출력
         {
             DisplayBattleStatus();
             Console.WriteLine("\n\n1. 공격\n2. 스킬\n3. 포션");
         }
 
-        public void DisplayTargetingPrompt()
+        public void DisplayTargetingPrompt() // 몬스터 대상 출력
         {
             DisplayBattleStatus();
             Console.Write("\n\n0. 취소\n대상을 선택해 주세요.\n>>");
         }
 
-        public void DisplaySkillList()
+        public void DisplaySkillList() // 스킬 목록 출력
         {
             DisplayBattleStatus();
             Console.WriteLine("\n\n0. 취소");
@@ -71,7 +71,7 @@ namespace TeamRPG_17
             Console.Write("\n사용할 스킬을 선택해 주세요.\n>>");
         }
 
-        public void DisplayPotionList()
+        public void DisplayPotionList() // 포션 목록 출력
         {
             DisplayBattleStatus();
             Console.WriteLine("\n\n0. 취소");
@@ -83,7 +83,7 @@ namespace TeamRPG_17
             Console.Write("\n포션을 선택해 주세요.\n>>");
         }
 
-        public void DisplayBattleResult(bool isWin, List<Monster> monsters, Player player, int dungeonLevel)
+        public void DisplayBattleResult(bool isWin, List<Monster> monsters, Player player, int dungeonLevel) // 전투 종료 결과 출력
         {
             Console.Clear();
             Console.WriteLine("Battle - Result");
@@ -100,7 +100,7 @@ namespace TeamRPG_17
             Console.WriteLine($"\nHP {player.hp} remains");
         }
 
-        private void DisplayVictoryResult(List<Monster> monsters)
+        private void DisplayVictoryResult(List<Monster> monsters) // 전투에서 잡은 몬스터 출력
         {
             Console.WriteLine("\n!!!   VICTORY   !!!");
             foreach (var monster in monsters.Where(m => m.IsDead))
@@ -109,7 +109,7 @@ namespace TeamRPG_17
             }
         }
 
-        public static void DisplayDamageTaken(Monster target, int prevHp, int dmg)
+        public static void DisplayDamageTaken(Monster target, int prevHp, int dmg) // 플레이어의 공격 출력 (몬스터가 맞을 때)
         {
             Console.Clear();
             Console.WriteLine($"{target.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
@@ -128,7 +128,7 @@ namespace TeamRPG_17
             PrintContinuePrompt();
         }
 
-        public static void DisplayMonsterAttack(Monster monster, Player player, int damage, int prevHp)
+        public static void DisplayMonsterAttack(Monster monster, Player player, int damage, int prevHp) // 몬스터의 공격 출력(플레이어가 맞을 때)
         {
             Console.Clear();
             Console.WriteLine($"{monster.GetInfo()}의 공격! {player.name}을(를) 맞췄습니다. [데미지 : {damage}]");
@@ -138,6 +138,44 @@ namespace TeamRPG_17
                 Console.WriteLine("Dead");
             else
                 Console.WriteLine($"{player.hp}");
+
+            PrintContinuePrompt();
+        }
+
+        public static void DisplayPotionEffect(PotionType potion) // 포션 사용 시 효과 출력
+        {
+            Console.Clear();
+            Console.WriteLine($"{potion}포션을 마셨습니다.");
+
+            switch (potion)
+            {
+                case PotionType.Health:
+                    {
+                        Console.WriteLine($"당신의 상처가 아뭅니다.");
+                        break;
+                    }
+                case PotionType.str:
+                    {
+                        Console.WriteLine($"당신의 악력이 강해지는 것 같습니다.");
+                        break;
+                    }
+                case PotionType.dex:
+                    {
+                        Console.WriteLine($"당신의 몸놀림이 빨라진 것 같습니다.");
+                        break;
+                    }
+                case PotionType.inte:
+                    {
+                        Console.WriteLine($"당신은 더 똑똑해진 것 같습니다.");
+                        break;
+                    }
+                case PotionType.luk:
+                    {
+                        Console.WriteLine($"당신의 뭘 해도 잘될 것 같은 느낌을 받습니다.");
+                        break;
+                    }
+                default: break;
+            }
 
             PrintContinuePrompt();
         }
