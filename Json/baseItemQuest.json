@@ -1,17 +1,5 @@
 [
   {
-    "questItem": [ "누가 쓰다버린 목검", "누가 쓰다버린 단검" ],
-    "questTown": 0,
-    "questComplete": false,
-    "questAccpet": false,
-    "questRepeatable": true,
-    "questTitle": "테스트 퀘스트",
-    "questDescription": "테스트 퀘스트입니다.",
-    "exp": 10,
-    "gold": 10,
-    "rewardItem": null
-  },
-  {
     "questItem": [ "촌장의 야망" ],
     "questTown": 0,
     "questComplete": false,
