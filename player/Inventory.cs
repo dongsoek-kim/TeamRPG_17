@@ -40,7 +40,7 @@ namespace TeamRPG_17
 
         public void ShowInventory(int nowPage,out int totalPages)
         {
-            int itemsPerPage = 10; // 한 페이지에 표시할 아이템 수
+            int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
             int  itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
             totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
             List<Item> itemList = inventory.Where(i => i != null).ToList();
@@ -66,13 +66,27 @@ namespace TeamRPG_17
         /// 포션갯수 출력함수
         /// </summary>
         public void showPotion()
-        { 
+        {
+            var originalPosition = Console.GetCursorPosition();
             int potionType = 0;
+            int coorX = Console.WindowWidth -60;
+            int coorY = 15;
+            for (int i = 0;i<6;i++)
+            {
+                Console.SetCursorPosition(coorX, coorY);
+                Console.WriteLine("|");
+                coorY++;
+            }
+            coorX = Console.WindowWidth - 50;
+            coorY = 16;
             foreach (int potion in potion.potionCount) 
             {
+                Console.SetCursorPosition(coorX, coorY);
                 Console.WriteLine($"{(PotionType)potionType}포션의 갯수 : {potion}개");
                 potionType++;
+                coorY++;
             }
+            Console.SetCursorPosition(originalPosition.Left, originalPosition.Top);
         }
         /// <summary>
         /// 장비 정보 출력함수
@@ -81,7 +95,7 @@ namespace TeamRPG_17
         public void ShowEquip(int nowPage, out int totalPages)
         {
             int itemCount = 1;
-            int itemsPerPage = 10; // 한 페이지에 표시할 아이템 수
+            int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
             int itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
             totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
             List<Item> itemList = inventory.Where(i => i != null).ToList();
@@ -113,51 +127,82 @@ namespace TeamRPG_17
                 }
                 itemCount++;
             }
-            //foreach (Item item in inventory)
-            //{
-            //    if (item == null)
-            //        continue;
-            //    if (item.itemType == ItemType.Armor)// item이 장착중인 방어구일때
-            //    {
-            //        if (equipedArmor[(int)item.EquipSlot] == item)
-            //        {
-            //            Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
-            //        }
-            //        else 
-            //        {
-            //            Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
-            //        }
-            //    }
-            //    else if(item.itemType == ItemType.Weapon)
-            //    {
-            //        if (equipedWeapon == item)
-            //        {
-            //            Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
-            //        }
-            //    }                
-            //    itemCount++;
-            //}
         }
+        /// <summary>
+        /// 장비 창
+        /// 부위별로 착용중인 장비 출력
+        /// </summary>
+        public void showNowEquip()
+        {   
+            Console.WriteLine("착용 중인 장비");
+            if (equipedWeapon != null)
+                nowEquipInfo(EquipSlot.Weapon);
+            else Console.WriteLine("무기 : 없음");
 
+            if (equipedArmor[(int)EquipSlot.Head] != null)
+            {
+                Console.Write("머리");
+                nowEquipInfo(EquipSlot.Head);
+            }
+            else Console.WriteLine("머리방어구 : 없음");
+
+            if (equipedArmor[(int)EquipSlot.Body] != null)
+            {
+                Console.Write("전신");
+                nowEquipInfo(EquipSlot.Body);
+            }
+            else Console.WriteLine("전신방어구 : 없음");
+
+            if (equipedArmor[(int)EquipSlot.Arm] != null)
+            {
+                Console.Write("팔");
+                nowEquipInfo(EquipSlot.Arm);
+            }
+            else Console.WriteLine("팔방어구 : 없음");
+
+            if (equipedArmor[(int)EquipSlot.Foot] != null)
+            {
+                Console.Write("다리");
+                nowEquipInfo(EquipSlot.Foot);
+                Console.WriteLine();
+            }
+            else Console.WriteLine("다리방어구 : 없음");
+            int sumDefens=0;
+            var itemStats = ItemStat();
+            Console.Write($"총방어력:");ArmorStat();
+            Console.WriteLine($"총 힘 : {itemStats.sumStr}, 총 민첩 : {itemStats.sumDex},총 지능 : {itemStats.sumInte},총 행운 : {itemStats.sumLuk}");
+        }
+        public void nowEquipInfo(EquipSlot equipSlot)
+        {
+            if (equipSlot == EquipSlot.Weapon)
+            {
+                Console.WriteLine($"무기 : {equipedWeapon.itemName}");
+                Console.WriteLine($"공격력: {equipedWeapon.damage}, 힘 : { equipedWeapon.str}, 민첩 : {equipedWeapon.dex},지능 : {equipedWeapon.inte}, 행운 : {equipedWeapon.luk}");
+            }
+            else
+            {
+                Console.WriteLine($"방어구 : {equipedArmor[(int)equipSlot].itemName}");
+                Console.WriteLine($"방어력 : {equipedArmor[(int)equipSlot].defense}, 힘 : {equipedArmor[(int)equipSlot].str},민첩 : {equipedArmor[(int)equipSlot].dex}, 지능 : {equipedArmor[(int)equipSlot].inte}, 행운 : {equipedArmor[(int)equipSlot].luk}");
+            }
+
+        }
         /// <summary>
         /// 방어구의 추가스탯 출력 함수
         /// </summary>
         public void ArmorStat()
         {
             string stat = "";
+            int sumDefense = 0;
             if (equipedArmor != null)
             {
                 foreach (Armor equipedArmor in equipedArmor)
                 {
                     if (equipedArmor != null)
-                        stat = $" ( +{equipedArmor.defense} )";
+                        sumDefense += equipedArmor.defense;
+                        
                 }
             }
-
+            if(sumDefense>0) stat = $" ( +{sumDefense} )";
             Console.WriteLine($"{stat}");
         }
 
@@ -172,6 +217,21 @@ namespace TeamRPG_17
             // 공격력 = +무기공격력*log(str*(직업)+Dex*(직업)+inte(직업))
 
             Console.WriteLine($"{stat}");
+        }
+        public (int sumStr,int sumDex,int sumInte,int sumLuk) ItemStat()
+        {
+            int sumStr = 0,sumDex=0,sumInte=0,sumLuk=0;
+            foreach (Armor equipedArmor in equipedArmor)
+            {
+                if (equipedArmor == null) continue;
+                else
+                { sumStr += equipedArmor.str; sumDex += equipedArmor.dex; sumInte += equipedArmor.inte; sumLuk += equipedArmor.luk; }
+            }
+            if(equipedWeapon!=null)
+            {
+                { sumStr += equipedWeapon.str; sumDex += equipedWeapon.dex; sumInte += equipedWeapon.inte; sumLuk += equipedWeapon.luk; }
+            }
+            return (sumStr, sumDex, sumInte, sumLuk);
         }
 
         /// <summary>
