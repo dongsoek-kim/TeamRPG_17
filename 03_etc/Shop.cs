@@ -117,8 +117,9 @@ namespace TeamRPG_17
         /// <summary>
         /// 판매 아이템 리스트 출력
         /// </summary>
-        public void PrintItemList(bool _isNumber = false)
+        public void PrintItemList(int itemsPerPage, int nowPage, out int totalPages, bool _isNumber = false)
         {
+
             int? number;
             Town town = GameManager.Instance.currentTown; // 현재 타운
 
@@ -126,13 +127,26 @@ namespace TeamRPG_17
             if (!town.CanGetItem())
             {
                 Console.WriteLine("PrintItemList() 메서드에서 아이템 리스트를 가져올 수 없습니다.");
+                totalPages = 0;
                 return;
             }
 
+            int itemCount = 1;
+            int totalTownItem = town.startItemIdx + town.count;
+            totalPages = (totalTownItem + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+
+            int startIndex = town.startItemIdx + nowPage * itemsPerPage;
+            int endIndex;
+
+            if ((startIndex + itemsPerPage > totalTownItem))
+                endIndex = totalTownItem;
+            else
+                endIndex = startIndex + itemsPerPage;
+
             // 판매 목록
-            for (int i = town.startItemIdx; i < town.startItemIdx + town.count; i++)
+            for (int i = startIndex; i < endIndex; i++)
             {
-                number = _isNumber ? i - town.startItemIdx + 1 : null;
+                number = _isNumber ? itemCount : null;
 
                 Console.Write($"- {number} {ItemManager.Instance.items[i].ItemInfo()}");
 
@@ -141,22 +155,30 @@ namespace TeamRPG_17
 
                 else
                     Console.WriteLine("  | 구매완료");
+
+                itemCount++;
             }
         }
 
         /// <summary>
         /// 판매 아이템 리스트 출력
         /// </summary>
-        public void SellItemList()
+        public void SellItemList(int itemsPerPage, int nowPage, out int totalPages)
         {
-            int num = 1;
-            for (int i = 0; i < ItemManager.Instance.itemLength; i++)
-            {
-                if (GameManager.Instance.player.inventory[i] == null)
-                    continue;
+            Item[] inventory = GameManager.Instance.player.inventory.inventory;
 
-                Console.Write($"- {num++} {ItemManager.Instance.items[i].ItemInfo()}");
-                Console.WriteLine($"  | {(int)(ItemManager.Instance.itemPrice[i] * sellRatio)}G");
+            int num = 1;
+
+            int itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
+            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            List<Item> itemList = inventory.Where(i => i != null).ToList();
+            int startIndex = nowPage * itemsPerPage;
+            List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
+
+            foreach(Item item in pageList)
+            {
+                Console.Write($"- {num++} {item.ItemInfo()}");
+                Console.WriteLine($"  | {(int)(ItemManager.Instance.itemPrice[(int)item.itemType] * sellRatio)}G");
             }
         }
 
