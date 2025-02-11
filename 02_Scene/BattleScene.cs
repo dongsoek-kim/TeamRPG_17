@@ -109,7 +109,7 @@ namespace TeamRPG_17
             }
         }
 
-        public void DisplayDamageTaken(Monster target, int prevHp, int dmg)
+        public static void DisplayDamageTaken(Monster target, int prevHp, int dmg)
         {
             Console.Clear();
             Console.WriteLine($"{target.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
@@ -128,7 +128,7 @@ namespace TeamRPG_17
             PrintContinuePrompt();
         }
 
-        public void DisplayMonsterAttack(Monster monster, Player player, int damage, int prevHp)
+        public static void DisplayMonsterAttack(Monster monster, Player player, int damage, int prevHp)
         {
             Console.Clear();
             Console.WriteLine($"{monster.GetInfo()}의 공격! {player.name}을(를) 맞췄습니다. [데미지 : {damage}]");
@@ -153,13 +153,13 @@ namespace TeamRPG_17
             Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
         }
 
-        public void DisplayNoPotions()
+        public static void DisplayNoPotions()
         {
             Console.WriteLine("\n남은 포션이 없습니다! 다른 포션을 선택해주세요.");
             Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
         }
 
-        public void PrintContinuePrompt()
+        public static void PrintContinuePrompt()
         {
             Console.Write("\n아무 키나 눌러 진행...\n>>");
             Console.ReadKey(true);

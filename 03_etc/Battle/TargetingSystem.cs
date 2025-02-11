@@ -37,7 +37,7 @@ namespace TeamRPG_17
                 if (target.IsDead)
                 {
                     Console.WriteLine("이미 죽은 몬스터입니다!");
-                    _battleUI.PrintContinuePrompt();
+                    BattleScene.PrintContinuePrompt();
                     continue;
                 }
 

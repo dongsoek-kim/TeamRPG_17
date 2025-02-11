@@ -64,7 +64,7 @@ namespace TeamRPG_17
                 foreach (var monster in _monsters.Where(m => !m.IsDead))
                 {
                     int damage = _battleSystem.ProcessMonsterAttack(monster);
-                    _battleUI.DisplayMonsterAttack(monster, _player, damage, _player.hp);
+                    BattleScene.DisplayMonsterAttack(monster, _player, damage, _player.hp);
                 }
 
                 if (_player.hp <= 0)
@@ -84,7 +84,7 @@ namespace TeamRPG_17
                 reward.ApplyReward(_player);
             }
 
-            _battleUI.PrintContinuePrompt();
+            BattleScene.PrintContinuePrompt();
         }
 
         private int HandleInput(int maxOption)

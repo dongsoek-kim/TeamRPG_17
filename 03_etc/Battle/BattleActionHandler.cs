@@ -113,7 +113,7 @@ namespace TeamRPG_17
                 }
                 else
                 {
-                    _battleUI.DisplayNoPotions();
+                    BattleScene.DisplayNoPotions();
                 }
             }
         }
