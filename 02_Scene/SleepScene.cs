@@ -50,6 +50,7 @@ namespace TeamRPG_17
 
                 GameManager.Instance.player.gold -= healPrice;
                 GameManager.Instance.player.hp = 100;
+                GameManager.Instance.player.mp = 100;
             }
             else
             {
