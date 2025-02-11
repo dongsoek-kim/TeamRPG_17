@@ -41,17 +41,23 @@ namespace TeamRPG_17
         public void ShowQuestList(TownName _town)
         {
             int questCount = 1;
-            string questStateText = "수락가능";
-            ConsoleColor questStateColor = ConsoleColor.Yellow;
+            string questStateText;
+            ConsoleColor questStateColor;
 
             foreach (Quest? quest in quests)
             {
+                questStateText = "수락가능";
+                questStateColor = ConsoleColor.Yellow;
+
+                // null 예외  // 다른 마을일떄 
                 if (quest == null || quest?.questTown != _town)
                     continue;
 
+                // 이미 클리어한 퀘스트  // 접근 불가능한 퀘스트
                 if (quest.questComplete || !quest.questAccess)
                     continue;
 
+                // 퀘스트 수락한 퀘스트
                 if(quest.questAccpet)
                 {
                     questStateText = "진행중";
