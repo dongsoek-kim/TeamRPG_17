@@ -145,7 +145,7 @@ namespace TeamRPG_17
         public void DisplayInvalidInput()
         {
             Console.WriteLine("잘못된 입력입니다. 다시 입력하세요.");
-            PrintContinuePrompt();
+            Console.ReadLine();
         }
 
         public void DisplayNotEnoughMP()
