@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace TeamRPG_17
 {
     public class Player
     {
+        [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Replace)]
         public string name      { get; set; }
         public JobType job      { get; set; }
 
@@ -50,7 +52,22 @@ namespace TeamRPG_17
 
             inventory = new Inventory();
         }
-
+        [JsonConstructor]
+        public Player(int level, int exp, int str, int dex, int inte, int luk,int damage,int defense,int haMax, int mpMax, int gold,Inventory inventory)
+        {
+            this.level = level;
+            this.exp = exp;
+            this.str = str;
+            this.dex = dex;
+            this.inte = inte;
+            this.luk = luk;
+            this.hpMax = hpMax;
+            this.mpMax = mpMax;
+            this.damage = damage;
+            this.defense = defense;
+            this.gold = gold;
+            this.inventory = inventory ?? new Inventory();
+        }
         // 던전 클리어 후 경험치 획득 함수
         public void AddExp(int addExp)
         {
