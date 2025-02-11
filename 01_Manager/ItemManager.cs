@@ -18,7 +18,12 @@ namespace TeamRPG_17
             itemLength = Enum.GetValues(typeof(ItemName)).Length;
             items = new Item[itemLength];
             itemPrice = new int[itemLength];
+
             LoadItemsData();
+
+            // 아이템을 다 불러오고 초기화
+            for (int i = 0; i < itemPrice.Length; i++)
+                itemPrice[i] = items[i].price;
         }
         public void LoadItemsData()
         {
