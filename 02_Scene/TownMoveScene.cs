@@ -37,6 +37,7 @@ namespace TeamRPG_17
 
                 // 게임매니저에 있는 현재 도시 설정후 로비씬
                 GameManager.Instance.currentTown = GameManager.Instance.towns[intCommand - 1];
+                GameManager.Instance.player.nowTown = (TownName)intCommand - 1;
                 GameManager.Instance.ChangeScene(SceneName.LobbyScene);
             }
         }

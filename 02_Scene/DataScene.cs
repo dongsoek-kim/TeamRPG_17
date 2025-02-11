@@ -143,6 +143,7 @@ namespace TeamRPG_17
                         {
                             DataManager.LoadData(intCommand);
                             Console.WriteLine("불러오기 완료!!");
+                            GameManager.Instance.currentTown = GameManager.Instance.towns[(int)GameManager.Instance.player.nowTown];
                             Console.ReadKey(true);
                             GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                         }

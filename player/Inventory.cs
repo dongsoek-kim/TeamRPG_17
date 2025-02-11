@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -60,6 +61,7 @@ namespace TeamRPG_17
             List<Item> itemList = inventory.Where(i => i != null).ToList();
             int startIndex = nowPage * itemsPerPage;
             List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
+            ConsoleColor color=ConsoleColor.White;
             foreach (Item item in pageList)
             {
                 string prefix = ""; // 기본적으로 장착 여부 없음
@@ -72,8 +74,19 @@ namespace TeamRPG_17
                 {
                     prefix = "[E] ";
                 }
-                Console.WriteLine($"{prefix}{item.ItemInfo()}");
-
+                switch (item.grade)
+                {
+                    case Grade.Common:
+                        color = ConsoleColor.DarkGray;
+                        break;
+                    case Grade.Rare:
+                        color = ConsoleColor.Blue;
+                        break;                     
+                    case Grade.Unique:
+                        color = ConsoleColor.Yellow;
+                        break;
+                }
+                Render.ColorWriteLine($"{prefix}{item.ItemInfo()}",color);
             }
         }
         /// <summary>
@@ -115,30 +128,33 @@ namespace TeamRPG_17
             List<Item> itemList = inventory.Where(i => i != null).ToList();
             int startIndex = nowPage * itemsPerPage;
             List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
+            ConsoleColor color = ConsoleColor.White;
             foreach (Item item in pageList)
             {
-                if (item.itemType == ItemType.Armor)// item이 장착중인 방어구일때
+                string prefix = "";
+
+                // 아이템 종류에 따라 장착 여부를 확인하여 접두어를 설정합니다.
+                if (item.itemType == ItemType.Armor && equipedArmor[(int)item.EquipSlot] == item)
                 {
-                    if (equipedArmor[(int)item.EquipSlot] == item)
-                    {
-                        Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
-                    }
+                    prefix = "[E]";
                 }
-                else if (item.itemType == ItemType.Weapon)
+                else if (item.itemType == ItemType.Weapon && equipedWeapon == item)
                 {
-                    if (equipedWeapon == item)
-                    {
-                        Console.WriteLine($"{itemCount}. [E]{item.ItemInfo()}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{itemCount}. {item.ItemInfo()}");
-                    }
+                    prefix = "[E]";
                 }
+                switch (item.grade)
+                {
+                    case Grade.Common:
+                        color = ConsoleColor.DarkGray;
+                        break;
+                    case Grade.Rare:
+                        color = ConsoleColor.Blue;
+                        break;
+                    case Grade.Unique:
+                        color = ConsoleColor.Yellow;
+                        break;
+                }
+                Render.ColorWriteLine($"{prefix}{item.ItemInfo()}", color);
                 itemCount++;
             }
         }

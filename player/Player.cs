@@ -12,7 +12,7 @@ namespace TeamRPG_17
         [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Replace)]
         public string name      { get; set; }
         public JobType job      { get; set; }
-
+        public TownName nowTown {  get; set; }
         public int level        { get; private set; }
         public int exp          { get; private set; }
         public int str          { get; private set; }
@@ -48,12 +48,13 @@ namespace TeamRPG_17
             mpMax = 100;
             hp = hpMax;
             mp = mpMax;
+            nowTown = TownName.Elinia;
             gold = 1000;
 
             inventory = new Inventory();
         }
         [JsonConstructor]
-        public Player(int level, int exp, int str, int dex, int inte, int luk,float damage,float defense,int hpMax, int mpMax, int gold,Inventory inventory)
+        public Player(int level, int exp, int str, int dex, int inte, int luk,float damage,float defense,int hpMax, int mpMax, int gold,TownName nowTown,Inventory inventory)
         {
             this.level = level;
             this.exp = exp;
@@ -65,6 +66,7 @@ namespace TeamRPG_17
             this.mpMax = mpMax;
             this.damage = damage;
             this.defense = defense;
+            this.nowTown = nowTown;
             this.gold = gold;
             this.inventory = inventory ?? new Inventory();
         }

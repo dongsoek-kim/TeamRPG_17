@@ -29,14 +29,14 @@ namespace TeamRPG_17
         private void InventoryPrint()
         {
             Console.Clear();
-            Console.WriteLine($"인벤토리");
+            Render.ColorWriteLine($"인벤토리",ConsoleColor.Cyan);
             Console.WriteLine("보유중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");
-            Console.WriteLine("[아이템 목록]");
+            Render.ColorWriteLine("[아이템 목록]",ConsoleColor.Cyan);
             GameManager.Instance.player.inventory.ShowInventory(nowPage,out totalPage);
             Console.WriteLine($"{nowPage+1}/{totalPage}페이지");
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");
-            Console.WriteLine("[장착중인 장비]                                             |            [포션갯수]");
+            Render.ColorWriteLine("[장착중인 장비]                                             |            [포션갯수]",ConsoleColor.Cyan);
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");
             GameManager.Instance.player.inventory.showPotion();
             GameManager.Instance.player.inventory.showNowEquip();
@@ -88,15 +88,16 @@ namespace TeamRPG_17
         private void equipManagement()
         {
             Console.Clear();
-            Console.WriteLine("인벤토리 - 장착 관리");
+            Render.ColorWriteLine("인벤토리 - 장착 관리",ConsoleColor.Cyan);
             Console.WriteLine("보유중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");
-            Console.WriteLine("[아이템 목록]");
+            Render.ColorWriteLine("[아이템 목록]",ConsoleColor.Cyan);
             GameManager.Instance.player.inventory.ShowEquip(nowPage,out totalPage);
             Console.WriteLine($"{nowPage + 1}/{totalPage}페이지");
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");
             Console.WriteLine("0. 나가기");
             ItemPage2();
+            
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
