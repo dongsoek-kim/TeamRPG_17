@@ -55,7 +55,7 @@
 
         public bool SceneInputCommand(out int intCommand)
         {
-            Render.ColorWriteLine("\n원하시는 행동을 입력해주세요.", ConsoleColor.DarkRed);
+            Render.ColorWriteLine("\n원하시는 행동을 입력해주세요.", ConsoleColor.DarkYellow);
 
             Console.Write("> ");
             string command = Console.ReadLine();
