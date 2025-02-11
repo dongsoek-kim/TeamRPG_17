@@ -26,6 +26,7 @@ namespace TeamRPG_17
             Console.WriteLine($"지능 : {GameManager.Instance.player.inte + itemStats.sumInte} ({itemStats.sumInte})");
             Console.WriteLine($"행운 : {GameManager.Instance.player.luk + itemStats.sumLuk} ({itemStats.sumLuk})");
             Console.Write($"공격력 : {GameManager.Instance.player.TotalDamage}");
+            Console.WriteLine($"Base: {GameManager.Instance.player.damage}, Bonus: {(int)GameManager.Instance.player.BonusDamage}, Item: {GameManager.Instance.player.inventory.WeaponStat()}, Total:{GameManager.Instance.player.damage}+{(int)GameManager.Instance.player.BonusDamage}+{GameManager.Instance.player.inventory.WeaponStat()}");
             Console.WriteLine($"방어력 : {GameManager.Instance.player.TotalDefens}");
 
             Console.WriteLine($"체 력 : {GameManager.Instance.player.hp} / {GameManager.Instance.player.hpMax}");
