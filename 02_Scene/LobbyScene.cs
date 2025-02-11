@@ -21,9 +21,9 @@ namespace TeamRPG_17
         {
             Town currentTown = GameManager.Instance.currentTown;
             Console.Clear();
-            Render.ColorWrite($"{currentTown.name} ", colors[(int)currentTown.id]);
-            Console.WriteLine($"마을에 오신 여러분 환영합니다.");
-            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
+            Render.ColorWriteLine($"{currentTown.name} ", colors[(int)currentTown.id]);
+            Render.AnimationWriteLine($"마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n", 2f, true);
+            Console.WriteLine(currentTown.townDescription);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
