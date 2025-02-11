@@ -114,7 +114,7 @@ namespace TeamRPG_17
         private void DataLoad()
         {
             Console.Clear();
-            Console.WriteLine("데이터 불러오기");
+            Console.WriteLine("캐릭터 선택하기");
             Console.WriteLine("원하시는 공간을 지정해주세요.\n");
             Console.WriteLine("─────────────────────────");
 
@@ -135,16 +135,17 @@ namespace TeamRPG_17
                 default:
                     if (intCommand - 1 < datas.Length)
                     {
+                        DataManager.currentSlot = intCommand;
                         if (datas[intCommand - 1] != null && datas[intCommand - 1].name != null)
                         {
                             DataManager.LoadData(intCommand);
                             Console.WriteLine("불러오기 완료!!");
                             Console.ReadKey(true);
+                            GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                         }
                         else
                         {
-                            Console.WriteLine("해당 슬롯은 비어있습니다.");
-                            Console.ReadKey(true);
+                            GameManager.Instance.ChangeScene(SceneName.UserCreateScene);
                         }
                     }
                     break;
