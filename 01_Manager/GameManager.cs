@@ -48,6 +48,8 @@
         /// </summary>
         public void ChangeScene(SceneName _name)
         {
+            if (currentScene != null)
+                currentScene.Exit();
             currentScene = scenes[(int)_name];
         }
 
