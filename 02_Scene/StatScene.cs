@@ -14,22 +14,31 @@ namespace TeamRPG_17
 
             Console.Clear();
 
-            Console.WriteLine("상태보기");
-            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
+            Render.ColorWriteLine(("상태보기"), ConsoleColor.Cyan);
+            Render.ColorWriteLine(("캐릭터의 정보가 표시됩니다."), ConsoleColor.Cyan);
 
             Console.WriteLine("─────────────────────────");
             Console.WriteLine($"Lv. {GameManager.Instance.player.level}");
             Console.WriteLine($"{GameManager.Instance.player.name} ( {GameManager.Instance.player.job} )");
 
-            Console.WriteLine($"힘 : {GameManager.Instance.player.str + itemStats.sumStr} ({itemStats.sumStr})");
-            Console.WriteLine($"민첩 : {GameManager.Instance.player.dex + itemStats.sumDex} ({itemStats.sumDex})");
-            Console.WriteLine($"지능 : {GameManager.Instance.player.inte + itemStats.sumInte} ({itemStats.sumInte})");
-            Console.WriteLine($"행운 : {GameManager.Instance.player.luk + itemStats.sumLuk} ({itemStats.sumLuk})");
-            Console.WriteLine($"공격력 : {GameManager.Instance.player.TotalDamage} ({GameManager.Instance.player.inventory.WeaponStat()})");
-            Console.WriteLine($"방어력 : {GameManager.Instance.player.TotalDefens} ({GameManager.Instance.player.inventory.ArmorStat()})");
-            Console.WriteLine($"체 력 : {GameManager.Instance.player.hp} / {GameManager.Instance.player.hpMax}");
-            Console.WriteLine($"마 력 : {GameManager.Instance.player.mp} / {GameManager.Instance.player.mpMax}");
-            Console.WriteLine($"Gold : {GameManager.Instance.player.gold}");
+            Console.Write($"힘 : {GameManager.Instance.player.str + itemStats.sumStr}");
+            Render.ColorWriteLine($" ({itemStats.sumStr})", ConsoleColor.Green);
+            Console.Write($"민첩 : {GameManager.Instance.player.dex + itemStats.sumDex}");
+            Render.ColorWriteLine($" ({itemStats.sumDex})", ConsoleColor.Green);
+            Console.Write($"지능 : {GameManager.Instance.player.inte + itemStats.sumInte}");
+            Render.ColorWriteLine($" ({itemStats.sumInte})", ConsoleColor.Green);
+            Console.Write($"행운 : {GameManager.Instance.player.luk + itemStats.sumLuk}");
+            Render.ColorWriteLine($" ({itemStats.sumDex})", ConsoleColor.Green);
+            Console.Write($"공격력 : {GameManager.Instance.player.TotalDamage}");
+            Render.ColorWriteLine($" ({GameManager.Instance.player.inventory.WeaponStat()})", ConsoleColor.Green);
+            Console.Write($"방어력 : {GameManager.Instance.player.TotalDefens}");
+            Render.ColorWriteLine($" ({GameManager.Instance.player.inventory.ArmorStat()})", ConsoleColor.Green);
+            Console.Write("체 력 : ");
+            Render.ColorWriteLine($"{GameManager.Instance.player.hp} / {GameManager.Instance.player.hpMax}", ConsoleColor.Red);
+            Console.Write("마 력 : ");
+            Render.ColorWriteLine($"{GameManager.Instance.player.mp} / {GameManager.Instance.player.mpMax}", ConsoleColor.Blue);
+            Console.Write("Gold : ");
+            Render.ColorWriteLine($"{GameManager.Instance.player.gold}", ConsoleColor.Yellow);
             Console.WriteLine("─────────────────────────");
 
             Console.WriteLine("0. 나가기");
