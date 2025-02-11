@@ -12,8 +12,8 @@ namespace TeamRPG_17
     public class QuestManager : Singleton<QuestManager>
     {
         // KillQuest의 Json파일, ItemQuest의 Json파일을 분리해서 관리
-        private KillQuest[] killQuests;
-        private ItemQuest[] itemQuests;
+        public KillQuest[] killQuests { get; private set; }
+        public ItemQuest[] itemQuests { get; private set; }
 
         private List<Quest> quests;
 
@@ -50,8 +50,13 @@ namespace TeamRPG_17
                     continue;
 
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
-                Console.Write($"{questCount++}. {quest.questTitle}  |  ");
-                Render.ColorWrite($"{questStateText}\n", ConsoleColor.Cyan);
+                Console.Write($"{questCount++}. {quest.questTitle}");
+                Render.ColorWrite($"  |  {questStateText}  ", ConsoleColor.Cyan);
+
+                // 반복퀘스트일때 추가 출력후 줄바꿈
+                if (quest.questRepeatable)
+                    Render.ColorWrite($"|  반복 퀘스트", ConsoleColor.Magenta);
+                Console.WriteLine();
             }
         }
 
@@ -81,15 +86,15 @@ namespace TeamRPG_17
             if (selectQuest == null)
                 return;
 
-            Render.ColorWriteLine($"\n{selectQuest.questTitle}",ConsoleColor.Cyan);
-            Console.WriteLine($"{selectQuest.questDescription}\n");   // 퀘스트 설명
-            selectQuest.ShowQuestReward();                          // 퀘스트 보상
+            Render.ColorWriteLine($"\n{selectQuest.questTitle}",ConsoleColor.Cyan); // 퀘스트명
+            Console.WriteLine($"{selectQuest.questDescription}\n");                 // 퀘스트 설명
+            selectQuest.ShowQuestReward();                                          // 퀘스트 보상
 
             // 수락한 퀘스트일때
             if (selectQuest.questAccpet)
             {
                 Console.WriteLine($"\n~~~~~퀘스트 진행률~~~~~");
-                selectQuest.QuestProgress();                // 퀘스트 진행도 확인
+                selectQuest.QuestProgress();   // 퀘스트 진행도 확인
 
                 // 퀘스트 완료 가능하다면 퀘스트완료 선택지 추가
                 if(selectQuest.QuestCheck())
