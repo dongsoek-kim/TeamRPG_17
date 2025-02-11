@@ -125,7 +125,7 @@ namespace TeamRPG_17
             // 예외 처리사항
             if (!town.CanGetItem())
             {
-                Console.WriteLine("PrintItemList() 메서드에서 아이템 리스를 가져올 수 없습니다.");
+                Console.WriteLine("PrintItemList() 메서드에서 아이템 리스트를 가져올 수 없습니다.");
                 return;
             }
 
