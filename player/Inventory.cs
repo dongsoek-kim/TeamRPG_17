@@ -217,7 +217,7 @@ namespace TeamRPG_17
                 }
             }
             if(sumDefense>0) stat = $" ( +{sumDefense} )";
-            Console.WriteLine($"{stat}");
+            //Console.WriteLine($"{stat}");
             return sumDefense;
         }
 
@@ -233,7 +233,7 @@ namespace TeamRPG_17
                 stat = $" ( +{equipedWeapon.damage} )";
                 weaponDamage = equipedWeapon.damage;
             }
-            Console.WriteLine($"{stat}");
+            //Console.WriteLine($"{stat}");
             return weaponDamage;
         }
         public (int sumStr,int sumDex,int sumInte,int sumLuk) ItemStat()
