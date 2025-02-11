@@ -96,7 +96,8 @@ namespace TeamRPG_17
                 {
                     return selection;
                 }
-                else return -1;
+                _battleUI.DisplayInvalidInput(); // 잘못된 입력 메시지 출력
+                Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
             }
         }
     }

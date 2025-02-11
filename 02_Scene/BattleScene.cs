@@ -144,26 +144,25 @@ namespace TeamRPG_17
 
         public void DisplayInvalidInput()
         {
-            Console.WriteLine("잘못된 입력입니다. 다시 입력하세요.");
-            Console.ReadLine();
+            Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
         }
 
         public void DisplayNotEnoughMP()
         {
-            Console.WriteLine("마나가 부족합니다!");
-            PrintContinuePrompt();
+            Console.WriteLine("마나가 부족합니다! 다시 입력해주세요.");
+            Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
         }
 
         public void DisplayNoPotions()
         {
             Console.WriteLine("\n남은 포션이 없습니다! 다른 포션을 선택해주세요.");
-            PrintContinuePrompt();
+            Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
         }
 
         public void PrintContinuePrompt()
         {
-            Console.Write("\n0. 다음\n>>");
-            Console.ReadLine();
+            Console.Write("\n아무 키나 눌러 진행...\n>>");
+            Console.ReadKey(true);
         }
     }
 }
