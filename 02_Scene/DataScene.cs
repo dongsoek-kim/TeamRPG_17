@@ -40,14 +40,14 @@ namespace TeamRPG_17
         private void DataMain()
         {
             Console.Clear();
-            Console.WriteLine("캐릭터 선택");
+            Render.ColorWriteLine("캐릭터 선택", ConsoleColor.Cyan);
             Console.WriteLine("사용하실 캐릭터를 선택해주세요.\n");
             Console.WriteLine("─────────────────────────");
             DataList(); // 현재 들어있는 데이터 출력
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("1. 새게임");
             Console.WriteLine("2. 불러오기");
-            Console.WriteLine("3. 삭제하기\n");
+            Render.ColorWriteLine("3. 삭제하기\n", ConsoleColor.Red);
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
@@ -206,12 +206,16 @@ namespace TeamRPG_17
         {
             for (int i = 0; i < datas.Length; i++)
             {
+                ConsoleColor color = ConsoleColor.DarkGray;
                 string strNumber = !onSelect ? (i + 1).ToString() : "";
-                string str = "비어있음";   
+                string str = "비어있음";
 
                 if (datas[i] != null && datas[i].name != null)
+                {
+                    color = ConsoleColor.Green;
                     str = string.Format("Lv {0:D2}. {1}", datas[i].level, datas[i].name);
-                Console.WriteLine($"{strNumber} [{str}]"); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
+                }
+                Render.ColorWriteLine($"{strNumber} [{str}]", color); // Data[] 안에 원소를 가지고와서 플레이어의 "Lv 0. playerName" 출력 예정 NULL이면 비어있음
             }
         }
 
