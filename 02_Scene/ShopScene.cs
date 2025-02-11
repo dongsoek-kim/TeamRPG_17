@@ -107,11 +107,11 @@ namespace TeamRPG_17
         private void ShopBuy()
         {
             Console.Clear();
-            Console.WriteLine("상점 - 아이템 구매");
+            Render.ColorWriteLine("상점 - 아이템 구매", ConsoleColor.Cyan);
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("─────────────────────────");
-            Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{GameManager.Instance.player.gold} G");
+            Render.ColorWriteLine("[보유 골드]", ConsoleColor.Cyan);
+            Render.ColorWriteLine($"{GameManager.Instance.player.gold} G", ConsoleColor.Yellow);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
             int itemCount = shop.PrintItemList(itemsPerPage, nowPage, out startIndex, out totalPage, true);
@@ -171,11 +171,11 @@ namespace TeamRPG_17
         private void ShopSell()
         {
             Console.Clear();
-            Console.WriteLine("상점 - 아이템 판매");
+            Render.ColorWriteLine("상점 - 아이템 판매", ConsoleColor.Cyan);
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("─────────────────────────");
-            Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{GameManager.Instance.player.gold} G");
+            Render.ColorWriteLine("[보유 골드]", ConsoleColor.Cyan);
+            Render.ColorWriteLine($"{GameManager.Instance.player.gold} G", ConsoleColor.Yellow);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
             int curPageItemCount = shop.SellItemList(itemsPerPage, nowPage, out totalPage); // 현재 페이지의 아이템의 개수 반환
