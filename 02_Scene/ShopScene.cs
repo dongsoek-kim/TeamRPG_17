@@ -8,6 +8,9 @@ namespace TeamRPG_17
 {
     public class ShopScene : Scene
     {
+        private int nowPage;
+        private int totalPage;
+
         private bool onBuy;
         private bool onSell;
 
@@ -15,6 +18,8 @@ namespace TeamRPG_17
 
         public ShopScene()
         {
+            nowPage = 0;
+
             onBuy = false;
             onSell = false;
 
@@ -125,6 +130,23 @@ namespace TeamRPG_17
                 default:
                     shop.SellItem(intCommand);
                     break;
+            }
+        }
+
+        private void ItemPage()
+        {
+            if (nowPage == 0 && totalPage > 0)
+            {
+                Console.WriteLine("11. 다음 페이지");
+            }
+            else if (nowPage > 0 && totalPage - 1 != nowPage)
+            {
+                Console.WriteLine("11. 다음 페이지");
+                Console.WriteLine("12. 이전 페이지");
+            }
+            else if (nowPage > 0)
+            {
+                Console.WriteLine("12. 이전 페이지");
             }
         }
     }
