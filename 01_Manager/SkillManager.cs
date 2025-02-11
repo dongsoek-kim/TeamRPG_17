@@ -19,10 +19,9 @@ namespace TeamRPG_17
             new ("매직 미사일", 1, 145, 50, SkillType.SingleTarget, JobType.Wizard),
             new ("파이어 볼", 2, 180, 75, SkillType.AllTarget, JobType.Wizard),
         };
-        public List<Skill> GetSkillList(JobType jobType) // jobType에 따라서 스킬을 가져오는 메서드
+        public List<Skill> GetSkillList(Player player) // jobType에 따라서 스킬을 가져오는 메서드
         {
-            List<Skill> skillList = skills.Where(s => s.JobType == jobType).ToList();
-            return skillList;
+            return skills.Where(s => s.JobType == player.job && s.Level <= player.level).ToList(); ;
         }
     }
 }
