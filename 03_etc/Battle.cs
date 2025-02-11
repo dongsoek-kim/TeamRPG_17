@@ -7,21 +7,21 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TeamRPG_17
 {
-    public class BattleScene
+    public class Battle
     {
-        private static BattleScene _instance;
-        public static BattleScene Instance
+        private static Battle _instance;
+        public static Battle Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new BattleScene();
+                    _instance = new Battle();
                 return _instance;
             }
         }
 
         private readonly Player _player;
-        public BattleSceneUI _battleUI;
+        public BattleScene _battleUI;
         public BattleSystem _battleSystem;
         public BattleActionHandler _actionHandler;
         public TargetingSystem _targetingSystem;
@@ -29,12 +29,12 @@ namespace TeamRPG_17
         private Dungeon _currentDungeon;
 
 
-        public BattleScene()
+        public Battle()
         {
             _player = GameManager.Instance.player;
             List<Skill> availableSkills = SkillManager.Instance.GetSkillList(_player);
 
-            _battleUI = new BattleSceneUI(availableSkills);
+            _battleUI = new BattleScene(availableSkills);
             _battleSystem = new BattleSystem(_player);
             _targetingSystem = new TargetingSystem(_battleUI, HandleInput);
             _actionHandler = new BattleActionHandler(_player, _battleUI, _battleSystem, _targetingSystem, availableSkills, HandleInput);

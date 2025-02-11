@@ -37,7 +37,7 @@ namespace TeamRPG_17
                     GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                     break;
                 case 1:
-                    BattleScene battle = new BattleScene();
+                    Battle battle = new Battle();
                     battle.StartBattle(currentDungeon);
                     break;
                    
