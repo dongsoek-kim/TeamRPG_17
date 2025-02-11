@@ -20,7 +20,7 @@ namespace TeamRPG_17
             set { inventory[index] = value; }
         }
 
-        public Armor[]? equipedArmor { get; private set; } = new Armor[4];
+        public Armor[]? equipedArmor { get; private set; }
         public Weapon? equipedWeapon { get; private set; }
 
         public int equipSlot { get; private set; }
@@ -31,13 +31,27 @@ namespace TeamRPG_17
             //ItemType=Armor면 new Armor , ItemType=Weapon이면 new Weapon
             inventory = new Item[ItemManager.Instance.items.Length];
             potion = new Potion();
-            for(int i=0;i< Enum.GetValues(typeof(ItemName)).Length;i++)
+            if (equipedArmor == null) equipedArmor= new Armor[4];
+            for (int i = 0; i < Enum.GetValues(typeof(ItemName)).Length; i++)
             {
                 AddItem((ItemName)i);
             }
-
         }
+        [JsonConstructor] // JSON 직렬화/역직렬화를 위해 생성자 지정
+        public Inventory(Item[] inventory, Armor[]? equipedArmor, Weapon? equipedWeapon, int equipSlot, Potion potion)
+        {
+            this.inventory = inventory ?? new Item[ItemManager.Instance.items.Length];
+            this.equipedArmor = equipedArmor ?? new Armor[4];
+            this.equipedWeapon = equipedWeapon;
+            this.equipSlot = equipSlot;
+            this.potion = potion ?? new Potion();
 
+            // ItemType에 따라 아이템 추가
+            for (int i = 0; i < Enum.GetValues(typeof(ItemName)).Length; i++)
+            {
+                AddItem((ItemName)i);
+            }
+        }
         public void ShowInventory(int nowPage,out int totalPages)
         {
             int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
