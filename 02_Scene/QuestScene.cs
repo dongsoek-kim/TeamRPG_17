@@ -94,7 +94,7 @@ namespace TeamRPG_17
             QuestManager.Instance.selectQuest?.ShowQuestReward();
             Console.WriteLine("\n보상을 획득하셨습니다.");
             Console.WriteLine("─────────────────────────");
-            Console.WriteLine("enter any Key");
+            Console.WriteLine("Press Any Key to Continue");
             Console.ReadKey();
 
             questReward = false;

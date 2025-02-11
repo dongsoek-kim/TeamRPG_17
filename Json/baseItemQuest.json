@@ -24,27 +24,27 @@
     "rewardItem": null
   },
   {
-    "questItem": [ "2번 마을 퀘스트" ],
-    "questTown": 1,
+    "questItem": [ "구멍난 양말", "누더기" ],
+    "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
     "questRepeatable": false,
-    "questTitle": "2번 마을 퀘스트",
-    "questDescription": "2번 마을 퀘스트",
-    "exp": 60,
-    "gold": 10,
+    "questTitle": "촌장의 새로운 유행",
+    "questDescription": "촌장이 새로운 패션을 선보이고 싶다며 구멍난 양말과 누더기를 가져오라고 부탁했다.\n그는 이것을 마을 공식 의상으로 지정할 계획이라고 하는데… 과연 주민들의 반응은 어떨까?",
+    "exp": 3000,
+    "gold": 5000,
     "rewardItem": null
   },
   {
-    "questItem": [ "3번 마을 퀘스트" ],
-    "questTown": 2,
+    "questItem": [ "붕대" ],
+    "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
     "questRepeatable": false,
-    "questTitle": "3번 마을 퀘스트",
-    "questDescription": "3번 마을 퀘스트",
-    "exp": 60,
-    "gold": 10,
+    "questTitle": "붕대의 비밀",
+    "questDescription": "붕대? 그냥 상처에 감는 거지 뭐.\n근데 사실 이 붕대, 예전에 내 친구가 유령을 쫓는 데 써봤는데, 대박 효과를 봤어.\n이제 너도 한 번 써볼래? 내가 이 붕대로 고양이를 쫓는 법도 알지?",
+    "exp": 3000,
+    "gold": 5000,
     "rewardItem": null
   }
 ]

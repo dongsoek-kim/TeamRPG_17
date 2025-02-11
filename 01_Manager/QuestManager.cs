@@ -55,6 +55,11 @@ namespace TeamRPG_17
             }
         }
 
+        public void ShowendQuestList()
+        {
+
+        }
+
 
         /// <summary>
         /// 선택된 퀘스트의 정보를 출력해주는 메서드
