@@ -97,6 +97,14 @@ namespace TeamRPG_17
             QuestManager.Instance.selectQuest?.ShowQuestReward();
             Console.WriteLine("\n보상을 획득하셨습니다.");
             Console.WriteLine("─────────────────────────");
+            if(QuestManager.Instance.newQuestString != null)
+            {
+                Render.ColorWriteLine("신규퀘스트", ConsoleColor.Cyan);
+                Console.Write(QuestManager.Instance.newQuestString);
+                QuestManager.Instance.newQuestString = null;
+
+            }
+
             Console.WriteLine("Press Any Key to Continue");
             Console.ReadKey();
 
