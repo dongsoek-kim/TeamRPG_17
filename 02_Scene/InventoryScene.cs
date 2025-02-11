@@ -51,6 +51,7 @@ namespace TeamRPG_17
             switch (intCommand)
             {
                 case 0:
+                    nowPage = 0;
                     GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                     break;
                 case 1:
@@ -104,7 +105,7 @@ namespace TeamRPG_17
                 case 0:
                     onEquip = false;
                     break;
-                case 11:
+                case 8:
                     if (totalPage - 1 == nowPage)
                     {
                         Console.WriteLine("마지막 페이지입니다.");
@@ -116,7 +117,7 @@ namespace TeamRPG_17
                         nowPage++;
                         break;
                     }
-                case 12:
+                case 9:
                     if (nowPage == 0)
                     {
                         Console.WriteLine("첫 페이지입니다.");
@@ -129,8 +130,10 @@ namespace TeamRPG_17
                         break;
                     }
                 default:
-                    GameManager.Instance.player.inventory.Equipment(intCommand+(nowPage*7));
-                    break;
+                    {   
+                        if(intCommand>0&&intCommand<8) GameManager.Instance.player.inventory.Equipment(intCommand + (nowPage * 7));
+                        break;
+                    }
             }
         }
         private void ItemPage()
@@ -153,16 +156,16 @@ namespace TeamRPG_17
         {
             if (nowPage == 0 && totalPage > 0)
             {
-                Console.WriteLine("11. 다음 페이지");
+                Console.WriteLine("8. 다음 페이지");
             }
             else if (nowPage > 0 && totalPage - 1 != nowPage)
             {
-                Console.WriteLine("11. 다음 페이지");
-                Console.WriteLine("12. 이전 페이지");
+                Console.WriteLine("8. 다음 페이지");
+                Console.WriteLine("9. 이전 페이지");
             }
             else if (nowPage > 0)
             {
-                Console.WriteLine("12. 이전 페이지");
+                Console.WriteLine("9. 이전 페이지");
             }
         }
     }

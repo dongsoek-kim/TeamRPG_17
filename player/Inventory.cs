@@ -259,7 +259,7 @@ namespace TeamRPG_17
         {
             int itemCount = 1;
 
-            for(int i = 0; i < inventory.Length; i++)
+            for (int i = 0; i < inventory.Length; i++)
             {
                 if (inventory[i] == null)
                     continue;
@@ -270,26 +270,32 @@ namespace TeamRPG_17
                     continue;
                 }
                 int thisEquipSlot = (int)inventory[i].EquipSlot;
-
                 switch (inventory[i].itemType)
                 {
                     case ItemType.Armor:
                         {
-                            if (equipedArmor[thisEquipSlot] != null)
+                            if (equipedArmor[thisEquipSlot] == (Armor)inventory[i])
                             {
                                 equipedArmor[thisEquipSlot] = null;
                             }
-                            equipedArmor[thisEquipSlot] = (Armor)inventory[i];
+
+                            else 
+                            {
+                                equipedArmor[thisEquipSlot] = (Armor)inventory[i]; 
+                            }
                             break;
                         }
                     case ItemType.Weapon:
                         {
                             // 선택된 무기가 착용중인 무기와 같을때 착용해제
-                            if (equipedWeapon != null)
+                            if (equipedWeapon == (Weapon)inventory[i])
                             {
                                 equipedWeapon = null;
                             }
-                            equipedWeapon = (Weapon)inventory[i];
+                            else
+                            {
+                                equipedWeapon = (Weapon)inventory[i];  // 새로운 무기라면 장착
+                            }
                             break;
                         }
                 }
