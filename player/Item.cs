@@ -34,20 +34,20 @@ namespace TeamRPG_17
             luk = _luk;
             EquipSlot = _equipslot;
             grade = _grade;
-            //switch(grade)
-            //{
-            //    case Grade.Common:
-            //        price = 500;
-            //        break;
-            //    case Grade.rare:
-            //        price = 1000;
-            //        break;
-            //    case Grade.Unique:
-            //        price = 2000;
-            //        break;
-            //    default:
-            //        break;
-            //}    
+            switch (grade)
+            {
+                case Grade.Common:
+                    price = 500;
+                    break;
+                case Grade.Rare:
+                    price = 1000;
+                    break;
+                case Grade.Unique:
+                    price = 2000;
+                    break;
+                default:
+                    break;
+            }
         }
 
         // 아이템 정보 문자열 반환 함수
