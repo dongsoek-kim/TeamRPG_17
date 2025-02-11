@@ -154,7 +154,7 @@ namespace TeamRPG_17
                         color = ConsoleColor.Yellow;
                         break;
                 }
-                Render.ColorWriteLine($"{prefix}{item.ItemInfo()}", color);
+                Render.ColorWriteLine($"{itemCount}.{prefix}{item.ItemInfo()}", color);
                 itemCount++;
             }
         }
