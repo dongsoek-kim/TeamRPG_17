@@ -9,7 +9,7 @@ namespace TeamRPG_17
     public class BattleActionHandler
     {
         private readonly Player _player;
-        private readonly BattleSceneUI _battleUI;
+        private readonly BattleScene _battleUI;
         private readonly BattleSystem _battleSystem;
         private readonly TargetingSystem _targetingSystem;
         private readonly List<Skill> _availableSkills;
@@ -17,7 +17,7 @@ namespace TeamRPG_17
 
         public BattleActionHandler(
             Player player,
-            BattleSceneUI battleUI,
+            BattleScene battleUI,
             BattleSystem battleSystem,
             TargetingSystem targetingSystem,
             List<Skill> availableSkills,

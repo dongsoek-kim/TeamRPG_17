@@ -3,102 +3,166 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TeamRPG_17
 {
     public class BattleScene
     {
-        private static BattleScene _instance;
-        public static BattleScene Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new BattleScene();
-                return _instance;
-            }
-        }
-
-        private readonly Player _player;
-        public BattleSceneUI _battleUI;
-        public BattleSystem _battleSystem;
-        public BattleActionHandler _actionHandler;
-        public TargetingSystem _targetingSystem;
+        private readonly List<Skill> _availableSkills;
+        private Player _player;
         private List<Monster> _monsters;
-        private Dungeon _currentDungeon;
 
-
-        public BattleScene()
+        public BattleScene(List<Skill> availableSkills)
         {
-            _player = GameManager.Instance.player;
-            List<Skill> availableSkills = SkillManager.Instance.GetSkillList(_player);
-
-            _battleUI = new BattleSceneUI(availableSkills);
-            _battleSystem = new BattleSystem(_player);
-            _targetingSystem = new TargetingSystem(_battleUI, HandleInput);
-            _actionHandler = new BattleActionHandler(_player, _battleUI, _battleSystem, _targetingSystem, availableSkills, HandleInput);
+            _availableSkills = availableSkills;
         }
 
-        public void StartBattle(Dungeon dungeon)
+        public void UpdateBattleState(Player player, List<Monster> monsters)
         {
-            _currentDungeon = dungeon;
-            _monsters = MonsterManager.Instance.RandomMonsterSpawn(dungeon);
-            _battleUI.UpdateBattleState(_player, _monsters);
-            InBattle();
+            _player = player;
+            _monsters = monsters;
         }
 
-        private void InBattle()
+        public void DisplayBattleStatus()
         {
-            while (_battleSystem.IsBattleActive(_monsters))
+            Console.Clear();
+            Console.WriteLine("=== ENGAGE!!! ===");
+            DisplayMonsterStatus();
+            Console.WriteLine("\n\n[내 정보]");
+            DisplayPlayerStatus();
+        }
+
+        private void DisplayMonsterStatus()
+        {
+            for (int i = 0; i < _monsters.Count; i++)
             {
-                _battleUI.DisplayBattleStatus();
-                _actionHandler.HandlePlayerTurn(_monsters);
-
-                if (_monsters.All(m => m.IsDead))
-                {
-                    BattleResult(true);
-                    return;
-                }
-
-                foreach (var monster in _monsters.Where(m => !m.IsDead))
-                {
-                    int damage = _battleSystem.ProcessMonsterAttack(monster);
-                    _battleUI.DisplayMonsterAttack(monster, _player, damage, _player.hp);
-                }
-
-                if (_player.hp <= 0)
-                {
-                    BattleResult(false);
-                }
+                Console.WriteLine($"{i + 1}. {_monsters[i].GetInfo()}   " +
+                    (_monsters[i].CurrentHp > 0 ? $"HP {_monsters[i].CurrentHp}" : "Dead"));
             }
         }
 
-        private void BattleResult(bool isWin)
+        private void DisplayPlayerStatus()
         {
-            _battleUI.DisplayBattleResult(isWin, _monsters, _player, _currentDungeon.Level);
+            Console.WriteLine($"\nLv.{_player.level}  {_player.name} ({_player.job})");
+            Console.WriteLine($"HP  {_player.hp} / {_player.hpMax}");
+            Console.WriteLine($"MP  {_player.mp} / {_player.mpMax}");
+        }
+
+        public void DisplayBattleMenu()
+        {
+            DisplayBattleStatus();
+            Console.WriteLine("\n\n1. 공격\n2. 스킬\n3. 포션");
+        }
+
+        public void DisplayTargetingPrompt()
+        {
+            DisplayBattleStatus();
+            Console.Write("\n\n0. 취소\n대상을 선택해 주세요.\n>>");
+        }
+
+        public void DisplaySkillList()
+        {
+            DisplayBattleStatus();
+            Console.WriteLine("\n\n0. 취소");
+            for (int i = 0; i < _availableSkills.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {_availableSkills[i].Name} (MP {_availableSkills[i].MpCost})");
+            }
+            Console.Write("\n사용할 스킬을 선택해 주세요.\n>>");
+        }
+
+        public void DisplayPotionList()
+        {
+            DisplayBattleStatus();
+            Console.WriteLine("\n\n0. 취소");
+            foreach (PotionType type in Enum.GetValues(typeof(PotionType)))
+            {
+                int count = _player.inventory.potion.GetPotionCount(type);
+                Console.WriteLine($"{(int)type + 1}. {type} 포션({count}개)");
+            }
+            Console.Write("\n포션을 선택해 주세요.\n>>");
+        }
+
+        public void DisplayBattleResult(bool isWin, List<Monster> monsters, Player player, int dungeonLevel)
+        {
+            Console.Clear();
+            Console.WriteLine("Battle - Result");
 
             if (isWin)
             {
-                BattleReward reward = new BattleReward(_currentDungeon.Level, _monsters.Count);
-                reward.ApplyReward(_player);
+                DisplayVictoryResult(monsters);
+            }
+            else
+            {
+                Console.WriteLine("\n~~~  YOU LOSE  ~~~");
             }
 
-            _battleUI.PrintContinuePrompt();
+            Console.WriteLine($"\nHP {player.hp} remains");
         }
 
-        private int HandleInput(int maxOption)
+        private void DisplayVictoryResult(List<Monster> monsters)
         {
-            while (true)
+            Console.WriteLine("\n!!!   VICTORY   !!!");
+            foreach (var monster in monsters.Where(m => m.IsDead))
             {
-                string input = Console.ReadLine();
-                if (int.TryParse(input, out int selection) && selection >= 0 && selection <= maxOption)
-                {
-                    return selection;
-                }
-                _battleUI.DisplayInvalidInput();
-                _battleUI.PrintContinuePrompt();
+                Console.WriteLine($"- {monster.Name} 처치!");
             }
+        }
+
+        public void DisplayDamageTaken(Monster target, int prevHp, int dmg)
+        {
+            Console.Clear();
+            Console.WriteLine($"{target.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
+            Console.Write($"HP {prevHp} -> ");
+
+            if (target.CurrentHp <= 0)
+            {
+                Console.WriteLine("Dead");
+            }
+            else
+            {
+                Console.WriteLine($"{target.CurrentHp}");
+            }
+
+            PrintContinuePrompt();
+        }
+
+        public void DisplayMonsterAttack(Monster monster, Player player, int damage, int prevHp)
+        {
+            Console.Clear();
+            Console.WriteLine($"{monster.GetInfo()}의 공격! {player.name}을(를) 맞췄습니다. [데미지 : {damage}]");
+            Console.Write($"HP {prevHp} -> ");
+
+            if (player.hp <= 0)
+                Console.WriteLine("Dead");
+            else
+                Console.WriteLine($"{player.hp}");
+
+            PrintContinuePrompt();
+        }
+
+        public void DisplayInvalidInput()
+        {
+            Console.WriteLine("잘못된 입력입니다. 다시 입력하세요.");
+            PrintContinuePrompt();
+        }
+
+        public void DisplayNotEnoughMP()
+        {
+            Console.WriteLine("마나가 부족합니다!");
+            PrintContinuePrompt();
+        }
+
+        public void DisplayNoPotions()
+        {
+            Console.WriteLine("\n남은 포션이 없습니다! 다른 포션을 선택해주세요.");
+            PrintContinuePrompt();
+        }
+
+        public void PrintContinuePrompt()
+        {
+            Console.Write("\n0. 다음\n>>");
+            Console.ReadLine();
         }
     }
 }

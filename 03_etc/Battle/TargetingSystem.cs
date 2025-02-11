@@ -8,10 +8,10 @@ namespace TeamRPG_17
 {
     public class TargetingSystem
     {
-        private readonly BattleSceneUI _battleUI;
+        private readonly BattleScene _battleUI;
         private readonly Func<int, int> _handleInput; // Func<int, int> 타입의 델리게이트로 변경
 
-        public TargetingSystem(BattleSceneUI battleUI, Func<int, int> handleInput)
+        public TargetingSystem(BattleScene battleUI, Func<int, int> handleInput)
         {
             _battleUI = battleUI;
             _handleInput = handleInput; // 델리게이트 필드에 할당
@@ -46,7 +46,7 @@ namespace TeamRPG_17
             }
 
             Monster target = SelectTarget(monsters);
-            return target != null ? new List<Monster> { target } : new List<Monster>();
+            return target != null ? new List<Monster> {target} : new List<Monster>();
         }
     }
 }

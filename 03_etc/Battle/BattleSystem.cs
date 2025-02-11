@@ -39,7 +39,7 @@ namespace TeamRPG_17
             else if (isDodge)
             {
                 Console.WriteLine($"{target.GetInfo()}가 공격을 회피했습니다!");
-                BattleScene.Instance._battleUI.PrintContinuePrompt();
+                Battle.Instance._battleUI.PrintContinuePrompt();
                 return;
             }
             else
@@ -47,7 +47,7 @@ namespace TeamRPG_17
                 Console.WriteLine($"{_player.name}의 공격!");
             }
             target.CurrentHp = Math.Max(target.CurrentHp - damage, 0);
-            BattleScene.Instance._battleUI.DisplayDamageTaken(target, tempHp, damage);
+            Battle.Instance._battleUI.DisplayDamageTaken(target, tempHp, damage);
         }
 
         public int ProcessMonsterAttack(Monster monster)
@@ -84,7 +84,7 @@ namespace TeamRPG_17
 
                 int dmg = (int)(_player.TotalDamage * (skill.Damage / 100f)) - (int)target.Defense;
                 target.CurrentHp = Math.Max(target.CurrentHp - dmg, 0);
-                BattleScene.Instance._battleUI.DisplayDamageTaken(target, tempHp, dmg);
+                Battle.Instance._battleUI.DisplayDamageTaken(target, tempHp, dmg);
             }
             _player.mp -= skill.MpCost;
         }
