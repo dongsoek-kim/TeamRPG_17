@@ -203,7 +203,7 @@ namespace TeamRPG_17
         /// <summary>
         /// 방어구의 추가스탯 출력 함수
         /// </summary>
-        public void ArmorStat()
+        public int ArmorStat()
         {
             string stat = "";
             int sumDefense = 0;
@@ -218,19 +218,23 @@ namespace TeamRPG_17
             }
             if(sumDefense>0) stat = $" ( +{sumDefense} )";
             Console.WriteLine($"{stat}");
+            return sumDefense;
         }
 
         /// <summary>
         /// 무기의 추가스탯 출력 함수
         /// </summary>
-        public void WeaponStat()
+        public int WeaponStat()
         {
+            int weaponDamage = 0;
             string stat = "";
             if (equipedWeapon != null)
+            {
                 stat = $" ( +{equipedWeapon.damage} )";
-            // 공격력 = +무기공격력*log(str*(직업)+Dex*(직업)+inte(직업))
-
+                weaponDamage = equipedWeapon.damage;
+            }
             Console.WriteLine($"{stat}");
+            return weaponDamage;
         }
         public (int sumStr,int sumDex,int sumInte,int sumLuk) ItemStat()
         {
