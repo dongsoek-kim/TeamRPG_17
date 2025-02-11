@@ -60,7 +60,7 @@ namespace TeamRPG_17
             return true;
         }
 
-        private bool HandleSkill(List<Monster> monsters) // 스킬 선택
+        private bool HandleSkill(List<Monster> monsters) // 스킬 선택(역시 GetTargetsForSkill()에서 몬스터를 선택해줘야됨)
         {
             while (true)
             {
@@ -90,7 +90,7 @@ namespace TeamRPG_17
             }
         }
 
-        private bool HandlePotion()
+        private bool HandlePotion() // 포션 선택
         {
             while (true)
             {
