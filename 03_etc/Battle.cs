@@ -96,8 +96,7 @@ namespace TeamRPG_17
                 {
                     return selection;
                 }
-                _battleUI.DisplayInvalidInput();
-                _battleUI.PrintContinuePrompt();
+                else return -1;
             }
         }
     }

@@ -24,6 +24,13 @@ namespace TeamRPG_17
                 _battleUI.DisplayTargetingPrompt();
 
                 int input = _handleInput(monsters.Count);
+
+                if (input == -1) // 잘못된 입력 처리
+                {
+                    _battleUI.DisplayInvalidInput();
+                    continue;
+                }
+
                 if (input == 0) return null;
 
                 Monster target = monsters[input - 1];

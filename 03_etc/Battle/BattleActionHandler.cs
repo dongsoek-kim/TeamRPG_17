@@ -15,13 +15,7 @@ namespace TeamRPG_17
         private readonly List<Skill> _availableSkills;
         private readonly Func<int, int> HandleInput; // BattleScene의 HandleInput 메서드를 사용
 
-        public BattleActionHandler(
-            Player player,
-            BattleScene battleUI,
-            BattleSystem battleSystem,
-            TargetingSystem targetingSystem,
-            List<Skill> availableSkills,
-            Func<int, int> handleInput)
+        public BattleActionHandler(Player player, BattleScene battleUI, BattleSystem battleSystem, TargetingSystem targetingSystem, List<Skill> availableSkills, Func<int, int> handleInput)
         {
             _player = player;
             _battleUI = battleUI;
@@ -50,6 +44,9 @@ namespace TeamRPG_17
                     case 3:
                         actionTaken = HandlePotion();
                         break;
+                    default:
+                        _battleUI.DisplayInvalidInput();  // 잘못된 입력이 들어오면 InvalidInput 메시지를 출력하고 다시 반복
+                        continue;
                 }
             }
         }
@@ -71,6 +68,12 @@ namespace TeamRPG_17
 
                 int input = HandleInput(_availableSkills.Count);
                 if (input == 0) return false;
+
+                if (input < 0 || input > _availableSkills.Count)
+                {
+                    _battleUI.DisplayInvalidInput();  // 잘못된 입력에 대해 반복
+                    continue;
+                }
 
                 Skill selectedSkill = _availableSkills[input - 1];
                 if (_player.mp < selectedSkill.MpCost)
@@ -95,6 +98,12 @@ namespace TeamRPG_17
 
                 int input = HandleInput(Enum.GetValues(typeof(PotionType)).Length);
                 if (input == 0) return false;
+
+                if (input < 0 || input >= Enum.GetValues(typeof(PotionType)).Length)
+                {
+                    _battleUI.DisplayInvalidInput();  // 잘못된 입력에 대해 처리
+                    continue;
+                }
 
                 PotionType selectedType = (PotionType)(input - 1);
                 if (_player.inventory.potion.GetPotionCount(selectedType) > 0)
