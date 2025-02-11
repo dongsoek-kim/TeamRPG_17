@@ -13,7 +13,6 @@ namespace TeamRPG_17
             int length = Enum.GetValues(typeof(TownName)).Length;
 
             Console.Clear();
-            Console.WriteLine("도시 이름들어갈 곳");
             Console.WriteLine("이동해주실 도시를 선택해주세요\n");
             Console.WriteLine($"현재 플레이어의 레벨 : {GameManager.Instance.player.level}");
             Console.WriteLine("─────────────────────────");

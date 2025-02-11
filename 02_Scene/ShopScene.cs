@@ -180,7 +180,7 @@ namespace TeamRPG_17
             Console.WriteLine("[아이템 목록]");
             int curPageItemCount = shop.SellItemList(itemsPerPage, nowPage, out totalPage); // 현재 페이지의 아이템의 개수 반환
             Console.WriteLine("─────────────────────────");
-            ItemPage();
+            ItemPage(GameManager.Instance.player.inventory.inventory.Count(i => i != null) > itemsPerPage);
             Console.WriteLine("0. 나가기");
 
             shop.ShopMessage();
@@ -218,6 +218,13 @@ namespace TeamRPG_17
                         break;
                     }
                 default:
+                    if (intCommand < 0 || intCommand > curPageItemCount)
+                    {
+                        Render.ColorWriteLine("잘못입력하셨습니다.", ConsoleColor.Red);
+                        Console.ReadKey(true);
+                        return;
+                    }
+
                     shop.SellItem(nowPage * itemsPerPage + intCommand);
                     if (curPageItemCount - 1 <= 0 && nowPage > 0) // 현재 페이지 아이템 개수가 없으면 이전 페이지로
                     {
@@ -229,11 +236,12 @@ namespace TeamRPG_17
             }
         }
 
-        private void ItemPage()
+        private void ItemPage(bool isActive = true)
         {
             if (nowPage == 0 && totalPage > 0)
             {
-                Console.WriteLine("11. 다음 페이지");
+                if(isActive)
+                    Console.WriteLine("11. 다음 페이지");
             }
             else if (nowPage > 0 && totalPage - 1 != nowPage)
             {
