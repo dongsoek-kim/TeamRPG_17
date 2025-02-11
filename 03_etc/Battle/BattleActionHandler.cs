@@ -62,10 +62,10 @@ namespace TeamRPG_17
 
         private bool HandleSkill(List<Monster> monsters) // 스킬 선택(역시 GetTargetsForSkill()에서 몬스터를 선택해줘야됨)
         {
+            _battleUI.DisplaySkillList();
+
             while (true)
             {
-                _battleUI.DisplaySkillList();
-
                 int input = HandleInput(_availableSkills.Count);
                 if (input == 0) return false;
 
@@ -92,10 +92,10 @@ namespace TeamRPG_17
 
         private bool HandlePotion() // 포션 선택
         {
+            _battleUI.DisplayPotionList();
+
             while (true)
             {
-                _battleUI.DisplayPotionList();
-
                 int input = HandleInput(Enum.GetValues(typeof(PotionType)).Length);
                 if (input == 0) return false;
 
@@ -115,6 +115,7 @@ namespace TeamRPG_17
                 else
                 {
                     BattleScene.DisplayNoPotions();
+                    continue;
                 }
             }
         }
