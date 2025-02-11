@@ -201,6 +201,22 @@ namespace TeamRPG_17
             }
         }
 
+        public bool IsClearQuest(string _questTitle)
+        {
+            foreach (Quest? quest in quests)
+            {
+                // null 예외
+                if (quest == null)
+                    continue;
+
+                // 동일한 퀘스트명
+                if(quest.questTitle.Equals(_questTitle))
+                    return quest.questComplete;
+            }
+
+            return false;
+        }
+
         public void MonsterKillCount(Monster _monster)
         {
             // Killquest 중 수락한 퀘스트

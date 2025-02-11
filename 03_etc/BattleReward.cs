@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,26 +48,45 @@ namespace TeamRPG_17
         }
         public void EquipmentReward()
         {
+
+
             Random random = new Random();
             int newerandom = random.Next(1, 1001);
-            if(newerandom==1)
+            if (newerandom > 1 && newerandom < 500)
             {
-                //if(GameManager.Instance.player.inventory[(int)ItemName.평범한쇠검]==null)
-                //GameManager.Instance.player.inventory.AddItem(ItemName.평범한쇠검);
-                //
+                if (IsClearQuest("고블린의 음모"))
+                {
+                    if (GameManager.Instance.player.inventory[(int)ItemName.누더기모자] == null)
+                        GameManager.Instance.player.inventory.AddItem(ItemName.누더기모자);
+                }
             }
-            if (newerandom > 2 && newerandom < 12)
+            if (newerandom > 500 && newerandom < 800)
             {
-                //if(GameManager.Instance.player.inventory[(int)ItemName.평범한쇠검]==null)
-                //GameManager.Instance.player.inventory.AddItem(ItemName.평범한쇠검);
-                //
+                if (IsClearQuest("이 누더기들은 뭐야"))
+                {
+                    if (GameManager.Instance.player.inventory[(int)ItemName.누더기] == null)
+                        GameManager.Instance.player.inventory.AddItem(ItemName.누더기);
+                }
             }
-            else if (newerandom > 12 && newerandom < 52);
+            if (newerandom > 800 && newerandom < 950) ;
             {
-                //if(GameManager.Instance.player.inventory[(int)ItemName.평범한쇠검]==null)
-                //GameManager.Instance.player.inventory.AddItem(ItemName.평범한쇠검);
-                //
+                if (IsClearQuest("또다시 얻은 쓸모없는 드랍템"))
+                {
+                    if (GameManager.Instance.player.inventory[(int)ItemName.붕대] == null)
+                        GameManager.Instance.player.inventory.AddItem(ItemName.붕대);
+                }
             }
+            if (newerandom > 950)
+            {
+                {
+                    if (IsClearQuest("엉망이 된 숙소"))
+                    {
+                        if (GameManager.Instance.player.inventory[(int)ItemName.구멍난양말] == null)
+                            GameManager.Instance.player.inventory.AddItem(ItemName.구멍난양말);
+                    }
+                }
+            }
+
 
         }
     }
