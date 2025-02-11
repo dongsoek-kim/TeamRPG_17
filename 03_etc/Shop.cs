@@ -117,10 +117,11 @@ namespace TeamRPG_17
         /// <summary>
         /// 판매 아이템 리스트 출력
         /// </summary>
-        public void PrintItemList(int itemsPerPage, int nowPage, out int totalPages, bool _isNumber = false)
+        public int PrintItemList(int itemsPerPage, int nowPage,out int startIndex, out int totalPages, bool _isNumber = false)
         {
 
             int? number;
+            startIndex = 0;
             Town town = GameManager.Instance.currentTown; // 현재 타운
 
             // 예외 처리사항
@@ -128,18 +129,18 @@ namespace TeamRPG_17
             {
                 Console.WriteLine("PrintItemList() 메서드에서 아이템 리스트를 가져올 수 없습니다.");
                 totalPages = 0;
-                return;
+                return 0;
             }
 
             int itemCount = 1;
-            int totalTownItem = town.startItemIdx + town.count;
-            totalPages = (totalTownItem + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            int townItemIdx = town.startItemIdx + town.count;
+            totalPages = (town.count + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
 
-            int startIndex = town.startItemIdx + nowPage * itemsPerPage;
+            startIndex = town.startItemIdx + nowPage * itemsPerPage;
             int endIndex;
 
-            if ((startIndex + itemsPerPage > totalTownItem))
-                endIndex = totalTownItem;
+            if ((startIndex + itemsPerPage > townItemIdx))
+                endIndex = townItemIdx;
             else
                 endIndex = startIndex + itemsPerPage;
 
@@ -158,12 +159,14 @@ namespace TeamRPG_17
 
                 itemCount++;
             }
+
+            return itemCount;
         }
 
         /// <summary>
         /// 판매 아이템 리스트 출력
         /// </summary>
-        public void SellItemList(int itemsPerPage, int nowPage, out int totalPages)
+        public int SellItemList(int itemsPerPage, int nowPage, out int totalPages)
         {
             Item[] inventory = GameManager.Instance.player.inventory.inventory;
 
@@ -180,6 +183,8 @@ namespace TeamRPG_17
                 Console.Write($"- {num++} {item.ItemInfo()}");
                 Console.WriteLine($"  | {(int)(ItemManager.Instance.itemPrice[(int)item.itemType] * sellRatio)}G");
             }
+
+            return pageList.Count;
         }
 
         /// <summary>
