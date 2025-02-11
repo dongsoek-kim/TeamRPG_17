@@ -17,6 +17,8 @@ namespace TeamRPG_17
 
         private List<Quest> quests;
 
+        public string? newQuestString { get; set; }
+
         public Quest? selectQuest { get; private set; }
 
         public void LoadQuest(string itemQuestJson, string killQuestJson)
@@ -169,7 +171,7 @@ namespace TeamRPG_17
 
         public void CheckPreQuest(string _questTitle)
         {
-            foreach(Quest? quest in quests)
+            foreach (Quest? quest in quests)
             {
                 // null 예외
                 if (quest == null)
@@ -182,6 +184,7 @@ namespace TeamRPG_17
                 if(quest.preQuestTitle.Equals(_questTitle))
                 {
                     quest.questAccess = true;
+                    newQuestString += $"- {quest.questTitle}\n";
                 }
             }
         }
