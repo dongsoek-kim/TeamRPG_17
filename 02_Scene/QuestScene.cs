@@ -32,13 +32,13 @@ namespace TeamRPG_17
         public void QuestList()
         {
             Console.Clear();
-            Console.WriteLine("퀘스트");
+            Render.ColorWriteLine("퀘스트", ConsoleColor.Cyan);
             Console.WriteLine("퀘스트 수락 및 완료 할 수 있습니다.");
             Console.WriteLine("─────────────────────────");
-            Render.ColorWriteLine("진행가능한 퀘스트", ConsoleColor.Green);
+            Render.ColorWriteLine("진행가능한 퀘스트", ConsoleColor.Yellow);
             QuestManager.Instance.ShowQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");
-            Render.ColorWriteLine("완료한 퀘스트", ConsoleColor.Red);
+            Render.ColorWriteLine("완료한 퀘스트", ConsoleColor.DarkGray);
             QuestManager.Instance.ShowEndQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
@@ -62,11 +62,9 @@ namespace TeamRPG_17
         public void QuestInformation()
         {
             Console.Clear();
-            Console.WriteLine("퀘스트 정보");
+            Render.ColorWriteLine("퀘스트 정보", ConsoleColor.Cyan);
             Console.WriteLine("─────────────────────────");
             QuestManager.Instance.ShowQuestInformation();
-
-            Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
 
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
@@ -94,18 +92,20 @@ namespace TeamRPG_17
         public void QuestReward()
         {
             Console.Clear();
+            Render.ColorWriteLine("퀘스트 보상", ConsoleColor.Cyan);
+            Console.WriteLine("─────────────────────────\n");
             QuestManager.Instance.selectQuest?.ShowQuestReward();
-            Console.WriteLine("\n보상을 획득하셨습니다.");
-            Console.WriteLine("─────────────────────────");
+            Console.WriteLine("\n─────────────────────────");
             if(QuestManager.Instance.newQuestString != null)
             {
                 Render.ColorWriteLine("신규퀘스트", ConsoleColor.Cyan);
-                Console.Write(QuestManager.Instance.newQuestString);
+                Console.Write($"\n{QuestManager.Instance.newQuestString}\n");
                 QuestManager.Instance.newQuestString = null;
 
             }
 
-            Console.WriteLine("Press Any Key to Continue");
+            Console.WriteLine("─────────────────────────");
+            Render.ColorWriteLine("Press Any Key to Continue", ConsoleColor.DarkGray);
             Console.ReadKey();
 
             questReward = false;
