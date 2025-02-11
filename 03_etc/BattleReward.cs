@@ -34,12 +34,15 @@ namespace TeamRPG_17
 
             player.inventory.potion.GetPotion(randomPotion, 1);
             EquipmentReward();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"보상 획득!!");
             Console.WriteLine($"\n획득 Exp : {Exp}");
             Console.WriteLine($"{randomPotion}포션 획득");
 
             Console.WriteLine($"획득 Gold : {Gold}");
             Console.WriteLine($"총 보유 Gold : {player.gold}");
+            Console.ResetColor();
 
         }
         public void EquipmentReward()

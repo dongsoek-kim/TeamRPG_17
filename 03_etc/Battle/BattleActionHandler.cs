@@ -25,7 +25,7 @@ namespace TeamRPG_17
             HandleInput = handleInput;
         }
 
-        public void HandlePlayerTurn(List<Monster> monsters)
+        public void HandlePlayerTurn(List<Monster> monsters) // 전투 기본 메뉴 선택(1. 공격, 2. 스킬, 3. 포션)
         {
             bool actionTaken = false;
             while (!actionTaken)
@@ -51,7 +51,7 @@ namespace TeamRPG_17
             }
         }
 
-        private bool HandleAttack(List<Monster> monsters)
+        private bool HandleAttack(List<Monster> monsters) // 공격 메뉴(SelectTarget()에서 몬스터를 선택해줘야됨)
         {
             Monster target = _targetingSystem.SelectTarget(monsters);
             if (target == null) return false;
@@ -60,7 +60,7 @@ namespace TeamRPG_17
             return true;
         }
 
-        private bool HandleSkill(List<Monster> monsters)
+        private bool HandleSkill(List<Monster> monsters) // 스킬 선택(역시 GetTargetsForSkill()에서 몬스터를 선택해줘야됨)
         {
             while (true)
             {
@@ -71,12 +71,12 @@ namespace TeamRPG_17
 
                 if (input < 0 || input > _availableSkills.Count)
                 {
-                    BattleScene.DisplayInvalidInput();  // 잘못된 입력에 대해 반복
+                    BattleScene.DisplayInvalidInput();  // 잘못된 입력에 대한 처리
                     continue;
                 }
 
                 Skill selectedSkill = _availableSkills[input - 1];
-                if (_player.mp < selectedSkill.MpCost)
+                if (_player.mp < selectedSkill.MpCost) // 마나 부족 시 다시
                 {
                     BattleScene.DisplayNotEnoughMP();
                     continue;
@@ -90,7 +90,7 @@ namespace TeamRPG_17
             }
         }
 
-        private bool HandlePotion()
+        private bool HandlePotion() // 포션 선택
         {
             while (true)
             {
@@ -109,6 +109,7 @@ namespace TeamRPG_17
                 if (_player.inventory.potion.GetPotionCount(selectedType) > 0)
                 {
                     _player.inventory.potion.UsePotion(selectedType);
+                    BattleScene.DisplayPotionEffect(selectedType);
                     return true;
                 }
                 else

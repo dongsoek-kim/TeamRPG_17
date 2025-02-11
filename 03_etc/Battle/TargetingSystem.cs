@@ -17,7 +17,7 @@ namespace TeamRPG_17
             _handleInput = handleInput; // 델리게이트 필드에 할당
         }
 
-        public Monster SelectTarget(List<Monster> monsters)
+        public Monster SelectTarget(List<Monster> monsters) // 기본 공격 시 대상 판단
         {
             while (true)
             {
@@ -45,7 +45,7 @@ namespace TeamRPG_17
             }
         }
 
-        public List<Monster> GetTargetsForSkill(Skill skill, List<Monster> monsters)
+        public List<Monster> GetTargetsForSkill(Skill skill, List<Monster> monsters) // 스킬이 단일 타겟인지 전체 타겟인지 판단
         {
             if (skill.SkillType == SkillType.AllTarget)
             {

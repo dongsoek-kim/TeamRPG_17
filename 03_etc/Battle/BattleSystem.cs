@@ -21,7 +21,7 @@ namespace TeamRPG_17
             return _player.hp > 0 && monsters.Any(m => !m.IsDead);
         }
 
-        public void PlayerAttack(Monster target)
+        public void PlayerAttack(Monster target) // 플레이어 공격
         {
             if (target.IsDead) return;
             int tempHp = target.CurrentHp;

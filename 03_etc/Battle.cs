@@ -40,7 +40,7 @@ namespace TeamRPG_17
             _actionHandler = new BattleActionHandler(_player, _battleUI, _battleSystem, _targetingSystem, availableSkills, HandleInput);
         }
 
-        public void StartBattle(Dungeon dungeon)
+        public void StartBattle(Dungeon dungeon) // 전투 개시(던전 정보, 몬스터 리스트 받아옴) (플레이어 정보랑 몬스터 리스트 BattleScene에 전달)
         {
             _currentDungeon = dungeon;
             _monsters = MonsterManager.Instance.RandomMonsterSpawn(dungeon);
@@ -48,7 +48,7 @@ namespace TeamRPG_17
             InBattle();
         }
 
-        private void InBattle()
+        private void InBattle() // 전투 흐름
         {
             while (_battleSystem.IsBattleActive(_monsters))
             {
@@ -74,11 +74,11 @@ namespace TeamRPG_17
             }
         }
 
-        private void BattleResult(bool isWin)
+        private void BattleResult(bool isWin) // 전투 결과
         {
             _battleUI.DisplayBattleResult(isWin, _monsters, _player, _currentDungeon.Level);
 
-            if (isWin)
+            if (isWin) // 승리 시엔 보상 적용
             {
                 BattleReward reward = new BattleReward(_currentDungeon.Level, _monsters.Count);
                 reward.ApplyReward(_player);
@@ -87,7 +87,7 @@ namespace TeamRPG_17
             BattleScene.PrintContinuePrompt();
         }
 
-        private int HandleInput(int maxOption)
+        private int HandleInput(int maxOption) // 선택지 입력 일괄 처리
         {
             while (true)
             {
