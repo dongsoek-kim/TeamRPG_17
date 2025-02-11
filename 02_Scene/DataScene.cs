@@ -108,6 +108,7 @@ namespace TeamRPG_17
                         onSelect = true;
 
                         GameManager.Instance.ChangeScene(SceneName.UserCreateScene);
+                        DataManager.currentSlot = intCommand;
                     }
                     break;
             }

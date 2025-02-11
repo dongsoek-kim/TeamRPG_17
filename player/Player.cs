@@ -53,7 +53,7 @@ namespace TeamRPG_17
             inventory = new Inventory();
         }
         [JsonConstructor]
-        public Player(int level, int exp, int str, int dex, int inte, int luk,int damage,int defense,int haMax, int mpMax, int gold,Inventory inventory)
+        public Player(int level, int exp, int str, int dex, int inte, int luk,float damage,float defense,int hpMax, int mpMax, int gold,Inventory inventory)
         {
             this.level = level;
             this.exp = exp;
