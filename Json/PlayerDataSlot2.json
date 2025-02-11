@@ -768,7 +768,7 @@
     "equipedWeapon": {
       "damage": 3,
       "itemType": 1,
-      "grade": 1,
+      "grade": 0,
       "EquipSlot": 4,
       "itemName": "카타르",
       "itemDescription": "뾰족하고 날카로운 단검",
@@ -776,7 +776,7 @@
       "dex": 5,
       "inte": 3,
       "luk": 3,
-      "price": 1000
+      "price": 500
     },
     "equipSlot": 0,
     "potion": {
