@@ -36,11 +36,7 @@ namespace TeamRPG_17
         {
             level = 1;
             exp = 0;
-            // 스탯(str 등)은 추후에 확정하여 변경예정
-            str = 0;
-            dex = 0;
-            inte = 0;
-            luk = 0;
+
             damage = 20;
             defense = 5;
 
@@ -53,6 +49,34 @@ namespace TeamRPG_17
 
             inventory = new Inventory();
         }
+
+        public void SetJob(JobType _job)
+        {
+            job = _job;
+
+            switch (job)
+            {
+                case JobType.Warrior:
+                    str = 4;
+                    dex = 2;
+                    inte = 2;
+                    luk = 2;
+                    break;
+                case JobType.Rogue:
+                    str = 2;
+                    dex = 4;
+                    inte = 2;
+                    luk = 2;
+                    break;
+                case JobType.Wizard:
+                    str = 2;
+                    dex = 2;
+                    inte = 4;
+                    luk = 2;
+                    break;
+            }
+        }
+
         [JsonConstructor]
         public Player(int level, int exp, int str, int dex, int inte, int luk,float damage,float defense,int hpMax, int mpMax, int gold,TownName nowTown,Inventory inventory)
         {
@@ -85,7 +109,6 @@ namespace TeamRPG_17
                 luk += 1;
                 damage += 0.5f;
                 defense += 1;
-                mpMax += 1;
                 mp = mpMax;
             }
         }
