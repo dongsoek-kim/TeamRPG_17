@@ -19,8 +19,8 @@ namespace TeamRPG_17
 
         public void LoadQuest(string itemQuestJson, string killQuestJson)
         {
-            itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(itemQuestJson);
             killQuests = JsonConvert.DeserializeObject<KillQuest[]>(killQuestJson);
+            itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(itemQuestJson);
         }
 
         /// <summary>
@@ -37,8 +37,10 @@ namespace TeamRPG_17
                 if (quest == null || quest?.questTown != _town)
                     continue;
 
+                if (quest.questComplete)
+                    continue;
+
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
-                questStateText = quest.questComplete ? "완료" : questStateText;
                 Console.Write($"{questCount++}. {quest.questTitle}  |  ");
                 Render.ColorWrite($"{questStateText}\n",ConsoleColor.Cyan);
             }
@@ -48,16 +50,43 @@ namespace TeamRPG_17
                 if (quest == null || quest?.questTown != _town)
                     continue;
 
+                if (quest.questComplete)
+                    continue;
+
                 questStateText = quest.questAccpet ? "진행중" : "수락가능";
-                questStateText = quest.questComplete ? "완료" : questStateText;
                 Console.Write($"{questCount++}. {quest.questTitle}  |  ");
                 Render.ColorWrite($"{questStateText}\n", ConsoleColor.Cyan);
             }
         }
 
-        public void ShowendQuestList()
+        public void ShowEndQuestList(TownName _town)
         {
+            foreach(KillQuest? quest in killQuests)
+            {
+                // null / 현재마을퀘스트 X
+                if (quest == null || quest?.questTown != _town)
+                    continue;
 
+                // 완료하지않은 퀘스트 X
+                if (!quest.questComplete)
+                    continue;
+
+                Console.Write($"- {quest.questTitle}  |  ");
+                Render.ColorWrite("완료\n", ConsoleColor.Cyan);
+            }
+            foreach (ItemQuest? quest in itemQuests)
+            {
+                // null / 현재마을퀘스트 X
+                if (quest == null || quest?.questTown != _town)
+                    continue;
+
+                // 완료하지않은 퀘스트 X
+                if (!quest.questComplete)
+                    continue;
+
+                Console.Write($"- {quest.questTitle}  |  ");
+                Render.ColorWrite("완료\n", ConsoleColor.Cyan);
+            }
         }
 
 
@@ -98,15 +127,17 @@ namespace TeamRPG_17
 
             foreach(KillQuest? quest in killQuests)
             {
+                // null / 현재마을 X
                 if (quest == null || quest.questTown != _town)
+                    continue;
+
+                // 이미 완료한 퀘스트 선택 X
+                if (quest.questComplete)
                     continue;
 
                 if (questCount == index)
                 {
                     selectQuest = quest;
-                    if (quest.questComplete)
-                        return false;
-
                     return true;
                 }
 
@@ -115,15 +146,17 @@ namespace TeamRPG_17
 
             foreach (ItemQuest? quest in itemQuests)
             {
+                // null / 현재마을 X
                 if (quest == null || quest.questTown != _town)
+                    continue;
+
+                // 이미 완료한 퀘스트 선택 X
+                if (quest.questComplete)
                     continue;
 
                 if (questCount == index)
                 {
                     selectQuest = quest;
-                    if (quest.questComplete)
-                        return false;
-
                     return true;
                 }
 
@@ -135,7 +168,7 @@ namespace TeamRPG_17
         /// <summary>
         /// 선택된 퀘스트의 수락 or 완료
         /// </summary>
-        public bool SelectQuestAccept()
+        public bool QuestAccept()
         {
             if (selectQuest == null)
                 return false;

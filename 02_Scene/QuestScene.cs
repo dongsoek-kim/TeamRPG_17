@@ -37,6 +37,8 @@ namespace TeamRPG_17
             Console.WriteLine("─────────────────────────");
             QuestManager.Instance.ShowQuestList((TownName)GameManager.Instance.currentTown.id);
             Console.WriteLine("─────────────────────────");
+            QuestManager.Instance.ShowEndQuestList((TownName)GameManager.Instance.currentTown.id);
+            Console.WriteLine("─────────────────────────");
             Console.WriteLine("0. 나가기");
 
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
@@ -76,11 +78,10 @@ namespace TeamRPG_17
                     break;
 
                 // 현재 보고있는 퀘스트를 수락 또는 완료
-                // 퀘스트 수락 / 퀘스트 완료 실패 true
-                // 퀘스트 완료 false
                 case 1:
-                    if (!QuestManager.Instance.SelectQuestAccept())
+                    if (!QuestManager.Instance.QuestAccept())
                     {
+                        // 퀘스트 완료시 퀘스트 정보 false 보상 true
                         questInformation = false;
                         questReward = true;
                     }
