@@ -22,6 +22,7 @@ namespace TeamRPG_17
             Console.WriteLine("5. 휴식하기");
             Console.WriteLine("6. 도시선택");
             Console.WriteLine("7. 퀘스트");
+            Console.WriteLine("8. 저장하기");
             Console.WriteLine("─────────────────────────");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
@@ -48,6 +49,15 @@ namespace TeamRPG_17
                     break;
                 case 7:
                     GameManager.Instance.ChangeScene(SceneName.QusetScene);
+                    break;
+                case 8:
+                    Console.Clear();
+                    Console.WriteLine("게임을 저장합니다.");
+                    DataManager.SaveGameData(
+                        GameManager.Instance.player,
+                        GameManager.Instance.player.inventory, 
+                        DataManager.currentSlot);    
+                    Console.ReadKey();
                     break;
             }
         }
