@@ -8,11 +8,21 @@ namespace TeamRPG_17
 {
     public class LobbyScene : Scene
     {
+        private ConsoleColor[] colors;
+        public LobbyScene()
+        {
+            colors = new ConsoleColor[Enum.GetValues(typeof(TownName)).Length];
+            colors[(int)TownName.Elinia] = ConsoleColor.Green;
+            colors[(int)TownName.Hannesys] = ConsoleColor.Red;
+            colors[(int)TownName.CunningCity] = ConsoleColor.DarkGray;
+        }
+
         public override void Update()
         {
+            Town currentTown = GameManager.Instance.currentTown;
             Console.Clear();
-
-            Console.WriteLine($"{GameManager.Instance.currentTown.name} 마을에 오신 여러분 환영합니다.");
+            Render.ColorWrite($"{currentTown.name} ", colors[(int)currentTown.id]);
+            Console.WriteLine($"마을에 오신 여러분 환영합니다.");
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("1. 상태보기");

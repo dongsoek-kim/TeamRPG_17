@@ -8,12 +8,22 @@ namespace TeamRPG_17
 {
     public class Shop
     {
+        private ConsoleColor[] colors;
+
         private bool onMessage;
         private string message;
         private ConsoleColor messageColor;
         private ConsoleColor defaultColor = Console.ForegroundColor;
 
         private float sellRatio = 0.85f;
+
+        public Shop()
+        {
+            colors = new ConsoleColor[Enum.GetValues(typeof(Grade)).Length];
+            colors[(int)Grade.Common] = ConsoleColor.Gray;
+            colors[(int)Grade.Rare] = ConsoleColor.Blue;
+            colors[(int)Grade.Unique] = ConsoleColor.Yellow;
+        }
 
         /// <summary>
         /// 아이템 구매 출력/입력
@@ -149,13 +159,15 @@ namespace TeamRPG_17
             {
                 number = _isNumber ? itemCount : null;
 
-                Console.Write($"- {number} {ItemManager.Instance.items[i].ItemInfo()}");
+                Item item = ItemManager.Instance.items[i];
+                Render.ColorWrite($"- {number} {item.ItemInfo()}", colors[(int)item.grade]);
+                Console.Write(" | ");
 
                 if (GameManager.Instance.player.inventory[i] == null)
-                    Console.WriteLine($"  | {ItemManager.Instance.itemPrice[i]}G");
+                    Render.ColorWriteLine($"{ItemManager.Instance.itemPrice[i]}G", ConsoleColor.Yellow);
 
                 else
-                    Console.WriteLine("  | 구매완료");
+                    Render.ColorWriteLine("구매완료", ConsoleColor.Green);
 
                 itemCount++;
             }
@@ -180,8 +192,9 @@ namespace TeamRPG_17
 
             foreach(Item item in pageList)
             {
-                Console.Write($"- {num++} {item.ItemInfo()}");
-                Console.WriteLine($"  | {(int)(ItemManager.Instance.itemPrice[(int)item.itemType] * sellRatio)}G");
+                Render.ColorWrite($"- {num++} {item.ItemInfo()}", colors[(int)item.grade]);
+                Console.Write(" | ");
+                Render.ColorWriteLine($"{(int)(ItemManager.Instance.itemPrice[(int)item.itemType] * sellRatio)}G", ConsoleColor.Yellow);
             }
 
             return pageList.Count;
