@@ -8,18 +8,26 @@ namespace TeamRPG_17
 {
     internal class TownMoveScene : Scene
     {
+        private ConsoleColor[] colors;
+        public TownMoveScene()
+        {
+            colors = new ConsoleColor[Enum.GetValues(typeof(TownName)).Length];
+            colors[(int)TownName.Elinia] = ConsoleColor.Green;
+            colors[(int)TownName.Hannesys] = ConsoleColor.Red;
+            colors[(int)TownName.CunningCity] = ConsoleColor.DarkGray;
+        }
         public override void Update()
         {
             int length = Enum.GetValues(typeof(TownName)).Length;
 
             Console.Clear();
-            Console.WriteLine("이동해주실 도시를 선택해주세요\n");
+            Render.ColorWriteLine("이동해주실 도시를 선택해주세요\n", ConsoleColor.Cyan);
             Console.WriteLine($"현재 플레이어의 레벨 : {GameManager.Instance.player.level}");
             Console.WriteLine("─────────────────────────");
             for ( int i = 0; i < length; i++)
             {
-                Console.Write($"{i + 1}. {GameManager.Instance.towns[i].name}");
-                Console.WriteLine($" | 도시레벨 : {GameManager.Instance.towns[i].entryLevel}");
+                Render.ColorWrite($"{i + 1}. {GameManager.Instance.towns[i].name}", colors[i]);
+                Render.ColorWriteLine($" | 도시레벨 : {GameManager.Instance.towns[i].entryLevel}", colors[i]);
             }    
             Console.WriteLine("─────────────────────────");
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
