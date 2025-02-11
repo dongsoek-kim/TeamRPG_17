@@ -38,7 +38,7 @@ namespace TeamRPG_17
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");
             Render.ColorWriteLine("[장착중인 장비]                                             |            [포션갯수]",ConsoleColor.Cyan);
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");
-            GameManager.Instance.player.inventory.showPotion();
+            GameManager.Instance.player.inventory.showPotion(nowPage);
             GameManager.Instance.player.inventory.showNowEquip();
             Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────");          
             Console.WriteLine("1. 장착 관리");

@@ -33,10 +33,6 @@ namespace TeamRPG_17
             inventory = new Item[ItemManager.Instance.items.Length];
             potion = new Potion();
             if (equipedArmor == null) equipedArmor= new Armor[4];
-            for (int i = 0; i < Enum.GetValues(typeof(ItemName)).Length; i++)
-            {
-                AddItem((ItemName)i);
-            }
         }
         [JsonConstructor] // JSON 직렬화/역직렬화를 위해 생성자 지정
         public Inventory(Item[] inventory, Armor[]? equipedArmor, Weapon? equipedWeapon, int equipSlot, Potion potion)
@@ -48,16 +44,16 @@ namespace TeamRPG_17
             this.potion = potion ?? new Potion();
 
             // ItemType에 따라 아이템 추가
-            for (int i = 0; i < Enum.GetValues(typeof(ItemName)).Length; i++)
-            {
-                AddItem((ItemName)i);
-            }
+            //for (int i = 0; i < Enum.GetValues(typeof(ItemName)).Length; i++)
+            //{
+            //    AddItem((ItemName)i);
+            //}
         }
         public void ShowInventory(int nowPage,out int totalPages)
         {
             int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
             int  itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
-            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            totalPages = (itemsHeld / itemsPerPage)+1; // 전체 페이지 수
             List<Item> itemList = inventory.Where(i => i != null).ToList();
             int startIndex = nowPage * itemsPerPage;
             List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
@@ -92,12 +88,18 @@ namespace TeamRPG_17
         /// <summary>
         /// 포션갯수 출력함수
         /// </summary>
-        public void showPotion()
+        public void showPotion(int nowpage)
         {
+            int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
+            int itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
+            int totalPages = (itemsHeld / itemsPerPage) + 1; // 전체 페이지 수
+            int height;
+            if (nowpage + 1 != totalPages) height = 7;
+            else height = itemsHeld % itemsPerPage;
             var originalPosition = Console.GetCursorPosition();
             int potionType = 0;
             int coorX = Console.WindowWidth -60;
-            int coorY = 15;
+            int coorY = 10+height;
             for (int i = 0;i<6;i++)
             {
                 Console.SetCursorPosition(coorX, coorY);
@@ -105,7 +107,7 @@ namespace TeamRPG_17
                 coorY++;
             }
             coorX = Console.WindowWidth - 50;
-            coorY = 16;
+            coorY = 10 + height;
             foreach (int potion in potion.potionCount) 
             {
                 Console.SetCursorPosition(coorX, coorY);
