@@ -100,21 +100,23 @@ namespace TeamRPG_17
         {
             get
             {
+                var itemStats = GameManager.Instance.player.inventory.ItemStat();
+
                 float baseDamage = damage;
                 float bonusDamage = 0;
 
                 switch (job)
                 {
                     case JobType.Warrior:
-                        bonusDamage += (((float)str * 1.5f) + ((float)dex * 0.5f) + ((float)inte * 0.1f));
+                        bonusDamage += (((float)itemStats.sumStr * 1.5f) + ((float)itemStats.sumDex * 0.5f) + ((float)itemStats.sumInte * 0.1f));
                         break;
 
                     case JobType.Rogue:
-                        bonusDamage += (((float)str * 0.5f) + ((float)dex * 1.5f) + ((float)inte * 0.1f));
+                        bonusDamage += (((float)itemStats.sumStr * 0.5f) + ((float)itemStats.sumDex * 1.5f) + ((float)itemStats.sumInte * 0.1f));
                         break;
 
                     case JobType.Wizard:
-                        bonusDamage += (((float)str * 0.1f) + ((float)dex * 0.5f) + ((float)inte * 1.5f));
+                        bonusDamage += (((float)itemStats.sumStr * 0.1f) + ((float)itemStats.sumDex * 0.5f) + ((float)itemStats.sumInte * 1.5f));
                         break;
                 }
 
