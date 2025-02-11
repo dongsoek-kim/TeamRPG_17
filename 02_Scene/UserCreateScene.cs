@@ -84,13 +84,16 @@ namespace TeamRPG_17
                     case 1:
                         isJobCheck = true;
                         GameManager.Instance.player.job = JobType.Warrior;
+                        GameManager.Instance.player.SetJob(JobType.Warrior);
                         break;
                     case 2:
                         GameManager.Instance.player.job = JobType.Rogue;
+                        GameManager.Instance.player.SetJob(JobType.Rogue);
                         isJobCheck = true;
                         break;
                     case 3:
                         GameManager.Instance.player.job = JobType.Wizard;
+                        GameManager.Instance.player.SetJob(JobType.Wizard);
                         isJobCheck = true;
                         break;
                 }

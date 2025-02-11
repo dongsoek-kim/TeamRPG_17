@@ -47,6 +47,15 @@ namespace TeamRPG_17
             nowTown = TownName.Elinia;
             gold = 1000;
 
+            inventory = new Inventory();
+        }
+
+        // job은 플레이어가 이미 가지고있는 변수
+        // _job을 매게변수라고 함 여기다 새로저장 / 매게변수 : 외부에서 값을 저장해주는 공간 (데이터 공간이 있어야함)
+        public void SetJob(JobType _job)
+        {
+            job = _job;
+
             switch (job)
             {
                 case JobType.Warrior:
@@ -68,8 +77,6 @@ namespace TeamRPG_17
                     luk = 2;
                     break;
             }
-
-            inventory = new Inventory();
         }
 
         [JsonConstructor]
@@ -104,7 +111,6 @@ namespace TeamRPG_17
                 luk += 1;
                 damage += 0.5f;
                 defense += 1;
-                mpMax += 1;
                 mp = mpMax;
             }
         }
