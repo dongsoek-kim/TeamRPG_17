@@ -10,6 +10,7 @@ namespace TeamRPG_17
     {
         private int nowPage;
         private int totalPage;
+        private int itemsPerPage; // 아이템 갯수
 
         private bool onBuy;
         private bool onSell;
@@ -19,6 +20,7 @@ namespace TeamRPG_17
         public ShopScene()
         {
             nowPage = 0;
+            itemsPerPage = 7;
 
             onBuy = false;
             onSell = false;
@@ -31,7 +33,7 @@ namespace TeamRPG_17
             if (onBuy)
                 ShopBuy();      // 아이템 판매
 
-            else if (onSell)        
+            else if (onSell)
                 ShopSell();     // 아이템 구매
 
             else
@@ -48,11 +50,12 @@ namespace TeamRPG_17
             Console.WriteLine($"{GameManager.Instance.player.gold} G");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
-            shop.PrintItemList();
+            shop.PrintItemList(itemsPerPage, nowPage, out totalPage);
             Console.WriteLine("─────────────────────────");
 
             Console.WriteLine("1. 아이템 구매");
-            Console.WriteLine("2. 아이템 판매");
+            Console.WriteLine("2. 아이템 판매\n");
+            ItemPage();
             Console.WriteLine("0. 나가기");
 
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
@@ -61,14 +64,41 @@ namespace TeamRPG_17
             switch (intCommand)
             {
                 case 0:
+                    nowPage = 0;
                     GameManager.Instance.ChangeScene(SceneName.LobbyScene);
                     break;
                 case 1:
+                    nowPage = 0;
                     onBuy = true;
                     break;
                 case 2:
+                    nowPage = 0;
                     onSell = true;
                     break;
+                case 11:
+                    if (totalPage - 1 == nowPage)
+                    {
+                        Console.WriteLine("마지막 페이지입니다.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        nowPage++;
+                        break;
+                    }
+                case 12:
+                    if (nowPage == 0)
+                    {
+                        Console.WriteLine("첫 페이지입니다.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        nowPage--;
+                        break;
+                    }
             }
         }
 
@@ -82,23 +112,47 @@ namespace TeamRPG_17
             Console.WriteLine($"{GameManager.Instance.player.gold} G");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
-            shop.PrintItemList(true);
+            shop.PrintItemList(itemsPerPage, nowPage, out totalPage, true);
             Console.WriteLine("─────────────────────────");
-
+            ItemPage();
             Console.WriteLine("0. 나가기");
 
             shop.ShopMessage();
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
-            
+
             switch (intCommand)
             {
                 case 0:
+                    nowPage = 0;
                     onBuy = false;
                     break;
-
+                case 11:
+                    if (totalPage - 1 == nowPage)
+                    {
+                        Console.WriteLine("마지막 페이지입니다.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        nowPage++;
+                        break;
+                    }
+                case 12:
+                    if (nowPage == 0)
+                    {
+                        Console.WriteLine("첫 페이지입니다.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        nowPage--;
+                        break;
+                    }
                 default:
-                    shop.BuyItem(GameManager.Instance.currentTown.startItemIdx + intCommand);
+                    shop.BuyItem(nowPage * itemsPerPage + intCommand);
                     break;
             }
         }
@@ -113,22 +167,47 @@ namespace TeamRPG_17
             Console.WriteLine($"{GameManager.Instance.player.gold} G");
             Console.WriteLine("─────────────────────────");
             Console.WriteLine("[아이템 목록]");
-            shop.SellItemList();
+            shop.SellItemList(itemsPerPage, nowPage, out totalPage);
             Console.WriteLine("─────────────────────────");
-
+            ItemPage();
             Console.WriteLine("0. 나가기");
 
             shop.ShopMessage();
             if (!GameManager.Instance.SceneInputCommand(out int intCommand))
                 return;
 
-            switch(intCommand)
+            switch (intCommand)
             {
                 case 0:
+                    nowPage = 0;
                     onSell = false;
                     break;
+                case 11:
+                    if (totalPage - 1 == nowPage)
+                    {
+                        Console.WriteLine("마지막 페이지입니다.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        nowPage++;
+                        break;
+                    }
+                case 12:
+                    if (nowPage == 0)
+                    {
+                        Console.WriteLine("첫 페이지입니다.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        nowPage--;
+                        break;
+                    }
                 default:
-                    shop.SellItem(intCommand);
+                    shop.SellItem(nowPage * itemsPerPage + intCommand);
                     break;
             }
         }
