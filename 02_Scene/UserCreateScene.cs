@@ -25,7 +25,10 @@ namespace TeamRPG_17
 
             // 닉네임과 직업 전부 완료되었을때 LobbyScene으로 이동
             if (isNameCheck && isJobCheck)
+            {
                 GameManager.Instance.ChangeScene(SceneName.LobbyScene);
+                DataManager.SaveGameData(GameManager.Instance.player, GameManager.Instance.player.inventory, DataManager.currentSlot);
+            }
         }
 
         private void CreateName()

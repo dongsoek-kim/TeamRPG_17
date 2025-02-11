@@ -45,7 +45,7 @@ namespace TeamRPG_17
                         actionTaken = HandlePotion();
                         break;
                     default:
-                        _battleUI.DisplayInvalidInput();  // 잘못된 입력이 들어오면 InvalidInput 메시지를 출력하고 다시 반복
+                        BattleScene.DisplayInvalidInput();  // 잘못된 입력이 들어오면 InvalidInput 메시지를 출력하고 다시 반복
                         continue;
                 }
             }
@@ -71,14 +71,14 @@ namespace TeamRPG_17
 
                 if (input < 0 || input > _availableSkills.Count)
                 {
-                    _battleUI.DisplayInvalidInput();  // 잘못된 입력에 대해 반복
+                    BattleScene.DisplayInvalidInput();  // 잘못된 입력에 대해 반복
                     continue;
                 }
 
                 Skill selectedSkill = _availableSkills[input - 1];
                 if (_player.mp < selectedSkill.MpCost)
                 {
-                    _battleUI.DisplayNotEnoughMP();
+                    BattleScene.DisplayNotEnoughMP();
                     continue;
                 }
 
@@ -101,7 +101,7 @@ namespace TeamRPG_17
 
                 if (input < 0 || input >= Enum.GetValues(typeof(PotionType)).Length)
                 {
-                    _battleUI.DisplayInvalidInput();  // 잘못된 입력에 대해 처리
+                    BattleScene.DisplayInvalidInput();  // 잘못된 입력에 대해 처리
                     continue;
                 }
 

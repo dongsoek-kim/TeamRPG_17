@@ -11,7 +11,7 @@ namespace TeamRPG_17
         private bool onMessage;
         private string message;
         private ConsoleColor messageColor;
-        private ConsoleColor defaultColor = Console.ForegroundColor;
+        //private ConsoleColor defaultColor = Console.ForegroundColor;
 
         private int healPrice = 500;
         public override void Update()
@@ -62,9 +62,7 @@ namespace TeamRPG_17
             if (!onMessage)
                 return;
 
-            Console.ForegroundColor = messageColor;
-            Console.WriteLine($"\n{message}");
-            Console.ForegroundColor = defaultColor;
+            Render.ColorWriteLine($"\n{message}", messageColor);
 
             onMessage = false;
         }

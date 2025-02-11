@@ -31,7 +31,7 @@
             scenes[8] = new QuestScene();
             scenes[9] = new DataScene();
             //seenes[8]
-            ChangeScene(SceneName.UserCreateScene);
+            ChangeScene(SceneName.DataScene);
             DataManager.LoadQuestManagerData(1);
         }
 
