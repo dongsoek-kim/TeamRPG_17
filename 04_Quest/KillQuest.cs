@@ -13,6 +13,9 @@ namespace TeamRPG_17
         public int[] monsterCount;   // 잡아야하는 몬스터 수
         public int[] killCount;      // 잡은 몬스터 수
 
+        /// <summary>
+        /// 퀘스트의 진행도를 출력해주는 메서드
+        /// </summary>
         public override void QuestProgress()
         {
             for (int i = 0; i < monsterName.Length; i++)
@@ -22,6 +25,10 @@ namespace TeamRPG_17
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// 퀘스트를 완료 처리 메서드
+        /// </summary>
+        /// <returns>완료 성공 여부 반환</returns>
         public override bool QuestComplete()
         {
             if(QuestCheck())
@@ -47,7 +54,11 @@ namespace TeamRPG_17
 
             return false;
         }
-
+        
+        /// <summary>
+        /// 사냥 퀘스트의 진행도 업데이트 
+        /// </summary>
+        /// <param name="_target">확인할 사망한 몬스터</param>
         public void QuestUpdate(Monster _target)
         {
             for (int i = 0; i < monsterName.Length; i++)
@@ -62,6 +73,10 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 퀘스트 완료 가능여부 확인
+        /// </summary>
+        /// <returns>완료 가능여부 반환</returns>
         public override bool QuestCheck()
         {
             for (int i = 0; i < monsterName.Length; i++)

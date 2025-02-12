@@ -18,6 +18,9 @@ namespace TeamRPG_17
             DungeonMain();
         }
 
+        /// <summary>
+        /// 던전 메인 화면
+        /// </summary>
         private void DungeonMain()
         {
             Console.Clear();

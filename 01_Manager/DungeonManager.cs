@@ -8,6 +8,9 @@ namespace TeamRPG_17
 {
     public class DungeonManager : Singleton<DungeonManager>
     {
+        /// <summary>
+        /// 던전 리스트
+        /// </summary>
         private List<Dungeon> dungeons = new List<Dungeon>
         {
             new Dungeon("시작의 숲", 1, "작은 마물과 짐승이 있는 조금 평화로운 숲"),
@@ -16,6 +19,11 @@ namespace TeamRPG_17
 
         };
 
+        /// <summary>
+        /// Town의 레벨에 따른 던전 반환
+        /// </summary>
+        /// <param name="level"> 타운 레벨</param>
+        /// <returns></returns>
         public Dungeon GetDungeonByTownLevel(int level)
         {
             return dungeons.OrderBy(d => Math.Abs(d.Level - level)).FirstOrDefault();

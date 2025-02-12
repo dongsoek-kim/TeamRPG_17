@@ -33,16 +33,24 @@ namespace TeamRPG_17
             startItemIdx = _startItemIdx;
             count = _count;
         }
-        
+
+        /// <summary>
+        /// 내가 가고자하는 마을에 갈 수 있는지 
+        /// 레벨에 따라서 판단하는 메서드입니다.
+        /// </summary>
+        /// <returns>true or false</returns>
         public bool CanEnterTown()
         {
             return (GameManager.Instance.player.level >= entryLevel);
         }
 
-        
+        /// <summary>
+        /// 현재 타운에서 상점에 있는 아이템을 가져올 수 있는지 
+        /// 인덱스의 범위에 따라서 판단하는 메서드입니다.
+        /// </summary>
+        /// <returns>true or false</returns>
         public bool CanGetItem()
         {
-            // 예외 처리 : startItemIdx + count가 저장된 아이템 배열크기보다 크면
             return (startItemIdx + count < ItemManager.Instance.itemLength);
         }
     }

@@ -19,16 +19,19 @@ namespace TeamRPG_17
         public override void Update()
         {
             if (questInformation)
-                QuestInformation(); // 선택된 퀘스트 정보 확인
+                QuestInformation();
 
             else if(questReward) 
-                QuestReward();      // 퀘스트 완료시 획득 보상 출력
+                QuestReward();      
 
             else
-                QuestList();        // 퀘스트 리스트 출력
+                QuestList();        
 
         }
 
+        /// <summary>
+        /// 퀘스트 리스트 출력
+        /// </summary>
         public void QuestList()
         {
             Console.Clear();
@@ -59,6 +62,9 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 선택된 퀘스트의 정보 확인
+        /// </summary>
         public void QuestInformation()
         {
             Console.Clear();
@@ -89,6 +95,9 @@ namespace TeamRPG_17
             }
         }
         
+        /// <summary>
+        /// 완료한 퀘스트의 보상 확인
+        /// </summary>
         public void QuestReward()
         {
             Console.Clear();

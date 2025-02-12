@@ -7,23 +7,35 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
-    public class BattleScene
+    public class BattleDisplay
     {
         private readonly List<Skill> _availableSkills;
         private Player _player;
         private List<Monster> _monsters;
 
-        public BattleScene(List<Skill> availableSkills)
+        /// <summary>
+        /// BattleDisplay의 생성자. 사용 가능한 스킬 목록을 받아 필드에 할당
+        /// </summary>
+        /// <param name="availableSkills"></param>
+        public BattleDisplay(List<Skill> availableSkills)
         {
             _availableSkills = availableSkills;
         }
 
+        /// <summary>
+        /// 전투 상태를 갱신하는 함수. 플레이어와 몬스터 정보를 받아 필드에 할당
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="monsters"></param>
         public void UpdateBattleState(Player player, List<Monster> monsters)
         {
             _player = player;
             _monsters = monsters;
         }
 
+        /// <summary>
+        /// 전투 기본 정보들 출력
+        /// </summary>
         public void DisplayBattleStatus() // 전투 기본 정보들 출력
         {
             Console.Clear();
@@ -33,6 +45,9 @@ namespace TeamRPG_17
             DisplayPlayerStatus();
         }
 
+        /// <summary>
+        /// 몬스터 상태 출력
+        /// </summary>
         private void DisplayMonsterStatus() // 몬스터 목록
         {
             for (int i = 0; i < _monsters.Count; i++)
@@ -51,7 +66,10 @@ namespace TeamRPG_17
             }
         }
 
-        private void DisplayPlayerStatus() // 플레이어 기본 정보
+        /// <summary>
+        /// 플레이어 상태 출력
+        /// </summary>
+        private void DisplayPlayerStatus()
         {
             Console.WriteLine($"\nLv.{_player.level}  {_player.name} ({_player.job})");
             Console.Write($"HP  ");
@@ -61,18 +79,27 @@ namespace TeamRPG_17
             Render.ColorWriteLine($"{_player.mp} / {_player.mpMax}", ConsoleColor.DarkCyan);
         }
 
+        /// <summary>
+        /// 전투 메뉴 출력
+        /// </summary>
         public void DisplayBattleMenu() // 전투 메뉴 출력
         {
             DisplayBattleStatus();
             Console.WriteLine("\n\n1. 공격\n2. 스킬\n3. 포션");
         }
 
+        /// <summary>
+        /// 몬스터 대상 출력
+        /// </summary>
         public void DisplayTargetingPrompt() // 몬스터 대상 출력
         {
             DisplayBattleStatus();
             Console.Write("\n\n0. 취소\n대상을 선택해 주세요.\n>>");
         }
 
+        /// <summary>
+        /// 스킬 목록 출력
+        /// </summary>
         public void DisplaySkillList() // 스킬 목록 출력
         {
             DisplayBattleStatus();
@@ -86,6 +113,9 @@ namespace TeamRPG_17
             Console.Write("\n사용할 스킬을 선택해 주세요.\n>>");
         }
 
+        /// <summary>
+        /// 포션 목록 출력
+        /// </summary>
         public void DisplayPotionList() // 포션 목록 출력
         {
             DisplayBattleStatus();
@@ -98,7 +128,13 @@ namespace TeamRPG_17
             Console.Write("\n포션을 선택해 주세요.\n>>");
         }
 
-        public void DisplayBattleResult(bool isWin, List<Monster> monsters, Player player, int dungeonLevel) // 전투 종료 결과 출력
+        /// <summary>
+        /// 전투 종료 결과 출력
+        /// </summary>
+        /// <param name="isWin"> 전투 승리 여부 </param>
+        /// <param name="monsters"> 현재 전투에 들어간 몬스터 목록 </param>
+        /// <param name="player"></param>
+        public void DisplayBattleResult(bool isWin, List<Monster> monsters, Player player)
         {
             Console.Clear();
             if (isWin)
@@ -128,7 +164,11 @@ namespace TeamRPG_17
 
         }
 
-        private void DisplayVictoryResult(List<Monster> monsters) // 전투에서 잡은 몬스터 출력
+        /// <summary>
+        /// 전투에서 잡은 몬스터 출력
+        /// </summary>
+        /// <param name="monsters"></param>
+        private void DisplayVictoryResult(List<Monster> monsters) 
         {
             Console.WriteLine("\n!!!   VICTORY   !!!");
             foreach (var monster in monsters.Where(m => m.IsDead))
@@ -137,7 +177,13 @@ namespace TeamRPG_17
             }
         }
 
-        public static void DisplayDamageTaken(Monster target, int prevHp, int dmg) // 플레이어의 공격 출력 (몬스터가 맞을 때)
+        /// <summary>
+        /// 플레이어의 공격 출력 (몬스터가 맞을 때)
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="prevHp"></param>
+        /// <param name="dmg"></param>
+        public static void DisplayDamageTaken(Monster target, int prevHp, int dmg)
         {
             Console.Clear();
             Console.WriteLine($"{target.GetInfo()}을(를) 맞췄습니다. [데미지 : {dmg}]");
@@ -158,7 +204,14 @@ namespace TeamRPG_17
             PrintContinuePrompt();
         }
 
-        public static void DisplayMonsterAttack(Monster monster, Player player, int damage, int prevHp) // 몬스터의 공격 출력(플레이어가 맞을 때)
+        /// <summary>
+        /// 몬스터의 공격 출력(플레이어가 맞을 때)
+        /// </summary>
+        /// <param name="monster"></param>
+        /// <param name="player"></param>
+        /// <param name="damage"></param>
+        /// <param name="prevHp"> 공격 받기 전 체력 </param>
+        public static void DisplayMonsterAttack(Monster monster, Player player, int damage, int prevHp)
         {
             Console.Clear();
             Console.WriteLine($"{monster.GetInfo()}의 공격! {player.name}을(를) 맞췄습니다. [데미지 : {damage}]");
@@ -174,7 +227,11 @@ namespace TeamRPG_17
             PrintContinuePrompt();
         }
 
-        public static void DisplayPotionEffect(PotionType potion) // 포션 사용 시 효과 출력
+        /// <summary>
+        ///     포션 사용 시 효과 출력
+        /// </summary>
+        /// <param name="potion"> 선택한 포션 </param>
+        public static void DisplayPotionEffect(PotionType potion)
         {
             Console.Clear();
             Console.WriteLine($"{potion}포션을 마셨습니다.");
@@ -212,23 +269,35 @@ namespace TeamRPG_17
             PrintContinuePrompt();
         }
 
+        /// <summary>
+        ///     잘못된 입력 출력
+        /// </summary>
         public static void DisplayInvalidInput()
         {
             Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
         }
 
+        /// <summary>
+        ///     마나 부족 시 출력
+        /// </summary>
         public static void DisplayNotEnoughMP()
         {
             Console.WriteLine("마나가 부족합니다! 다시 입력해주세요.");
-            Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
+            Console.Write(">> ");
         }
 
+        /// <summary>
+        ///    포션이 없을 때 출력
+        /// </summary>
         public static void DisplayNoPotions()
         {
             Console.WriteLine("\n남은 포션이 없습니다! 다른 포션을 선택해주세요.");
-            Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
+            Console.Write(">> ");
         }
 
+        /// <summary>
+        ///   계속 진행할 수 있도록 출력
+        /// </summary>
         public static void PrintContinuePrompt()
         {
             Console.Write("\n아무 키나 눌러 진행...\n>>");

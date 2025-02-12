@@ -17,7 +17,15 @@ namespace TeamRPG_17
 
 
 
-
+        /// <summary>
+        /// 스킬 생성자. 스킬 이름, 레벨, 데미지, 마나 소모량, 스킬 타입, 직업 타입을 받아 생성
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="level"></param>
+        /// <param name="damage"></param>
+        /// <param name="mpCost"></param>
+        /// <param name="skillType"></param>
+        /// <param name="jobType"></param>
         public Skill(string name, int level, int damage, int mpCost, SkillType skillType, JobType jobType)
         {
             Name = name;

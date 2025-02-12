@@ -8,16 +8,26 @@ namespace TeamRPG_17
 {
     public class TargetingSystem
     {
-        private readonly BattleScene _battleUI;
-        private readonly Func<int, int> _handleInput; // Func<int, int> 타입의 델리게이트로 변경
+        private readonly BattleDisplay _battleUI;
+        private readonly Func<int, int> _handleInput;
 
-        public TargetingSystem(BattleScene battleUI, Func<int, int> handleInput)
+        /// <summary>
+        /// TargetingSystem의 생성자. BattleDisplay와 HandleInput 메서드를 받아 필드에 할당
+        /// </summary>
+        /// <param name="battleUI"></param>
+        /// <param name="handleInput"></param>
+        public TargetingSystem(BattleDisplay battleUI, Func<int, int> handleInput)
         {
             _battleUI = battleUI;
-            _handleInput = handleInput; // 델리게이트 필드에 할당
+            _handleInput = handleInput;
         }
 
-        public Monster SelectTarget(List<Monster> monsters) // 기본 공격 시 대상 판단
+        /// <summary>
+        /// 기본 공격 시 대상을 선택하는 함수
+        /// </summary>
+        /// <param name="monsters"></param>
+        /// <returns></returns>
+        public Monster SelectTarget(List<Monster> monsters)
         {
             while (true)
             {
@@ -25,9 +35,9 @@ namespace TeamRPG_17
 
                 int input = _handleInput(monsters.Count);
 
-                if (input == -1) // 잘못된 입력 처리
+                if (input == -1)
                 {
-                    BattleScene.DisplayInvalidInput();
+                    BattleDisplay.DisplayInvalidInput();
                     continue;
                 }
 
@@ -37,7 +47,7 @@ namespace TeamRPG_17
                 if (target.IsDead)
                 {
                     Console.WriteLine("이미 죽은 몬스터입니다!");
-                    BattleScene.PrintContinuePrompt();
+                    BattleDisplay.PrintContinuePrompt();
                     continue;
                 }
 
@@ -45,7 +55,13 @@ namespace TeamRPG_17
             }
         }
 
-        public List<Monster> GetTargetsForSkill(Skill skill, List<Monster> monsters) // 스킬이 단일 타겟인지 전체 타겟인지 판단
+        /// <summary>
+        /// 스킬에 대한 대상을 선택하는 함수
+        /// </summary>
+        /// <param name="skill"></param>
+        /// <param name="monsters"></param>
+        /// <returns></returns>
+        public List<Monster> GetTargetsForSkill(Skill skill, List<Monster> monsters)
         {
             if (skill.SkillType == SkillType.AllTarget)
             {
