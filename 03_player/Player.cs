@@ -98,7 +98,11 @@ namespace TeamRPG_17
             this.gold = gold;
             this.inventory = inventory ?? new Inventory();
         }
-        // 던전 클리어 후 경험치 획득 함수
+
+        /// <summary>
+        /// 던전 클리어 후 경험치 획득 함수
+        /// </summary>
+        /// <param name="addExp"></param>
         public void AddExp(int addExp)
         {
             exp++;
@@ -149,7 +153,7 @@ namespace TeamRPG_17
                 var itemStats = GameManager.Instance.player.inventory.ItemStat();
 
                 float baseDamage = damage;
-                float bonusDamage = 0;
+                float bonusDamage = 0; // 스탯/직업별 데미지 계산
 
                 switch (job)
                 {
@@ -166,7 +170,7 @@ namespace TeamRPG_17
                         break;
                 }
 
-                return (int)(baseDamage + bonusDamage + GameManager.Instance.player.inventory.WeaponStat());
+                return (int)(baseDamage + bonusDamage + GameManager.Instance.player.inventory.WeaponStat()); // 공격력+스탯/직업별 공격력+장비 공격력
             }
          }
 
