@@ -8,9 +8,11 @@ namespace TeamRPG_17
 {
     public class ItemQuest : Quest
     {
-        // 퀘스트완료에 필요한 아이템
-        public string[] questItem;
+        public string[] questItem;  // 퀘스트완료에 필요한 아이템
 
+        /// <summary>
+        /// 퀘스트의 진행도를 출력해주는 메서드
+        /// </summary>
         public override void QuestProgress()
         {
             foreach (string item in questItem)
@@ -29,6 +31,10 @@ namespace TeamRPG_17
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// 퀘스트를 완료 처리 메서드
+        /// </summary>
+        /// <returns>완료 성공 여부 반환</returns>
         public override bool QuestComplete()
         {
             if(QuestCheck())
@@ -57,6 +63,10 @@ namespace TeamRPG_17
             return false;
         }
 
+        /// <summary>
+        /// 퀘스트 완료 가능여부 확인
+        /// </summary>
+        /// <returns>완료 가능여부 반환</returns>
         public override bool QuestCheck()
         {
             // 퀘스트 아이템 리스트에서 하나라도 부족하면 false
