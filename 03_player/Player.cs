@@ -117,6 +117,7 @@ namespace TeamRPG_17
                 luk += 1;
                 damage += 0.5f;
                 defense += 1;
+                mpMax += 10;
                 mp = mpMax;
             }
         }
