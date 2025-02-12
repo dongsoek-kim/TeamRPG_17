@@ -14,8 +14,8 @@ namespace TeamRPG_17
 
         private int startIndex; // 현재 상점 페이지에 따라서 시작위치가 바뀌는 아이템 인덱스 
 
-        private bool onBuy;
-        private bool onSell;
+        private bool onBuy; // 구매 페이지 여부
+        private bool onSell; // 판매 페이지 여부
 
         private Shop shop;
 
@@ -33,15 +33,18 @@ namespace TeamRPG_17
         public override void Update()
         {
             if (onBuy)
-                ShopBuy();      // 아이템 판매
+                ShopBuy();
 
             else if (onSell)
-                ShopSell();     // 아이템 구매
+                ShopSell();
 
             else
-                ShopMain();     // 상점 메인
+                ShopMain();
         }
 
+        /// <summary>
+        /// 상점 페이지의 메인
+        /// </summary>
         private void ShopMain()
         {
             Console.Clear();
@@ -104,6 +107,9 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 상점 아이템 구매
+        /// </summary>
         private void ShopBuy()
         {
             Console.Clear();
@@ -168,6 +174,9 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 상점 아이템 판매
+        /// </summary>
         private void ShopSell()
         {
             Console.Clear();
@@ -236,6 +245,10 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 상점 메뉴 버튼 출력
+        /// </summary>
+        /// <param name="isActive">메뉴 버튼을 활성화 할것인지 여부</param>
         private void ItemPage(bool isActive = true)
         {
             if (nowPage == 0 && totalPage > 0)
