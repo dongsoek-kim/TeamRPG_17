@@ -9,7 +9,7 @@ namespace TeamRPG_17
     public class TargetingSystem
     {
         private readonly BattleDisplay _battleUI;
-        private readonly Func<int, int> _handleInput; // Func<int, int> 타입의 델리게이트로 변경
+        private readonly Func<int, int> _handleInput;
 
         /// <summary>
         /// TargetingSystem의 생성자. BattleDisplay와 HandleInput 메서드를 받아 필드에 할당
@@ -19,7 +19,7 @@ namespace TeamRPG_17
         public TargetingSystem(BattleDisplay battleUI, Func<int, int> handleInput)
         {
             _battleUI = battleUI;
-            _handleInput = handleInput; // 델리게이트 필드에 할당
+            _handleInput = handleInput;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace TeamRPG_17
         /// </summary>
         /// <param name="monsters"></param>
         /// <returns></returns>
-        public Monster SelectTarget(List<Monster> monsters) // 기본 공격 시 대상 판단
+        public Monster SelectTarget(List<Monster> monsters)
         {
             while (true)
             {
@@ -35,7 +35,7 @@ namespace TeamRPG_17
 
                 int input = _handleInput(monsters.Count);
 
-                if (input == -1) // 잘못된 입력 처리
+                if (input == -1)
                 {
                     BattleDisplay.DisplayInvalidInput();
                     continue;
@@ -61,7 +61,7 @@ namespace TeamRPG_17
         /// <param name="skill"></param>
         /// <param name="monsters"></param>
         /// <returns></returns>
-        public List<Monster> GetTargetsForSkill(Skill skill, List<Monster> monsters) // 스킬이 단일 타겟인지 전체 타겟인지 판단
+        public List<Monster> GetTargetsForSkill(Skill skill, List<Monster> monsters)
         {
             if (skill.SkillType == SkillType.AllTarget)
             {

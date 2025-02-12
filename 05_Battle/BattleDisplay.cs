@@ -230,7 +230,7 @@ namespace TeamRPG_17
         /// <summary>
         ///     포션 사용 시 효과 출력
         /// </summary>
-        /// <param name="potion"></param>
+        /// <param name="potion"> 선택한 포션 </param>
         public static void DisplayPotionEffect(PotionType potion)
         {
             Console.Clear();
