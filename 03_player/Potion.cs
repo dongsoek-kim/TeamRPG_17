@@ -15,10 +15,18 @@ namespace TeamRPG_17
         public int luk = 5;
         public int[] potionCount = new int[Enum.GetValues(typeof(PotionType)).Length];
 
+        /// <summary>
+        /// 생성자. 체력 포션 3개를 가지고 시작
+        /// </summary>
         public Potion()
         {
             potionCount[0] = 3;
         }
+
+        /// <summary>
+        /// 포션 사용 함수
+        /// </summary>
+        /// <param name="potionType"></param>
         public void UsePotion(PotionType potionType)
         {
             switch (potionType)
@@ -54,6 +62,12 @@ namespace TeamRPG_17
 
             }
         }
+
+        /// <summary>
+        /// 포션을 획득하는 함수
+        /// </summary>
+        /// <param name="potionType"> 포션 종류 </param>
+        /// <param name="_getNum"> 획득량 </param>
         public void GetPotion(PotionType potionType, int _getNum)
         {
             switch (potionType)
@@ -88,6 +102,11 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 포션 개수 반환
+        /// </summary>
+        /// <param name="potionType"></param>
+        /// <returns></returns>
         public int GetPotionCount(PotionType potionType)
         {
             return potionCount[(int)potionType];
