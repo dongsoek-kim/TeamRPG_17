@@ -8,13 +8,21 @@ using Newtonsoft.Json.Linq;
 
 namespace TeamRPG_17
 {
-    static class DataManager//Player,Inventory,Quest의 데이터 저장,불러오기
+    static class DataManager
     {
-        static public int currentSlot = 1;
+        /// <summary>
+        /// 현재 데이터 파일 슬롯
+        /// </summary>
+      static public int currentSlot = 1;
+        /// <summary>
+        /// 플레이어데이터 Json 파일 로드
+        /// </summary>
+        /// <param name="_input">몇번째 슬롯인지 판별</param>
+        /// <returns></returns>
       static public Player LoadPlayerData(int _input)
         {
             string relativePath = @"..\..\..\Json\";
-            string jsonFile = $"PlayerDataSlot{_input}.json";  // JSON 파일명
+            string jsonFile = $"PlayerDataSlot{_input}.json"; 
 
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             try
@@ -40,19 +48,22 @@ namespace TeamRPG_17
                 return null;
             }
         }
-
+        /// <summary>
+        /// 퀘스트 Json파일 로드
+        /// </summary>
+        /// <param name="_input">몇번째 슬롯인지 판별</param>
         static public void LoadQuestManagerData(int _input)
         {
-            string relativePath = @"..\..\..\Json\";                            // 파일 위치
-            string itemQuestjsonFile = $"itemQuestDataSlot{_input}.json";       // 템퀘스트 JSON 파일명
-            string killQuestjsonFile = $"killQuestDataSlot{_input}.json";     // 킬퀘스트 JSON 파일명
+            string relativePath = @"..\..\..\Json\";                           
+            string itemQuestjsonFile = $"itemQuestDataSlot{_input}.json";      
+            string killQuestjsonFile = $"killQuestDataSlot{_input}.json";    
 
             string itemQuestjsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, itemQuestjsonFile));
             string killQuestjsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, killQuestjsonFile));
 
             try
             {
-                // _input슬롯의 퀘스트 데이터 있으면
+                
                 if (File.Exists(itemQuestjsonPath) && File.Exists(killQuestjsonPath))
                 {
                     string iQuestJson = File.ReadAllText(itemQuestjsonPath);
@@ -61,8 +72,7 @@ namespace TeamRPG_17
                     return;
                 }
                 else
-                {
-                    // 없으면 baseItemQuest.json / baseKillQuest.json 으로 만들기
+                {                   
                     itemQuestjsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, "baseItemQuest.json"));
                     killQuestjsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, "baseKillQuest.json"));
                     string iQuestJson = File.ReadAllText(itemQuestjsonPath);
@@ -76,12 +86,21 @@ namespace TeamRPG_17
                 return;
             }
         }
-
+        /// <summary>
+        /// 각각의 로드 함수들을 한번에 부르는 메서드
+        /// </summary>
+        /// <param name="_input">몇번째 슬롯인지 판별</param>
         static public void LoadData(int _input)
         {
             GameManager.Instance.player = LoadPlayerData(_input);
             LoadQuestManagerData(_input);
         }
+        /// <summary>
+        /// json파일에 저장하는 메서드
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="inventory"></param>
+        /// <param name="userInput"></param>
         public static void SaveGameData(Player player, Inventory inventory, int userInput = 1)
         {
             string relativePath = @"..\..\..\Json\";
@@ -114,6 +133,9 @@ namespace TeamRPG_17
                 Console.WriteLine($"Error saving game data: {ex.Message}");
             }
         }
+        /// <summary>
+        /// ItemData를 로드하는 메서드
+        /// </summary>
         public static void LoadItemsData()
         {
             string relativePath = @"..\..\..\Json\";
@@ -186,12 +208,24 @@ namespace TeamRPG_17
 
     }
     public class ItemConverter : JsonConverter
-    {
+    {/// <summary>
+    /// json컨버터
+    /// </summary>
+    /// <param name="objectType"></param>
+    /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
             return typeof(Item).IsAssignableFrom(objectType);
         }
-
+        /// <summary>
+        /// 아이템데이터를 올바르게 직렬화하는 메서드
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="objectType"></param>
+        /// <param name="existingValue"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
@@ -219,8 +253,7 @@ namespace TeamRPG_17
                         if (!string.IsNullOrEmpty(equipSlotString))
                         {
                             if (!Enum.TryParse<EquipSlot>(equipSlotString, true, out _equipslot))
-                            {
-                                // 변환 실패 시 기본값 사용 또는 예외 처리
+                            {                                
                                 _equipslot = default(EquipSlot);
                             }
                         }
@@ -229,8 +262,7 @@ namespace TeamRPG_17
                         if (!string.IsNullOrEmpty(gradeString))
                         {
                             if (!Enum.TryParse<Grade>(gradeString, true, out grade))
-                            {
-                                // 변환 실패 시 기본값 사용 또는 예외 처리
+                            {                                
                                 grade = default(Grade);
                             }
                         }
@@ -252,7 +284,6 @@ namespace TeamRPG_17
                         {
                             if (!Enum.TryParse<EquipSlot>(equipSlotString, true, out _equipslot))
                             {
-                                // 변환 실패 시 기본값 사용 또는 예외 처리
                                 _equipslot = default(EquipSlot);
                             }
                         }
@@ -262,7 +293,6 @@ namespace TeamRPG_17
                         {
                             if (!Enum.TryParse<Grade>(gradeString, true, out grade))
                             {
-                                // 변환 실패 시 기본값 사용 또는 예외 처리
                                 grade = default(Grade);
                             }
                         }

@@ -13,19 +13,28 @@ namespace TeamRPG_17
         int totalPage;
  
         int nowPage;
+        /// <summary>
+        /// 생성자
+        /// </summary>
         public InventoryScene()
         {
             onEquip = false;
             nowPage = 0;
         }
-
+        /// <summary>
+        /// onEquip의 상태에 따라 장비관련 : 인벤토리로 나누어 출력해주는 Update메서드
+        /// </summary>
         public override void Update()
         {
             if (onEquip)
-                equipManagement();      // 장비 관리
+                equipManagement();
             else
-                InventoryPrint();       // 인벤토리
+                InventoryPrint();
         }
+        /// <summary>
+        /// 인벤토리 UI 출력부분
+        /// UserInput을 받아 다음 Path로 이동
+        /// </summary>
         private void InventoryPrint()
         {
             Console.Clear();
@@ -85,6 +94,10 @@ namespace TeamRPG_17
                     
             }
         }
+        /// <summary>
+        /// 장착 관리 UI 출력부분
+        /// UserInput을 받아 다음 Path로 이동
+        /// </summary>
         private void equipManagement()
         {
             Console.Clear();
@@ -137,6 +150,9 @@ namespace TeamRPG_17
                     }
             }
         }
+        /// <summary>
+        /// UserInput을 받아 처리하는 페이지이동하는 메서드
+        /// </summary>
         private void ItemPage()
         {
             if(nowPage==0 && totalPage>0)
@@ -153,6 +169,9 @@ namespace TeamRPG_17
                 Console.WriteLine("3. 이전 페이지");
             }
         }
+        /// <summary>
+        /// UserInput을 받아 처리하는 페이지이동하는 메서드
+        /// </summary>
         private void ItemPage2()
         {
             if (nowPage == 0 && totalPage > 0)

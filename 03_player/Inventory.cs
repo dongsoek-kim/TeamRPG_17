@@ -26,15 +26,26 @@ namespace TeamRPG_17
 
         public int equipSlot { get; private set; }
         public Potion potion { get; private set; }
-
+        /// <summary>
+        /// Inventory생성자 유저가 가지고있는 아이템목록인 item과 Potion
+        /// 그리고 현재 장착중인 장비를 생성해준다
+        /// </summary>
         public Inventory()
         {
-            //ItemType=Armor면 new Armor , ItemType=Weapon이면 new Weapon
             inventory = new Item[ItemManager.Instance.items.Length];
             potion = new Potion();
             if (equipedArmor == null) equipedArmor= new Armor[4];
         }
-        [JsonConstructor] // JSON 직렬화/역직렬화를 위해 생성자 지정
+        /// <summary>
+        /// JSON 직렬화/역직렬화를 위해 생성자 지정
+        /// DataLoad시 호출되는 생성자, Class 변수에 값을 입력
+        /// </summary>
+        /// <param name="inventory"></param>
+        /// <param name="equipedArmor"></param>
+        /// <param name="equipedWeapon"></param>
+        /// <param name="equipSlot"></param>
+        /// <param name="potion"></param>
+        [JsonConstructor]         
         public Inventory(Item[] inventory, Armor[]? equipedArmor, Weapon? equipedWeapon, int equipSlot, Potion potion)
         {
             this.inventory = inventory ?? new Item[ItemManager.Instance.items.Length];
@@ -49,6 +60,11 @@ namespace TeamRPG_17
             //    AddItem((ItemName)i);
             //}
         }
+        /// <summary>
+        /// ItemInfo를 출력해주는 메서드, 페이지를 계산해서 한페이지당 7개의 아이템을 출력해준다.
+        /// </summary>
+        /// <param name="nowPage"></param>
+        /// <param name="totalPages"></param>
         public void ShowInventory(int nowPage,out int totalPages)
         {
             int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
@@ -88,6 +104,7 @@ namespace TeamRPG_17
         /// <summary>
         /// 포션갯수 출력함수
         /// </summary>
+        /// <param name="nowpage"></param>
         public void showPotion(int nowpage)
         {
             int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
@@ -204,6 +221,10 @@ namespace TeamRPG_17
             Console.Write($"총방어력:");ArmorStat();
             Console.WriteLine($"총 힘 : {itemStats.sumStr}, 총 민첩 : {itemStats.sumDex},총 지능 : {itemStats.sumInte},총 행운 : {itemStats.sumLuk}");
         }
+        /// <summary>
+        /// 현재 장착중인 아이템 목록 출력메서드
+        /// </summary>
+        /// <param name="equipSlot"></param>
         public void nowEquipInfo(EquipSlot equipSlot)
         {
             if (equipSlot == EquipSlot.Weapon)
@@ -254,6 +275,10 @@ namespace TeamRPG_17
             //Console.WriteLine($"{stat}");
             return weaponDamage;
         }
+        /// <summary>
+        /// 아이템에서 얻은 능력치 총합 계산 메서드
+        /// </summary>
+        /// <returns>Player에서 사용하는 Sum값 return</returns>
         public (int sumStr,int sumDex,int sumInte,int sumLuk) ItemStat()
         {
             int sumStr = 0,sumDex=0,sumInte=0,sumLuk=0;
@@ -273,6 +298,7 @@ namespace TeamRPG_17
         /// <summary>
         /// 장비 착용 / 착용해제 함수
         /// </summary>
+        /// <param name="_inputCount">아이템 목록에서 몇번째 아이템인지</param>
         public void Equipment(int _inputCount)
         {
             int itemCount = 1;
@@ -368,6 +394,11 @@ namespace TeamRPG_17
             }
             return false;
         }
+        /// <summary>
+        /// 보유중인 아이템을 미보유상태로 만드는 메서드
+        /// </summary>
+        /// <param name="itemName"></param>
+        /// <returns></returns>
         public bool DeleteItem(string itemName)
         {
             for (int i = 0; i < inventory.Length; i++)
