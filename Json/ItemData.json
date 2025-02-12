@@ -13,18 +13,18 @@
     "Defense": "0"
   },
   // --------------------------------------------------------- Common Weapon
-  {
-    "itemName": "누가 쓰다버린 목검",
-    "itemDescription": "많이 낡았다",
-    "itemType": "Weapon",
-    "str": 2,
-    "dex": 1,
-    "inte": 1,
-    "luk": 1,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "1"
-  },
+    {
+        "itemName": "누가 쓰다버린 목검",
+        "itemDescription": "많이 낡았다",
+        "itemType": "Weapon",
+        "str": 2,
+        "dex": 1,
+        "inte": 1,
+        "luk": 1,
+        "EquipSlot": "Weapon",
+        "Grade": "Common",
+        "damage": "1"
+    },
   {
     "itemName": "테무산 쇠 검",
     "itemDescription": "쇠로 만들어진 평범한 검",

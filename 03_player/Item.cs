@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +12,14 @@ namespace TeamRPG_17
     public abstract class Item
     {
         public ItemType itemType        { get; private set; }
-        public Grade grade { get; private set; }
+        public Grade Grade { get; private set; }
         public EquipSlot EquipSlot { get; private set; }
         public string   itemName        { get; private set; }
         public string   itemDescription { get; private set; }
         
-        public int str {  get; private set; }//힘
-        public int dex { get; private set; }//민첩
-        public  int inte {  get; private set; }//지력
+        public int str {  get; private set; }
+        public int dex { get; private set; }
+        public  int inte {  get; private set; }
         public int luk {  get; private set; }
 
         public int price {  get; private set; }
@@ -35,8 +37,8 @@ namespace TeamRPG_17
             inte = _inte;
             luk = _luk;
             EquipSlot = _equipslot;
-            grade = _grade;
-            switch (grade)
+            Grade = _grade;
+            switch (Grade)
             {
                 case Grade.Common:
                     price = 500;

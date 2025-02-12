@@ -158,7 +158,7 @@ namespace TeamRPG_17
                 number = _isNumber ? itemCount : null;
 
                 Item item = ItemManager.Instance.items[i];
-                Render.ColorWrite($"- {number} {item.ItemInfo()}", colors[(int)item.grade]);
+                Render.ColorWrite($"- {number} {item.ItemInfo()}", colors[(int)item.Grade]);
                 Console.Write(" | ");
 
                 if (GameManager.Instance.player.inventory[i] == null)
@@ -194,7 +194,7 @@ namespace TeamRPG_17
 
             foreach(Item item in pageList)
             {
-                Render.ColorWrite($"- {num++} {item.ItemInfo()}", colors[(int)item.grade]);
+                Render.ColorWrite($"- {num++} {item.ItemInfo()}", colors[(int)item.Grade]);
                 Console.Write(" | ");
                 Render.ColorWriteLine($"{(int)(ItemManager.Instance.itemPrice[(int)item.itemType] * sellRatio)}G", ConsoleColor.Yellow);
             }

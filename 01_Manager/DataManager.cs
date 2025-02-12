@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
 namespace TeamRPG_17
@@ -108,19 +109,20 @@ namespace TeamRPG_17
             string itemQuestjsonPath = $"itemQuestDataSlot{userInput}.json";
             string killQuestjsonPath = $"killQuestDataSlot{userInput}.json";
 
-            // 파일 경로 생성
+            
             string PlayerDatajson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, PlayerDatajsonPath));
             string itemQuestJson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, itemQuestjsonPath));
             string killQuestJson = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, killQuestjsonPath));
 
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.Converters.Add(new StringEnumConverter());
+
             try
-            {
-                // 데이터 직렬화
+            {                
                 string PlayerData = JsonConvert.SerializeObject(player, Formatting.Indented);
                 string itemQuestData = JsonConvert.SerializeObject(QuestManager.Instance.itemQuests, Formatting.Indented);
                 string killQuestData = JsonConvert.SerializeObject(QuestManager.Instance.killQuests, Formatting.Indented);
-
-                // 데이터 저장
+                
                 File.WriteAllText(PlayerDatajson, PlayerData);
                 File.WriteAllText(itemQuestJson, itemQuestData);
                 File.WriteAllText(killQuestJson, killQuestData);
@@ -129,7 +131,7 @@ namespace TeamRPG_17
             }
             catch (Exception ex)
             {
-                // 예외 발생 시 오류 메시지 출력
+                
                 Console.WriteLine($"Error saving game data: {ex.Message}");
             }
         }
@@ -139,21 +141,21 @@ namespace TeamRPG_17
         public static void LoadItemsData()
         {
             string relativePath = @"..\..\..\Json\";
-            string jsonFile = "ItemData.json";  // JSON 파일명
+            string jsonFile = "ItemData.json"; 
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             try
             {
                 if (File.Exists(jsonPath))
                 {
                     string json = File.ReadAllText(jsonPath);
-                    // JSON 데이터를 불러와 아이템 생성
+                   
                     var rawItems = JsonConvert.DeserializeObject<dynamic[]>(json);
                     for (int i = 0; i < rawItems.Length; i++)
                     {
                         var rawItem = rawItems[i];
                         ItemType itemType = (ItemType)Enum.Parse(typeof(ItemType), rawItem.itemType.ToString());
 
-                        // 아이템 타입에 맞게 생성
+                       
                         if (itemType == ItemType.Armor)
                         {
                             int defense = int.Parse(rawItem.Defense.ToString());
@@ -166,7 +168,7 @@ namespace TeamRPG_17
                             ItemManager.Instance.items[i] = new Armor(
                                 rawItem.itemName.ToString(),
                                 rawItem.itemDescription.ToString(),
-                                defense,    // int로 변환된 값
+                                defense,    
                                 str,
                                 dex,
                                 inte,
@@ -182,13 +184,13 @@ namespace TeamRPG_17
                             int dex = int.Parse(rawItem.dex.ToString());
                             int inte = int.Parse(rawItem.inte.ToString());
                             int luk = int.Parse(rawItem.luk.ToString());
-                            Grade grade = (Grade)Enum.Parse(typeof(Grade), rawItem.Grade.ToString());  // 대소문자 구분 안함
+                            Grade grade = (Grade)Enum.Parse(typeof(Grade), rawItem.Grade.ToString());  
                             EquipSlot equipSlot = (EquipSlot)Enum.Parse(typeof(EquipSlot), rawItem.EquipSlot.ToString());
-                            // Weapon 객체 생성
+                           
                             ItemManager.Instance.items[i] = new Weapon(
                                 rawItem.itemName.ToString(),
                                 rawItem.itemDescription.ToString(),
-                                damage,    // int로 변환된 값
+                                damage,   
                                 str,
                                 dex,
                                 inte,
