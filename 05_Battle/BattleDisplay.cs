@@ -134,7 +134,7 @@ namespace TeamRPG_17
         /// <param name="isWin"> 전투 승리 여부 </param>
         /// <param name="monsters"> 현재 전투에 들어간 몬스터 목록 </param>
         /// <param name="player"></param>
-        public void DisplayBattleResult(bool isWin, List<Monster> monsters, Player player)
+        public void DisplayBattleResult(bool isWin, List<Monster> monsters, Player player, int currentDungeon)
         {
             Console.Clear();
             if (isWin)
@@ -180,9 +180,9 @@ namespace TeamRPG_17
         /// <summary>
         /// 플레이어의 공격 출력 (몬스터가 맞을 때)
         /// </summary>
-        /// <param name="target"></param>
-        /// <param name="prevHp"></param>
-        /// <param name="dmg"></param>
+        /// <param name="target"> 대상 </param>
+        /// <param name="prevHp"> 공격 받기 전 체력 </param>
+        /// <param name="dmg"> 댐지 </param>
         public static void DisplayDamageTaken(Monster target, int prevHp, int dmg)
         {
             Console.Clear();
