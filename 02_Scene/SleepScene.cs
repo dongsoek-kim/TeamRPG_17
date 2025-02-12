@@ -37,15 +37,16 @@ namespace TeamRPG_17
                     break;
             }
         }
-
+        /// <summary>
+        ///  플레이어 회복
+        /// </summary>
         public void HealPlayer()
         {
             onMessage = true;
 
             if(healPrice <= GameManager.Instance.player.gold)
             {
-                // 메세지 출력
-                message = "휴식을 완료했습니다.";
+                message = "휴식을 완료했습니다."; // 메세지 출력
                 messageColor = ConsoleColor.Blue;
 
                 GameManager.Instance.player.gold -= healPrice;
@@ -69,7 +70,9 @@ namespace TeamRPG_17
             onMessage = false;
         }
 
-
+        /// <summary>
+        /// 회복포션 소지개수 3개이하 시 충전
+        /// </summary>
         public void GiftPotion()
         {
             int potionCount = GameManager.Instance.player.inventory.potion.potionCount[(int)PotionType.Health];

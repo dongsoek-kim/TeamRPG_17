@@ -6,11 +6,11 @@ namespace TeamRPG_17
     public class DataScene : Scene
     {
 
-        private bool onSave;
-        private bool onLoad;
-        private bool onDelete;
-        private bool onSelect;
-        private Player[] datas;
+        private bool onSave; // 세이브 관리 여부
+        private bool onLoad; // 로드 관리 여부
+        private bool onDelete; // 삭제 관리 여부
+        private bool onSelect; // 선택 관리 여부
+        private Player[] datas; // 현재 데이터 보관함
 
         public DataScene()
         {
@@ -19,7 +19,7 @@ namespace TeamRPG_17
             onDelete = false;
             onSelect = true;
 
-            datas = new Player[3]; // 데이터 크기
+            datas = new Player[3];
             for(int i = 0; i<datas.Length; i++)
                 datas[i] = DataManager.LoadPlayerData(i+1);
             
@@ -37,6 +37,9 @@ namespace TeamRPG_17
                 DataMain();
         }
 
+        /// <summary>
+        /// 데이터 메인
+        /// </summary>
         private void DataMain()
         {
             Console.Clear();
@@ -68,6 +71,9 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 데이터 저장
+        /// </summary>
         private void DataSave()
         {
             Console.Clear();
@@ -114,6 +120,9 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 데이터 불러오기
+        /// </summary>
         private void DataLoad()
         {
             Console.Clear();
@@ -156,6 +165,9 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 데이터 삭제
+        /// </summary>
         private void DataDelete()
         {
             Console.Clear();
@@ -202,6 +214,9 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 데이터 리스트 출력
+        /// </summary>
         private void DataList()
         {
             for (int i = 0; i < datas.Length; i++)
@@ -219,6 +234,13 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 현재 슬롯에 데이터가 있는지 판단하는 메서드
+        /// </summary>
+        /// <param name="slotNumber">체크할 슬롯의 인덱스</param>
+        /// <param name="checkMessage">있을때 사용자에게 보여질 메세지</param>
+        /// <param name="_innerCommand">메서드 안에서 사용자의 입력 반환</param>
+        /// <returns>슬롯이 있으면 true, 없으면 false</returns>
         private bool CheckSlot(int slotNumber, string checkMessage, out int _innerCommand)
         {
             string pName = "";
@@ -252,6 +274,9 @@ namespace TeamRPG_17
             return false;
         }
 
+        /// <summary>
+        /// 데이터 동기화
+        /// </summary>
         private void SyncSlot()
         {
             for(int i = 0; i<datas.Length; i++)
