@@ -9,6 +9,11 @@ namespace TeamRPG_17
 {
     public static class Render
     {
+        /// <summary>
+        /// 색을 추가하여 출력하는 메서드 ( Write )
+        /// </summary>
+        /// <param name="text">출력 데이터</param>
+        /// <param name="color">색</param>
         public static void ColorWrite(string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -16,6 +21,11 @@ namespace TeamRPG_17
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// 색을 추가하여 출력하는 메서드 ( Write )
+        /// </summary>
+        /// <param name="ch">출력 데이터</param>
+        /// <param name="color">색</param>
         public static void ColorWrite(char ch, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -23,6 +33,11 @@ namespace TeamRPG_17
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// 색을 추가하여 출력하는 메서드 ( WriteLine )
+        /// </summary>
+        /// <param name="text">출력 데이터</param>
+        /// <param name="color">색</param>
         public static void ColorWriteLine(string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -30,6 +45,11 @@ namespace TeamRPG_17
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// 색을 추가하여 출력하는 메서드 ( WriteLine )
+        /// </summary>
+        /// <param name="ch">출력 데이터</param>
+        /// <param name="color">색</param>
         public static void ColorWriteLine(char ch, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -37,6 +57,13 @@ namespace TeamRPG_17
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// 한글자씩 출력되는 애니메이션 텍스트 ( Write )
+        /// </summary>
+        /// <param name="text">출력 데이터</param>
+        /// <param name="duration">시간 *높을수록 느려짐</param>
+        /// <param name="canSkip">스킵 가능 여부</param>
+        /// <param name="color">색</param>
         public static void AnimationWrite(string text, float duration, bool canSkip, ConsoleColor color = ConsoleColor.Gray)
         {
             int count = 0;
@@ -60,6 +87,13 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 한글자씩 출력되는 애니메이션 텍스트 ( WriteLine )
+        /// </summary>
+        /// <param name="text">출력 데이터</param>
+        /// <param name="duration">시간 *높을수록 느려짐</param>
+        /// <param name="canSkip">스킵 가능 여부</param>
+        /// <param name="color">색</param>
         public static void AnimationWriteLine(string text, float duration,bool canSkip, ConsoleColor color = ConsoleColor.Gray)
         {
             int count = 0;

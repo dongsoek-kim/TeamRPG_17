@@ -28,15 +28,14 @@ namespace TeamRPG_17
         /// <summary>
         /// 아이템 구매 출력/입력
         /// </summary>
+        /// <param name="_num">아이템 인덱스 입력</param>
         public void BuyItem(int _num)
         {
-            // 현재 도시에 따라서 아이템 인덱스 변경
+            
             Town town = GameManager.Instance.currentTown;
             int itemIndex = _num - 1;
             onMessage = true;
 
-            // 잘못된 입력
-            // 범위 초과 ( 0 미만 , 게임 내 아이템 개수 초과 )
             if (_num < 0 || (town.startItemIdx + town.count) < _num)
             {
                 message = "잘못된 입력입니다";
@@ -44,7 +43,6 @@ namespace TeamRPG_17
                 return;
             }
 
-            // 이미 보유한 아이템
             if (GameManager.Instance.player.inventory[itemIndex] != null)
             {
                 message = "이미 구매한 아이템입니다.";
@@ -52,8 +50,6 @@ namespace TeamRPG_17
                 return;
             }
 
-            // 구매 시도
-            // 돈이 충분하지않을때
             if (GameManager.Instance.player.gold < ItemManager.Instance.itemPrice[itemIndex])
             {
                 message = "Gold 가 부족합니다.";
@@ -61,11 +57,9 @@ namespace TeamRPG_17
                 return;
             }
 
-            // 범위를 초과하지않음 / 보유중이 아님 / 돈이 충분함
             message = "구매를 완료했습니다.";
             messageColor = ConsoleColor.Blue;
 
-            // 돈 차감 및 아이템 추가
             GameManager.Instance.player.gold -= ItemManager.Instance.itemPrice[itemIndex];
             GameManager.Instance.player.inventory.AddItem((ItemName)itemIndex);
         }
@@ -73,6 +67,7 @@ namespace TeamRPG_17
         /// <summary>
         /// 아이템 판매 출력/입력
         /// </summary>
+        /// <param name="_num">아이템 인덱스</param>
         public void SellItem(int _num)
         {
             onMessage = true;
@@ -88,8 +83,7 @@ namespace TeamRPG_17
                     itemCount++;
                     continue;
                 }
-                // 판매된 아이템이 착용중인 아이템인지 확인 및 착용해제
-                // 판매된 아이템 -> null
+
                 switch (GameManager.Instance.player.inventory[i].itemType)
                 {
                     case ItemType.Armor:
@@ -110,7 +104,6 @@ namespace TeamRPG_17
 
                 int getGold = (int)(ItemManager.Instance.itemPrice[i] * sellRatio);
 
-                // 판매된 아이템 -> null , Gold 획득
                 message = $"{GameManager.Instance.player.inventory[i].itemName} 판매되었습니다. ( + {getGold}G)";
                 GameManager.Instance.player.inventory[i] = null;
                 GameManager.Instance.player.gold += getGold;
@@ -119,7 +112,6 @@ namespace TeamRPG_17
                 return;
             }
 
-            // 잘못된 입력으로 판매되지않았을때
             message = "잘못된 입력입니다";
             messageColor = ConsoleColor.Red;
         }
@@ -127,12 +119,18 @@ namespace TeamRPG_17
         /// <summary>
         /// 판매 아이템 리스트 출력
         /// </summary>
+        /// <param name="itemsPerPage">현재 페이지에 최대 출력 수</param>
+        /// <param name="nowPage">현재 페이지</param>
+        /// <param name="startIndex">시작되는 아이템 인덱스 반환</param>
+        /// <param name="totalPages">아이템 개수에 따라서 전체 페이지 반환</param>
+        /// <param name="_isNumber">번호를 붙일 것인지 기본값 : false</param>
+        /// <returns>현재 페이지 아이템 개수 반환</returns>
         public int PrintItemList(int itemsPerPage, int nowPage,out int startIndex, out int totalPages, bool _isNumber = false)
         {
 
             int? number;
             startIndex = 0;
-            Town town = GameManager.Instance.currentTown; // 현재 타운
+            Town town = GameManager.Instance.currentTown;
 
             // 예외 처리사항
             if (!town.CanGetItem())
@@ -144,7 +142,7 @@ namespace TeamRPG_17
 
             int itemCount = 1;
             int townItemIdx = town.startItemIdx + town.count;
-            totalPages = (town.count + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            totalPages = (town.count + itemsPerPage - 1) / itemsPerPage;
 
             startIndex = town.startItemIdx + nowPage * itemsPerPage;
             int endIndex;
@@ -154,13 +152,13 @@ namespace TeamRPG_17
             else
                 endIndex = startIndex + itemsPerPage;
 
-            // 판매 목록
+            
             for (int i = startIndex; i < endIndex; i++)
             {
                 number = _isNumber ? itemCount : null;
 
                 Item item = ItemManager.Instance.items[i];
-                Render.ColorWrite($"- {number} {item.ItemInfo()}", colors[(int)item.grade]);
+                Render.ColorWrite($"- {number} {item.ItemInfo()}", colors[(int)item.Grade]);
                 Console.Write(" | ");
 
                 if (GameManager.Instance.player.inventory[i] == null)
@@ -178,6 +176,10 @@ namespace TeamRPG_17
         /// <summary>
         /// 판매 아이템 리스트 출력
         /// </summary>
+        /// <param name="itemsPerPage">현재 페이지에 최대 출력 수</param>
+        /// <param name="nowPage">현재 페이지</param>
+        /// <param name="totalPages">아이템 개수에 따라서 전체 페이지 반환</param>
+        /// <returns>현재 페이지 아이템 개수 반환</returns>
         public int SellItemList(int itemsPerPage, int nowPage, out int totalPages)
         {
             Item[] inventory = GameManager.Instance.player.inventory.inventory;
@@ -185,14 +187,14 @@ namespace TeamRPG_17
             int num = 1;
 
             int itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
-            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage;
             List<Item> itemList = inventory.Where(i => i != null).ToList();
             int startIndex = nowPage * itemsPerPage;
             List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
 
             foreach(Item item in pageList)
             {
-                Render.ColorWrite($"- {num++} {item.ItemInfo()}", colors[(int)item.grade]);
+                Render.ColorWrite($"- {num++} {item.ItemInfo()}", colors[(int)item.Grade]);
                 Console.Write(" | ");
                 Render.ColorWriteLine($"{(int)(ItemManager.Instance.itemPrice[(int)item.itemType] * sellRatio)}G", ConsoleColor.Yellow);
             }

@@ -12,6 +12,12 @@ namespace TeamRPG_17
         public int Level { get; private set; }
         public string DungeonInfo { get; private set; }
 
+        /// <summary>
+        /// 던전 생성자. 던전 이름, 레벨, 던전 정보를 받아 생성
+        /// </summary>
+        /// <param name="dungeonName"> 던전 명 </param>
+        /// <param name="level"> 던전 레벨 </param>
+        /// <param name="dungeonInfo"> 던전 정보 </param>
         public Dungeon(string dungeonName, int level, string dungeonInfo)
         {
             DungeonName = dungeonName;

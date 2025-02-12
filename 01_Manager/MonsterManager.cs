@@ -8,7 +8,9 @@ namespace TeamRPG_17
 {
     public class MonsterManager : Singleton<MonsterManager>
     {
-
+        /// <summary>
+        /// 몬스터 리스트
+        /// </summary>
         private List<Monster> monsters =
         [
             // 레벨 1 몬스터
@@ -48,10 +50,21 @@ namespace TeamRPG_17
             new("절망의 그림자", 3, 210, 27, 24)
         ];
 
+        /// <summary>
+        /// 레벨에 따른 몬스터 리스트 반환
+        /// </summary>
+        /// <param name="level"> 던전 레벨이 들어가야 함 </param>
+        /// <returns></returns>
         public List<Monster> GetMonsterByLevel(int level)
         {
             return monsters.Where(m => m.Level == level).ToList();
         }
+
+        /// <summary>
+        /// 랜덤 몬스터 스폰
+        /// </summary>
+        /// <param name="dungeon"> 현재 던전의 정보 </param>
+        /// <returns></returns>
         public List<Monster> RandomMonsterSpawn(Dungeon dungeon)
         {
             List<Monster> list = new List<Monster>();

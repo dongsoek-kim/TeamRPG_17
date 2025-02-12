@@ -26,19 +26,26 @@ namespace TeamRPG_17
 
         public int equipSlot { get; private set; }
         public Potion potion { get; private set; }
-
+        /// <summary>
+        /// Inventory생성자 유저가 가지고있는 아이템목록인 item과 Potion
+        /// 그리고 현재 장착중인 장비를 생성해준다
+        /// </summary>
         public Inventory()
         {
-            //ItemType=Armor면 new Armor , ItemType=Weapon이면 new Weapon
             inventory = new Item[ItemManager.Instance.items.Length];
             potion = new Potion();
             if (equipedArmor == null) equipedArmor= new Armor[4];
-            for (int i = 0; i < Enum.GetValues(typeof(ItemName)).Length; i++)
-            {
-                AddItem((ItemName)i);
-            }
         }
-        [JsonConstructor] // JSON 직렬화/역직렬화를 위해 생성자 지정
+        /// <summary>
+        /// JSON 직렬화/역직렬화를 위해 생성자 지정
+        /// DataLoad시 호출되는 생성자, Class 변수에 값을 입력
+        /// </summary>
+        /// <param name="inventory"></param>
+        /// <param name="equipedArmor"></param>
+        /// <param name="equipedWeapon"></param>
+        /// <param name="equipSlot"></param>
+        /// <param name="potion"></param>
+        [JsonConstructor]         
         public Inventory(Item[] inventory, Armor[]? equipedArmor, Weapon? equipedWeapon, int equipSlot, Potion potion)
         {
             this.inventory = inventory ?? new Item[ItemManager.Instance.items.Length];
@@ -46,25 +53,24 @@ namespace TeamRPG_17
             this.equipedWeapon = equipedWeapon;
             this.equipSlot = equipSlot;
             this.potion = potion ?? new Potion();
-
-            // ItemType에 따라 아이템 추가
-            for (int i = 0; i < Enum.GetValues(typeof(ItemName)).Length; i++)
-            {
-                AddItem((ItemName)i);
-            }
         }
+        /// <summary>
+        /// ItemInfo를 출력해주는 메서드, 페이지를 계산해서 한페이지당 7개의 아이템을 출력해준다.
+        /// </summary>
+        /// <param name="nowPage"></param>
+        /// <param name="totalPages"></param>
         public void ShowInventory(int nowPage,out int totalPages)
         {
-            int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
-            int  itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
-            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            int itemsPerPage = 7; 
+            int  itemsHeld = inventory.Count(i => i != null); 
+            totalPages = (itemsHeld / itemsPerPage)+1; 
             List<Item> itemList = inventory.Where(i => i != null).ToList();
             int startIndex = nowPage * itemsPerPage;
             List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
             ConsoleColor color=ConsoleColor.White;
             foreach (Item item in pageList)
             {
-                string prefix = ""; // 기본적으로 장착 여부 없음
+                string prefix = ""; 
 
                 if (item.itemType == ItemType.Armor && equipedArmor[(int)item.EquipSlot] == item)
                 {
@@ -74,7 +80,7 @@ namespace TeamRPG_17
                 {
                     prefix = "[E] ";
                 }
-                switch (item.grade)
+                switch (item.Grade)
                 {
                     case Grade.Common:
                         color = ConsoleColor.DarkGray;
@@ -92,12 +98,19 @@ namespace TeamRPG_17
         /// <summary>
         /// 포션갯수 출력함수
         /// </summary>
-        public void showPotion()
+        /// <param name="nowpage"></param>
+        public void showPotion(int nowpage)
         {
+            int itemsPerPage = 7; 
+            int itemsHeld = inventory.Count(i => i != null); 
+            int totalPages = (itemsHeld / itemsPerPage) + 1;
+            int height;
+            if (nowpage + 1 != totalPages) height = 7;
+            else height = itemsHeld % itemsPerPage;
             var originalPosition = Console.GetCursorPosition();
             int potionType = 0;
             int coorX = Console.WindowWidth -60;
-            int coorY = 15;
+            int coorY = 10+height;
             for (int i = 0;i<6;i++)
             {
                 Console.SetCursorPosition(coorX, coorY);
@@ -105,7 +118,7 @@ namespace TeamRPG_17
                 coorY++;
             }
             coorX = Console.WindowWidth - 50;
-            coorY = 16;
+            coorY = 10 + height;
             foreach (int potion in potion.potionCount) 
             {
                 Console.SetCursorPosition(coorX, coorY);
@@ -122,9 +135,9 @@ namespace TeamRPG_17
         public void ShowEquip(int nowPage, out int totalPages)
         {
             int itemCount = 1;
-            int itemsPerPage = 7; // 한 페이지에 표시할 아이템 수
-            int itemsHeld = inventory.Count(i => i != null); // 보유 중인 아이템 개수
-            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; // 전체 페이지 수
+            int itemsPerPage = 7; 
+            int itemsHeld = inventory.Count(i => i != null); 
+            totalPages = (itemsHeld + itemsPerPage - 1) / itemsPerPage; 
             List<Item> itemList = inventory.Where(i => i != null).ToList();
             int startIndex = nowPage * itemsPerPage;
             List<Item> pageList = itemList.Skip(startIndex).Take(itemsPerPage).ToList();
@@ -133,7 +146,6 @@ namespace TeamRPG_17
             {
                 string prefix = "";
 
-                // 아이템 종류에 따라 장착 여부를 확인하여 접두어를 설정합니다.
                 if (item.itemType == ItemType.Armor && equipedArmor[(int)item.EquipSlot] == item)
                 {
                     prefix = "[E]";
@@ -142,7 +154,7 @@ namespace TeamRPG_17
                 {
                     prefix = "[E]";
                 }
-                switch (item.grade)
+                switch (item.Grade)
                 {
                     case Grade.Common:
                         color = ConsoleColor.DarkGray;
@@ -202,6 +214,10 @@ namespace TeamRPG_17
             Console.Write($"총방어력:");ArmorStat();
             Console.WriteLine($"총 힘 : {itemStats.sumStr}, 총 민첩 : {itemStats.sumDex},총 지능 : {itemStats.sumInte},총 행운 : {itemStats.sumLuk}");
         }
+        /// <summary>
+        /// 현재 장착중인 아이템 목록 출력메서드
+        /// </summary>
+        /// <param name="equipSlot"></param>
         public void nowEquipInfo(EquipSlot equipSlot)
         {
             if (equipSlot == EquipSlot.Weapon)
@@ -252,6 +268,10 @@ namespace TeamRPG_17
             //Console.WriteLine($"{stat}");
             return weaponDamage;
         }
+        /// <summary>
+        /// 아이템에서 얻은 능력치 총합 계산 메서드
+        /// </summary>
+        /// <returns>Player에서 사용하는 Sum값 return</returns>
         public (int sumStr,int sumDex,int sumInte,int sumLuk) ItemStat()
         {
             int sumStr = 0,sumDex=0,sumInte=0,sumLuk=0;
@@ -271,6 +291,7 @@ namespace TeamRPG_17
         /// <summary>
         /// 장비 착용 / 착용해제 함수
         /// </summary>
+        /// <param name="_inputCount">아이템 목록에서 몇번째 아이템인지</param>
         public void Equipment(int _inputCount)
         {
             int itemCount = 1;
@@ -303,14 +324,13 @@ namespace TeamRPG_17
                         }
                     case ItemType.Weapon:
                         {
-                            // 선택된 무기가 착용중인 무기와 같을때 착용해제
                             if (equipedWeapon == (Weapon)inventory[i])
                             {
                                 equipedWeapon = null;
                             }
                             else
                             {
-                                equipedWeapon = (Weapon)inventory[i];  // 새로운 무기라면 장착
+                                equipedWeapon = (Weapon)inventory[i];
                             }
                             break;
                         }
@@ -366,6 +386,11 @@ namespace TeamRPG_17
             }
             return false;
         }
+        /// <summary>
+        /// 보유중인 아이템을 미보유상태로 만드는 메서드
+        /// </summary>
+        /// <param name="itemName"></param>
+        /// <returns></returns>
         public bool DeleteItem(string itemName)
         {
             for (int i = 0; i < inventory.Length; i++)

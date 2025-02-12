@@ -36,11 +36,7 @@ namespace TeamRPG_17
         {
             level = 1;
             exp = 0;
-            // 스탯(str 등)은 추후에 확정하여 변경예정
-            str = 0;
-            dex = 0;
-            inte = 0;
-            luk = 0;
+
             damage = 20;
             defense = 5;
 
@@ -53,6 +49,38 @@ namespace TeamRPG_17
 
             inventory = new Inventory();
         }
+
+        /// <summary>
+        /// 플레이어 직업설정 및 직업별 초기 스탯 지정
+        /// </summary>
+        /// <param name="_job"></param>
+        public void SetJob(JobType _job)
+        {
+            job = _job;
+
+            switch (job)
+            {
+                case JobType.Warrior:
+                    str = 4;
+                    dex = 2;
+                    inte = 2;
+                    luk = 2;
+                    break;
+                case JobType.Rogue:
+                    str = 2;
+                    dex = 4;
+                    inte = 2;
+                    luk = 2;
+                    break;
+                case JobType.Wizard:
+                    str = 2;
+                    dex = 2;
+                    inte = 4;
+                    luk = 2;
+                    break;
+            }
+        }
+
         [JsonConstructor]
         public Player(int level, int exp, int str, int dex, int inte, int luk,float damage,float defense,int hpMax, int mpMax, int gold,TownName nowTown,Inventory inventory)
         {
@@ -70,7 +98,11 @@ namespace TeamRPG_17
             this.gold = gold;
             this.inventory = inventory ?? new Inventory();
         }
-        // 던전 클리어 후 경험치 획득 함수
+
+        /// <summary>
+        /// 던전 클리어 후 경험치 획득 함수
+        /// </summary>
+        /// <param name="addExp"></param>
         public void AddExp(int addExp)
         {
             exp++;
@@ -85,7 +117,7 @@ namespace TeamRPG_17
                 luk += 1;
                 damage += 0.5f;
                 defense += 1;
-                mpMax += 1;
+                mpMax += 10;
                 mp = mpMax;
             }
         }
@@ -112,9 +144,9 @@ namespace TeamRPG_17
                 return inventory.equipedWeapon.damage;
         }
 
-        public float BonusDamage { get; private set; }
-
-        // 총 데미지 계산식 (스탯/직업별)
+        /// <summary>
+        /// 총 공격력/데미지 계산 속성
+        /// </summary>
         public int TotalDamage 
         {
             get
@@ -122,7 +154,7 @@ namespace TeamRPG_17
                 var itemStats = GameManager.Instance.player.inventory.ItemStat();
 
                 float baseDamage = damage;
-                float bonusDamage = 0;
+                float bonusDamage = 0; // 스탯/직업별 데미지 계산
 
                 switch (job)
                 {
@@ -139,10 +171,14 @@ namespace TeamRPG_17
                         break;
                 }
 
-                return (int)(baseDamage + bonusDamage + GameManager.Instance.player.inventory.WeaponStat());
+                return (int)(baseDamage + bonusDamage + GameManager.Instance.player.inventory.WeaponStat()); // 공격력+스탯/직업별 공격력+장비 공격력
             }
          }
 
+
+        /// <summary>
+        /// 총 방어력 계산 속성
+        /// </summary>
         public int TotalDefens
         {
             get
@@ -154,12 +190,16 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 행운 스탯에 따른 크리티컬 확률/데미지 함수
+        /// </summary>
+        /// <returns></returns>
         public int LuckyDamage()
         {
             float finalDamage = TotalDamage;
 
             // 크리티컬
-            float critical = luk * 0.3f / 100f; // Luk 10이면 3% 확률 회피
+            float critical = luk * 0.3f / 100f;
             if (random.NextDouble() < critical)
             {
                 finalDamage *= 1.5f;

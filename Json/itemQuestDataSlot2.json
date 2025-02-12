@@ -1,6 +1,8 @@
 [
   {
-    "questItem": [ "가죽 모자" ],
+    "questItem": [
+      "가죽모자"
+    ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -14,7 +16,9 @@
     "rewardItem": null
   },
   {
-    "questItem": [ "누더기" ],
+    "questItem": [
+      "누더기"
+    ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -28,7 +32,9 @@
     "rewardItem": null
   },
   {
-    "questItem": [ "붕대" ],
+    "questItem": [
+      "붕대"
+    ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -42,7 +48,9 @@
     "rewardItem": null
   },
   {
-    "questItem": [ "구멍난 양말" ],
+    "questItem": [
+      "구멍난 양말"
+    ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -53,11 +61,13 @@
     "preQuestTitle": "엉망이 된 숙소",
     "exp": 2000,
     "gold": 4000,
-    "rewardItem": "매조련사의장갑"
+    "rewardItem": 46
   },
-
   {
-    "questItem": [ "구멍난 양말", "누더기" ],
+    "questItem": [
+      "구멍난 양말",
+      "누더기"
+    ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -71,7 +81,9 @@
     "rewardItem": null
   },
   {
-    "questItem": [ "붕대" ],
+    "questItem": [
+      "붕대"
+    ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,
@@ -85,7 +97,9 @@
     "rewardItem": null
   },
   {
-    "questItem": [ "촌장의 야망" ],
+    "questItem": [
+      "촌장의 야망"
+    ],
     "questTown": 0,
     "questComplete": false,
     "questAccpet": false,

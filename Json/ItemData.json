@@ -13,18 +13,18 @@
     "Defense": "0"
   },
   // --------------------------------------------------------- Common Weapon
-  {
-    "itemName": "누가 쓰다버린 목검",
-    "itemDescription": "많이 낡았다",
-    "itemType": "Weapon",
-    "str": 2,
-    "dex": 1,
-    "inte": 1,
-    "luk": 1,
-    "EquipSlot": "Weapon",
-    "Grade": "Common",
-    "damage": "1"
-  },
+    {
+        "itemName": "누가 쓰다버린 목검",
+        "itemDescription": "많이 낡았다",
+        "itemType": "Weapon",
+        "str": 2,
+        "dex": 1,
+        "inte": 1,
+        "luk": 1,
+        "EquipSlot": "Weapon",
+        "Grade": "Common",
+        "damage": "1"
+    },
   {
     "itemName": "테무산 쇠 검",
     "itemDescription": "쇠로 만들어진 평범한 검",
@@ -440,7 +440,7 @@
     "Defense": "3"
   },
 
-  // --------------------------------------------------------- Unique Weapon : 9
+  // --------------------------------------------------------- Unique Weapon : 3
   {
     "itemName": "연장점검",
     "itemDescription": "기다리던 유저에겐 이름만으로도 화나게 하는 검",
@@ -537,7 +537,7 @@
     "dex": 8,
     "inte": 5,
     "luk": 7,
-    "EquipSlot": "Head",
+    "EquipSlot": "Body",
     "Grade": "Unique",
     "Defense": "12"
   },
@@ -549,7 +549,7 @@
     "dex": 5,
     "inte": 8,
     "luk": 7,
-    "EquipSlot": "Head",
+    "EquipSlot": "Body",
     "Grade": "Unique",
     "Defense": "12"
   },
@@ -564,7 +564,7 @@
     "dex": 7,
     "inte": 7,
     "luk": 5,
-    "EquipSlot": "Head",
+    "EquipSlot": "Arm",
     "Grade": "Unique",
     "Defense": "6"
   },
@@ -576,7 +576,7 @@
     "dex": 7,
     "inte": 10,
     "luk": 5,
-    "EquipSlot": "Head",
+    "EquipSlot": "Arm",
     "Grade": "Unique",
     "Defense": "6"
   },
@@ -588,7 +588,7 @@
     "dex": 10,
     "inte": 7,
     "luk": 5,
-    "EquipSlot": "Head",
+    "EquipSlot": "Arm",
     "Grade": "Unique",
     "Defense": "6"
   },

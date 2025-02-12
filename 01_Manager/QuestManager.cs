@@ -11,19 +11,18 @@ namespace TeamRPG_17
 {
     public class QuestManager : Singleton<QuestManager>
     {
-        // KillQuest의 Json파일, ItemQuest의 Json파일을 분리해서 관리
-        public KillQuest[] killQuests { get; private set; }
-        public ItemQuest[] itemQuests { get; private set; }
+        public KillQuest[] killQuests { get; private set; }     // 킬 퀘스트 배열
+        public ItemQuest[] itemQuests { get; private set; }     // 아이템 퀘스트 배열
 
-        private List<Quest> quests;
+        private List<Quest> quests;                             // 킬 + 아이템 퀘스트 리스트
 
-        public string? newQuestString { get; set; }
+        public Quest? selectQuest { get; private set; }         // 현재 선택한 퀘스트 참조
 
-        public Quest? selectQuest { get; private set; }
+        public string? newQuestString { get; set; }             // 신규 퀘스트 출력용 문자열 변수
+
 
         public void LoadQuest(string itemQuestJson, string killQuestJson)
         {
-            // kill / item 퀘스트 초기화
             killQuests = JsonConvert.DeserializeObject<KillQuest[]>(killQuestJson);
             itemQuests = JsonConvert.DeserializeObject<ItemQuest[]>(itemQuestJson);
 
@@ -35,23 +34,29 @@ namespace TeamRPG_17
         }
 
         /// <summary>
-        /// _town 마을의 퀘스트 리스트 출력
+        /// _town 마을의 수락가능/진행중 퀘스트 리스트 출력
         /// </summary>
-        /// <param name="_town"></param>
+        /// <param name="_town">출력 대상 퀘스트 마을 enum</param>
         public void ShowQuestList(TownName _town)
         {
             int questCount = 1;
-            string questStateText = "수락가능";
-            ConsoleColor questStateColor = ConsoleColor.Yellow;
+            string questStateText;
+            ConsoleColor questStateColor;
 
             foreach (Quest? quest in quests)
             {
+                questStateText = "수락가능";
+                questStateColor = ConsoleColor.Yellow;
+
+                // null 예외  // 다른 마을일떄 
                 if (quest == null || quest?.questTown != _town)
                     continue;
 
+                // 이미 클리어한 퀘스트  // 접근 불가능한 퀘스트
                 if (quest.questComplete || !quest.questAccess)
                     continue;
 
+                // 퀘스트 수락한 퀘스트
                 if(quest.questAccpet)
                 {
                     questStateText = "진행중";
@@ -68,6 +73,10 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// _town 마을의 완료한 퀘스트 리스트 출력
+        /// </summary>
+        /// <param name="_town">>출력 대상 퀘스트 마을 enum</param>
         public void ShowEndQuestList(TownName _town)
         {
             foreach(Quest? quest in quests)
@@ -87,7 +96,7 @@ namespace TeamRPG_17
 
 
         /// <summary>
-        /// 선택된 퀘스트의 정보를 출력해주는 메서드
+        /// 선택된 퀘스트 정보를 출력
         /// </summary>
         public void ShowQuestInformation()
         {
@@ -121,8 +130,11 @@ namespace TeamRPG_17
         }
 
         /// <summary>
-        /// 퀘스트 선택 메서드 정상적인 입력이라면 selectQuest에 저장됨
+        /// 퀘스트 선택 처리 메서드
         /// </summary>
+        /// <param name="_town">현재 마을 enum</param>
+        /// <param name="index">선택한 번호</param>
+        /// <returns>퀘스트 선택 성공 여부</returns>
         public bool SelectQuest(TownName _town, int index)
         {
             int questCount = 1;
@@ -151,8 +163,9 @@ namespace TeamRPG_17
         }
 
         /// <summary>
-        /// 선택된 퀘스트의 수락 or 완료
+        /// 선택된 퀘스트의 완료 or 수락 처리
         /// </summary>
+        /// <returns>완료 false // 수락 true 반환</returns>
         public bool QuestAccept()
         {
             if (selectQuest == null)
@@ -181,6 +194,10 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 사전 퀘스트 처리 메서드 
+        /// </summary>
+        /// <param name="_questTitle">완료한 퀘스트 타이틀</param>
         public void CheckPreQuest(string _questTitle)
         {
             foreach (Quest? quest in quests)
@@ -201,6 +218,31 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 퀘스트 클리어 여부 반환 함수
+        /// </summary>
+        /// <param name="_questTitle">확인할 퀘스트 타이틀</param>
+        /// <returns>클리어 여부 반환</returns>
+        public bool IsClearQuest(string _questTitle)
+        {
+            foreach (Quest? quest in quests)
+            {
+                // null 예외
+                if (quest == null)
+                    continue;
+
+                // 동일한 퀘스트명
+                if(quest.questTitle.Equals(_questTitle))
+                    return quest.questComplete;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 킬 퀘스트 진행도 업데이트 처리
+        /// </summary>
+        /// <param name="_monster">사먕한 몬스터</param>
         public void MonsterKillCount(Monster _monster)
         {
             // Killquest 중 수락한 퀘스트

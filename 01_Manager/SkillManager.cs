@@ -8,6 +8,9 @@ namespace TeamRPG_17
 {
     public class SkillManager : Singleton<SkillManager>
     {
+        /// <summary>
+        /// 스킬 리스트
+        /// </summary>
         private List<Skill> skills = new List<Skill>
         {
             new ("강타", 1, 125, 35, SkillType.SingleTarget, JobType.Warrior),
@@ -45,7 +48,13 @@ namespace TeamRPG_17
             new ("아포칼립스", 10, 370, 210, SkillType.AllTarget, JobType.Wizard),
 
         };
-        public List<Skill> GetSkillList(Player player) // jobType에 따라서 스킬을 가져오는 메서드
+
+        /// <summary>
+        /// 플레이어의 직업에 따라 스킬을 가져오는 메서드
+        /// </summary>
+        /// <param name="player"> 플레이어의 JobType에 따라서 스킬을 List로 가져옴 </param>
+        /// <returns></returns>
+        public List<Skill> GetSkillList(Player player)
         {
             return skills.Where(s => s.JobType == player.job && s.Level <= player.level).ToList(); ;
         }

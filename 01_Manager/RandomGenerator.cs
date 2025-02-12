@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
+    /// <summary>
+    /// 랜덤 값을 생성하는 클래스
+    /// </summary>
     public class RandomGenerator
     {
         private static readonly RandomGenerator instance = new RandomGenerator();
