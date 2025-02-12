@@ -15,6 +15,9 @@ namespace TeamRPG_17
         private readonly List<Skill> _availableSkills;
         private readonly Func<int, int> HandleInput; // BattleScene의 HandleInput 메서드를 사용
 
+        /// <summary>
+        /// BattleActionHandler의 생성자. 필요한 인자들을 받아 필드에 할당
+        /// </summary>
         public BattleActionHandler(Player player, BattleDisplay battleUI, BattleSystem battleSystem, TargetingSystem targetingSystem, List<Skill> availableSkills, Func<int, int> handleInput)
         {
             _player = player;
@@ -25,6 +28,10 @@ namespace TeamRPG_17
             HandleInput = handleInput;
         }
 
+        /// <summary>
+        /// 플레이어의 턴을 처리하는 함수. 전투 기본 메뉴를 출력하고 선택에 따라 공격, 스킬, 포션을 처리함
+        /// </summary>
+        /// <param name="monsters"></param>
         public void HandlePlayerTurn(List<Monster> monsters) // 전투 기본 메뉴 선택(1. 공격, 2. 스킬, 3. 포션)
         {
             bool actionTaken = false;
@@ -51,6 +58,10 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 공격 메뉴를 처리하는 함수. SelectTarget()에서 몬스터를 선택해줘야됨
+        /// </summary>
+        /// <param name="monsters"></param>
         private bool HandleAttack(List<Monster> monsters) // 공격 메뉴(SelectTarget()에서 몬스터를 선택해줘야됨)
         {
             Monster target = _targetingSystem.SelectTarget(monsters);
@@ -60,6 +71,10 @@ namespace TeamRPG_17
             return true;
         }
 
+        /// <summary>
+        /// 스킬 메뉴를 처리하는 함수. GetTargetsForSkill()에서 몬스터를 선택해줘야됨
+        /// </summary>
+        /// <param name="monsters"></param>
         private bool HandleSkill(List<Monster> monsters) // 스킬 선택(역시 GetTargetsForSkill()에서 몬스터를 선택해줘야됨)
         {
             _battleUI.DisplaySkillList();
@@ -90,6 +105,10 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 포션 메뉴를 처리하는 함수
+        /// </summary>
+        /// <returns></returns>
         private bool HandlePotion() // 포션 선택
         {
             _battleUI.DisplayPotionList();

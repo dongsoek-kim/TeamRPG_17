@@ -11,12 +11,22 @@ namespace TeamRPG_17
         private readonly BattleDisplay _battleUI;
         private readonly Func<int, int> _handleInput; // Func<int, int> 타입의 델리게이트로 변경
 
+        /// <summary>
+        /// TargetingSystem의 생성자. BattleDisplay와 HandleInput 메서드를 받아 필드에 할당
+        /// </summary>
+        /// <param name="battleUI"></param>
+        /// <param name="handleInput"></param>
         public TargetingSystem(BattleDisplay battleUI, Func<int, int> handleInput)
         {
             _battleUI = battleUI;
             _handleInput = handleInput; // 델리게이트 필드에 할당
         }
 
+        /// <summary>
+        /// 기본 공격 시 대상을 선택하는 함수
+        /// </summary>
+        /// <param name="monsters"></param>
+        /// <returns></returns>
         public Monster SelectTarget(List<Monster> monsters) // 기본 공격 시 대상 판단
         {
             while (true)
@@ -45,6 +55,12 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 스킬에 대한 대상을 선택하는 함수
+        /// </summary>
+        /// <param name="skill"></param>
+        /// <param name="monsters"></param>
+        /// <returns></returns>
         public List<Monster> GetTargetsForSkill(Skill skill, List<Monster> monsters) // 스킬이 단일 타겟인지 전체 타겟인지 판단
         {
             if (skill.SkillType == SkillType.AllTarget)

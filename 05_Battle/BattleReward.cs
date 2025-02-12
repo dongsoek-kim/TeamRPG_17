@@ -14,17 +14,32 @@ namespace TeamRPG_17
 
         public List<Item> Items { get; private set; }
 
+        /// <summary>
+        /// 전투 보상 생성자. 던전 레벨과 몬스터 수를 받아 경험치와 골드를 계산
+        /// </summary>
+        /// <param name="dungeonLevel"> 현재 던전의 레벨 가져옴 </param>
+        /// <param name="monsterCount"> 전투한 몬스터 숫자 가져옴 </param>
         public BattleReward(int dungeonLevel, int monsterCount)
         {
             CalculateReward(dungeonLevel, monsterCount);
         }
 
+        /// <summary>
+        /// 보상 계산 함수. 경험치는 던전 레벨 * 몬스터 수 * 10, 골드는 던전 레벨 * 몬스터 수 * 5로 계산
+        /// </summary>
+        /// <param name="dungeonLevel"></param>
+        /// <param name="monsterCount"></param>
         private void CalculateReward(int dungeonLevel, int monsterCount)
         {
             //Exp = dungeonLevel * monsterCount * 10;
             Exp = 1;
             Gold = dungeonLevel * monsterCount * 5;
         }
+
+        /// <summary>
+        /// 보상 적용 함수. 경험치와 골드를 플레이어에게 지급
+        /// </summary>
+        /// <param name="player"></param>
         public void ApplyReward(Player player)
         {
             bool getReward;
@@ -52,6 +67,12 @@ namespace TeamRPG_17
             Console.ResetColor();
 
         }
+
+        /// <summary>
+        /// 장비 보상 함수. 랜덤으로 장비를 획득할 수 있음
+        /// </summary>
+        /// <param name="getReward"></param>
+        /// <param name="itemNum"></param>
         public void EquipmentReward(out bool getReward, out int itemNum)
         {
             getReward= false;
@@ -109,8 +130,6 @@ namespace TeamRPG_17
                     }
                 }
             }
-
-
         }
     }
 }
