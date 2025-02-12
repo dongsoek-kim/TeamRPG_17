@@ -50,6 +50,10 @@ namespace TeamRPG_17
             inventory = new Inventory();
         }
 
+        /// <summary>
+        /// 플레이어 직업설정 및 직업별 초기 스탯 지정
+        /// </summary>
+        /// <param name="_job"></param>
         public void SetJob(JobType _job)
         {
             job = _job;
@@ -135,9 +139,9 @@ namespace TeamRPG_17
                 return inventory.equipedWeapon.damage;
         }
 
-        public float BonusDamage { get; private set; }
-
-        // 총 데미지 계산식 (스탯/직업별)
+        /// <summary>
+        /// 총 공격력/데미지 계산 속성
+        /// </summary>
         public int TotalDamage 
         {
             get
@@ -166,6 +170,10 @@ namespace TeamRPG_17
             }
          }
 
+
+        /// <summary>
+        /// 총 방어력 계산 속성
+        /// </summary>
         public int TotalDefens
         {
             get
@@ -177,12 +185,16 @@ namespace TeamRPG_17
             }
         }
 
+        /// <summary>
+        /// 행운 스탯에 따른 크리티컬 확률/데미지 함수
+        /// </summary>
+        /// <returns></returns>
         public int LuckyDamage()
         {
             float finalDamage = TotalDamage;
 
             // 크리티컬
-            float critical = luk * 0.3f / 100f; // Luk 10이면 3% 확률 회피
+            float critical = luk * 0.3f / 100f;
             if (random.NextDouble() < critical)
             {
                 finalDamage *= 1.5f;
