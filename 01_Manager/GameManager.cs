@@ -32,6 +32,8 @@
             scenes[9] = new DataScene();
             //seenes[8]
             ChangeScene(SceneName.DataScene);
+            DataManager.LoadItemsData();
+            ItemManager.Instance.ItemPrice();
             DataManager.LoadQuestManagerData(1);
         }
 
