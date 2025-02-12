@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace TeamRPG_17
 {
-    public class BattleScene
+    public class BattleDisplay
     {
         private readonly List<Skill> _availableSkills;
         private Player _player;
         private List<Monster> _monsters;
 
-        public BattleScene(List<Skill> availableSkills)
+        public BattleDisplay(List<Skill> availableSkills)
         {
             _availableSkills = availableSkills;
         }

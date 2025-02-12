@@ -8,10 +8,10 @@ namespace TeamRPG_17
 {
     public class TargetingSystem
     {
-        private readonly BattleScene _battleUI;
+        private readonly BattleDisplay _battleUI;
         private readonly Func<int, int> _handleInput; // Func<int, int> 타입의 델리게이트로 변경
 
-        public TargetingSystem(BattleScene battleUI, Func<int, int> handleInput)
+        public TargetingSystem(BattleDisplay battleUI, Func<int, int> handleInput)
         {
             _battleUI = battleUI;
             _handleInput = handleInput; // 델리게이트 필드에 할당
@@ -27,7 +27,7 @@ namespace TeamRPG_17
 
                 if (input == -1) // 잘못된 입력 처리
                 {
-                    BattleScene.DisplayInvalidInput();
+                    BattleDisplay.DisplayInvalidInput();
                     continue;
                 }
 
@@ -37,7 +37,7 @@ namespace TeamRPG_17
                 if (target.IsDead)
                 {
                     Console.WriteLine("이미 죽은 몬스터입니다!");
-                    BattleScene.PrintContinuePrompt();
+                    BattleDisplay.PrintContinuePrompt();
                     continue;
                 }
 

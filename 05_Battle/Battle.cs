@@ -21,7 +21,7 @@ namespace TeamRPG_17
         }
 
         private readonly Player _player;
-        public BattleScene _battleUI;
+        public BattleDisplay _battleUI;
         public BattleSystem _battleSystem;
         public BattleActionHandler _actionHandler;
         public TargetingSystem _targetingSystem;
@@ -34,7 +34,7 @@ namespace TeamRPG_17
             _player = GameManager.Instance.player;
             List<Skill> availableSkills = SkillManager.Instance.GetSkillList(_player);
 
-            _battleUI = new BattleScene(availableSkills);
+            _battleUI = new BattleDisplay(availableSkills);
             _battleSystem = new BattleSystem(_player);
             _targetingSystem = new TargetingSystem(_battleUI, HandleInput);
             _actionHandler = new BattleActionHandler(_player, _battleUI, _battleSystem, _targetingSystem, availableSkills, HandleInput);
@@ -64,7 +64,7 @@ namespace TeamRPG_17
                 foreach (var monster in _monsters.Where(m => !m.IsDead))
                 {
                     int damage = _battleSystem.ProcessMonsterAttack(monster);
-                    BattleScene.DisplayMonsterAttack(monster, _player, damage, _player.hp);
+                    BattleDisplay.DisplayMonsterAttack(monster, _player, damage, _player.hp);
                 }
 
                 if (_player.hp <= 0)
@@ -84,7 +84,7 @@ namespace TeamRPG_17
                 reward.ApplyReward(_player);
             }
 
-            BattleScene.PrintContinuePrompt();
+            BattleDisplay.PrintContinuePrompt();
         }
 
         private int HandleInput(int maxOption) // 선택지 입력 일괄 처리
@@ -96,7 +96,7 @@ namespace TeamRPG_17
                 {
                     return selection;
                 }
-                BattleScene.DisplayInvalidInput(); // 잘못된 입력 메시지 출력
+                BattleDisplay.DisplayInvalidInput(); // 잘못된 입력 메시지 출력
                 Console.Write(">> "); // 다시 입력 프롬프트 표시 (엔터 없이 입력 가능)
             }
         }

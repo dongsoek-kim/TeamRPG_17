@@ -9,13 +9,13 @@ namespace TeamRPG_17
     public class BattleActionHandler
     {
         private readonly Player _player;
-        private readonly BattleScene _battleUI;
+        private readonly BattleDisplay _battleUI;
         private readonly BattleSystem _battleSystem;
         private readonly TargetingSystem _targetingSystem;
         private readonly List<Skill> _availableSkills;
         private readonly Func<int, int> HandleInput; // BattleScene의 HandleInput 메서드를 사용
 
-        public BattleActionHandler(Player player, BattleScene battleUI, BattleSystem battleSystem, TargetingSystem targetingSystem, List<Skill> availableSkills, Func<int, int> handleInput)
+        public BattleActionHandler(Player player, BattleDisplay battleUI, BattleSystem battleSystem, TargetingSystem targetingSystem, List<Skill> availableSkills, Func<int, int> handleInput)
         {
             _player = player;
             _battleUI = battleUI;
@@ -45,7 +45,7 @@ namespace TeamRPG_17
                         actionTaken = HandlePotion();
                         break;
                     default:
-                        BattleScene.DisplayInvalidInput();  // 잘못된 입력이 들어오면 InvalidInput 메시지를 출력하고 다시 반복
+                        BattleDisplay.DisplayInvalidInput();  // 잘못된 입력이 들어오면 InvalidInput 메시지를 출력하고 다시 반복
                         continue;
                 }
             }
@@ -71,14 +71,14 @@ namespace TeamRPG_17
 
                 if (input < 0 || input > _availableSkills.Count)
                 {
-                    BattleScene.DisplayInvalidInput();  // 잘못된 입력에 대한 처리
+                    BattleDisplay.DisplayInvalidInput();  // 잘못된 입력에 대한 처리
                     continue;
                 }
 
                 Skill selectedSkill = _availableSkills[input - 1];
                 if (_player.mp < selectedSkill.MpCost) // 마나 부족 시 다시
                 {
-                    BattleScene.DisplayNotEnoughMP();
+                    BattleDisplay.DisplayNotEnoughMP();
                     continue;
                 }
 
@@ -101,7 +101,7 @@ namespace TeamRPG_17
 
                 if (input < 0 || input >= Enum.GetValues(typeof(PotionType)).Length)
                 {
-                    BattleScene.DisplayInvalidInput();  // 잘못된 입력에 대해 처리
+                    BattleDisplay.DisplayInvalidInput();  // 잘못된 입력에 대해 처리
                     continue;
                 }
 
@@ -109,12 +109,12 @@ namespace TeamRPG_17
                 if (_player.inventory.potion.GetPotionCount(selectedType) > 0)
                 {
                     _player.inventory.potion.UsePotion(selectedType);
-                    BattleScene.DisplayPotionEffect(selectedType);
+                    BattleDisplay.DisplayPotionEffect(selectedType);
                     return true;
                 }
                 else
                 {
-                    BattleScene.DisplayNoPotions();
+                    BattleDisplay.DisplayNoPotions();
                     continue;
                 }
             }
