@@ -166,7 +166,7 @@ namespace TeamRPG_17
             }
         }
         /// <summary>
-        /// 
+        /// 전투 완료 후에 포션으로 올랐던 능력치가 다시 감소하는 메서드
         /// </summary>
         /// <param name="potionType"></param>
         /// <param name="usecount"></param>
