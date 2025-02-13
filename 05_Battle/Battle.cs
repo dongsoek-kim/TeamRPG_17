@@ -27,7 +27,7 @@ namespace TeamRPG_17
         public TargetingSystem _targetingSystem;
         private List<Monster> _monsters;
         private Dungeon _currentDungeon;
-
+        private int[] _initialPotionCount= new int[4];
         /// <summary>
         /// Battle 클래스의 생성자. 싱글턴 패턴을 사용하여 하나의 인스턴스만 유지
         /// 전투 관련 UI, 시스템, 타겟팅, 액션 핸들러를 초기화
@@ -49,9 +49,18 @@ namespace TeamRPG_17
         /// <param name="dungeon">전투가 일어날 던전 정보</param>"
         public void StartBattle(Dungeon dungeon) 
         {
+            int i = 0;
             _currentDungeon = dungeon;
             _monsters = MonsterManager.Instance.RandomMonsterSpawn(dungeon);
             _battleUI.UpdateBattleState(_player, _monsters);
+            foreach (int potionCount in GameManager.Instance.player.inventory.potion.potionCount)
+            {            
+                if(i>0)
+                {
+                    _initialPotionCount[i-1] = potionCount;
+                }
+                i++;
+            }   
             InBattle();
         }
 
@@ -91,7 +100,7 @@ namespace TeamRPG_17
         private void BattleResult(bool isWin)
         {
             _battleUI.DisplayBattleResult(isWin, _monsters, _player, _currentDungeon.Level);
-
+            GameManager.Instance.player.undoUesedPotion(_initialPotionCount);
             if (isWin) // 승리 시엔 보상 적용
             {
                 BattleReward reward = new BattleReward(_currentDungeon.Level, _monsters.Count);

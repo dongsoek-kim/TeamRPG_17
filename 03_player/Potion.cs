@@ -39,22 +39,26 @@ namespace TeamRPG_17
                         break;
                     }
                 case PotionType.str:
-                    {//GameManager.Instance.player.str = +str;
+                    {
+                        GameManager.Instance.player.usePotion(PotionType.str);
                         potionCount[(int)PotionType.str]--;
                         break;
                     }
                 case PotionType.dex:
-                    {//GameManager.Instance.player.str = +str;
+                    {
+                        GameManager.Instance.player.usePotion(PotionType.dex);
                         potionCount[(int)PotionType.dex]--;
                         break;
                     }
                 case PotionType.inte:
-                    {//GameManager.Instance.player.str = +str;
+                    {
+                        GameManager.Instance.player.usePotion(PotionType.inte);
                         potionCount[(int)PotionType.inte]--;
                         break;
                     }
                 case PotionType.luk:
-                    {//GameManager.Instance.player.str = +str;
+                    {
+                        GameManager.Instance.player.usePotion(PotionType.luk);
                         potionCount[(int)PotionType.luk]--;
                         break;
                     }
