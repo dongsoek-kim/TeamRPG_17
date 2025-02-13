@@ -143,7 +143,55 @@ namespace TeamRPG_17
             else
                 return inventory.equipedWeapon.damage;
         }
-
+        /// <summary>
+        /// 전투중 포션을 사용하면 능력치가 올라가게해주는 메서드
+        /// </summary>
+        /// <param name="potionType"></param>
+        public void usePotion(PotionType potionType)
+        {
+            switch (potionType)
+            {
+                case PotionType.str:
+                    str+=3;
+                    break;
+                case PotionType.dex:
+                    dex += 3;
+                    break;
+                case PotionType.inte:
+                    inte += 3;
+                    break;
+                case PotionType.luk:
+                    luk += 3;
+                    break;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="potionType"></param>
+        /// <param name="usecount"></param>
+        public void undoUesedPotion(int[] initailPotionCount)
+        {
+            for(int i=0;i<initailPotionCount.Length;i++)
+            {
+                int usedPotionCount = initailPotionCount[i] - this.inventory.potion.potionCount[i];
+                switch (i)
+                    {
+                    case 1:
+                        str -= 3 * usedPotionCount;
+                        break;
+                    case 2:
+                        dex -= 3 * usedPotionCount;
+                        break;
+                    case 3:
+                        inte -= 3 * usedPotionCount;
+                        break;
+                    case 4:
+                        luk -= 3 * usedPotionCount;
+                        break;
+                    }
+            }
+        }
         /// <summary>
         /// 총 공격력/데미지 계산 속성
         /// </summary>
